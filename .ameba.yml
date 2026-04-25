@@ -1,0 +1,10 @@
+# Ameba configuration for tokens library (Crystal port of huggingface/tokenizers)
+Version: "1.7.0-dev"
+
+Excluded:
+  - temp/**/*
+  - lib/**/*
+  - vendor/**/*
+  - spec/**/*
+
+
