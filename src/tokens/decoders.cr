@@ -1,0 +1,8 @@
+require "./decoders/bpe"
+require "./decoders/byte_fallback"
+require "./decoders/ctc"
+require "./decoders/fuse"
+require "./decoders/sequence"
+require "./decoders/strip"
+require "./decoders/wordpiece"
+require "./decoders/mod"
