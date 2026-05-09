@@ -1,0 +1,5 @@
+require "./processors/bert"
+require "./processors/roberta"
+require "./processors/template"
+require "./processors/sequence"
+require "./processors/mod"
