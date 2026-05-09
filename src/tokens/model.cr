@@ -4,7 +4,6 @@ module Tokens
   class TokenizerError < Exception
   end
 
-  # The Model trait — core interface for tokenization models.
   module Model
     abstract def tokenize(sequence : String) : Array(Token)
 

@@ -1,0 +1,8 @@
+require "./tokenizer/encoding"
+require "./tokenizer/truncation"
+require "./tokenizer/added_vocabulary"
+require "./tokenizer/normalizer"
+require "./tokenizer/pattern"
+require "./tokenizer/pre_tokenizer"
+require "./tokenizer/input_sequence"
+require "./tokenizer/tokenizer"
