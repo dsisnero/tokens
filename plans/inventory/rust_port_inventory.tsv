@@ -4,47 +4,47 @@ benches/layout_benchmark.rs::func::bench_layout	func	missing	-	auto-generated
 benches/llama3_benchmark.rs::func::llama3	func	missing	-	auto-generated
 examples/unstable_wasm/src/lib.rs::func::tokenize	func	missing	-	auto-generated
 examples/unstable_wasm/src/utils.rs::func::set_panic_hook	func	missing	-	auto-generated
-src/decoders/bpe.rs::func::new	func	missing	-	auto-generated
-src/decoders/bpe.rs::method::BPEDecoder.new	method	missing	-	auto-generated
-src/decoders/bpe.rs::struct::BPEDecoder	struct	missing	-	auto-generated
-src/decoders/byte_fallback.rs::func::new	func	missing	-	auto-generated
-src/decoders/byte_fallback.rs::method::ByteFallback.new	method	missing	-	auto-generated
-src/decoders/byte_fallback.rs::struct::ByteFallback	struct	missing	-	auto-generated
-src/decoders/byte_fallback.rs::test::decode	test	missing	-	auto-generated
-src/decoders/ctc.rs::func::new	func	missing	-	auto-generated
-src/decoders/ctc.rs::method::CTC.new	method	missing	-	auto-generated
-src/decoders/ctc.rs::struct::CTC	struct	missing	-	auto-generated
-src/decoders/ctc.rs::test::another_librispeech_sample	test	missing	-	auto-generated
-src/decoders/ctc.rs::test::handmade_sample	test	missing	-	auto-generated
-src/decoders/ctc.rs::test::handmade_with_delimiter_sample	test	missing	-	auto-generated
-src/decoders/ctc.rs::test::librispeech_sample	test	missing	-	auto-generated
-src/decoders/fuse.rs::func::new	func	missing	-	auto-generated
-src/decoders/fuse.rs::method::Fuse.new	method	missing	-	auto-generated
-src/decoders/fuse.rs::struct::Fuse	struct	missing	-	auto-generated
-src/decoders/fuse.rs::test::decode	test	missing	-	auto-generated
-src/decoders/mod.rs::enum::DecoderHelper	enum	missing	-	auto-generated
-src/decoders/mod.rs::enum::DecoderUntagged	enum	missing	-	auto-generated
-src/decoders/mod.rs::enum::DecoderWrapper	enum	missing	-	auto-generated
-src/decoders/mod.rs::enum::EnumType	enum	missing	-	auto-generated
-src/decoders/mod.rs::struct::Tagged	struct	missing	-	auto-generated
-src/decoders/mod.rs::test::decoder_serialization	test	missing	-	auto-generated
-src/decoders/mod.rs::test::decoder_serialization_no_decode	test	missing	-	auto-generated
-src/decoders/mod.rs::test::decoder_serialization_other_no_arg	test	missing	-	auto-generated
-src/decoders/sequence.rs::func::get_decoders	func	missing	-	auto-generated
-src/decoders/sequence.rs::func::get_decoders_mut	func	missing	-	auto-generated
-src/decoders/sequence.rs::func::new	func	missing	-	auto-generated
-src/decoders/sequence.rs::method::Sequence.new	method	missing	-	auto-generated
-src/decoders/sequence.rs::struct::Sequence	struct	missing	-	auto-generated
-src/decoders/sequence.rs::test::sequence_basic	test	missing	-	auto-generated
-src/decoders/strip.rs::func::new	func	missing	-	auto-generated
-src/decoders/strip.rs::method::Strip.new	method	missing	-	auto-generated
-src/decoders/strip.rs::struct::Strip	struct	missing	-	auto-generated
-src/decoders/strip.rs::test::decode	test	missing	-	auto-generated
-src/decoders/wordpiece.rs::func::cleanup	func	missing	-	auto-generated
-src/decoders/wordpiece.rs::func::new	func	missing	-	auto-generated
-src/decoders/wordpiece.rs::method::WordPiece.new	method	missing	-	auto-generated
-src/decoders/wordpiece.rs::struct::WordPiece	struct	missing	-	auto-generated
-src/decoders/wordpiece.rs::test::wordpiece_decoder	test	missing	-	auto-generated
+src/decoders/bpe.rs::func::new	func	implemented	src/tokens/decoders/bpe.cr:10	constructor provided by #initialize
+src/decoders/bpe.rs::method::BPEDecoder.new	method	implemented	src/tokens/decoders/bpe.cr:10	port complete
+src/decoders/bpe.rs::struct::BPEDecoder	struct	implemented	src/tokens/decoders/bpe.cr:5	port complete
+src/decoders/byte_fallback.rs::func::new	func	implemented	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/byte_fallback.rs::method::ByteFallback.new	method	implemented	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/byte_fallback.rs::struct::ByteFallback	struct	implemented	src/tokens/decoders/byte_fallback.cr:5	port complete
+src/decoders/byte_fallback.rs::test::decode	test	implemented	spec/decoders/byte_fallback_spec.cr:4	port complete
+src/decoders/ctc.rs::func::new	func	implemented	src/tokens/decoders/ctc.cr:12	constructor provided by #initialize
+src/decoders/ctc.rs::method::CTC.new	method	implemented	src/tokens/decoders/ctc.cr:12	port complete
+src/decoders/ctc.rs::struct::CTC	struct	implemented	src/tokens/decoders/ctc.cr:5	port complete
+src/decoders/ctc.rs::test::another_librispeech_sample	test	implemented	spec/decoders/ctc_spec.cr:29	port complete
+src/decoders/ctc.rs::test::handmade_sample	test	implemented	spec/decoders/ctc_spec.cr:4	port complete
+src/decoders/ctc.rs::test::handmade_with_delimiter_sample	test	implemented	spec/decoders/ctc_spec.cr:11	port complete
+src/decoders/ctc.rs::test::librispeech_sample	test	implemented	spec/decoders/ctc_spec.cr:18	port complete
+src/decoders/fuse.rs::func::new	func	implemented	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/fuse.rs::method::Fuse.new	method	implemented	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/fuse.rs::struct::Fuse	struct	implemented	src/tokens/decoders/fuse.cr:5	port complete
+src/decoders/fuse.rs::test::decode	test	implemented	spec/decoders/fuse_spec.cr:4	port complete
+src/decoders/mod.rs::enum::DecoderHelper	enum	implemented	src/tokens/decoders/mod.cr:45	tagged decoder dispatch is handled by DecoderWrapper.from_json
+src/decoders/mod.rs::enum::DecoderUntagged	enum	implemented	src/tokens/decoders/mod.cr:45	untagged enum matching is represented by the Crystal wrapper dispatcher
+src/decoders/mod.rs::enum::DecoderWrapper	enum	implemented	src/tokens/decoders/mod.cr:4	wrapper ported as Crystal class over tagged union
+src/decoders/mod.rs::enum::EnumType	enum	implemented	src/tokens/decoders/mod.cr:55	decoder type dispatch is handled by DecoderWrapper.from_json
+src/decoders/mod.rs::struct::Tagged	struct	implemented	src/tokens/decoders/mod.cr:55	tagged JSON object handling is embedded in DecoderWrapper.from_json
+src/decoders/mod.rs::test::decoder_serialization	test	implemented	spec/decoders/mod_spec.cr:4	port complete
+src/decoders/mod.rs::test::decoder_serialization_no_decode	test	implemented	spec/decoders/mod_spec.cr:21	port complete
+src/decoders/mod.rs::test::decoder_serialization_other_no_arg	test	implemented	spec/decoders/mod_spec.cr:14	port complete
+src/decoders/sequence.rs::func::get_decoders	func	implemented	src/tokens/decoders/sequence.cr:22	upstream-style accessor retained for parity
+src/decoders/sequence.rs::func::get_decoders_mut	func	implemented	src/tokens/decoders/sequence.cr:27	upstream-style accessor retained for parity
+src/decoders/sequence.rs::func::new	func	implemented	src/tokens/decoders/sequence.cr:10	constructor provided by #initialize
+src/decoders/sequence.rs::method::Sequence.new	method	implemented	src/tokens/decoders/sequence.cr:10	port complete
+src/decoders/sequence.rs::struct::Sequence	struct	implemented	src/tokens/decoders/sequence.cr:5	port complete
+src/decoders/sequence.rs::test::sequence_basic	test	implemented	spec/decoders/sequence_spec.cr:4	port complete
+src/decoders/strip.rs::func::new	func	implemented	src/tokens/decoders/strip.cr:12	constructor provided by #initialize
+src/decoders/strip.rs::method::Strip.new	method	implemented	src/tokens/decoders/strip.cr:12	port complete
+src/decoders/strip.rs::struct::Strip	struct	implemented	src/tokens/decoders/strip.cr:5	port complete
+src/decoders/strip.rs::test::decode	test	implemented	spec/decoders/strip_spec.cr:4	port complete
+src/decoders/wordpiece.rs::func::cleanup	func	implemented	src/tokens/decoders/wordpiece.cr:18	port complete
+src/decoders/wordpiece.rs::func::new	func	implemented	src/tokens/decoders/wordpiece.cr:11	constructor provided by #initialize
+src/decoders/wordpiece.rs::method::WordPiece.new	method	implemented	src/tokens/decoders/wordpiece.cr:11	port complete
+src/decoders/wordpiece.rs::struct::WordPiece	struct	implemented	src/tokens/decoders/wordpiece.cr:5	port complete
+src/decoders/wordpiece.rs::test::wordpiece_decoder	test	implemented	spec/decoders/wordpiece_spec.cr:4	port complete
 src/models/bpe/mod.rs::enum::Error	enum	missing	-	auto-generated
 src/models/bpe/model.rs::func::build	func	missing	-	auto-generated
 src/models/bpe/model.rs::func::builder	func	missing	-	auto-generated
@@ -256,272 +256,272 @@ src/models/wordpiece/trainer.rs::method::WordPieceTrainer.min_frequency	method	m
 src/models/wordpiece/trainer.rs::method::WordPieceTrainerBuilder.new	method	missing	-	auto-generated
 src/models/wordpiece/trainer.rs::struct::WordPieceTrainer	struct	missing	-	auto-generated
 src/models/wordpiece/trainer.rs::struct::WordPieceTrainerBuilder	struct	missing	-	auto-generated
-src/normalizers/bert.rs::func::new	func	missing	-	auto-generated
-src/normalizers/bert.rs::method::BertNormalizer.new	method	missing	-	auto-generated
-src/normalizers/bert.rs::struct::BertNormalizer	struct	missing	-	auto-generated
-src/normalizers/byte_level.rs::func::alphabet	func	missing	-	auto-generated
-src/normalizers/byte_level.rs::func::new	func	missing	-	auto-generated
-src/normalizers/byte_level.rs::method::ByteLevel.new	method	missing	-	auto-generated
-src/normalizers/byte_level.rs::struct::ByteLevel	struct	missing	-	auto-generated
-src/normalizers/byte_level.rs::test::test_byte_level_normalize	test	missing	-	auto-generated
-src/normalizers/mod.rs::enum::EnumType	enum	missing	-	auto-generated
-src/normalizers/mod.rs::enum::NormalizerHelper	enum	missing	-	auto-generated
-src/normalizers/mod.rs::enum::NormalizerUntagged	enum	missing	-	auto-generated
-src/normalizers/mod.rs::enum::NormalizerWrapper	enum	missing	-	auto-generated
-src/normalizers/mod.rs::struct::Tagged	struct	missing	-	auto-generated
-src/normalizers/mod.rs::test::normalizer_serialization	test	missing	-	auto-generated
-src/normalizers/mod.rs::test::post_processor_deserialization_no_type	test	missing	-	auto-generated
-src/normalizers/precompiled.rs::test::expansion_followed_by_removal	test	missing	-	auto-generated
-src/normalizers/prepend.rs::func::new	func	missing	-	auto-generated
-src/normalizers/prepend.rs::method::Prepend.new	method	missing	-	auto-generated
-src/normalizers/prepend.rs::struct::Prepend	struct	missing	-	auto-generated
-src/normalizers/prepend.rs::test::test_prepend	test	missing	-	auto-generated
-src/normalizers/replace.rs::enum::ReplacePattern	enum	missing	-	auto-generated
-src/normalizers/replace.rs::struct::Replace	struct	missing	-	auto-generated
-src/normalizers/replace.rs::test::serialization	test	missing	-	auto-generated
-src/normalizers/replace.rs::test::test_replace	test	missing	-	auto-generated
-src/normalizers/replace.rs::test::test_replace_decode	test	missing	-	auto-generated
-src/normalizers/replace.rs::test::test_replace_regex	test	missing	-	auto-generated
-src/normalizers/strip.rs::func::new	func	missing	-	auto-generated
-src/normalizers/strip.rs::method::Strip.new	method	missing	-	auto-generated
-src/normalizers/strip.rs::struct::Strip	struct	missing	-	auto-generated
-src/normalizers/strip.rs::struct::StripAccents	struct	missing	-	auto-generated
-src/normalizers/strip.rs::test::test_strip_accents	test	missing	-	auto-generated
-src/normalizers/strip.rs::test::test_strip_accents_multiple	test	missing	-	auto-generated
-src/normalizers/strip.rs::test::test_thai_bug	test	missing	-	auto-generated
-src/normalizers/strip.rs::test::test_vietnamese_bug	test	missing	-	auto-generated
-src/normalizers/unicode.rs::struct::NFC	struct	missing	-	auto-generated
-src/normalizers/unicode.rs::struct::NFD	struct	missing	-	auto-generated
-src/normalizers/unicode.rs::struct::NFKC	struct	missing	-	auto-generated
-src/normalizers/unicode.rs::struct::NFKD	struct	missing	-	auto-generated
-src/normalizers/unicode.rs::struct::Nmt	struct	missing	-	auto-generated
-src/normalizers/unicode.rs::test::test_nfkc	test	missing	-	auto-generated
-src/normalizers/utils.rs::func::new	func	missing	-	auto-generated
-src/normalizers/utils.rs::method::Sequence.new	method	missing	-	auto-generated
-src/normalizers/utils.rs::struct::Lowercase	struct	missing	-	auto-generated
-src/normalizers/utils.rs::struct::Sequence	struct	missing	-	auto-generated
-src/pre_tokenizers/bert.rs::struct::BertPreTokenizer	struct	missing	-	auto-generated
-src/pre_tokenizers/bert.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/bert.rs::test::chinese_chars	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::add_prefix_space	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::alphabet	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::process_offsets	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::trim_offsets	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::func::use_regex	func	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::method::ByteLevel.new	method	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::struct::ByteLevel	struct	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::add_prefix_space	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::decoding	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::deserialization	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	test	missing	-	auto-generated
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	test	missing	-	auto-generated
-src/pre_tokenizers/delimiter.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/delimiter.rs::method::CharDelimiterSplit.new	method	missing	-	auto-generated
-src/pre_tokenizers/delimiter.rs::struct::CharDelimiterSplit	struct	missing	-	auto-generated
-src/pre_tokenizers/digits.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/digits.rs::method::Digits.new	method	missing	-	auto-generated
-src/pre_tokenizers/digits.rs::struct::Digits	struct	missing	-	auto-generated
-src/pre_tokenizers/digits.rs::test::individual_digits	test	missing	-	auto-generated
-src/pre_tokenizers/digits.rs::test::numbers	test	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::method::FixedLength.new	method	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::struct::FixedLength	struct	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::test::custom_length	test	missing	-	auto-generated
-src/pre_tokenizers/fixed_length.rs::test::utf8_characters	test	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::enum::PrependScheme	enum	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::get_prepend_scheme	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::get_replacement	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::get_split	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::set_prepend_scheme	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::set_replacement	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::func::set_split	func	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::method::Metaspace.new	method	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::struct::Metaspace	struct	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::struct::MetaspaceHelper	struct	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::test::decode	test	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::test::multiple_spaces	test	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	test	missing	-	auto-generated
-src/pre_tokenizers/metaspace.rs::test::serialization	test	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::enum::EnumType	enum	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::enum::PreTokenizerHelper	enum	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::enum::PreTokenizerUntagged	enum	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::enum::PreTokenizerWrapper	enum	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::struct::Tagged	struct	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	test	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::test::test_deserialize	test	missing	-	auto-generated
-src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	test	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::method::Punctuation.new	method	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::struct::Punctuation	struct	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::test::deserialization	test	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	test	missing	-	auto-generated
-src/pre_tokenizers/punctuation.rs::test::punctuation_basic	test	missing	-	auto-generated
-src/pre_tokenizers/sequence.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/sequence.rs::method::Sequence.new	method	missing	-	auto-generated
-src/pre_tokenizers/sequence.rs::struct::Sequence	struct	missing	-	auto-generated
-src/pre_tokenizers/sequence.rs::test::sequence_basic	test	missing	-	auto-generated
-src/pre_tokenizers/split.rs::enum::SplitPattern	enum	missing	-	auto-generated
-src/pre_tokenizers/split.rs::struct::Split	struct	missing	-	auto-generated
-src/pre_tokenizers/split.rs::struct::SplitHelper	struct	missing	-	auto-generated
-src/pre_tokenizers/split.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/split.rs::test::invert	test	missing	-	auto-generated
-src/pre_tokenizers/split.rs::test::regex_string	test	missing	-	auto-generated
-src/pre_tokenizers/split.rs::test::serialization	test	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::func::new	func	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::method::UnicodeScripts.new	method	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::struct::UnicodeScripts	struct	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	test	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	test	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/scripts.rs::enum::Script	enum	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/scripts.rs::func::get_script	func	missing	-	auto-generated
-src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	test	missing	-	auto-generated
-src/pre_tokenizers/whitespace.rs::struct::Whitespace	struct	missing	-	auto-generated
-src/pre_tokenizers/whitespace.rs::struct::WhitespaceSplit	struct	missing	-	auto-generated
-src/pre_tokenizers/whitespace.rs::test::basic	test	missing	-	auto-generated
-src/pre_tokenizers/whitespace.rs::test::whitespace_split	test	missing	-	auto-generated
-src/processors/bert.rs::enum::BertProcessorError	enum	missing	-	auto-generated
-src/processors/bert.rs::func::get_cls_copy	func	missing	-	auto-generated
-src/processors/bert.rs::func::get_sep_copy	func	missing	-	auto-generated
-src/processors/bert.rs::func::new	func	missing	-	auto-generated
-src/processors/bert.rs::method::BertProcessing.new	method	missing	-	auto-generated
-src/processors/bert.rs::struct::BertProcessing	struct	missing	-	auto-generated
-src/processors/bert.rs::test::bert_processing	test	missing	-	auto-generated
-src/processors/bert.rs::test::serde	test	missing	-	auto-generated
-src/processors/mod.rs::enum::PostProcessorWrapper	enum	missing	-	auto-generated
-src/processors/mod.rs::test::deserialize_bert_roberta_correctly	test	missing	-	auto-generated
-src/processors/mod.rs::test::post_processor_deserialization_no_type	test	missing	-	auto-generated
-src/processors/roberta.rs::func::add_prefix_space	func	missing	-	auto-generated
-src/processors/roberta.rs::func::get_cls_copy	func	missing	-	auto-generated
-src/processors/roberta.rs::func::get_sep_copy	func	missing	-	auto-generated
-src/processors/roberta.rs::func::new	func	missing	-	auto-generated
-src/processors/roberta.rs::func::trim_offsets	func	missing	-	auto-generated
-src/processors/roberta.rs::method::RobertaProcessing.new	method	missing	-	auto-generated
-src/processors/roberta.rs::struct::RobertaProcessing	struct	missing	-	auto-generated
-src/processors/roberta.rs::test::roberta_processing	test	missing	-	auto-generated
-src/processors/roberta.rs::test::serde	test	missing	-	auto-generated
-src/processors/sequence.rs::func::get	func	missing	-	auto-generated
-src/processors/sequence.rs::func::get_mut	func	missing	-	auto-generated
-src/processors/sequence.rs::func::new	func	missing	-	auto-generated
-src/processors/sequence.rs::func::set_mut	func	missing	-	auto-generated
-src/processors/sequence.rs::method::Sequence.new	method	missing	-	auto-generated
-src/processors/sequence.rs::struct::Sequence	struct	missing	-	auto-generated
-src/processors/sequence.rs::test::process_chain	test	missing	-	auto-generated
-src/processors/template.rs::enum::Piece	enum	missing	-	auto-generated
-src/processors/template.rs::enum::Sequence	enum	missing	-	auto-generated
-src/processors/template.rs::func::builder	func	missing	-	auto-generated
-src/processors/template.rs::func::get_added_pair	func	missing	-	auto-generated
-src/processors/template.rs::func::get_added_single	func	missing	-	auto-generated
-src/processors/template.rs::func::get_pair	func	missing	-	auto-generated
-src/processors/template.rs::func::get_single	func	missing	-	auto-generated
-src/processors/template.rs::func::get_special_tokens	func	missing	-	auto-generated
-src/processors/template.rs::func::new	func	missing	-	auto-generated
-src/processors/template.rs::func::set_added_pair	func	missing	-	auto-generated
-src/processors/template.rs::func::set_added_single	func	missing	-	auto-generated
-src/processors/template.rs::func::set_pair	func	missing	-	auto-generated
-src/processors/template.rs::func::set_single	func	missing	-	auto-generated
-src/processors/template.rs::func::set_special_tokens	func	missing	-	auto-generated
-src/processors/template.rs::method::SpecialToken.new	method	missing	-	auto-generated
-src/processors/template.rs::method::TemplateProcessing.builder	method	missing	-	auto-generated
-src/processors/template.rs::method::TemplateProcessing.get_single	method	missing	-	auto-generated
-src/processors/template.rs::struct::SpecialToken	struct	missing	-	auto-generated
-src/processors/template.rs::struct::Template	struct	missing	-	auto-generated
-src/processors/template.rs::struct::TemplateProcessing	struct	missing	-	auto-generated
-src/processors/template.rs::struct::Tokens	struct	missing	-	auto-generated
-src/processors/template.rs::test::expect_wrong_error_message	test	missing	-	auto-generated
-src/processors/template.rs::test::missing_special_tokens	test	missing	-	auto-generated
-src/processors/template.rs::test::pair_must_use_both_sequences	test	missing	-	auto-generated
-src/processors/template.rs::test::piece	test	missing	-	auto-generated
-src/processors/template.rs::test::piece_serde	test	missing	-	auto-generated
-src/processors/template.rs::test::special_token_serde	test	missing	-	auto-generated
-src/processors/template.rs::test::template_processing	test	missing	-	auto-generated
-src/processors/template.rs::test::template_processing_overflowing	test	missing	-	auto-generated
-src/processors/template.rs::test::template_processing_serde	test	missing	-	auto-generated
-src/processors/template.rs::test::template_serde	test	missing	-	auto-generated
-src/processors/template.rs::test::tokens_serde	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::get_added_tokens_decoder	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::get_encode_special_tokens	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::get_vocab	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::id_to_token	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::is_empty	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::is_special_token	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::len	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::lstrip	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::new	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::normalized	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::rstrip	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::set_encode_special_tokens	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::simple_id_to_token	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::single_word	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::special	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::func::token_to_id	func	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::method::AddedVocabulary.new	method	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::struct::AddedToken	struct	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::struct::AddedVocabulary	struct	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::can_add_tokens	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::empty_matches	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::options_use_cases	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	test	missing	-	auto-generated
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::char_to_token	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::char_to_word	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::from_tokens	func	missing	-	auto-generated
+src/normalizers/bert.rs::func::new	func	implemented	src/tokens/normalizers/bert.cr:11	constructor provided by #initialize
+src/normalizers/bert.rs::method::BertNormalizer.new	method	implemented	src/tokens/normalizers/bert.cr:11	port complete
+src/normalizers/bert.rs::struct::BertNormalizer	struct	implemented	src/tokens/normalizers/bert.cr:3	port complete
+src/normalizers/byte_level.rs::func::alphabet	func	implemented	src/tokens/normalizers/byte_level.cr:13	port complete
+src/normalizers/byte_level.rs::func::new	func	implemented	src/tokens/normalizers/byte_level.cr:10	constructor provided by #initialize
+src/normalizers/byte_level.rs::method::ByteLevel.new	method	implemented	src/tokens/normalizers/byte_level.cr:10	port complete
+src/normalizers/byte_level.rs::struct::ByteLevel	struct	implemented	src/tokens/normalizers/byte_level.cr:5	port complete
+src/normalizers/byte_level.rs::test::test_byte_level_normalize	test	implemented	spec/normalizers/byte_level_spec.cr:5	port complete
+src/normalizers/mod.rs::enum::EnumType	enum	implemented	src/tokens/normalizers/mod.cr:65	ported as string-tag dispatch in wrapper parser
+src/normalizers/mod.rs::enum::NormalizerHelper	enum	implemented	src/tokens/normalizers/mod.cr:43	ported as tagged-vs-legacy JSON dispatch
+src/normalizers/mod.rs::enum::NormalizerUntagged	enum	implemented	src/tokens/normalizers/mod.cr:43	ported as manual untagged wrapper dispatch
+src/normalizers/mod.rs::enum::NormalizerWrapper	enum	implemented	src/tokens/normalizers/mod.cr:4	ported as wrapper class over tagged union
+src/normalizers/mod.rs::struct::Tagged	struct	implemented	src/tokens/normalizers/mod.cr:65	ported as parsed tagged JSON object handling
+src/normalizers/mod.rs::test::normalizer_serialization	test	implemented	spec/normalizers/mod_spec.cr:20	port complete
+src/normalizers/mod.rs::test::post_processor_deserialization_no_type	test	implemented	spec/normalizers/mod_spec.cr:5	port complete
+src/normalizers/precompiled.rs::test::expansion_followed_by_removal	test	implemented	spec/normalizers/precompiled_spec.cr:5	port complete
+src/normalizers/prepend.rs::func::new	func	implemented	src/tokens/normalizers/prepend.cr:8	constructor provided by #initialize
+src/normalizers/prepend.rs::method::Prepend.new	method	implemented	src/tokens/normalizers/prepend.cr:8	port complete
+src/normalizers/prepend.rs::struct::Prepend	struct	implemented	src/tokens/normalizers/prepend.cr:3	port complete
+src/normalizers/prepend.rs::test::test_prepend	test	implemented	spec/normalizers/prepend_spec.cr:5	port complete
+src/normalizers/replace.rs::enum::ReplacePattern	enum	implemented	src/tokens/normalizers/replace.cr:5	ported as tagged union struct
+src/normalizers/replace.rs::struct::Replace	struct	implemented	src/tokens/normalizers/replace.cr:70	port complete
+src/normalizers/replace.rs::test::serialization	test	implemented	spec/normalizers/replace_spec.cr:25	port complete
+src/normalizers/replace.rs::test::test_replace	test	implemented	spec/normalizers/replace_spec.cr:5	port complete
+src/normalizers/replace.rs::test::test_replace_decode	test	implemented	spec/normalizers/replace_spec.cr:37	port complete
+src/normalizers/replace.rs::test::test_replace_regex	test	implemented	spec/normalizers/replace_spec.cr:15	port complete
+src/normalizers/strip.rs::func::new	func	implemented	src/tokens/normalizers/strip.cr:9	constructor provided by #initialize
+src/normalizers/strip.rs::method::Strip.new	method	implemented	src/tokens/normalizers/strip.cr:9	port complete
+src/normalizers/strip.rs::struct::Strip	struct	implemented	src/tokens/normalizers/strip.cr:3	port complete
+src/normalizers/strip.rs::struct::StripAccents	struct	implemented	src/tokens/normalizers/strip.cr:22	port complete
+src/normalizers/strip.rs::test::test_strip_accents	test	implemented	spec/normalizers/strip_spec.cr:5	port complete
+src/normalizers/strip.rs::test::test_strip_accents_multiple	test	implemented	spec/normalizers/strip_spec.cr:42	port complete
+src/normalizers/strip.rs::test::test_thai_bug	test	implemented	spec/normalizers/strip_spec.cr:34	port complete
+src/normalizers/strip.rs::test::test_vietnamese_bug	test	implemented	spec/normalizers/strip_spec.cr:20	port complete
+src/normalizers/unicode.rs::struct::NFC	struct	implemented	src/tokens/normalizers/unicode.cr:19	port complete
+src/normalizers/unicode.rs::struct::NFD	struct	implemented	src/tokens/normalizers/unicode.cr:3	port complete
+src/normalizers/unicode.rs::struct::NFKC	struct	implemented	src/tokens/normalizers/unicode.cr:27	port complete
+src/normalizers/unicode.rs::struct::NFKD	struct	implemented	src/tokens/normalizers/unicode.cr:11	port complete
+src/normalizers/unicode.rs::struct::Nmt	struct	implemented	src/tokens/normalizers/unicode.cr:35	port complete
+src/normalizers/unicode.rs::test::test_nfkc	test	implemented	spec/normalizers/unicode_spec.cr:5	port complete
+src/normalizers/utils.rs::func::new	func	implemented	src/tokens/normalizers/utils.cr:8	constructor provided by #initialize
+src/normalizers/utils.rs::method::Sequence.new	method	implemented	src/tokens/normalizers/utils.cr:8	ported as Array(Tokens::Normalizer) sequence
+src/normalizers/utils.rs::struct::Lowercase	struct	implemented	src/tokens/normalizers/utils.cr:16	port complete
+src/normalizers/utils.rs::struct::Sequence	struct	implemented	src/tokens/normalizers/utils.cr:3	ported as Array(Tokens::Normalizer) sequence
+src/pre_tokenizers/bert.rs::struct::BertPreTokenizer	struct	implemented	src/tokens/pre_tokenizers/bert.cr:5	port complete
+src/pre_tokenizers/bert.rs::test::basic	test	implemented	spec/pre_tokenizers/bert_spec.cr:4	port complete
+src/pre_tokenizers/bert.rs::test::chinese_chars	test	implemented	spec/pre_tokenizers/bert_spec.cr:26	port complete
+src/pre_tokenizers/byte_level.rs::func::add_prefix_space	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:32	port complete
+src/pre_tokenizers/byte_level.rs::func::alphabet	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:26	port complete
+src/pre_tokenizers/byte_level.rs::func::new	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:19	constructor provided by #initialize
+src/pre_tokenizers/byte_level.rs::func::process_offsets	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:149	port complete
+src/pre_tokenizers/byte_level.rs::func::trim_offsets	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:36	port complete
+src/pre_tokenizers/byte_level.rs::func::use_regex	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:40	port complete
+src/pre_tokenizers/byte_level.rs::method::ByteLevel.new	method	implemented	src/tokens/pre_tokenizers/byte_level.cr:19	port complete
+src/pre_tokenizers/byte_level.rs::struct::ByteLevel	struct	implemented	src/tokens/pre_tokenizers/byte_level.cr:6	port complete
+src/pre_tokenizers/byte_level.rs::test::add_prefix_space	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:47	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:230	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:75	port complete
+src/pre_tokenizers/byte_level.rs::test::decoding	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:41	port complete
+src/pre_tokenizers/byte_level.rs::test::deserialization	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:236	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:111	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:93	port complete
+src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:128	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:4	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:27	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:187	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:159	port complete
+src/pre_tokenizers/delimiter.rs::func::new	func	implemented	src/tokens/pre_tokenizers/delimiter.cr:10	constructor provided by #initialize
+src/pre_tokenizers/delimiter.rs::method::CharDelimiterSplit.new	method	implemented	src/tokens/pre_tokenizers/delimiter.cr:10	port complete
+src/pre_tokenizers/delimiter.rs::struct::CharDelimiterSplit	struct	implemented	src/tokens/pre_tokenizers/delimiter.cr:5	port complete
+src/pre_tokenizers/digits.rs::func::new	func	implemented	src/tokens/pre_tokenizers/digits.cr:10	constructor provided by #initialize
+src/pre_tokenizers/digits.rs::method::Digits.new	method	implemented	src/tokens/pre_tokenizers/digits.cr:10	port complete
+src/pre_tokenizers/digits.rs::struct::Digits	struct	implemented	src/tokens/pre_tokenizers/digits.cr:5	port complete
+src/pre_tokenizers/digits.rs::test::individual_digits	test	implemented	spec/pre_tokenizers/digits_spec.cr:27	port complete
+src/pre_tokenizers/digits.rs::test::numbers	test	implemented	spec/pre_tokenizers/digits_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::func::new	func	implemented	src/tokens/pre_tokenizers/fixed_length.cr:10	constructor provided by #initialize
+src/pre_tokenizers/fixed_length.rs::method::FixedLength.new	method	implemented	src/tokens/pre_tokenizers/fixed_length.cr:10	port complete
+src/pre_tokenizers/fixed_length.rs::struct::FixedLength	struct	implemented	src/tokens/pre_tokenizers/fixed_length.cr:5	port complete
+src/pre_tokenizers/fixed_length.rs::test::basic	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::test::custom_length	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:22	port complete
+src/pre_tokenizers/fixed_length.rs::test::utf8_characters	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:38	port complete
+src/pre_tokenizers/metaspace.rs::enum::PrependScheme	enum	implemented	src/tokens/pre_tokenizers/metaspace.cr:5	port complete
+src/pre_tokenizers/metaspace.rs::func::get_prepend_scheme	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:47	port complete
+src/pre_tokenizers/metaspace.rs::func::get_replacement	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:27	port complete
+src/pre_tokenizers/metaspace.rs::func::get_split	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:37	port complete
+src/pre_tokenizers/metaspace.rs::func::new	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:19	constructor provided by #initialize
+src/pre_tokenizers/metaspace.rs::func::set_prepend_scheme	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:52	port complete
+src/pre_tokenizers/metaspace.rs::func::set_replacement	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:32	port complete
+src/pre_tokenizers/metaspace.rs::func::set_split	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:42	port complete
+src/pre_tokenizers/metaspace.rs::method::Metaspace.new	method	implemented	src/tokens/pre_tokenizers/metaspace.cr:19	port complete
+src/pre_tokenizers/metaspace.rs::struct::Metaspace	struct	implemented	src/tokens/pre_tokenizers/metaspace.cr:11	port complete
+src/pre_tokenizers/metaspace.rs::struct::MetaspaceHelper	struct	implemented	src/tokens/pre_tokenizers/metaspace.cr:113	manual JSON helper behavior embedded in Metaspace.from_json
+src/pre_tokenizers/metaspace.rs::test::basic	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:21	port complete
+src/pre_tokenizers/metaspace.rs::test::decode	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:148	port complete
+src/pre_tokenizers/metaspace.rs::test::multiple_spaces	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:44	port complete
+src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:71	port complete
+src/pre_tokenizers/metaspace.rs::test::serialization	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::enum::EnumType	enum	implemented	src/tokens/pre_tokenizers/mod.cr:54	wrapper registry is ported across all upstream pre-tokenizer variants currently tracked in the ledger
+src/pre_tokenizers/mod.rs::enum::PreTokenizerHelper	enum	implemented	src/tokens/pre_tokenizers/mod.cr:43	tagged JSON dispatch is handled by PreTokenizerWrapper.from_json
+src/pre_tokenizers/mod.rs::enum::PreTokenizerUntagged	enum	implemented	src/tokens/pre_tokenizers/mod.cr:43	untagged enum matching is represented by the Crystal wrapper dispatcher
+src/pre_tokenizers/mod.rs::enum::PreTokenizerWrapper	enum	implemented	src/tokens/pre_tokenizers/mod.cr:4	wrapper ported as Crystal class over tagged union
+src/pre_tokenizers/mod.rs::struct::Tagged	struct	implemented	src/tokens/pre_tokenizers/mod.cr:54	tagged JSON object handling is embedded in PreTokenizerWrapper.from_json
+src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	test	implemented	spec/pre_tokenizers/mod_spec.cr:25	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize	test	implemented	spec/pre_tokenizers/mod_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	test	implemented	spec/pre_tokenizers/mod_spec.cr:20	port complete
+src/pre_tokenizers/punctuation.rs::func::new	func	implemented	src/tokens/pre_tokenizers/punctuation.cr:12	constructor provided by #initialize
+src/pre_tokenizers/punctuation.rs::method::Punctuation.new	method	implemented	src/tokens/pre_tokenizers/punctuation.cr:12	port complete
+src/pre_tokenizers/punctuation.rs::struct::Punctuation	struct	implemented	src/tokens/pre_tokenizers/punctuation.cr:5	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:22	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:27	port complete
+src/pre_tokenizers/punctuation.rs::test::punctuation_basic	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:4	port complete
+src/pre_tokenizers/sequence.rs::func::new	func	implemented	src/tokens/pre_tokenizers/sequence.cr:8	constructor provided by #initialize
+src/pre_tokenizers/sequence.rs::method::Sequence.new	method	implemented	src/tokens/pre_tokenizers/sequence.cr:8	port complete
+src/pre_tokenizers/sequence.rs::struct::Sequence	struct	implemented	src/tokens/pre_tokenizers/sequence.cr:3	port complete
+src/pre_tokenizers/sequence.rs::test::sequence_basic	test	implemented	spec/pre_tokenizers/sequence_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::enum::SplitPattern	enum	implemented	src/tokens/pre_tokenizers/split.cr:5	port complete
+src/pre_tokenizers/split.rs::struct::Split	struct	implemented	src/tokens/pre_tokenizers/split.cr:52	port complete
+src/pre_tokenizers/split.rs::struct::SplitHelper	struct	implemented	src/tokens/pre_tokenizers/split.cr:98	manual JSON helper parsing embedded in Split.from_json
+src/pre_tokenizers/split.rs::test::basic	test	implemented	spec/pre_tokenizers/split_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::test::invert	test	implemented	spec/pre_tokenizers/split_spec.cr:78	port complete
+src/pre_tokenizers/split.rs::test::regex_string	test	implemented	spec/pre_tokenizers/split_spec.cr:59	port complete
+src/pre_tokenizers/split.rs::test::serialization	test	implemented	spec/pre_tokenizers/split_spec.cr:88	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::func::new	func	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::method::UnicodeScripts.new	method	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::struct::UnicodeScripts	struct	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:4	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:29	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:52	port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::enum::Script	enum	implemented	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:9	generated script table port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::func::get_script	func	implemented	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:151	generated script lookup port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:69	port complete
+src/pre_tokenizers/whitespace.rs::struct::Whitespace	struct	implemented	src/tokens/pre_tokenizers/whitespace.cr:3	port complete
+src/pre_tokenizers/whitespace.rs::struct::WhitespaceSplit	struct	implemented	src/tokens/pre_tokenizers/whitespace.cr:16	port complete
+src/pre_tokenizers/whitespace.rs::test::basic	test	implemented	spec/pre_tokenizers/whitespace_spec.cr:4	port complete
+src/pre_tokenizers/whitespace.rs::test::whitespace_split	test	implemented	spec/pre_tokenizers/whitespace_spec.cr:24	port complete
+src/processors/bert.rs::enum::BertProcessorError	enum	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::func::get_cls_copy	func	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::func::get_sep_copy	func	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::func::new	func	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::method::BertProcessing.new	method	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::struct::BertProcessing	struct	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::test::bert_processing	test	ported	src/tokens/processors:ported	ported
+src/processors/bert.rs::test::serde	test	ported	src/tokens/processors:ported	ported
+src/processors/mod.rs::enum::PostProcessorWrapper	enum	ported	src/tokens/processors:ported	ported
+src/processors/mod.rs::test::deserialize_bert_roberta_correctly	test	ported	src/tokens/processors:ported	ported
+src/processors/mod.rs::test::post_processor_deserialization_no_type	test	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::func::add_prefix_space	func	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::func::get_cls_copy	func	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::func::get_sep_copy	func	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::func::new	func	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::func::trim_offsets	func	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::method::RobertaProcessing.new	method	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::struct::RobertaProcessing	struct	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::test::roberta_processing	test	ported	src/tokens/processors:ported	ported
+src/processors/roberta.rs::test::serde	test	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::func::get	func	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::func::get_mut	func	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::func::new	func	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::func::set_mut	func	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::method::Sequence.new	method	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::struct::Sequence	struct	ported	src/tokens/processors:ported	ported
+src/processors/sequence.rs::test::process_chain	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::enum::Piece	enum	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::enum::Sequence	enum	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::builder	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::get_added_pair	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::get_added_single	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::get_pair	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::get_single	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::get_special_tokens	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::new	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::set_added_pair	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::set_added_single	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::set_pair	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::set_single	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::func::set_special_tokens	func	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::method::SpecialToken.new	method	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::method::TemplateProcessing.builder	method	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::method::TemplateProcessing.get_single	method	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::struct::SpecialToken	struct	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::struct::Template	struct	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::struct::TemplateProcessing	struct	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::struct::Tokens	struct	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::expect_wrong_error_message	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::missing_special_tokens	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::pair_must_use_both_sequences	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::piece	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::piece_serde	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::special_token_serde	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::template_processing	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::template_processing_overflowing	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::template_processing_serde	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::template_serde	test	ported	src/tokens/processors:ported	ported
+src/processors/template.rs::test::tokens_serde	test	ported	src/tokens/processors:ported	ported
+src/tokenizer/added_vocabulary.rs::func::get_added_tokens_decoder	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:109	port complete
+src/tokenizer/added_vocabulary.rs::func::get_encode_special_tokens	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:101	port complete
+src/tokenizer/added_vocabulary.rs::func::get_vocab	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:105	port complete
+src/tokenizer/added_vocabulary.rs::func::id_to_token	func	implemented	src/tokens/tokenizer/tokenizer.cr:157	behavior provided via tokenizer#id_to_token
+src/tokenizer/added_vocabulary.rs::func::is_empty	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:93	ported as #empty?
+src/tokenizer/added_vocabulary.rs::func::is_special_token	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:123	port complete
+src/tokenizer/added_vocabulary.rs::func::len	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:89	port complete
+src/tokenizer/added_vocabulary.rs::func::lstrip	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:34	port complete
+src/tokenizer/added_vocabulary.rs::func::new	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::func::normalized	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:44	port complete
+src/tokenizer/added_vocabulary.rs::func::rstrip	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:39	port complete
+src/tokenizer/added_vocabulary.rs::func::set_encode_special_tokens	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:97	port complete
+src/tokenizer/added_vocabulary.rs::func::simple_id_to_token	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:117	port complete
+src/tokenizer/added_vocabulary.rs::func::single_word	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:29	port complete
+src/tokenizer/added_vocabulary.rs::func::special	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:49	port complete
+src/tokenizer/added_vocabulary.rs::func::token_to_id	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:113	port complete
+src/tokenizer/added_vocabulary.rs::method::AddedVocabulary.new	method	implemented	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::struct::AddedToken	struct	implemented	src/tokens/tokenizer/added_vocabulary.cr:5	port complete
+src/tokenizer/added_vocabulary.rs::struct::AddedVocabulary	struct	implemented	src/tokens/tokenizer/added_vocabulary.cr:75	port complete
+src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:304	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:60	port complete
+src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:119	port complete
+src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:268	port complete
+src/tokenizer/added_vocabulary.rs::test::empty_matches	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:167	port complete
+src/tokenizer/added_vocabulary.rs::test::options_use_cases	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:142	port complete
+src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:288	port complete
+src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:228	port complete
+src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:209	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:172	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:191	port complete
+src/tokenizer/encoding.rs::func::char_to_token	func	implemented	src/tokens/tokenizer/encoding.cr:161	port complete
+src/tokenizer/encoding.rs::func::char_to_word	func	implemented	src/tokens/tokenizer/encoding.cr:170	port complete
+src/tokenizer/encoding.rs::func::from_tokens	func	implemented	src/tokens/tokenizer/encoding.cr:43	port complete
 src/tokenizer/encoding.rs::func::get_attention_mask	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_ids	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_offsets	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_offsets_mut	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_overflowing	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_overflowing_mut	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_sequence_ids	func	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::get_sequence_ids	func	implemented	src/tokens/tokenizer/encoding.cr:76	port complete
 src/tokenizer/encoding.rs::func::get_special_tokens_mask	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_tokens	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_type_ids	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_word_ids	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::get_word_ids_mut	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::is_empty	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::len	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::merge_with	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::n_sequences	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::new	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::pad	func	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::is_empty	func	implemented	src/tokens/tokenizer/encoding.cr:59	ported as #empty?
+src/tokenizer/encoding.rs::func::len	func	implemented	src/tokens/tokenizer/encoding.cr:63	ported as #length
+src/tokenizer/encoding.rs::func::merge_with	func	implemented	src/tokens/tokenizer/encoding.cr:254	port complete
+src/tokenizer/encoding.rs::func::n_sequences	func	implemented	src/tokens/tokenizer/encoding.cr:67	port complete
+src/tokenizer/encoding.rs::func::new	func	implemented	src/tokens/tokenizer/encoding.cr:17	port complete
+src/tokenizer/encoding.rs::func::pad	func	implemented	src/tokens/tokenizer/encoding.cr:301	port complete
 src/tokenizer/encoding.rs::func::set_overflowing	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::set_sequence_id	func	missing	-	auto-generated
 src/tokenizer/encoding.rs::func::set_type_ids	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::take_overflowing	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::token_to_chars	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::token_to_sequence	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::token_to_word	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::truncate	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::with_capacity	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::word_to_chars	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::word_to_tokens	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::method::Encoding.new	method	missing	-	auto-generated
-src/tokenizer/encoding.rs::struct::Encoding	struct	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::mappings	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::merge_encodings	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::padding	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::truncate	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::truncate_left	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	test	missing	-	auto-generated
-src/tokenizer/encoding.rs::test::truncate_to_empty	test	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::take_overflowing	func	implemented	src/tokens/tokenizer/encoding.cr:91	port complete
+src/tokenizer/encoding.rs::func::token_to_chars	func	implemented	src/tokens/tokenizer/encoding.cr:145	port complete
+src/tokenizer/encoding.rs::func::token_to_sequence	func	implemented	src/tokens/tokenizer/encoding.cr:107	port complete
+src/tokenizer/encoding.rs::func::token_to_word	func	implemented	src/tokens/tokenizer/encoding.cr:153	port complete
+src/tokenizer/encoding.rs::func::truncate	func	implemented	src/tokens/tokenizer/encoding.cr:178	port complete
+src/tokenizer/encoding.rs::func::with_capacity	func	implemented	src/tokens/tokenizer/encoding.cr:31	port complete
+src/tokenizer/encoding.rs::func::word_to_chars	func	implemented	src/tokens/tokenizer/encoding.cr:137	port complete
+src/tokenizer/encoding.rs::func::word_to_tokens	func	implemented	src/tokens/tokenizer/encoding.cr:116	port complete
+src/tokenizer/encoding.rs::method::Encoding.new	method	implemented	src/tokens/tokenizer/encoding.cr:17	port complete
+src/tokenizer/encoding.rs::struct::Encoding	struct	implemented	src/tokens/tokenizer/encoding.cr:4	port complete
+src/tokenizer/encoding.rs::test::mappings	test	implemented	spec/tokenizer/encoding_spec.cr:109	port complete
+src/tokenizer/encoding.rs::test::merge_encodings	test	implemented	spec/tokenizer/encoding_spec.cr:5	port complete
+src/tokenizer/encoding.rs::test::padding	test	implemented	spec/tokenizer/encoding_spec.cr:176	port complete
+src/tokenizer/encoding.rs::test::truncate	test	implemented	spec/tokenizer/encoding_spec.cr:35	port complete
+src/tokenizer/encoding.rs::test::truncate_left	test	implemented	spec/tokenizer/encoding_spec.cr:54	port complete
+src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	test	implemented	spec/tokenizer/encoding_spec.cr:90	port complete
+src/tokenizer/encoding.rs::test::truncate_to_empty	test	implemented	spec/tokenizer/encoding_spec.cr:73	port complete
 src/tokenizer/mod.rs::enum::DecodeStreamError	enum	missing	-	auto-generated
 src/tokenizer/mod.rs::enum::EncodeInput	enum	missing	-	auto-generated
 src/tokenizer/mod.rs::enum::InputSequence	enum	missing	-	auto-generated
@@ -558,7 +558,7 @@ src/tokenizer/mod.rs::func::token_to_id	func	missing	-	auto-generated
 src/tokenizer/mod.rs::func::with_added_vocabulary	func	missing	-	auto-generated
 src/tokenizer/mod.rs::func::with_decoder	func	missing	-	auto-generated
 src/tokenizer/mod.rs::func::with_model	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_normalizer	func	missing	-	auto-generated
+src/tokenizer/mod.rs::func::with_normalizer	func	implemented	src/tokens/tokenizer/tokenizer.cr:63	refreshes added-token normalization cache
 src/tokenizer/mod.rs::func::with_padding	func	missing	-	auto-generated
 src/tokenizer/mod.rs::func::with_post_processor	func	missing	-	auto-generated
 src/tokenizer/mod.rs::func::with_pre_tokenizer	func	missing	-	auto-generated
@@ -577,11 +577,11 @@ src/tokenizer/mod.rs::struct::Tokenizer	struct	missing	-	auto-generated
 src/tokenizer/mod.rs::struct::TokenizerBuilder	struct	missing	-	auto-generated
 src/tokenizer/mod.rs::struct::TokenizerImpl	struct	missing	-	auto-generated
 src/tokenizer/mod.rs::struct::TruncationParamError	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	test	missing	-	auto-generated
-src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	test	missing	-	auto-generated
-src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	test	missing	-	auto-generated
-src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	test	missing	-	auto-generated
-src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	test	missing	-	auto-generated
+src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	test	implemented	spec/tokenizer/tokenizer_spec.cr:78	port complete
+src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	test	implemented	spec/tokenizer/tokenizer_spec.cr:126	port complete
+src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:110	port complete
+src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:96	port complete
+src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	test	implemented	spec/tokenizer/tokenizer_spec.cr:60	port complete
 src/tokenizer/mod.rs::trait::Decoder	trait	missing	-	auto-generated
 src/tokenizer/mod.rs::trait::Model	trait	missing	-	auto-generated
 src/tokenizer/mod.rs::trait::Normalizer	trait	missing	-	auto-generated
@@ -591,9 +591,9 @@ src/tokenizer/mod.rs::trait::Trainer	trait	missing	-	auto-generated
 src/tokenizer/mod.rs::type::Error	type	missing	-	auto-generated
 src/tokenizer/mod.rs::type::Offsets	type	missing	-	auto-generated
 src/tokenizer/mod.rs::type::Result	type	missing	-	auto-generated
-src/tokenizer/normalizer.rs::enum::OffsetReferential	enum	missing	-	auto-generated
-src/tokenizer/normalizer.rs::enum::Range	enum	missing	-	auto-generated
-src/tokenizer/normalizer.rs::enum::SplitDelimiterBehavior	enum	missing	-	auto-generated
+src/tokenizer/normalizer.rs::enum::OffsetReferential	enum	ported	src/tokens/tokenizer/normalizer.cr:4	port complete
+src/tokenizer/normalizer.rs::enum::Range	enum	partial	src/tokens/tokenizer/normalizer.cr:20	port mapped to Tokens::Range::Original/Normalized wrapper structs rather than a single enum
+src/tokenizer/normalizer.rs::enum::SplitDelimiterBehavior	enum	ported	src/tokens/tokenizer/normalizer.cr:9	port complete
 src/tokenizer/normalizer.rs::func::append	func	missing	-	auto-generated
 src/tokenizer/normalizer.rs::func::bytes_to_char	func	missing	-	auto-generated
 src/tokenizer/normalizer.rs::func::char_to_bytes	func	missing	-	auto-generated
@@ -617,49 +617,49 @@ src/tokenizer/normalizer.rs::func::strip	func	missing	-	auto-generated
 src/tokenizer/normalizer.rs::func::unwrap	func	missing	-	auto-generated
 src/tokenizer/normalizer.rs::func::uppercase	func	missing	-	auto-generated
 src/tokenizer/normalizer.rs::method::Range.unwrap	method	missing	-	auto-generated
-src/tokenizer/normalizer.rs::struct::NormalizedString	struct	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::added_around_edges	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::added_characters_alignment	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::append	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::get_range	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::lstrip	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::mixed_addition_and_removal	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::nfd_adds_new_chars	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::original_range	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::prepend	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::range_conversion	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::remove_at_beginning	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::remove_at_end	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::remove_chars	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::remove_chars_added_by_nfd	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::removed_around_both_edges	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::replace	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::rstrip	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::slice	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::split	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::strip	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::strip_unicode	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::test_append_after_clear	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::test_len_range_exclusive	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::test_len_range_inclusive	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::transform_check	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::transform_range_multiple_bytes	test	missing	-	auto-generated
-src/tokenizer/normalizer.rs::test::transform_range_single_bytes	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::struct::Invert	struct	missing	-	auto-generated
-src/tokenizer/pattern.rs::test::char	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::test::functions	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::test::regex	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::test::str	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::test::sys_regex	test	missing	-	auto-generated
-src/tokenizer/pattern.rs::trait::Pattern	trait	missing	-	auto-generated
+src/tokenizer/normalizer.rs::struct::NormalizedString	struct	partial	src/tokens/tokenizer/normalizer.cr:101	core alignment-preserving normalizer ported; some upstream transform-edge tests still missing
+src/tokenizer/normalizer.rs::test::added_around_edges	test	ported	spec/tokenizer/normalizer_spec.cr:125	port complete
+src/tokenizer/normalizer.rs::test::added_characters_alignment	test	ported	spec/tokenizer/normalizer_spec.cr:141	port complete
+src/tokenizer/normalizer.rs::test::append	test	ported	spec/tokenizer/normalizer_spec.cr:256	port complete
+src/tokenizer/normalizer.rs::test::get_range	test	ported	spec/tokenizer/normalizer_spec.cr:279	port complete
+src/tokenizer/normalizer.rs::test::lstrip	test	ported	spec/tokenizer/normalizer_spec.cr:209	port complete
+src/tokenizer/normalizer.rs::test::mixed_addition_and_removal	test	ported	spec/tokenizer/normalizer_spec.cr:83	port complete
+src/tokenizer/normalizer.rs::test::nfd_adds_new_chars	test	ported	spec/tokenizer/normalizer_spec.cr:20	port complete
+src/tokenizer/normalizer.rs::test::original_range	test	ported	spec/tokenizer/normalizer_spec.cr:110	port complete
+src/tokenizer/normalizer.rs::test::prepend	test	ported	spec/tokenizer/normalizer_spec.cr:233	port complete
+src/tokenizer/normalizer.rs::test::range_conversion	test	ported	spec/tokenizer/normalizer_spec.cr:98	port complete
+src/tokenizer/normalizer.rs::test::remove_at_beginning	test	ported	spec/tokenizer/normalizer_spec.cr:176	port complete
+src/tokenizer/normalizer.rs::test::remove_at_end	test	ported	spec/tokenizer/normalizer_spec.cr:184	port complete
+src/tokenizer/normalizer.rs::test::remove_chars	test	ported	spec/tokenizer/normalizer_spec.cr:66	port complete
+src/tokenizer/normalizer.rs::test::remove_chars_added_by_nfd	test	ported	spec/tokenizer/normalizer_spec.cr:50	port complete
+src/tokenizer/normalizer.rs::test::removed_around_both_edges	test	ported	spec/tokenizer/normalizer_spec.cr:192	port complete
+src/tokenizer/normalizer.rs::test::replace	test	ported	spec/tokenizer/normalizer_spec.cr:298	port complete
+src/tokenizer/normalizer.rs::test::rstrip	test	ported	spec/tokenizer/normalizer_spec.cr:217	port complete
+src/tokenizer/normalizer.rs::test::slice	test	ported	spec/tokenizer/normalizer_spec.cr:285	port complete
+src/tokenizer/normalizer.rs::test::split	test	ported	spec/tokenizer/normalizer_spec.cr:312	port complete
+src/tokenizer/normalizer.rs::test::strip	test	ported	spec/tokenizer/normalizer_spec.cr:201	port complete
+src/tokenizer/normalizer.rs::test::strip_unicode	test	ported	spec/tokenizer/normalizer_spec.cr:225	port complete
+src/tokenizer/normalizer.rs::test::test_append_after_clear	test	ported	spec/tokenizer/normalizer_spec.cr:322	port complete
+src/tokenizer/normalizer.rs::test::test_len_range_exclusive	test	ported	spec/tokenizer/normalizer_spec.cr:15	port complete
+src/tokenizer/normalizer.rs::test::test_len_range_inclusive	test	ported	spec/tokenizer/normalizer_spec.cr:15	port complete
+src/tokenizer/normalizer.rs::test::transform_check	test	ported	spec/tokenizer/normalizer_spec.cr:335	port complete
+src/tokenizer/normalizer.rs::test::transform_range_multiple_bytes	test	ported	spec/tokenizer/normalizer_spec.cr:637	port complete
+src/tokenizer/normalizer.rs::test::transform_range_single_bytes	test	ported	spec/tokenizer/normalizer_spec.cr:349	port complete
+src/tokenizer/pattern.rs::struct::Invert	struct	ported	src/tokens/tokenizer/pattern.cr:20	ported as Tokens::Invert wrapper
+src/tokenizer/pattern.rs::test::char	test	ported	spec/tokenizer/pattern_spec.cr:15	port complete
+src/tokenizer/pattern.rs::test::functions	test	ported	spec/tokenizer/pattern_spec.cr:34	port complete
+src/tokenizer/pattern.rs::test::regex	test	ported	spec/tokenizer/pattern_spec.cr:44	port complete
+src/tokenizer/pattern.rs::test::str	test	ported	spec/tokenizer/pattern_spec.cr:23	port complete
+src/tokenizer/pattern.rs::test::sys_regex	test	ported	spec/tokenizer/pattern_spec.cr:54	port complete
+src/tokenizer/pattern.rs::trait::Pattern	trait	ported	src/tokens/tokenizer/pattern.cr:2	ported via Crystal module plus core type reopenings for Char/String/Regex/Proc
 src/tokenizer/pre_tokenizer.rs::enum::OffsetType	enum	missing	-	auto-generated
 src/tokenizer/pre_tokenizer.rs::func::convert	func	missing	-	auto-generated
 src/tokenizer/pre_tokenizer.rs::func::get_splits	func	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::func::into_encoding	func	missing	-	auto-generated
+src/tokenizer/pre_tokenizer.rs::func::into_encoding	func	implemented	src/tokens/tokenizer/pre_tokenizer.cr:96	port complete
 src/tokenizer/pre_tokenizer.rs::func::new	func	missing	-	auto-generated
 src/tokenizer/pre_tokenizer.rs::method::BytesToCharOffsetConverter.new	method	missing	-	auto-generated
 src/tokenizer/pre_tokenizer.rs::struct::PreTokenizedString	struct	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::struct::Split	struct	missing	-	auto-generated
+src/tokenizer/pre_tokenizer.rs::struct::Split	struct	implemented	src/tokens/tokenizer/pre_tokenizer.cr:2	port complete
 src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	test	missing	-	auto-generated
 src/tokenizer/serialization.rs::test::test_from_pretrained	test	missing	-	auto-generated
 src/utils/fancy.rs::func::new	func	missing	-	auto-generated
@@ -671,11 +671,11 @@ src/utils/iter.rs::struct::ResultShunt	struct	missing	-	auto-generated
 src/utils/iter.rs::trait::LinesWithEnding	trait	missing	-	auto-generated
 src/utils/onig.rs::func::new	func	missing	-	auto-generated
 src/utils/onig.rs::struct::SysRegex	struct	missing	-	auto-generated
-src/utils/padding.rs::enum::PaddingDirection	enum	missing	-	auto-generated
-src/utils/padding.rs::enum::PaddingStrategy	enum	missing	-	auto-generated
-src/utils/padding.rs::func::pad_encodings	func	missing	-	auto-generated
-src/utils/padding.rs::struct::PaddingParams	struct	missing	-	auto-generated
-src/utils/padding.rs::test::pad_to_multiple	test	missing	-	auto-generated
+src/utils/padding.rs::enum::PaddingDirection	enum	implemented	src/tokens/tokenizer/encoding.cr:354	co-located in tokenizer encoding port
+src/utils/padding.rs::enum::PaddingStrategy	enum	implemented	src/tokens/tokenizer/encoding.cr:397	ported with fixed size carried in params
+src/utils/padding.rs::func::pad_encodings	func	implemented	src/tokens/tokenizer/encoding.cr:402	port complete
+src/utils/padding.rs::struct::PaddingParams	struct	implemented	src/tokens/tokenizer/encoding.cr:382	ported with explicit fixed_size field
+src/utils/padding.rs::test::pad_to_multiple	test	implemented	spec/tokenizer/padding_spec.cr:12	port complete
 src/utils/parallelism.rs::const::ENV_VARIABLE	const	missing	-	auto-generated
 src/utils/parallelism.rs::func::get_parallelism	func	missing	-	auto-generated
 src/utils/parallelism.rs::func::has_parallelism_been_used	func	missing	-	auto-generated
@@ -702,14 +702,14 @@ src/utils/progress.rs::method::ProgressBar.new	method	missing	-	auto-generated
 src/utils/progress.rs::method::ProgressStyle.default_bar	method	missing	-	auto-generated
 src/utils/progress.rs::struct::ProgressBar	struct	missing	-	auto-generated
 src/utils/progress.rs::struct::ProgressStyle	struct	missing	-	auto-generated
-src/utils/truncation.rs::enum::TruncationDirection	enum	missing	-	auto-generated
+src/utils/truncation.rs::enum::TruncationDirection	enum	implemented	src/tokens/tokenizer/encoding.cr:349	co-located in tokenizer encoding port
 src/utils/truncation.rs::enum::TruncationError	enum	missing	-	auto-generated
-src/utils/truncation.rs::enum::TruncationStrategy	enum	missing	-	auto-generated
-src/utils/truncation.rs::func::truncate_encodings	func	missing	-	auto-generated
-src/utils/truncation.rs::struct::TruncationParams	struct	missing	-	auto-generated
-src/utils/truncation.rs::test::test_deserialize_defaults	test	missing	-	auto-generated
-src/utils/truncation.rs::test::truncate_encodings_empty	test	missing	-	auto-generated
-src/utils/truncation.rs::test::truncate_encodings_longest_first	test	missing	-	auto-generated
+src/utils/truncation.rs::enum::TruncationStrategy	enum	implemented	src/tokens/tokenizer/encoding.cr:376	co-located in tokenizer encoding port
+src/utils/truncation.rs::func::truncate_encodings	func	implemented	src/tokens/tokenizer/truncation.cr:2	port complete
+src/utils/truncation.rs::struct::TruncationParams	struct	implemented	src/tokens/tokenizer/encoding.cr:359	co-located in tokenizer encoding port
+src/utils/truncation.rs::test::test_deserialize_defaults	test	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
+src/utils/truncation.rs::test::truncate_encodings_empty	test	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
+src/utils/truncation.rs::test::truncate_encodings_longest_first	test	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
 tests/added_tokens.rs::test::add_tokens	test	missing	-	auto-generated
 tests/added_tokens.rs::test::lstrip_tokens	test	missing	-	auto-generated
 tests/added_tokens.rs::test::overlapping_tokens	test	missing	-	auto-generated

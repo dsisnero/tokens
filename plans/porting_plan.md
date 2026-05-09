@@ -1,292 +1,241 @@
-# Porting Plan: huggingface/tokenizers → Crystal
+# Porting Plan: `huggingface/tokenizers` -> Crystal
 
 **Upstream repo:** https://github.com/huggingface/tokenizers
-**Upstream pinned ref:** `3992692` (main branch)
-**Vendor path:** `vendor/tokenizers` (git submodule)
+**Upstream pinned ref:** `3992692`
+**Vendor path:** `vendor/tokenizers`
 **Core Rust crate:** `vendor/tokenizers/tokenizers/src/`
 
----
-
-## Phases
-
-### Phase 1 — Core BPE Model [x]
-
-**Rust source files:**
-- `models/bpe/model.rs` (1171 lines)
-- `models/bpe/trainer.rs` (868 lines)
-- `models/bpe/word.rs` (353 lines)
-- `models/bpe/serialization.rs` (238 lines)
-- `models/bpe/mod.rs` (82 lines)
-
-**Crystal target:** `src/tokens/models/bpe/`
-
-Single-file module split into:
-- `bpe.cr` — entry point, requires submodules
-- `bpe/types.cr` — Pair, Vocab, MergeMap aliases, AddedToken record
-- `bpe/word.cr` — Word with linked-list Symbol, MergeHeap
-- `bpe/cache.cr` — BpeCache with atomic-style fresh/clear/get/set
-- `bpe/iterators.cr` — FirstLastIterator
-- `bpe/builder.cr` — BpeBuilder (vocab/merges/files/constructor)
-- `bpe/model.cr` — BPE class (tokenize, merge_word, serialization, save/load)
-- `bpe/trainer.cr` — BpeTrainer, BpeTrainerBuilder, TrainerMerge
-- `bpe/error.cr` — TokenizerError hierarchy
-
-**Rust tests ported:** 2 (test_train, bpe_test_max_token_length_direct_assert)
-**Crystal specs:** 35 (tokenization, serialization, training)
-**Status:** ✅ Complete
-
----
-
-### Phase 2 — Tokenizer Pipeline [ ]
-
-**Rust source files:**
-- `tokenizer/mod.rs` (1789 lines) — TokenizerImpl, TokenizerBuilder, traits (Normalizer, PreTokenizer, Model, PostProcessor, Decoder, Trainer), Encoding, InputSequence, EncodeInput, DecodeStream
-- `tokenizer/encoding.rs` (909 lines) — Encoding struct, serialization of encodings, overflow handling
-- `tokenizer/added_vocabulary.rs` (1197 lines) — AddedVocabulary, AddedToken management
-- `tokenizer/normalizer.rs` (2311 lines) — NormalizedString, OffsetReferential, SplitDelimiterBehavior, normalizer pattern system
-- `tokenizer/pre_tokenizer.rs` (364 lines) — PreTokenizedString, splits, offsets
-- `tokenizer/pattern.rs` (221 lines) — Pattern trait, regex/string patterns for splitting
-- `tokenizer/serialization.rs` (242 lines) — TokenizerImpl deserialization, version compat
-
-**Key types to port:**
-- `Tokenizer` / `TokenizerImpl<M, N, PT, PP, D>` — the main pipeline orchestrator
-- `TokenizerBuilder` — builder pattern for constructing pipelines
-- `Encoding` — output of tokenization (ids, type_ids, tokens, words, offsets, attention_mask, special_tokens_mask, overflowing, sequence_ids)
-- `AddedVocabulary` — special token management
-- `NormalizedString` — normalized string with offset mapping
-- `PreTokenizedString` — pre-tokenized splits with alignment
-- `Pattern` / `RegexPattern` / `StringPattern` — split patterns
-- `InputSequence` / `EncodeInput` — input types for encode()
-- `DecodeStream` — streaming decode
-
-**Key methods:** `encode`, `encode_batch`, `decode`, `decode_batch`, `train`, `train_from_files`, `save`, `from_pretrained`, `add_special_tokens`, `add_tokens`, `token_to_id`, `id_to_token`, `get_vocab`, `get_vocab_size`
-
-**Estimated specs:** 20+
-**Risk:** High (large module, complex trait generics)
-**Dependencies:** None (no sub-dependencies outside stdlib + BPE)
+This plan is inventory-driven. It should be updated from:
 
-**Status:** ⬜ Not started
-
----
-
-### Phase 3 — Normalizers [ ]
-
-**Rust source files:**
-- `normalizers/mod.rs` (281 lines) — NormalizerWrapper, normalizer registry, Normalizer trait impls for serde
-- `normalizers/bert.rs` (137 lines) — BertNormalizer (lowercase, strip_accents, clean_text, handle_chinese_chars)
-- `normalizers/byte_level.rs` (174 lines) — ByteLevel (UTF-8 bytes mapping)
-- `normalizers/replace.rs` (157 lines) — Replace (pattern, content)
-- `normalizers/strip.rs` (157 lines) — Strip (left, right)
-- `normalizers/unicode.rs` (103 lines) — NFC, NFD, NFKC, NFKD
-- `normalizers/precompiled.rs` (89 lines) — PrecompiledNormalizer
-- `normalizers/prepend.rs` (62 lines) — Prepend (prefix)
-- `normalizers/utils.rs` (60 lines) — Sequence
+- `plans/inventory/rust_port_inventory.tsv`
+- `plans/inventory/rust_test_parity.tsv`
 
-**Key types:** BertNormalizer, ByteLevel, Replace, Strip, NFC/NFD/NFKC/NFKD, Sequence, Prepend, PrecompiledNormalizer
+## Current Feature In Progress
+
+**Active feature:** `Feature 1 - Runtime Pipeline Parity`
 
-**Estimated specs:** 10+
-**Risk:** Low (small files, standard algorithms)
-**Crystal stdlib:** `Unicode.nfc?`, `Unicode.nfd?` etc available
+**Current subfeature:** `Feature 1.6 - Runtime integration tests`
 
-**Status:** ⬜ Not started
+**Why this is active now**
 
----
+- This is the largest user-visible gap.
+- It unlocks end-to-end tokenizer assembly instead of isolated utilities.
+- Pre-tokenizers and decoders are now closed, so post-processors are the next runtime assembly gap on the direct path to end-to-end tokenizer parity.
 
-### Phase 4 — Pre-Tokenizers [ ]
+**Inventory footprint as of 2026-05-06**
 
-**Rust source files:**
-- `pre_tokenizers/mod.rs` (332 lines) — PreTokenizerWrapper, registry, serde
-- `pre_tokenizers/byte_level.rs` (593 lines) — ByteLevel (bytes-to-chars mapping, special char handling)
-- `pre_tokenizers/bert.rs` (82 lines) — BertPreTokenizer
-- `pre_tokenizers/metaspace.rs` (370 lines) — Metaspace (replace/escape special tokens)
-- `pre_tokenizers/split.rs` (253 lines) — Split pattern-based pre-tokenizer
-- `pre_tokenizers/whitespace.rs` (105 lines) — Whitespace / WhitespaceSplit
-- `pre_tokenizers/byte_level.rs` handled under byte_level
-- `pre_tokenizers/delimiter.rs` (26 lines) — CharDelimiterSplit
-- `pre_tokenizers/digits.rs` (102 lines) — Digits (individual/ignore_single)
-- `pre_tokenizers/punctuation.rs` (83 lines) — Punctuation
-- `pre_tokenizers/sequence.rs` (82 lines) — Sequence of pre-tokenizers
-- `pre_tokenizers/fixed_length.rs` (122 lines) — FixedLength pre-tokenizer
-- `pre_tokenizers/unicode_scripts/mod.rs` — Unicode scripts dispatch
-- `pre_tokenizers/unicode_scripts/scripts.rs` (2095 lines) — Unicode script detection data tables
-- `pre_tokenizers/unicode_scripts/pre_tokenizer.rs` (146 lines) — UnicodeScripts pre-tokenizer
+- `src/tokenizer`: 42 source rows done, 112 source rows remaining, 24 tests done, 34 tests remaining
+- `src/normalizers`: 30 source rows done, 0 source rows remaining, 14 tests done, 0 tests remaining
+- `src/pre_tokenizers`: 50 source rows done, 0 source rows remaining, 41 tests done, 0 tests remaining
+- `src/decoders`: 29 source rows done, 0 source rows remaining, 12 tests done, 0 tests remaining
+- `src/processors`: 41 source rows done, 0 source rows remaining, 18 tests done, 0 tests remaining
 
-**Key types:** ByteLevel, BertPreTokenizer, Metaspace, Split, Whitespace, Digits, Punctuation, Sequence, FixedLength, UnicodeScripts
+**Definition of done**
 
-**Estimated specs:** 15+
-**Risk:** Medium (ByteLevel is complex, UnicodeScripts has large data table)
-**Note:** Unicode scripts data table (2095 lines) may need to be generated from Unicode data or ported as-is
+- All rows under `src/tokenizer`, `src/normalizers`, `src/pre_tokenizers`, `src/decoders`, and `src/processors` are implemented or explicitly skipped with notes.
+- All corresponding test rows in `rust_test_parity.tsv` are implemented or explicitly skipped with notes.
+- Tokenizer assembly works across `model + normalizer + pre_tokenizer + post_processor + decoder`.
+- Tokenizer serialization/deserialization is working for the implemented runtime surface.
+- The remaining pipeline integration tests (`offsets`, `added_tokens`, `stream`, `documentation`, serialization matrix rows that depend on the runtime pipeline) are green.
 
-**Status:** ⬜ Not started
+**Execution rule**
 
----
+Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is blocked.
 
-### Phase 5 — Decoders [ ]
+## Feature 1 - Runtime Pipeline Parity
 
-**Rust source files:**
-- `decoders/mod.rs` (233 lines) — DecoderWrapper, registry, serde
-- `decoders/bpe.rs` (38 lines) — BPE decoder
-- `decoders/byte_fallback.rs` (109 lines) — ByteFallback
-- `decoders/ctc.rs` (120 lines) — CTC decoder
-- `decoders/fuse.rs` (43 lines) — Fuse decoder
-- `decoders/sequence.rs` (55 lines) — Sequence of decoders
-- `decoders/strip.rs` (80 lines) — Strip (left, right, start, stop)
-- `decoders/wordpiece.rs` (86 lines) — WordPiece decoder
+**Outcome:** the Crystal port can build and run complete tokenizer pipelines, not just standalone BPE/model pieces.
 
-**Key types:** BPE, ByteFallback, CTC, Fuse, Sequence, Strip, WordPiece
+### 1.1 Tokenizer core
 
-**Estimated specs:** 8+
-**Risk:** Very Low (small files, straightforward logic)
+- [x] Port `tokenizer/pattern.rs`
+- [x] Port the `NormalizedString` foundation from `tokenizer/normalizer.rs`
+- [x] Port the main `AddedVocabulary` behaviors from `tokenizer/added_vocabulary.rs`
+- [x] Port core `Encoding` behaviors needed by truncation, padding, and mappings
+- [x] Port core `PreTokenizedString` split/encoding flow
+- [x] Port basic tokenizer truncation behavior from `tokenizer/mod.rs`
+- [ ] Finish remaining `tokenizer/mod.rs` API surface
+- [ ] Finish remaining `tokenizer/encoding.rs` rows
+- [ ] Finish remaining `tokenizer/pre_tokenizer.rs` rows
+- [ ] Finish remaining `tokenizer/normalizer.rs` rows
+- [ ] Port `tokenizer/serialization.rs`
+- [ ] Port stream decode behavior from `tests/stream.rs`
 
-**Status:** ⬜ Not started
+**Hot files still open**
 
----
+- `src/tokenizer/mod.rs` - 63 source rows remaining
+- `src/tokenizer/normalizer.rs` - 25 source rows remaining
+- `src/tokenizer/encoding.rs` - 14 source rows remaining
+- `src/tokenizer/pre_tokenizer.rs` - 6 source rows remaining
+- `src/tokenizer/serialization.rs` - 2 source rows remaining, 2 tests remaining
 
-### Phase 6 — Post-Processors [ ]
+### 1.2 Normalizers
 
-**Rust source files:**
-- `processors/mod.rs` (32 lines used for registry+serde of all of these)
-- `processors/bert.rs` (277 lines) — BertProcessing (CLS/SEP)
-- `processors/roberta.rs` (341 lines) — RobertaProcessing (prepend/append special tokens, trim offsets)
-- `processors/template.rs` (1156 lines) — TemplateProcessing (rendered template-based post-processing)
-- `processors/sequence.rs` (172 lines) — Sequence of post-processors
+- [x] Port `normalizers/byte_level.rs`
+- [x] Port `normalizers/prepend.rs`
+- [x] Port `normalizers/unicode.rs` wrappers now covered by `NFC/NFD/NFKC/NFKD/Nmt`
+- [x] Port `normalizers/utils.rs` enough for `Lowercase` and `Sequence`
+- [x] Port `normalizers/replace.rs`
+- [x] Port `normalizers/strip.rs`
+- [x] Port `normalizers/bert.rs`
+- [x] Port `normalizers/precompiled.rs` helper behavior needed by current parity coverage
+- [x] Port `normalizers/mod.rs` wrapper/registry/serde layer
 
-**Key types:** BertProcessing, RobertaProcessing, TemplateProcessing, Sequence
+**Tests still open**
 
-**Estimated specs:** 10+
-**Risk:** Medium (TemplateProcessing is complex, 1156 lines)
-**Note:** TemplateProcessing is the largest non-tokenizer file — involves a custom template engine with token/vocabulary manipulation
+- [x] `src/normalizers/strip.rs` test block
+- [x] `src/normalizers/mod.rs` serialization/deserialization tests
 
-**Status:** ⬜ Not started
+### 1.3 Pre-tokenizers
 
----
+- [x] Port `pre_tokenizers/mod.rs` wrapper/registry/serde layer
+- [x] Port `pre_tokenizers/whitespace.rs`
+- [x] Port `pre_tokenizers/split.rs`
+- [x] Port `pre_tokenizers/delimiter.rs`
+- [x] Port `pre_tokenizers/digits.rs`
+- [x] Port `pre_tokenizers/punctuation.rs`
+- [x] Port `pre_tokenizers/sequence.rs`
+- [x] Port `pre_tokenizers/fixed_length.rs`
+- [x] Port `pre_tokenizers/bert.rs`
+- [x] Port `pre_tokenizers/metaspace.rs`
+- [x] Port `pre_tokenizers/byte_level.rs`
+- [x] Port `pre_tokenizers/unicode_scripts/*`
 
-### Phase 7 — Unigram Model [ ]
+### 1.4 Decoders
 
-**Rust source files:**
-- `models/unigram/mod.rs` — module structure
-- `models/unigram/model.rs` (664 lines) — Unigram model (score-based tokenization with lattice/Viterbi)
-- `models/unigram/trainer.rs` (825 lines) — UnigramTrainer (EM training with KUDO/Unigram algorithm)
-- `models/unigram/lattice.rs` (691 lines) — Lattice (DAG for tokenization candidates)
-- `models/unigram/serialization.rs` (115 lines)
-- `models/unigram/trie.rs` (91 lines) — Trie for vocabulary lookup
+- [x] Port `decoders/bpe.rs`
+- [x] Port `decoders/byte_fallback.rs`
+- [x] Port `decoders/ctc.rs`
+- [x] Port `decoders/fuse.rs`
+- [x] Port `decoders/sequence.rs`
+- [x] Port `decoders/strip.rs`
+- [x] Port `decoders/wordpiece.rs`
+- [x] Port `decoders/mod.rs` wrapper/registry/serde layer
 
-**Key types:** Unigram, UnigramTrainer, LatticeNode, Lattice, Trie
+### 1.5 Post-processors
 
-**Estimated specs:** 10+
-**Risk:** Very High (complex algorithm, lattice/Viterbi, EM training)
+- [x] Port `processors/bert.rs`
+- [x] Port `processors/roberta.rs`
+- [x] Port `processors/template.rs`
+- [x] Port `processors/sequence.rs`
+- [x] Port `processors/mod.rs` wrapper/registry/serde layer
 
-**Status:** ⬜ Not started
+**Hot files still open**
 
----
+- (none)
 
-### Phase 8 — WordPiece Model [ ]
+### 1.6 Runtime integration tests that close this feature
 
-**Rust source files:**
-- `models/wordpiece/mod.rs` (329 lines) — WordPiece model + builder
-- `models/wordpiece/trainer.rs` (203 lines) — WordPieceTrainer
-- `models/wordpiece/serialization.rs` (151 lines)
+- [ ] `tests/offsets.rs`
+- [ ] `tests/added_tokens.rs`
+- [ ] `tests/stream.rs`
+- [ ] `tests/documentation.rs` rows that depend on the runtime pipeline
+- [ ] `tests/serialization.rs` rows that depend on runtime wrappers
 
-**Key types:** WordPiece, WordPieceTrainer
+## Feature 2 - Additional Model Families
 
-**Estimated specs:** 5+
-**Risk:** Low-Medium (simpler than BPE)
+**Outcome:** the Crystal port supports the non-BPE model families that upstream ships.
 
-**Status:** ⬜ Not started
+**Inventory footprint as of 2026-05-06**
 
----
+- `src/models/wordlevel`: 22 source rows remaining, 6 tests remaining
+- `src/models/wordpiece`: 43 source rows remaining, 3 tests remaining
+- `src/models/unigram`: 66 source rows remaining, 20 tests remaining
+- `src/models/mod.rs`: 12 source rows remaining
 
-### Phase 9 — WordLevel Model [ ]
+### 2.1 WordLevel
 
-**Rust source files:**
-- `models/wordlevel/mod.rs` (251 lines) — WordLevel model + builder
-- `models/wordlevel/trainer.rs` (182 lines)
-- `models/wordlevel/serialization.rs` (127 lines)
+- [ ] Port `models/wordlevel/mod.rs`
+- [ ] Port `models/wordlevel/trainer.rs`
+- [ ] Port `models/wordlevel/serialization.rs`
 
-**Key types:** WordLevel, WordLevelTrainer
+### 2.2 WordPiece
 
-**Estimated specs:** 5+
-**Risk:** Very Low (simplest model)
+- [ ] Port `models/wordpiece/mod.rs`
+- [ ] Port `models/wordpiece/trainer.rs`
+- [ ] Port `models/wordpiece/serialization.rs`
 
-**Status:** ⬜ Not started
+### 2.3 Unigram
 
----
+- [ ] Port `models/unigram/trie.rs`
+- [ ] Port `models/unigram/lattice.rs`
+- [ ] Port `models/unigram/model.rs`
+- [ ] Port `models/unigram/trainer.rs`
+- [ ] Port `models/unigram/serialization.rs`
+- [ ] Port top-level `tests/unigram.rs`
 
-### Phase 10 — Utilities [ ]
+### 2.4 Model wrapper and model-level integration
 
-**Rust source files:**
-- `utils/mod.rs` (225 lines) — utility re-exports
-- `utils/padding.rs` (142 lines) — PaddingParams, PaddingStrategy, pad_encodings
-- `utils/truncation.rs` (326 lines) — TruncationParams, TruncationDirection, TruncationStrategy
-- `utils/cache.rs` (128 lines) — LRUCache
-- `utils/iter.rs` (99 lines) — LinesWithEnding iterator
-- `utils/parallelism.rs` (277 lines) — maybe_par_iter, maybe_par_bridge, maybe_par_sort
-- `utils/progress.rs` (49 lines) — ProgressFormat enum
-- `utils/fancy.rs` (63 lines) — fancy printing
-- `utils/from_pretrained.rs` (68 lines) — Hub downloading (requires HTTP feature)
-- `utils/onig.rs` (45 lines) — Oniguruma regex wrapper
+- [ ] Port `models/mod.rs`
+- [ ] Close cross-model serialization coverage after WordLevel/WordPiece/Unigram land
 
-**Key types:** PaddingParams, PaddingStrategy, TruncationParams, TruncationStrategy, LRUCache, LinesWithEnding, ProgressFormat
+## Feature 3 - Integration, Serialization, and Distribution
 
-**Estimated specs:** 10+
-**Risk:** Low-Medium (parallelism is the trickiest; Crystal has `parallel` module though)
+**Outcome:** the repo is not just functionally ported, but wired for parity validation, serialization compatibility, examples, and distribution-facing utilities.
 
-**Status:** ⬜ Not started
+**Inventory footprint as of 2026-05-06**
 
----
+- `src/utils`: 12 source rows done, 36 source rows remaining, 4 tests done, 2 tests remaining
+- `tests/serialization.rs`: 11 source rows remaining, 11 tests remaining
+- `tests/documentation.rs`: 8 source rows remaining, 8 tests remaining
+- `tests/offsets.rs`: 6 source rows remaining, 6 tests remaining
+- `tests/added_tokens.rs`: 5 source rows remaining, 5 tests remaining
+- `tests/from_pretrained.rs`: 4 source rows remaining, 4 tests remaining
+- `examples/unstable_wasm/*` and benches: still unported
 
-## Progress Summary
+### 3.1 Utility layer
 
-| Phase | Component | Est. Lines | Priority | Risk | Status |
-|-------|-----------|-----------|----------|------|--------|
-| 1 | Core BPE | 3800 | P0 | Medium | ✅ Done |
-| 2 | Tokenizer Pipeline | 6900 | P0 | High | ⬜ |
-| 3 | Normalizers | 1100 | P1 | Low | ⬜ |
-| 4 | Pre-Tokenizers | 4200 | P1 | Medium | ⬜ |
-| 5 | Decoders | 700 | P2 | Very Low | ⬜ |
-| 6 | Post-Processors | 2000 | P2 | Medium | ⬜ |
-| 7 | Unigram Model | 2400 | P2 | Very High | ⬜ |
-| 8 | WordPiece Model | 700 | P3 | Low-Medium | ⬜ |
-| 9 | WordLevel Model | 600 | P3 | Very Low | ⬜ |
-| 10 | Utilities | 1450 | P1 | Low-Medium | ⬜ |
+- [x] Port core truncation and padding utilities already required by tokenizer work
+- [ ] Finish `utils/parallelism.rs`
+- [ ] Finish `utils/progress.rs`
+- [ ] Finish `utils/from_pretrained.rs`
+- [ ] Finish `utils/onig.rs`
+- [ ] Finish `utils/iter.rs`
+- [ ] Finish `utils/fancy.rs`
 
-**Total Rust source:** ~24,000 lines across ~68 files
-**Phases completed:** 1 of 10
+### 3.2 Cross-cutting parity suites
 
-## Architecture
+- [ ] Port `tests/serialization.rs`
+- [ ] Port `tests/documentation.rs`
+- [ ] Port `tests/offsets.rs`
+- [ ] Port `tests/added_tokens.rs`
+- [ ] Port `tests/from_pretrained.rs`
+- [ ] Port `tests/training.rs`
 
-The Rust crate's module hierarchy maps directly to Crystal:
+### 3.3 Examples and benchmarks
 
-```
-src/tokens.cr                    # Entry: requires all modules
-├── src/tokens/model.cr          # Model trait (abstract module)
-├── src/tokens/token.cr          # Token record
-├── src/tokens/extensions.cr     # Hash#drain extension
-├── src/tokens/models/
-│   ├── bpe/                     # Phase 1 (done)
-│   ├── unigram/                 # Phase 7
-│   ├── wordpiece/               # Phase 8
-│   └── wordlevel/               # Phase 9
-├── src/tokens/tokenizer/        # Phase 2
-├── src/tokens/normalizers/      # Phase 3
-├── src/tokens/pre_tokenizers/   # Phase 4
-├── src/tokens/decoders/         # Phase 5
-├── src/tokens/processors/       # Phase 6
-└── src/tokens/utils/            # Phase 10
-```
+- [ ] Port `examples/unstable_wasm/src/lib.rs`
+- [ ] Port benchmark entry points
 
-Each phase follows the same pattern established by Phase 1:
-1. Translate Rust source to Crystal preserving exact behavior
-2. Port relevant Rust tests as Crystal specs
-3. Run quality gates (`crystal tool format --check`, `ameba`, `crystal spec`)
-4. Update rust_test_parity.tsv
+## Completed or Mostly Completed Foundations
 
-## Design Decisions
+### BPE baseline
 
-- No `mod.cr` files — Crystal convention uses directory name as module name, entry file at directory level
-- Crystal stdlib only for ported code (no external shards)
-- `AddedToken` defined as a Crystal `record` within each model module
-- Serialization uses `JSON.build` / `JSON.parse` (Crystal stdlib)
-- Parallelism: Crystal has `parallel` module in stdlib for some use cases; `maybe_par_iter` patterns from Rust use `Channel` or `Fiber` equivalents where available
-- Unicode normalization: Crystal stdlib has `Unicode.nfc?`, `Unicode.nfd?`, etc.
-- Regex: Crystal uses PCRE2 (different from Rust's regex crate) — patterns may need adjustment
+- [x] BPE model, trainer, and spec baseline exist in the repo
+- [x] BPE behavior is already exercised by the current passing spec suite
+- [ ] Reconcile the remaining `src/models/bpe/*` source rows in `rust_port_inventory.tsv` so the ledger matches the code that already exists
+
+### Tokenizer foundation already landed
+
+- [x] `tokenizer/pattern.rs`
+- [x] large `NormalizedString` / alignment foundation
+- [x] `AddedVocabulary` matching and normalization cache behavior
+- [x] tokenizer truncation and padding basics
+- [x] byte-level, prepend, unicode, utils, and replace normalizers
+
+## Ordering
+
+1. Finish **Feature 1** completely.
+2. Move to **Feature 2** only after the runtime pipeline can assemble real end-to-end tokenizers.
+3. Finish **Feature 3** after the runtime surface and model families are in place, except where Feature 1 explicitly depends on one of its integration suites.
+
+## Completion Gate For This Plan
+
+The plan is complete when:
+
+- Every feature checklist above is `[x]` or explicitly skipped with a reason in the inventory.
+- `plans/inventory/rust_port_inventory.tsv` has no accidental stale `missing` rows for already-landed code.
+- `plans/inventory/rust_test_parity.tsv` has no accidental stale `missing` rows for already-landed specs.
+- `crystal tool format --check src spec` passes.
+- `crystal spec` passes.
+- `ameba src spec` is either green or reduced to a consciously tracked residual backlog with no ambiguity about newly introduced violations.
