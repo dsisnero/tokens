@@ -18,11 +18,11 @@ This plan is inventory-driven. It should be updated from:
 
 **Why this is active now**
 
-- This is the largest user-visible gap.
-- It unlocks end-to-end tokenizer assembly instead of isolated utilities.
-- Pre-tokenizers and decoders are now closed, so post-processors are the next runtime assembly gap on the direct path to end-to-end tokenizer parity.
+- All pipeline components are ported (normalizer, pre-tokenizer, post-processor, decoder).
+- Tokenizer serialization is the next gap — needed to load/save complete tokenizer configs and to run the integration test suites.
+- After serialization lands, the integration tests (added_tokens, offsets, stream) can be ported to validate end-to-end behavior.
 
-**Inventory footprint as of 2026-05-06**
+**Inventory footprint as of 2026-05-09**
 
 - `src/tokenizer`: 42 source rows done, 112 source rows remaining, 24 tests done, 34 tests remaining
 - `src/normalizers`: 30 source rows done, 0 source rows remaining, 14 tests done, 0 tests remaining
@@ -58,7 +58,7 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 - [ ] Finish remaining `tokenizer/encoding.rs` rows
 - [ ] Finish remaining `tokenizer/pre_tokenizer.rs` rows
 - [ ] Finish remaining `tokenizer/normalizer.rs` rows
-- [ ] Port `tokenizer/serialization.rs`
+- [x] Port `tokenizer/serialization.rs`
 - [ ] Port stream decode behavior from `tests/stream.rs`
 
 **Hot files still open**

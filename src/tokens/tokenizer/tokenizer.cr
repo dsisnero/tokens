@@ -11,10 +11,16 @@ module Tokens
 
   module Normalizer
     abstract def normalize(normalized : NormalizedString) : Nil
+
+    def to_json(json : JSON::Builder)
+    end
   end
 
   module PreTokenizer
     abstract def pre_tokenize(pretokenized : PreTokenizedString) : Nil
+
+    def to_json(json : JSON::Builder)
+    end
   end
 
   module PostProcessor
@@ -25,6 +31,9 @@ module Tokens
       pair_encoding : Encoding?,
       add_special_tokens : Bool,
     ) : Encoding
+
+    def to_json(json : JSON::Builder)
+    end
   end
 
   module Decoder
@@ -32,6 +41,9 @@ module Tokens
 
     def decode(tokens : Array(String)) : String
       decode_chain(tokens).join
+    end
+
+    def to_json(json : JSON::Builder)
     end
   end
 
@@ -347,6 +359,145 @@ module Tokens
         0
       end
     end
+
+    def to_json(json : JSON::Builder)
+      json.object do
+        json.field "version", "1.0"
+
+        json.field "truncation" do
+          if t = @truncation
+            t.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "padding" do
+          if p = @padding
+            p.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "added_tokens" do
+          @added_vocabulary.to_json(json)
+        end
+
+        json.field "normalizer" do
+          if n = @normalizer
+            n.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "pre_tokenizer" do
+          if pt = @pre_tokenizer
+            pt.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "post_processor" do
+          if pp = @post_processor
+            pp.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "decoder" do
+          if d = @decoder
+            d.to_json(json)
+          else
+            json.null
+          end
+        end
+
+        json.field "model" do
+          case model = @model
+          when Models::BPE::BPE
+            json.raw(model.to_json)
+          else
+            json.null
+          end
+        end
+      end
+    end
+
+    def self.from_json(json_str : String) : self
+      data = JSON.parse(json_str)
+      raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
+      obj = data.as_h
+
+      version = obj["version"]?.try(&.as_s?)
+      raise Exception.new("Unknown tokenizer version '#{version}'") unless version == "1.0"
+
+      model_val = obj["model"]?
+      raise Exception.new("Missing model") unless model_val
+      model_json = model_val.to_json
+
+      # Use BPE model deserialization
+      model = Models::BPE::BPE.from_json(model_json)
+      tokenizer = new(model)
+
+      if tr = obj["truncation"]?
+        unless tr.raw.nil?
+          params = TruncationParams.from_json(tr.to_json)
+          tokenizer.with_truncation(params)
+        end
+      end
+
+      if pad = obj["padding"]?
+        unless pad.raw.nil?
+          params = PaddingParams.from_json(pad.to_json)
+          tokenizer.with_padding(params)
+        end
+      end
+
+      if norm = obj["normalizer"]?
+        unless norm.raw.nil?
+          tokenizer.with_normalizer(NormalizerWrapper.from_json(norm.to_json).as(Normalizer))
+        end
+      end
+
+      if pt = obj["pre_tokenizer"]?
+        unless pt.raw.nil?
+          tokenizer.with_pre_tokenizer(PreTokenizerWrapper.from_json(pt.to_json).as(PreTokenizer))
+        end
+      end
+
+      if pp = obj["post_processor"]?
+        unless pp.raw.nil?
+          tokenizer.with_post_processor(PostProcessorWrapper.from_json(pp.to_json).as(PostProcessor))
+        end
+      end
+
+      if dec = obj["decoder"]?
+        unless dec.raw.nil?
+          tokenizer.with_decoder(DecoderWrapper.from_json(dec.to_json).as(Decoder))
+        end
+      end
+
+      added_tokens_arr = obj["added_tokens"]?.try(&.as_a?)
+      if added_tokens_arr
+        tokens = added_tokens_arr.map do |entry|
+          AddedTokenWithId.from_json(entry.to_json)
+        end
+        tok_tokens = tokens.map do |atwi|
+          t = atwi.token
+          if t.normalized
+            t.normalized(true)
+          end
+          t
+        end
+        tokenizer.add_tokens(tok_tokens)
+      end
+
+      tokenizer
+    end
   end
 
   class Tokenizer
@@ -364,7 +515,8 @@ module Tokens
                        get_vocab get_vocab_size token_to_id id_to_token
                        set_encode_special_tokens get_encode_special_tokens
                        add_special_tokens add_tokens encode encode_fast
-                       encode_char_offsets decode decode_stream get_n_added_tokens] %}
+                       encode_char_offsets decode decode_stream get_n_added_tokens
+                       to_json from_json] %}
       def {{name.id}}(*args, **kwargs)
         @inner.{{name.id}}(*args, **kwargs)
       end

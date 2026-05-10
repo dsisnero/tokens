@@ -66,10 +66,47 @@ module Tokens
   end
 
   struct AddedTokenWithId
-    include JSON::Serializable
-
     getter id : UInt32
     getter token : AddedToken
+
+    def initialize(@id : UInt32, @token : AddedToken)
+    end
+
+    def to_json(json : JSON::Builder)
+      json.object do
+        json.field "id", @id
+        json.field "content", @token.content
+        json.field "single_word", @token.single_word
+        json.field "lstrip", @token.lstrip
+        json.field "rstrip", @token.rstrip
+        json.field "normalized", @token.normalized
+        json.field "special", @token.special
+      end
+    end
+
+    def self.from_json(json_str : String) : self
+      data = JSON.parse(json_str)
+      raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
+      obj = data.as_h
+
+      id = obj["id"]?.try(&.as_i?) || raise(JSON::ParseException.new("Missing id", 0, 0))
+      content = obj["content"]?.try(&.as_s?) || raise(JSON::ParseException.new("Missing content", 0, 0))
+      single_word = obj["single_word"]?.try(&.as_bool) || false
+      lstrip = obj["lstrip"]?.try(&.as_bool) || false
+      rstrip = obj["rstrip"]?.try(&.as_bool) || false
+      normalized = obj["normalized"]?.try(&.as_bool) || false
+      special = obj["special"]?.try(&.as_bool) || false
+
+      token = AddedToken.new(
+        content: content,
+        single_word: single_word,
+        lstrip: lstrip,
+        rstrip: rstrip,
+        normalized: normalized,
+        special: special,
+      )
+      new(id.to_u32, token)
+    end
   end
 
   class AddedVocabulary
@@ -373,6 +410,15 @@ module Tokens
         bytes += char.bytesize
       end
       bytes
+    end
+
+    def to_json(json : JSON::Builder)
+      json.array do
+        @added_tokens_decoder.each do |id, token|
+          obj = AddedTokenWithId.new(id, token)
+          obj.to_json(json)
+        end
+      end
     end
   end
 end
