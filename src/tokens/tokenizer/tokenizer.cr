@@ -546,7 +546,7 @@ module Tokens
     def step(id : UInt32) : String?
       if @prefix.empty? && !@ids.empty?
         new_prefix = @tokenizer.decode(@ids, @skip_special_tokens)
-        if !new_prefix.ends_with?("�")
+        if !new_prefix.ends_with?("�") && !ends_with_incomplete_utf8?(new_prefix)
           @prefix = new_prefix
           @prefix_index = @ids.size
         end
@@ -555,12 +555,12 @@ module Tokens
       @ids << id
       string = @tokenizer.decode(@ids, @skip_special_tokens)
 
-      if string.bytesize > @prefix.bytesize && !string.ends_with?("�")
+      if string.bytesize > @prefix.bytesize && !string.ends_with?("�") && !ends_with_incomplete_utf8?(string)
         if !string.starts_with?(@prefix)
           raise DecodeStreamError.new(@ids.last, @prefix, string)
         end
 
-        new_text = string[@prefix.bytesize..]
+        new_text = string.byte_slice(@prefix.bytesize, string.bytesize - @prefix.bytesize) || ""
         new_prefix_index = @ids.size - @prefix_index
         @ids = @ids[@prefix_index..]
         @prefix = @tokenizer.decode(@ids, @skip_special_tokens)
@@ -569,6 +569,38 @@ module Tokens
       else
         nil
       end
+    end
+
+    private def ends_with_incomplete_utf8?(string : String) : Bool
+      bytes = string.to_slice
+      return false if bytes.empty?
+      i = bytes.size - 1
+
+      # Count trailing continuation bytes (0x80-0xBF)
+      trail_count = 0
+      while i >= 0 && (bytes[i] & 0xC0) == 0x80
+        trail_count += 1
+        i -= 1
+      end
+
+      if i < 0
+        # All bytes are continuation bytes - fragment of a split character
+        return true
+      end
+
+      # Check what the lead byte expects
+      lead = bytes[i]
+      expected = case lead
+                 when 0xF0..0xF7 then 3
+                 when 0xE0..0xEF then 2
+                 when 0xC0..0xDF then 1
+                 else                 0
+                 end
+
+      # A lead byte at the very end (no continuation after it) is incomplete
+      return true if i == bytes.size - 1 && expected > 0
+
+      expected ? trail_count < expected : false
     end
   end
 end

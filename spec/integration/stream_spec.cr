@@ -5,9 +5,6 @@ describe "Stream decode integration tests" do
     tokenizer_json = File.read("data/llama-3-tokenizer.json")
     tokenizer = Tokens::TokenizerImpl.from_json(tokenizer_json)
 
-    # "A B C D E F G H I J" using known Llama-3 token IDs
-    # Upstream: tokenizer.decode_stream(false) returns DecodeStream
-    # Crystal: tokenizer.decode_stream(false) returns DecodeStream
     stream = tokenizer.decode_stream(false)
     stream.step(32_u32).should eq("A")
     stream.step(426_u32).should eq(" B")
@@ -19,5 +16,15 @@ describe "Stream decode integration tests" do
     stream.step(473_u32).should eq(" H")
     stream.step(358_u32).should eq(" I")
     stream.step(622_u32).should eq(" J")
+
+    # Korean: "삥뽕빵" (multi-byte tokens: [80690,98], [167,121,243], [102457,113])
+    stream = tokenizer.decode_stream(false)
+    stream.step(80690_u32).should be_nil
+    stream.step(98_u32).should eq("삥")
+    stream.step(167_u32).should be_nil
+    stream.step(121_u32).should be_nil
+    stream.step(243_u32).should eq("뽕")
+    stream.step(102457_u32).should be_nil
+    stream.step(113_u32).should eq("빵")
   end
 end
