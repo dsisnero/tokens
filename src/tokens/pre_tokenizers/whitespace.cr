@@ -11,6 +11,12 @@ module Tokens
             .map { |slice| Tokens::Split.new(slice) }
         end
       end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "Whitespace"
+        end
+      end
     end
 
     struct WhitespaceSplit

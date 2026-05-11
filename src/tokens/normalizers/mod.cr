@@ -32,6 +32,10 @@ module Tokens
       @normalizer.normalize(normalized)
     end
 
+    def to_json(json : JSON::Builder)
+      @normalizer.to_json(json)
+    end
+
     def ==(other : self) : Bool
       @normalizer == other.normalizer
     end

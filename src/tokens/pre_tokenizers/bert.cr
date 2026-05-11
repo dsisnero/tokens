@@ -19,6 +19,12 @@ module Tokens
         end
       end
 
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "BertPreTokenizer"
+        end
+      end
+
       private def bert_punctuation?(char : Char) : Bool
         code = char.ord
         ascii_punctuation = (33..47).includes?(code) ||

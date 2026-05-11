@@ -30,6 +30,10 @@ module Tokens
       @pretokenizer.pre_tokenize(pretokenized)
     end
 
+    def to_json(json : JSON::Builder)
+      @pretokenizer.to_json(json)
+    end
+
     def ==(other : self) : Bool
       @pretokenizer == other.pretokenizer
     end

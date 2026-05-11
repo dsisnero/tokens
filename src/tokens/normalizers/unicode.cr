@@ -6,6 +6,12 @@ module Tokens
       def normalize(normalized : Tokens::NormalizedString) : Nil
         normalized.nfd
       end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "NFD"
+        end
+      end
     end
 
     struct NFKD
@@ -13,6 +19,12 @@ module Tokens
 
       def normalize(normalized : Tokens::NormalizedString) : Nil
         normalized.nfkd
+      end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "NFKD"
+        end
       end
     end
 
@@ -22,6 +34,12 @@ module Tokens
       def normalize(normalized : Tokens::NormalizedString) : Nil
         normalized.nfc
       end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "NFC"
+        end
+      end
     end
 
     struct NFKC
@@ -29,6 +47,12 @@ module Tokens
 
       def normalize(normalized : Tokens::NormalizedString) : Nil
         normalized.nfkc
+      end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "NFKC"
+        end
       end
     end
 
@@ -39,6 +63,12 @@ module Tokens
         normalized
           .filter { |char| !remove_nmt_control?(char.ord) }
           .map { |char| nmt_space(char.ord) || char }
+      end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "Nmt"
+        end
       end
 
       private def remove_nmt_control?(codepoint : Int32) : Bool

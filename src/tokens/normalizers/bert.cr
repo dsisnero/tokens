@@ -19,10 +19,25 @@ module Tokens
       def normalize(normalized : Tokens::NormalizedString) : Nil
         do_clean_text(normalized) if @clean_text
         do_handle_chinese_chars(normalized) if @handle_chinese_chars
-
         should_strip_accents = @strip_accents.nil? ? @lowercase : @strip_accents.as(Bool)
         do_strip_accents(normalized) if should_strip_accents
         normalized.lowercase if @lowercase
+      end
+
+      def to_json(json : JSON::Builder)
+        json.object do
+          json.field "type", "BertNormalizer"
+          json.field "clean_text", @clean_text
+          json.field "handle_chinese_chars", @handle_chinese_chars
+          json.field "strip_accents" do
+            if sa = @strip_accents
+              json.bool(sa)
+            else
+              json.null
+            end
+          end
+          json.field "lowercase", @lowercase
+        end
       end
 
       private def do_clean_text(normalized : Tokens::NormalizedString)

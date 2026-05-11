@@ -14,7 +14,7 @@ This plan is inventory-driven. It should be updated from:
 
 **Active feature:** `Feature 1 - Runtime Pipeline Parity`
 
-**Current subfeature:** `Feature 2.3 - Unigram`
+**Current subfeature:** `Feature 3.1 - Serialization matrix tests`
 
 **Why this is active now**
 
@@ -163,8 +163,8 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 
 ### 2.4 Model wrapper and model-level integration
 
-- [ ] Port `models/mod.rs`
-- [ ] Close cross-model serialization coverage after WordLevel/WordPiece/Unigram land
+- [x] Port `models/mod.rs`
+- [x] Close cross-model serialization coverage after WordLevel/WordPiece/Unigram land
 
 ## Feature 3 - Integration, Serialization, and Distribution
 
