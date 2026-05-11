@@ -14,7 +14,7 @@ This plan is inventory-driven. It should be updated from:
 
 **Active feature:** `Feature 1 - Runtime Pipeline Parity`
 
-**Current subfeature:** `Feature 1.6 - Runtime integration tests`
+**Current subfeature:** `Feature 2.2 - WordPiece`
 
 **Why this is active now**
 
@@ -135,16 +135,16 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 
 **Inventory footprint as of 2026-05-06**
 
-- `src/models/wordlevel`: 22 source rows remaining, 6 tests remaining
+- `src/models/wordlevel`: 22 source rows done, 6 tests done, 0 remaining
 - `src/models/wordpiece`: 43 source rows remaining, 3 tests remaining
 - `src/models/unigram`: 66 source rows remaining, 20 tests remaining
 - `src/models/mod.rs`: 12 source rows remaining
 
 ### 2.1 WordLevel
 
-- [ ] Port `models/wordlevel/mod.rs`
-- [ ] Port `models/wordlevel/trainer.rs`
-- [ ] Port `models/wordlevel/serialization.rs`
+- [x] Port `models/wordlevel/mod.rs`
+- [x] Port `models/wordlevel/trainer.rs`
+- [x] Port `models/wordlevel/serialization.rs`
 
 ### 2.2 WordPiece
 
