@@ -69,8 +69,7 @@ module Tokens
         vocab.each { |key, val| vocab_r[val] = key }
 
         # Transfer to model
-        model.vocab_set(vocab)
-        model.vocab_r_set(vocab_r)
+        model.copy_vocab_from(WordLevel.new(vocab, vocab_r, model.unk_token))
 
         @special_tokens
       end

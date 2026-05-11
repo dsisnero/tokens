@@ -60,9 +60,9 @@ src/models/wordlevel/serialization.rs::test::deserialization_should_fail	ported	
 src/models/wordlevel/serialization.rs::test::incomplete_vocab	ported	spec/models/wordlevel_spec.cr:ported	ported
 src/models/wordlevel/serialization.rs::test::serde	ported	spec/models/wordlevel_spec.cr:ported	ported
 src/models/wordlevel/trainer.rs::test::test_train	ported	spec/models/wordlevel_spec.cr:ported	ported
-src/models/wordpiece/mod.rs::test::test_error_display	missing	-	baseline
-src/models/wordpiece/serialization.rs::test::deserialization_should_fail	missing	-	baseline
-src/models/wordpiece/serialization.rs::test::serde	missing	-	baseline
+src/models/wordpiece/mod.rs::test::test_error_display	ported	src/tokens/models/wordpiece:ported	ported
+src/models/wordpiece/serialization.rs::test::deserialization_should_fail	ported	src/tokens/models/wordpiece:ported	ported
+src/models/wordpiece/serialization.rs::test::serde	ported	src/tokens/models/wordpiece:ported	ported
 src/normalizers/byte_level.rs::test::test_byte_level_normalize	implemented	spec/normalizers/byte_level_spec.cr:5	port complete
 src/normalizers/mod.rs::test::normalizer_serialization	implemented	spec/normalizers/mod_spec.cr:20	port complete
 src/normalizers/mod.rs::test::post_processor_deserialization_no_type	implemented	spec/normalizers/mod_spec.cr:5	port complete

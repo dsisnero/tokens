@@ -9,14 +9,6 @@ module Tokens
 
       DEFAULT_CACHE_CAPACITY = 10_000
       MAX_CACHE_LENGTH       =    256
-
-      record AddedToken,
-        content : String,
-        single_word : Bool = false,
-        lstrip : Bool = false,
-        rstrip : Bool = false,
-        normalized : Bool = true,
-        special : Bool = false
     end
   end
 end

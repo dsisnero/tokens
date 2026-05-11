@@ -61,6 +61,11 @@ module Tokens
         @vocab_r = v
       end
 
+      def copy_vocab_from(other : self)
+        @vocab = other.vocab.dup
+        @vocab_r = other.vocab_r.dup
+      end
+
       def vocab : Hash(String, UInt32)
         @vocab.dup
       end
