@@ -737,7 +737,7 @@ tests/offsets.rs::test::byte_level_double_sequence	test	ported	spec/integration/
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_unicode	test	ported	spec/integration/offsets_spec.cr:ported	ported
-tests/offsets.rs::test::split_on_added_tokens_bert	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::split_on_added_tokens_bert	test	ported	spec/integration/offsets_bert_spec.cr:ported	ported
 tests/serialization.rs::test::bpe_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/serialization.rs::test::bpe_with_dropout_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/serialization.rs::test::decoders	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
