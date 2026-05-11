@@ -60,7 +60,7 @@ These upstream integration tests need external model data files. Some are now un
 | `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 | unblocked |
 | `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 | blocked (needs HTTP feature) |
 | `tests/training.rs` | Training data files | 2 | unblocked |
-| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 | unblocked |
+| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 | DONE |
 | `tests/common/mod.rs` | Test helper infrastructure | 5 | resolved |
 
 **Resolution:** added `make download-data` to fetch test files from HuggingFace. All data files are now available at `data/`. The `data/` directory is gitignored — run `make download-data` once before running integration tests.

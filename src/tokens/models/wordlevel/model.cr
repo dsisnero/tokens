@@ -29,6 +29,21 @@ module Tokens
         new
       end
 
+      def self.read_file(path : String) : Hash(String, UInt32)
+        data = File.read(path)
+        json = JSON.parse(data)
+        raise JSON::ParseException.new("Expected object", 0, 0) unless json.as_h?
+        vocab = {} of String => UInt32
+        json.as_h.each do |token, id|
+          vocab[token] = id.as_i.to_u32
+        end
+        vocab
+      end
+
+      def self.from_file(path : String, unk_token : String = "<unk>") : self
+        build(vocab: read_file(path), unk_token: unk_token)
+      end
+
       def self.build(vocab : Hash(String, UInt32), unk_token : String = "<unk>") : self
         vocab_r = {} of UInt32 => String
         vocab.each { |key, val| vocab_r[val] = key }

@@ -223,17 +223,17 @@ tests/offsets.rs::test::byte_level_pre_tokenized_sequence	ported	spec/integratio
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_unicode	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::split_on_added_tokens_bert	ported	spec/integration/offsets_spec.cr:ported	ported
-tests/serialization.rs::test::bpe_serde	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::bpe_with_dropout_serde	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::decoders	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::models	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::normalizers	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::pretoks	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::processors	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::test_deserialize_long_file	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::tokenizer	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::wordlevel_serde	skipped	-	blocked: needs external data files
-tests/serialization.rs::test::wordpiece_serde	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::bpe_serde	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::bpe_with_dropout_serde	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::decoders	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::models	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::normalizers	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::pretoks	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::processors	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::test_deserialize_long_file	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::tokenizer	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::wordlevel_serde	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::wordpiece_serde	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/stream.rs::test::test_decode_stream_step_no_panic	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/stream.rs::test::test_decoding_with_added_bpe	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/training.rs::test::bpe_continuing_subword_prefix_error	skipped	-	blocked: needs external data files

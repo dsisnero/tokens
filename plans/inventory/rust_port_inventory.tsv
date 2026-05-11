@@ -738,17 +738,17 @@ tests/offsets.rs::test::byte_level_pre_tokenized_sequence	test	ported	spec/integ
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_unicode	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::split_on_added_tokens_bert	test	ported	spec/integration/offsets_spec.cr:ported	ported
-tests/serialization.rs::test::bpe_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::bpe_with_dropout_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::decoders	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::models	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::normalizers	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::pretoks	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::processors	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::test_deserialize_long_file	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::tokenizer	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::wordlevel_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/serialization.rs::test::wordpiece_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
+tests/serialization.rs::test::bpe_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::bpe_with_dropout_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::decoders	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::models	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::normalizers	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::pretoks	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::processors	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::test_deserialize_long_file	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::tokenizer	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::wordlevel_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
+tests/serialization.rs::test::wordpiece_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/stream.rs::test::test_decode_stream_step_no_panic	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/stream.rs::test::test_decoding_with_added_bpe	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/training.rs::test::bpe_continuing_subword_prefix_error	test	skipped	-	blocked: needs training data files
