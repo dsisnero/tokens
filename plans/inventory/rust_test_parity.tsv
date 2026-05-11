@@ -200,11 +200,11 @@ src/utils/parallelism.rs::test::test_maybe_parallel_slice	skipped	-	not ported: 
 src/utils/truncation.rs::test::test_deserialize_defaults	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
 src/utils/truncation.rs::test::truncate_encodings_empty	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
 src/utils/truncation.rs::test::truncate_encodings_longest_first	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
-tests/added_tokens.rs::test::add_tokens	skipped	-	blocked: needs external data files
-tests/added_tokens.rs::test::lstrip_tokens	skipped	-	blocked: needs external data files
-tests/added_tokens.rs::test::overlapping_tokens	skipped	-	blocked: needs external data files
-tests/added_tokens.rs::test::rstrip_tokens	skipped	-	blocked: needs external data files
-tests/added_tokens.rs::test::single_word_tokens	skipped	-	blocked: needs external data files
+tests/added_tokens.rs::test::add_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::lstrip_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::overlapping_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::rstrip_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::single_word_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/documentation.rs::test::load_tokenizer	skipped	-	blocked: needs external data files
 tests/documentation.rs::test::pipeline	skipped	-	blocked: needs external data files
 tests/documentation.rs::test::pipeline_bert	skipped	-	blocked: needs external data files

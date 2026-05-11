@@ -710,11 +710,11 @@ src/utils/truncation.rs::struct::TruncationParams	struct	implemented	src/tokens/
 src/utils/truncation.rs::test::test_deserialize_defaults	test	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
 src/utils/truncation.rs::test::truncate_encodings_empty	test	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
 src/utils/truncation.rs::test::truncate_encodings_longest_first	test	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
-tests/added_tokens.rs::test::add_tokens	test	skipped	-	blocked: needs external BPE model data files
-tests/added_tokens.rs::test::lstrip_tokens	test	skipped	-	blocked: needs external BPE model data files
-tests/added_tokens.rs::test::overlapping_tokens	test	skipped	-	blocked: needs external BPE model data files
-tests/added_tokens.rs::test::rstrip_tokens	test	skipped	-	blocked: needs external BPE model data files
-tests/added_tokens.rs::test::single_word_tokens	test	skipped	-	blocked: needs external BPE model data files
+tests/added_tokens.rs::test::add_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::lstrip_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::overlapping_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::rstrip_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
+tests/added_tokens.rs::test::single_word_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/common/mod.rs::func::get_bert	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/common/mod.rs::func::get_bert_wordpiece	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/common/mod.rs::func::get_byte_level	func	skipped	-	blocked: test helper infrastructure, not portable

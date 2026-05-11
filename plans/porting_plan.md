@@ -14,7 +14,7 @@ This plan is inventory-driven. It should be updated from:
 
 **Active feature:** `Feature 3 - Integration, Serialization, and Distribution`
 
-**Current subfeature:** `Feature 3.2 - Inventory reconciliation`
+**Current subfeature:** `Feature 3.4 - Integration tests unlocked`
 
 ### What's done
 
@@ -50,20 +50,20 @@ Only two categories of work remain:
 
 ### What's blocked (cannot be done without data files)
 
-These upstream integration tests need external model data files not vendored in the repo:
+These upstream integration tests need external model data files. Some are now unblocked via `make download-data`.
 
-| Test file | Needed data | Tests |
-|---|---|---|
-| `tests/added_tokens.rs` | `data/gpt2-vocab.json`, `data/gpt2-merges.txt` | 5 |
-| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 |
-| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 |
-| `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 |
-| `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 |
-| `tests/training.rs` | Training data files | 2 |
-| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 |
-| `tests/common/mod.rs` | Test helper infrastructure | 5 |
+| Test file | Needed data | Tests | Status |
+|---|---|---|---|
+| `tests/added_tokens.rs` | `data/gpt2-vocab.json`, `data/gpt2-merges.txt` | 5 | DONE |
+| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 | unblocked |
+| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 | unblocked |
+| `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 | unblocked |
+| `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 | blocked (needs HTTP feature) |
+| `tests/training.rs` | Training data files | 2 | unblocked |
+| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 | unblocked |
+| `tests/common/mod.rs` | Test helper infrastructure | 5 | resolved |
 
-**Resolution:** either vend the data files as test fixtures, or create lightweight synthetic fixtures that exercise the same code paths.
+**Resolution:** added `make download-data` to fetch test files from HuggingFace. All data files are now available at `data/`. The `data/` directory is gitignored — run `make download-data` once before running integration tests.
 
 ## Feature 1 - Runtime Pipeline Parity
 

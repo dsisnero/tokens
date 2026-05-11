@@ -3,6 +3,7 @@
 /.shards/
 /.crystal-cache/
 *.dwarf
+/data/
 
 # macOS resource fork files (FAT32 removable drives)
 ._*
