@@ -484,27 +484,27 @@ src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	tes
 src/tokenizer/encoding.rs::func::char_to_token	func	implemented	src/tokens/tokenizer/encoding.cr:161	port complete
 src/tokenizer/encoding.rs::func::char_to_word	func	implemented	src/tokens/tokenizer/encoding.cr:170	port complete
 src/tokenizer/encoding.rs::func::from_tokens	func	implemented	src/tokens/tokenizer/encoding.cr:43	port complete
-src/tokenizer/encoding.rs::func::get_attention_mask	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_ids	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_offsets	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_offsets_mut	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_overflowing	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_overflowing_mut	func	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::get_attention_mask	func	ported	src/tokens/tokenizer/encoding.cr:8	getter attention_mask
+src/tokenizer/encoding.rs::func::get_ids	func	ported	src/tokens/tokenizer/encoding.cr:7	getter ids
+src/tokenizer/encoding.rs::func::get_offsets	func	ported	src/tokens/tokenizer/encoding.cr:11	getter offsets
+src/tokenizer/encoding.rs::func::get_offsets_mut	func	intentional_divergence	src/tokens/tokenizer/encoding.cr:98	Crystal: process_tokens_with_offsets_mut
+src/tokenizer/encoding.rs::func::get_overflowing	func	ported	src/tokens/tokenizer/encoding.cr:14	getter overflowing
+src/tokenizer/encoding.rs::func::get_overflowing_mut	func	intentional_divergence	src/tokens/tokenizer/encoding.cr:92	Crystal: take_overflowing
 src/tokenizer/encoding.rs::func::get_sequence_ids	func	implemented	src/tokens/tokenizer/encoding.cr:76	port complete
-src/tokenizer/encoding.rs::func::get_special_tokens_mask	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_tokens	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_type_ids	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_word_ids	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::get_word_ids_mut	func	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::get_special_tokens_mask	func	ported	src/tokens/tokenizer/encoding.cr:12	getter special_tokens_mask
+src/tokenizer/encoding.rs::func::get_tokens	func	ported	src/tokens/tokenizer/encoding.cr:9	getter tokens
+src/tokenizer/encoding.rs::func::get_type_ids	func	ported	src/tokens/tokenizer/encoding.cr:8	getter type_ids
+src/tokenizer/encoding.rs::func::get_word_ids	func	ported	src/tokens/tokenizer/encoding.cr:10	getter words
+src/tokenizer/encoding.rs::func::get_word_ids_mut	func	intentional_divergence	-	Crystal: words array is mutable via getter
 src/tokenizer/encoding.rs::func::is_empty	func	implemented	src/tokens/tokenizer/encoding.cr:59	ported as #empty?
 src/tokenizer/encoding.rs::func::len	func	implemented	src/tokens/tokenizer/encoding.cr:63	ported as #length
 src/tokenizer/encoding.rs::func::merge_with	func	implemented	src/tokens/tokenizer/encoding.cr:254	port complete
 src/tokenizer/encoding.rs::func::n_sequences	func	implemented	src/tokens/tokenizer/encoding.cr:67	port complete
 src/tokenizer/encoding.rs::func::new	func	implemented	src/tokens/tokenizer/encoding.cr:17	port complete
 src/tokenizer/encoding.rs::func::pad	func	implemented	src/tokens/tokenizer/encoding.cr:301	port complete
-src/tokenizer/encoding.rs::func::set_overflowing	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::set_sequence_id	func	missing	-	auto-generated
-src/tokenizer/encoding.rs::func::set_type_ids	func	missing	-	auto-generated
+src/tokenizer/encoding.rs::func::set_overflowing	func	intentional_divergence	-	Crystal: set via overflowing= or initializer
+src/tokenizer/encoding.rs::func::set_sequence_id	func	ported	src/tokens/tokenizer/encoding.cr:71	set_sequence_id
+src/tokenizer/encoding.rs::func::set_type_ids	func	ported	src/tokens/tokenizer/encoding.cr:87	set_type_ids
 src/tokenizer/encoding.rs::func::take_overflowing	func	implemented	src/tokens/tokenizer/encoding.cr:91	port complete
 src/tokenizer/encoding.rs::func::token_to_chars	func	implemented	src/tokens/tokenizer/encoding.cr:145	port complete
 src/tokenizer/encoding.rs::func::token_to_sequence	func	implemented	src/tokens/tokenizer/encoding.cr:107	port complete
@@ -522,102 +522,102 @@ src/tokenizer/encoding.rs::test::truncate	test	implemented	spec/tokenizer/encodi
 src/tokenizer/encoding.rs::test::truncate_left	test	implemented	spec/tokenizer/encoding_spec.cr:54	port complete
 src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	test	implemented	spec/tokenizer/encoding_spec.cr:90	port complete
 src/tokenizer/encoding.rs::test::truncate_to_empty	test	implemented	spec/tokenizer/encoding_spec.cr:73	port complete
-src/tokenizer/mod.rs::enum::DecodeStreamError	enum	missing	-	auto-generated
-src/tokenizer/mod.rs::enum::EncodeInput	enum	missing	-	auto-generated
-src/tokenizer/mod.rs::enum::InputSequence	enum	missing	-	auto-generated
-src/tokenizer/mod.rs::enum::ProcessorError	enum	missing	-	auto-generated
-src/tokenizer/mod.rs::func::add_special_tokens	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::add_tokens	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::build	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::decode	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::decode_batch	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::decode_stream	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::default_process	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_added_tokens_decoder	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_added_vocabulary	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_decoder	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_encode_special_tokens	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_model	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_normalizer	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_padding	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_padding_mut	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_post_processor	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_pre_tokenizer	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_truncation	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_truncation_mut	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_vocab	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::get_vocab_size	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::id_to_token	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::into_inner	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::new	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::post_process	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::set_encode_special_tokens	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::step	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::to_string	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::token_to_id	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_added_vocabulary	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_decoder	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_model	func	missing	-	auto-generated
+src/tokenizer/mod.rs::enum::DecodeStreamError	enum	ported	src/tokens/tokenizer/tokenizer.cr:2	DecodeStreamError
+src/tokenizer/mod.rs::enum::EncodeInput	enum	intentional_divergence	src/tokens/tokenizer/input_sequence.cr	InputSequence handles both raw and pretokenized
+src/tokenizer/mod.rs::enum::InputSequence	enum	ported	src/tokens/tokenizer/input_sequence.cr	InputSequence
+src/tokenizer/mod.rs::enum::ProcessorError	enum	intentional_divergence	-	Crystal: uses Exception directly
+src/tokenizer/mod.rs::func::add_special_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:169	add_special_tokens
+src/tokenizer/mod.rs::func::add_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:173	add_tokens
+src/tokenizer/mod.rs::func::build	func	intentional_divergence	-	Crystal: TokenizerImpl constructor instead of builder pattern
+src/tokenizer/mod.rs::func::decode	func	ported	src/tokens/tokenizer/tokenizer.cr:224	decode
+src/tokenizer/mod.rs::func::decode_batch	func	skipped	-	not ported: batch decode
+src/tokenizer/mod.rs::func::decode_stream	func	ported	src/tokens/tokenizer/tokenizer.cr:258	decode_stream
+src/tokenizer/mod.rs::func::default_process	func	ported	src/tokens/tokenizer/tokenizer.cr:312	post_process fallback
+src/tokenizer/mod.rs::func::get_added_tokens_decoder	func	ported	src/tokens/tokenizer/tokenizer.cr:119	get_added_vocabulary.get_added_tokens_decoder
+src/tokenizer/mod.rs::func::get_added_vocabulary	func	ported	src/tokens/tokenizer/tokenizer.cr:114	get_added_vocabulary
+src/tokenizer/mod.rs::func::get_decoder	func	ported	src/tokens/tokenizer/tokenizer.cr:92	get_decoder
+src/tokenizer/mod.rs::func::get_encode_special_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:165	get_encode_special_tokens
+src/tokenizer/mod.rs::func::get_model	func	ported	src/tokens/tokenizer/tokenizer.cr:101	get_model
+src/tokenizer/mod.rs::func::get_normalizer	func	ported	src/tokens/tokenizer/tokenizer.cr:65	get_normalizer
+src/tokenizer/mod.rs::func::get_padding	func	ported	src/tokens/tokenizer/tokenizer.cr:128	get_padding
+src/tokenizer/mod.rs::func::get_padding_mut	func	intentional_divergence	-	Crystal: padding is mutable via with_padding
+src/tokenizer/mod.rs::func::get_post_processor	func	ported	src/tokens/tokenizer/tokenizer.cr:83	get_post_processor
+src/tokenizer/mod.rs::func::get_pre_tokenizer	func	ported	src/tokens/tokenizer/tokenizer.cr:74	get_pre_tokenizer
+src/tokenizer/mod.rs::func::get_truncation	func	ported	src/tokens/tokenizer/tokenizer.cr:119	get_truncation
+src/tokenizer/mod.rs::func::get_truncation_mut	func	intentional_divergence	-	Crystal: truncation is mutable via with_truncation
+src/tokenizer/mod.rs::func::get_vocab	func	ported	src/tokens/tokenizer/tokenizer.cr:137	get_vocab
+src/tokenizer/mod.rs::func::get_vocab_size	func	ported	src/tokens/tokenizer/tokenizer.cr:143	get_vocab_size
+src/tokenizer/mod.rs::func::id_to_token	func	ported	src/tokens/tokenizer/tokenizer.cr:157	id_to_token
+src/tokenizer/mod.rs::func::into_inner	func	skipped	-	not needed: Tokenizer delegates to inner
+src/tokenizer/mod.rs::func::new	func	ported	src/tokens/tokenizer/tokenizer.cr:49	TokenizerImpl.new/initialize
+src/tokenizer/mod.rs::func::post_process	func	ported	src/tokens/tokenizer/tokenizer.cr:273	post_process
+src/tokenizer/mod.rs::func::set_encode_special_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:161	set_encode_special_tokens
+src/tokenizer/mod.rs::func::step	func	ported	src/tokens/tokenizer/tokenizer.cr:387	DecodeStream.step
+src/tokenizer/mod.rs::func::to_string	func	ported	src/tokens/tokenizer/tokenizer.cr:360	to_json
+src/tokenizer/mod.rs::func::token_to_id	func	ported	src/tokens/tokenizer/tokenizer.cr:153	token_to_id
+src/tokenizer/mod.rs::func::with_added_vocabulary	func	ported	src/tokens/tokenizer/tokenizer.cr:109	with_added_vocabulary
+src/tokenizer/mod.rs::func::with_decoder	func	ported	src/tokens/tokenizer/tokenizer.cr:92	with_decoder
+src/tokenizer/mod.rs::func::with_model	func	ported	src/tokens/tokenizer/tokenizer.cr:101	with_model
 src/tokenizer/mod.rs::func::with_normalizer	func	implemented	src/tokens/tokenizer/tokenizer.cr:63	refreshes added-token normalization cache
-src/tokenizer/mod.rs::func::with_padding	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_post_processor	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_pre_tokenizer	func	missing	-	auto-generated
-src/tokenizer/mod.rs::func::with_truncation	func	missing	-	auto-generated
-src/tokenizer/mod.rs::method::Token.new	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::Tokenizer.new	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::TokenizerBuilder.new	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::TokenizerImpl.add_special_tokens	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::TokenizerImpl.new	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::TokenizerImpl.post_process	method	missing	-	auto-generated
-src/tokenizer/mod.rs::method::TokenizerImpl.to_string	method	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::BuilderError	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::DecodeStream	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::Token	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::Tokenizer	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::TokenizerBuilder	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::TokenizerImpl	struct	missing	-	auto-generated
-src/tokenizer/mod.rs::struct::TruncationParamError	struct	missing	-	auto-generated
+src/tokenizer/mod.rs::func::with_padding	func	ported	src/tokens/tokenizer/tokenizer.cr:128	with_padding
+src/tokenizer/mod.rs::func::with_post_processor	func	ported	src/tokens/tokenizer/tokenizer.cr:83	with_post_processor
+src/tokenizer/mod.rs::func::with_pre_tokenizer	func	ported	src/tokens/tokenizer/tokenizer.cr:74	with_pre_tokenizer
+src/tokenizer/mod.rs::func::with_truncation	func	ported	src/tokens/tokenizer/tokenizer.cr:119	with_truncation
+src/tokenizer/mod.rs::method::Token.new	method	ported	src/tokens/token.cr:2	Token.new
+src/tokenizer/mod.rs::method::Tokenizer.new	method	ported	src/tokens/tokenizer/tokenizer.cr:367	Tokenizer.new
+src/tokenizer/mod.rs::method::TokenizerBuilder.new	method	intentional_divergence	-	Crystal: no builder class, use TokenizerImpl method chaining
+src/tokenizer/mod.rs::method::TokenizerImpl.add_special_tokens	method	ported	src/tokens/tokenizer/tokenizer.cr:169	add_special_tokens
+src/tokenizer/mod.rs::method::TokenizerImpl.new	method	ported	src/tokens/tokenizer/tokenizer.cr:49	TokenizerImpl.new
+src/tokenizer/mod.rs::method::TokenizerImpl.post_process	method	ported	src/tokens/tokenizer/tokenizer.cr:273	post_process
+src/tokenizer/mod.rs::method::TokenizerImpl.to_string	method	ported	src/tokens/tokenizer/tokenizer.cr:360	to_json
+src/tokenizer/mod.rs::struct::BuilderError	struct	intentional_divergence	-	Crystal: uses Exception directly
+src/tokenizer/mod.rs::struct::DecodeStream	struct	ported	src/tokens/tokenizer/tokenizer.cr:375	DecodeStream
+src/tokenizer/mod.rs::struct::Token	struct	ported	src/tokens/token.cr:2	Token
+src/tokenizer/mod.rs::struct::Tokenizer	struct	ported	src/tokens/tokenizer/tokenizer.cr:364	Tokenizer
+src/tokenizer/mod.rs::struct::TokenizerBuilder	struct	intentional_divergence	-	Crystal: no builder struct, method chaining on TokenizerImpl
+src/tokenizer/mod.rs::struct::TokenizerImpl	struct	ported	src/tokens/tokenizer/tokenizer.cr:42	TokenizerImpl
+src/tokenizer/mod.rs::struct::TruncationParamError	struct	intentional_divergence	-	Crystal: uses Exception directly
 src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	test	implemented	spec/tokenizer/tokenizer_spec.cr:78	port complete
 src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	test	implemented	spec/tokenizer/tokenizer_spec.cr:126	port complete
 src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:110	port complete
 src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:96	port complete
 src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	test	implemented	spec/tokenizer/tokenizer_spec.cr:60	port complete
-src/tokenizer/mod.rs::trait::Decoder	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::trait::Model	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::trait::Normalizer	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::trait::PostProcessor	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::trait::PreTokenizer	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::trait::Trainer	trait	missing	-	auto-generated
-src/tokenizer/mod.rs::type::Error	type	missing	-	auto-generated
-src/tokenizer/mod.rs::type::Offsets	type	missing	-	auto-generated
-src/tokenizer/mod.rs::type::Result	type	missing	-	auto-generated
+src/tokenizer/mod.rs::trait::Decoder	trait	ported	src/tokens/tokenizer/tokenizer.cr:30	module Decoder
+src/tokenizer/mod.rs::trait::Model	trait	ported	src/tokens/model.cr:4	module Model
+src/tokenizer/mod.rs::trait::Normalizer	trait	ported	src/tokens/tokenizer/tokenizer.cr:12	module Normalizer
+src/tokenizer/mod.rs::trait::PostProcessor	trait	ported	src/tokens/tokenizer/tokenizer.cr:20	module PostProcessor
+src/tokenizer/mod.rs::trait::PreTokenizer	trait	ported	src/tokens/tokenizer/tokenizer.cr:16	module PreTokenizer
+src/tokenizer/mod.rs::trait::Trainer	trait	ported	src/tokens/tokenizer/tokenizer.cr:38	module Trainer
+src/tokenizer/mod.rs::type::Error	type	intentional_divergence	-	Crystal: uses Exception subclasses
+src/tokenizer/mod.rs::type::Offsets	type	intentional_divergence	-	Crystal: uses Tuple(UInt32, UInt32)
+src/tokenizer/mod.rs::type::Result	type	intentional_divergence	-	Crystal: uses exceptions, not Result types
 src/tokenizer/normalizer.rs::enum::OffsetReferential	enum	ported	src/tokens/tokenizer/normalizer.cr:4	port complete
 src/tokenizer/normalizer.rs::enum::Range	enum	partial	src/tokens/tokenizer/normalizer.cr:20	port mapped to Tokens::Range::Original/Normalized wrapper structs rather than a single enum
 src/tokenizer/normalizer.rs::enum::SplitDelimiterBehavior	enum	ported	src/tokens/tokenizer/normalizer.cr:9	port complete
-src/tokenizer/normalizer.rs::func::append	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::bytes_to_char	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::char_to_bytes	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::clear	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::get	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::get_original	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::into_full_range	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::is_empty	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::len	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::len_original	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::lowercase	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::lstrip	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::nfc	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::nfd	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::nfkc	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::nfkd	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::offsets_original	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::prepend	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::rstrip	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::strip	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::unwrap	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::func::uppercase	func	missing	-	auto-generated
-src/tokenizer/normalizer.rs::method::Range.unwrap	method	missing	-	auto-generated
-src/tokenizer/normalizer.rs::struct::NormalizedString	struct	partial	src/tokens/tokenizer/normalizer.cr:101	core alignment-preserving normalizer ported; some upstream transform-edge tests still missing
+src/tokenizer/normalizer.rs::func::append	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString append
+src/tokenizer/normalizer.rs::func::bytes_to_char	func	ported	src/tokens/tokenizer/normalizer.cr	normalized bytes_to_char
+src/tokenizer/normalizer.rs::func::char_to_bytes	func	ported	src/tokens/tokenizer/normalizer.cr	normalized char_to_bytes
+src/tokenizer/normalizer.rs::func::clear	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString clear
+src/tokenizer/normalizer.rs::func::get	func	ported	src/tokens/tokenizer/normalizer.cr:163	get
+src/tokenizer/normalizer.rs::func::get_original	func	ported	src/tokens/tokenizer/normalizer.cr:163	get_original
+src/tokenizer/normalizer.rs::func::into_full_range	func	ported	src/tokens/tokenizer/normalizer.cr:222	into_full_range
+src/tokenizer/normalizer.rs::func::is_empty	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString empty?
+src/tokenizer/normalizer.rs::func::len	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString length method
+src/tokenizer/normalizer.rs::func::len_original	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString len_original
+src/tokenizer/normalizer.rs::func::lowercase	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString lowercase
+src/tokenizer/normalizer.rs::func::lstrip	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString lstrip
+src/tokenizer/normalizer.rs::func::nfc	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString nfc
+src/tokenizer/normalizer.rs::func::nfd	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString nfd
+src/tokenizer/normalizer.rs::func::nfkc	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString nfkc
+src/tokenizer/normalizer.rs::func::nfkd	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString nfkd
+src/tokenizer/normalizer.rs::func::offsets_original	func	ported	src/tokens/tokenizer/normalizer.cr	convert_offsets
+src/tokenizer/normalizer.rs::func::prepend	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString prepend
+src/tokenizer/normalizer.rs::func::rstrip	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString rstrip
+src/tokenizer/normalizer.rs::func::strip	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString strip
+src/tokenizer/normalizer.rs::func::unwrap	func	intentional_divergence	-	Crystal: nil-safety, no unwrap needed
+src/tokenizer/normalizer.rs::func::uppercase	func	intentional_divergence	-	not ported: uppercase (not needed by current normalizers)
+src/tokenizer/normalizer.rs::method::Range.unwrap	method	intentional_divergence	-	Crystal: nil-safety, no unwrap needed
+src/tokenizer/normalizer.rs::struct::NormalizedString	struct	ported	src/tokens/tokenizer/normalizer.cr:97	NormalizedString
 src/tokenizer/normalizer.rs::test::added_around_edges	test	ported	spec/tokenizer/normalizer_spec.cr:125	port complete
 src/tokenizer/normalizer.rs::test::added_characters_alignment	test	ported	spec/tokenizer/normalizer_spec.cr:141	port complete
 src/tokenizer/normalizer.rs::test::append	test	ported	spec/tokenizer/normalizer_spec.cr:256	port complete
@@ -652,16 +652,16 @@ src/tokenizer/pattern.rs::test::regex	test	ported	spec/tokenizer/pattern_spec.cr
 src/tokenizer/pattern.rs::test::str	test	ported	spec/tokenizer/pattern_spec.cr:23	port complete
 src/tokenizer/pattern.rs::test::sys_regex	test	ported	spec/tokenizer/pattern_spec.cr:54	port complete
 src/tokenizer/pattern.rs::trait::Pattern	trait	ported	src/tokens/tokenizer/pattern.cr:2	ported via Crystal module plus core type reopenings for Char/String/Regex/Proc
-src/tokenizer/pre_tokenizer.rs::enum::OffsetType	enum	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::func::convert	func	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::func::get_splits	func	missing	-	auto-generated
+src/tokenizer/pre_tokenizer.rs::enum::OffsetType	enum	ported	src/tokens/tokenizer/encoding.cr	OffsetType enum
+src/tokenizer/pre_tokenizer.rs::func::convert	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.into_encoding
+src/tokenizer/pre_tokenizer.rs::func::get_splits	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.get_splits
 src/tokenizer/pre_tokenizer.rs::func::into_encoding	func	implemented	src/tokens/tokenizer/pre_tokenizer.cr:96	port complete
-src/tokenizer/pre_tokenizer.rs::func::new	func	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::method::BytesToCharOffsetConverter.new	method	missing	-	auto-generated
-src/tokenizer/pre_tokenizer.rs::struct::PreTokenizedString	struct	missing	-	auto-generated
+src/tokenizer/pre_tokenizer.rs::func::new	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.new
+src/tokenizer/pre_tokenizer.rs::method::BytesToCharOffsetConverter.new	method	ported	src/tokens/tokenizer/pre_tokenizer.cr	BytesToCharOffsetConverter
+src/tokenizer/pre_tokenizer.rs::struct::PreTokenizedString	struct	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString
 src/tokenizer/pre_tokenizer.rs::struct::Split	struct	implemented	src/tokens/tokenizer/pre_tokenizer.cr:2	port complete
-src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	test	missing	-	auto-generated
-src/tokenizer/serialization.rs::test::test_from_pretrained	test	missing	-	auto-generated
+src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	test	ported	spec/tokenizer/serialization_spec.cr	ported: serialization round-trip spec
+src/tokenizer/serialization.rs::test::test_from_pretrained	test	skipped	-	not ported: requires HTTP feature and network access
 src/utils/fancy.rs::func::new	func	missing	-	auto-generated
 src/utils/fancy.rs::struct::Matches	struct	missing	-	auto-generated
 src/utils/fancy.rs::struct::SysRegex	struct	missing	-	auto-generated
