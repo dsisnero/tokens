@@ -720,12 +720,12 @@ tests/common/mod.rs::func::get_bert_wordpiece	func	skipped	-	blocked: test helpe
 tests/common/mod.rs::func::get_byte_level	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/common/mod.rs::func::get_byte_level_bpe	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/common/mod.rs::func::get_empty	func	skipped	-	blocked: test helper infrastructure, not portable
-tests/documentation.rs::test::load_tokenizer	test	skipped	-	blocked: needs WordPiece model data file
-tests/documentation.rs::test::pipeline	test	skipped	-	blocked: needs WordPiece model data file
-tests/documentation.rs::test::pipeline_bert	test	skipped	-	blocked: needs WordPiece model data file
-tests/documentation.rs::test::quicktour	test	skipped	-	blocked: needs WordPiece model data file
+tests/documentation.rs::test::load_tokenizer	test	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::pipeline	test	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::pipeline_bert	test	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::quicktour	test	ported	spec/integration/documentation_spec.cr:ported	ported
 tests/documentation.rs::test::quicktour_slow_train	test	skipped	-	blocked: needs WordPiece model data file
-tests/documentation.rs::test::streaming_tokenizer	test	skipped	-	blocked: needs WordPiece model data file
+tests/documentation.rs::test::streaming_tokenizer	test	ported	spec/integration/documentation_spec.cr:ported	ported
 tests/documentation.rs::test::train_pipeline_bert	test	skipped	-	blocked: needs WordPiece model data file
 tests/documentation.rs::test::train_tokenizer	test	skipped	-	blocked: needs WordPiece model data file
 tests/from_pretrained.rs::test::test_from_pretrained	test	skipped	-	blocked: needs HTTP feature and pretrained models

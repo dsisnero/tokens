@@ -205,12 +205,12 @@ tests/added_tokens.rs::test::lstrip_tokens	ported	spec/integration/added_tokens_
 tests/added_tokens.rs::test::overlapping_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::rstrip_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::single_word_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
-tests/documentation.rs::test::load_tokenizer	skipped	-	blocked: needs external data files
-tests/documentation.rs::test::pipeline	skipped	-	blocked: needs external data files
-tests/documentation.rs::test::pipeline_bert	skipped	-	blocked: needs external data files
-tests/documentation.rs::test::quicktour	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::load_tokenizer	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::pipeline	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::pipeline_bert	ported	spec/integration/documentation_spec.cr:ported	ported
+tests/documentation.rs::test::quicktour	ported	spec/integration/documentation_spec.cr:ported	ported
 tests/documentation.rs::test::quicktour_slow_train	skipped	-	blocked: needs external data files
-tests/documentation.rs::test::streaming_tokenizer	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::streaming_tokenizer	ported	spec/integration/documentation_spec.cr:ported	ported
 tests/documentation.rs::test::train_pipeline_bert	skipped	-	blocked: needs external data files
 tests/documentation.rs::test::train_tokenizer	skipped	-	blocked: needs external data files
 tests/from_pretrained.rs::test::test_from_pretrained	skipped	-	blocked: needs external data files

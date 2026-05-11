@@ -54,4 +54,4 @@ $(DATA_DIR)/roberta.json: | $(DATA_DIR)
 	curl -sL $(HF_DATA)/roberta.json -o $@
 
 # Minimal set needed for integration tests
-download-data: $(DATA_DIR)/gpt2-vocab.json $(DATA_DIR)/gpt2-merges.txt $(DATA_DIR)/small.txt $(DATA_DIR)/unigram.json $(DATA_DIR)/albert-base-v1-tokenizer.json $(DATA_DIR)/bert-base-uncased-vocab.txt $(DATA_DIR)/llama-3-tokenizer.json
+download-data: $(DATA_DIR)/gpt2-vocab.json $(DATA_DIR)/gpt2-merges.txt $(DATA_DIR)/small.txt $(DATA_DIR)/unigram.json $(DATA_DIR)/albert-base-v1-tokenizer.json $(DATA_DIR)/bert-base-uncased-vocab.txt $(DATA_DIR)/llama-3-tokenizer.json $(DATA_DIR)/roberta.json
