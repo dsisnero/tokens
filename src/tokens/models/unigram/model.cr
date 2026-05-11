@@ -332,7 +332,13 @@ module Tokens
         end
 
         def trainer
-          raise "UnigramTrainer not yet ported"
+          UnigramTrainer.new
+        end
+
+        def copy_vocab_from(other : self)
+          @vocab_entries = other.vocab_entries.map { |(t, s)| {t, s} }
+          @token_to_ids = other.token_to_ids.dup
+          @min_score = other.min_score
         end
 
         def ==(other : self) : Bool

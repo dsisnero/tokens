@@ -199,6 +199,63 @@ module Tokens
             ""
           end
         end
+
+        def populate_marginal(freq : Float64, expected : Array(Float64)) : Float64
+          n_nodes = @nodes.size
+          alpha = Array(Float64).new(n_nodes, 0.0)
+          beta = Array(Float64).new(n_nodes, 0.0)
+
+          (0..@len).each do |pos|
+            @begin_nodes[pos].each do |rnode|
+              @end_nodes[pos].each_with_index do |lnode, idx|
+                lid = lnode.node_id
+                rid = rnode.node_id
+                alpha[rid] = log_sum_exp(alpha[rid], lnode.score + alpha[lid], idx == 0)
+              end
+            end
+          end
+
+          @len.downto(0) do |pos|
+            @end_nodes[pos].each do |lnode|
+              @begin_nodes[pos].each_with_index do |rnode, idx|
+                lid = lnode.node_id
+                rid = rnode.node_id
+                beta[lid] = log_sum_exp(beta[lid], rnode.score + beta[rid], idx == 0)
+              end
+            end
+          end
+
+          eos_id = @begin_nodes[@len][0].node_id
+          z = alpha[eos_id]
+
+          (0...@len).each do |pos|
+            @begin_nodes[pos].each do |node|
+              nid = node.node_id
+              id = node.id
+              a = alpha[nid]
+              b = beta[nid]
+              total = a + node.score + b - z
+              update = freq * Math.exp(total)
+              expected[id] += update
+            end
+          end
+
+          freq * z
+        end
+
+        def log_sum_exp(x : Float64, y : Float64, init_mode : Bool) : Float64
+          if init_mode
+            y
+          else
+            vmin, vmax = x > y ? {y, x} : {x, y}
+            k = 50.0_f64
+            if vmax > vmin + k
+              vmax
+            else
+              vmax + Math.log(Math.exp(vmin - vmax) + 1.0)
+            end
+          end
+        end
       end
 
       # Hypothesis for N-best search. Ordered by fx (ascending).
@@ -209,25 +266,6 @@ module Tokens
         getter gx : Float64
 
         def initialize(@node_ref : LatticeNode, @next : Hypothesis?, @fx : Float64, @gx : Float64)
-        end
-      end
-
-      # log(exp(x) + exp(y)), numerically stable
-      def self.log_sum_exp(x : Float64, y : Float64, init_mode : Bool) : Float64
-        if init_mode
-          y
-        else
-          vmin, vmax = if x > y
-                         {y, x}
-                       else
-                         {x, y}
-                       end
-          k = 50.0_f64
-          if vmax > vmin + k
-            vmax
-          else
-            vmax + Math.log(Math.exp(vmin - vmax) + 1.0)
-          end
         end
       end
     end

@@ -129,7 +129,9 @@ describe Tokens::Models::Unigram::Lattice do
     vals = [1.0_f64, 2.0_f64, 3.0_f64]
     x = 0.0_f64
     vals.each_with_index do |y, i|
-      x = Tokens::Models::Unigram.log_sum_exp(x, y, i == 0)
+      # We test via the lattice instance method
+      lattice = Tokens::Models::Unigram::Lattice.new("a", 1, 2)
+      x = lattice.log_sum_exp(x, y, i == 0)
     end
     expected = vals.map { |v| Math.exp(v) }.sum.try { |s| Math.log(s) } || 0.0
     (x - expected).abs.should be < 0.001
