@@ -136,8 +136,8 @@ These upstream integration tests need external model data files. Some are now un
 ### 3.3 End-to-end Unigram integration test
 
 - [x] Port `tests/unigram.rs` `test_sample` (lattice sampling with temperature, spec/integration/unigram_spec.cr)
-- [ ] `test_unigram_from_file` blocked (needs data/unigram.json)
-- [ ] `test_train_unigram_from_file` blocked (needs data/small.txt)
+- [x] `test_unigram_from_file` ported (spec/integration/unigram_from_file_spec.cr)
+- [ ] `test_train_unigram_from_file` partial (vocab size differs: seed generation uses n-grams instead of esaxx suffix arrays)
 
 ### 3.4 Utility layer
 
@@ -175,5 +175,5 @@ Priority:
 - [x] `crystal tool format --check src spec` passes
 - [x] `crystal spec` passes (268 examples)
 - [x] Inventory fully reconciled (0 genuine `missing` rows)
-- [x] `tests/unigram.rs` `test_sample` ported (1/3 tests, 2 blocked on data files)
+- [x] `tests/unigram.rs` `test_sample` + `test_unigram_from_file` ported (2/3 tests, 1 partial - train_from_file needs esaxx suffix arrays)
 - [ ] Integration tests unblocked (data files vendored or fixtures created)

@@ -754,5 +754,5 @@ tests/stream.rs::test::test_decoding_with_added_bpe	test	ported	spec/integration
 tests/training.rs::test::bpe_continuing_subword_prefix_error	test	skipped	-	blocked: needs training data files
 tests/training.rs::test::bpe_values_after_training	test	skipped	-	blocked: needs training data files
 tests/unigram.rs::test::test_sample	test	skipped	-	mixed (1 test ported, 2 blocked on data files)
-tests/unigram.rs::test::test_train_unigram_from_file	test	skipped	-	mixed (1 test ported, 2 blocked on data files)
-tests/unigram.rs::test::test_unigram_from_file	test	skipped	-	mixed (1 test ported, 2 blocked on data files)
+tests/unigram.rs::test::test_train_unigram_from_file	test	partial	spec/integration/unigram_train_from_file_spec.cr:pending	partial: vocab size differs (esaxx suffix arrays not ported)
+tests/unigram.rs::test::test_unigram_from_file	test	ported	spec/integration/unigram_from_file_spec.cr:ported	ported

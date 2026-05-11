@@ -239,5 +239,5 @@ tests/stream.rs::test::test_decoding_with_added_bpe	ported	spec/integration/stre
 tests/training.rs::test::bpe_continuing_subword_prefix_error	skipped	-	blocked: needs external data files
 tests/training.rs::test::bpe_values_after_training	skipped	-	blocked: needs external data files
 tests/unigram.rs::test::test_sample	ported	spec/integration/unigram_spec.cr:ported	ported
-tests/unigram.rs::test::test_train_unigram_from_file	skipped	-	blocked: needs external data file
-tests/unigram.rs::test::test_unigram_from_file	skipped	-	blocked: needs external data file
+tests/unigram.rs::test::test_train_unigram_from_file	partial	spec/integration/unigram_train_from_file_spec.cr:pending	partial: vocab size differs (esaxx suffix arrays not ported)
+tests/unigram.rs::test::test_unigram_from_file	ported	spec/integration/unigram_from_file_spec.cr:ported	ported
