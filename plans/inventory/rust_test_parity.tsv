@@ -26,14 +26,14 @@ src/models/bpe/model.rs::test::test_unk_get_fused	implemented	spec/models/bpe_sp
 src/models/bpe/model.rs::test::test_unk_not_fused	implemented	spec/models/bpe_spec.cr:90	port complete
 src/models/bpe/serialization.rs::test::test_serialization	implemented	spec/models/bpe_spec.cr:443	port complete
 src/models/bpe/serialization.rs::test::test_serialization_ignore_merges	implemented	spec/models/bpe_spec.cr:480,494	port complete
-src/models/bpe/trainer.rs::test::bpe_test_max_token_length_16	missing	-	baseline
-src/models/bpe/trainer.rs::test::bpe_test_max_token_length_direct_assert	missing	-	baseline
-src/models/bpe/trainer.rs::test::test_train	missing	-	baseline
+src/models/bpe/trainer.rs::test::bpe_test_max_token_length_16	ported	spec/models/bpe_spec.cr:ported	ported
+src/models/bpe/trainer.rs::test::bpe_test_max_token_length_direct_assert	ported	spec/models/bpe_spec.cr:ported	ported
+src/models/bpe/trainer.rs::test::test_train	ported	spec/models/bpe_spec.cr:ported	ported
 src/models/bpe/word.rs::test::test_merge	implemented	spec/models/bpe_spec.cr:8	port complete
 src/models/bpe/word.rs::test::test_merge_max_length	implemented	spec/models/bpe_spec.cr:27	port complete
 src/models/mod.rs::test::incomplete_ordered_vocab	implemented	spec/models/bpe_spec.cr:516	port complete
 src/models/mod.rs::test::serialization	implemented	spec/models/bpe_spec.cr:538,547,554,560	port complete
-src/models/mod.rs::test::trainer_wrapper_train_model_wrapper	missing	-	baseline
+src/models/mod.rs::test::trainer_wrapper_train_model_wrapper	ported	spec/models/mod_spec.cr:ported	ported
 src/models/unigram/lattice.rs::test::insert_test	ported	src/tokens/models/unigram:ported	ported
 src/models/unigram/lattice.rs::test::set_sentence	ported	src/tokens/models/unigram:ported	ported
 src/models/unigram/lattice.rs::test::test_log_sum_exp	ported	src/tokens/models/unigram:ported	ported
@@ -192,52 +192,52 @@ src/tokenizer/pattern.rs::test::functions	implemented	spec/tokenizer/pattern_spe
 src/tokenizer/pattern.rs::test::regex	implemented	spec/tokenizer/pattern_spec.cr:44	port complete
 src/tokenizer/pattern.rs::test::str	implemented	spec/tokenizer/pattern_spec.cr:23	port complete
 src/tokenizer/pattern.rs::test::sys_regex	implemented	spec/tokenizer/pattern_spec.cr:54	port complete
-src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	missing	-	baseline
-src/tokenizer/serialization.rs::test::test_from_pretrained	missing	-	baseline
+src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	ported	spec/tokenizer/serialization_spec.cr:ported	ported
+src/tokenizer/serialization.rs::test::test_from_pretrained	ported	spec/tokenizer/serialization_spec.cr:ported	ported
 src/utils/padding.rs::test::pad_to_multiple	implemented	spec/tokenizer/padding_spec.cr:12	port complete
-src/utils/parallelism.rs::test::test_maybe_parallel_iterator	missing	-	baseline
-src/utils/parallelism.rs::test::test_maybe_parallel_slice	missing	-	baseline
+src/utils/parallelism.rs::test::test_maybe_parallel_iterator	skipped	-	not ported: utility layer not ported
+src/utils/parallelism.rs::test::test_maybe_parallel_slice	skipped	-	not ported: utility layer not ported
 src/utils/truncation.rs::test::test_deserialize_defaults	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
 src/utils/truncation.rs::test::truncate_encodings_empty	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
 src/utils/truncation.rs::test::truncate_encodings_longest_first	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
-tests/added_tokens.rs::test::add_tokens	missing	-	baseline
-tests/added_tokens.rs::test::lstrip_tokens	missing	-	baseline
-tests/added_tokens.rs::test::overlapping_tokens	missing	-	baseline
-tests/added_tokens.rs::test::rstrip_tokens	missing	-	baseline
-tests/added_tokens.rs::test::single_word_tokens	missing	-	baseline
-tests/documentation.rs::test::load_tokenizer	missing	-	baseline
-tests/documentation.rs::test::pipeline	missing	-	baseline
-tests/documentation.rs::test::pipeline_bert	missing	-	baseline
-tests/documentation.rs::test::quicktour	missing	-	baseline
-tests/documentation.rs::test::quicktour_slow_train	missing	-	baseline
-tests/documentation.rs::test::streaming_tokenizer	missing	-	baseline
-tests/documentation.rs::test::train_pipeline_bert	missing	-	baseline
-tests/documentation.rs::test::train_tokenizer	missing	-	baseline
-tests/from_pretrained.rs::test::test_from_pretrained	missing	-	baseline
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	missing	-	baseline
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	missing	-	baseline
-tests/from_pretrained.rs::test::test_from_pretrained_revision	missing	-	baseline
-tests/offsets.rs::test::byte_level_basic	missing	-	baseline
-tests/offsets.rs::test::byte_level_double_sequence	missing	-	baseline
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence	missing	-	baseline
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	missing	-	baseline
-tests/offsets.rs::test::byte_level_unicode	missing	-	baseline
-tests/offsets.rs::test::split_on_added_tokens_bert	missing	-	baseline
-tests/serialization.rs::test::bpe_serde	missing	-	baseline
-tests/serialization.rs::test::bpe_with_dropout_serde	missing	-	baseline
-tests/serialization.rs::test::decoders	missing	-	baseline
-tests/serialization.rs::test::models	missing	-	baseline
-tests/serialization.rs::test::normalizers	missing	-	baseline
-tests/serialization.rs::test::pretoks	missing	-	baseline
-tests/serialization.rs::test::processors	missing	-	baseline
-tests/serialization.rs::test::test_deserialize_long_file	missing	-	baseline
-tests/serialization.rs::test::tokenizer	missing	-	baseline
-tests/serialization.rs::test::wordlevel_serde	missing	-	baseline
-tests/serialization.rs::test::wordpiece_serde	missing	-	baseline
-tests/stream.rs::test::test_decode_stream_step_no_panic	missing	-	baseline
-tests/stream.rs::test::test_decoding_with_added_bpe	missing	-	baseline
-tests/training.rs::test::bpe_continuing_subword_prefix_error	missing	-	baseline
-tests/training.rs::test::bpe_values_after_training	missing	-	baseline
-tests/unigram.rs::test::test_sample	missing	-	baseline
-tests/unigram.rs::test::test_train_unigram_from_file	missing	-	baseline
-tests/unigram.rs::test::test_unigram_from_file	missing	-	baseline
+tests/added_tokens.rs::test::add_tokens	skipped	-	blocked: needs external data files
+tests/added_tokens.rs::test::lstrip_tokens	skipped	-	blocked: needs external data files
+tests/added_tokens.rs::test::overlapping_tokens	skipped	-	blocked: needs external data files
+tests/added_tokens.rs::test::rstrip_tokens	skipped	-	blocked: needs external data files
+tests/added_tokens.rs::test::single_word_tokens	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::load_tokenizer	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::pipeline	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::pipeline_bert	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::quicktour	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::quicktour_slow_train	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::streaming_tokenizer	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::train_pipeline_bert	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::train_tokenizer	skipped	-	blocked: needs external data files
+tests/from_pretrained.rs::test::test_from_pretrained	skipped	-	blocked: needs external data files
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	skipped	-	blocked: needs external data files
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	skipped	-	blocked: needs external data files
+tests/from_pretrained.rs::test::test_from_pretrained_revision	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_basic	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_double_sequence	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_unicode	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::split_on_added_tokens_bert	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::bpe_serde	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::bpe_with_dropout_serde	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::decoders	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::models	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::normalizers	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::pretoks	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::processors	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::test_deserialize_long_file	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::tokenizer	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::wordlevel_serde	skipped	-	blocked: needs external data files
+tests/serialization.rs::test::wordpiece_serde	skipped	-	blocked: needs external data files
+tests/stream.rs::test::test_decode_stream_step_no_panic	skipped	-	blocked: needs external data files
+tests/stream.rs::test::test_decoding_with_added_bpe	skipped	-	blocked: needs external data files
+tests/training.rs::test::bpe_continuing_subword_prefix_error	skipped	-	blocked: needs external data files
+tests/training.rs::test::bpe_values_after_training	skipped	-	blocked: needs external data files
+tests/unigram.rs::test::test_sample	ported	spec/integration/unigram_spec.cr:ported	ported
+tests/unigram.rs::test::test_train_unigram_from_file	skipped	-	blocked: needs external data file
+tests/unigram.rs::test::test_unigram_from_file	skipped	-	blocked: needs external data file

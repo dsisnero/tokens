@@ -128,14 +128,16 @@ These upstream integration tests need external model data files not vendored in 
 ### 3.2 Inventory reconciliation
 
 - [x] BPE inventory reconciled (0 missing)
-- [ ] `tests/*` rows — mark as `blocked` (needs data files)
-- [ ] `src/utils/*` rows — mark as `intentional_divergence` (Crystal equivalents differ)
-- [ ] `src/models/mod.rs` (12 rows) — reconcile TrainerWrapper
-- [ ] `examples/` and `benches/` — mark as `skipped`
+- [x] `tests/*` rows — marked as `blocked` (needs data files)
+- [x] `src/utils/*` rows — marked as `intentional_divergence` or `skipped`
+- [x] `src/models/mod.rs` (12 rows) — reconciled (intentional_divergence for serde types, ported for wrappers)
+- [x] `examples/` and `benches/` — marked as `skipped`
 
 ### 3.3 End-to-end Unigram integration test
 
-- [ ] Port `tests/unigram.rs` (3 test functions). Unigram model and trainer are fully ported — this test validates them working together.
+- [x] Port `tests/unigram.rs` `test_sample` (lattice sampling with temperature, spec/integration/unigram_spec.cr)
+- [ ] `test_unigram_from_file` blocked (needs data/unigram.json)
+- [ ] `test_train_unigram_from_file` blocked (needs data/small.txt)
 
 ### 3.4 Utility layer
 
@@ -171,7 +173,7 @@ Priority:
 - [x] All model families ported (Feature 2)
 - [x] Cross-model serialization working
 - [x] `crystal tool format --check src spec` passes
-- [x] `crystal spec` passes (267 examples)
-- [ ] Inventory fully reconciled (0 genuine `missing` rows)
-- [ ] `tests/unigram.rs` ported
+- [x] `crystal spec` passes (268 examples)
+- [x] Inventory fully reconciled (0 genuine `missing` rows)
+- [x] `tests/unigram.rs` `test_sample` ported (1/3 tests, 2 blocked on data files)
 - [ ] Integration tests unblocked (data files vendored or fixtures created)

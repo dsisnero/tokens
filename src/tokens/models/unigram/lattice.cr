@@ -200,6 +200,69 @@ module Tokens
           end
         end
 
+        # Weighted random sampling of a tokenization path.
+        # theta controls temperature (0 = deterministic best path, 1 = proportional to score).
+        def sample(theta : Float64) : Array(LatticeNode)
+          llen = @len
+          return [] of LatticeNode if llen == 0
+
+          alpha = Array(Float64).new(@nodes.size, 0.0)
+
+          # Forward pass with theta scaling
+          (0..llen).each do |pos|
+            @begin_nodes[pos].each do |rnode|
+              @end_nodes[pos].each_with_index do |lnode, idx|
+                lid = lnode.node_id
+                rid = rnode.node_id
+                alpha[rid] = log_sum_exp(
+                  alpha[rid],
+                  theta * (lnode.score + alpha[lid]),
+                  idx == 0,
+                )
+              end
+            end
+          end
+
+          # Backward sampling
+          results = [] of LatticeNode
+          probs = [] of Float64
+          z = alpha[@begin_nodes[llen][0].node_id] # EOS
+          node = @begin_nodes[llen][0]             # Start from EOS
+
+          loop do
+            probs.clear
+            pos = node.pos
+            @end_nodes[pos].each do |lnode|
+              lid = lnode.node_id
+              probs << Math.exp(alpha[lid] + theta * lnode.score - z)
+            end
+
+            # Weighted random selection
+            idx = weighted_sample(probs)
+            node = @end_nodes[pos][idx]
+            break if node.id == @end_nodes[0][0].id # BOS
+            z = alpha[node.node_id]
+            results << node
+          end
+
+          results.reverse
+        end
+
+        def sample_token(theta : Float64) : Array(String)
+          sample(theta).map { |n| piece(n) }
+        end
+
+        private def weighted_sample(weights : Array(Float64)) : Int32
+          sum = weights.sum
+          r = Random.rand * sum
+          cumulative = 0.0
+          weights.each_with_index do |w, i|
+            cumulative += w
+            return i if r <= cumulative
+          end
+          weights.size - 1
+        end
+
         def populate_marginal(freq : Float64, expected : Array(Float64)) : Float64
           n_nodes = @nodes.size
           alpha = Array(Float64).new(n_nodes, 0.0)
