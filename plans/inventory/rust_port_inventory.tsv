@@ -45,74 +45,74 @@ src/decoders/wordpiece.rs::func::new	func	implemented	src/tokens/decoders/wordpi
 src/decoders/wordpiece.rs::method::WordPiece.new	method	implemented	src/tokens/decoders/wordpiece.cr:11	port complete
 src/decoders/wordpiece.rs::struct::WordPiece	struct	implemented	src/tokens/decoders/wordpiece.cr:5	port complete
 src/decoders/wordpiece.rs::test::wordpiece_decoder	test	implemented	spec/decoders/wordpiece_spec.cr:4	port complete
-src/models/bpe/mod.rs::enum::Error	enum	missing	-	auto-generated
-src/models/bpe/model.rs::func::build	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::builder	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::byte_fallback	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::cache_capacity	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::clear_cache	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::continuing_subword_prefix	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::dropout	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::end_of_word_suffix	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::files	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::from_file	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::fuse_unk	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::get_continuing_subword_prefix	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::get_unk_token	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::get_vocab	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::ignore_merges	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::new	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::read_file	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::resize_cache	func	missing	-	auto-generated
-src/models/bpe/model.rs::func::unk_token	func	missing	-	auto-generated
-src/models/bpe/model.rs::method::BPE.builder	method	missing	-	auto-generated
-src/models/bpe/model.rs::method::BpeBuilder.new	method	missing	-	auto-generated
-src/models/bpe/model.rs::struct::BPE	struct	missing	-	auto-generated
-src/models/bpe/model.rs::struct::BpeBuilder	struct	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_byte_fallback	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_byte_fallback_newline	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_from_file	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_from_file_bad_merges	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_from_file_merge_token_oov	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_with_continuing_subword_prefix	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_bpe_with_dropout_0	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_cache_is_per_bpe_instance	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_ignore_merges	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_ordered_vocab_iter	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_tokenize_with_and_without_dropout	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_unk_get_fused	test	missing	-	auto-generated
-src/models/bpe/model.rs::test::test_unk_not_fused	test	missing	-	auto-generated
-src/models/bpe/model.rs::type::MergeMap	type	missing	-	auto-generated
-src/models/bpe/model.rs::type::Merges	type	missing	-	auto-generated
-src/models/bpe/model.rs::type::Vocab	type	missing	-	auto-generated
-src/models/bpe/serialization.rs::test::test_serialization	test	missing	-	auto-generated
-src/models/bpe/serialization.rs::test::test_serialization_ignore_merges	test	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::build	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::builder	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::continuing_subword_prefix	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::do_train	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::end_of_word_suffix	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::get_word_count	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::initial_alphabet	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::limit_alphabet	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::max_token_length	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::min_frequency	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::new	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::progress_format	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::show_progress	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::special_tokens	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::func::vocab_size	func	missing	-	auto-generated
-src/models/bpe/trainer.rs::method::BpeTrainer.new	method	missing	-	auto-generated
-src/models/bpe/trainer.rs::method::BpeTrainerBuilder.new	method	missing	-	auto-generated
-src/models/bpe/trainer.rs::struct::BpeTrainer	struct	missing	-	auto-generated
-src/models/bpe/trainer.rs::struct::BpeTrainerBuilder	struct	missing	-	auto-generated
-src/models/bpe/trainer.rs::test::bpe_test_max_token_length_16	test	missing	-	auto-generated
-src/models/bpe/trainer.rs::test::bpe_test_max_token_length_direct_assert	test	missing	-	auto-generated
-src/models/bpe/trainer.rs::test::test_train	test	missing	-	auto-generated
-src/models/bpe/word.rs::func::merge_with	func	missing	-	auto-generated
-src/models/bpe/word.rs::method::Symbol.merge_with	method	missing	-	auto-generated
-src/models/bpe/word.rs::test::test_merge	test	missing	-	auto-generated
-src/models/bpe/word.rs::test::test_merge_max_length	test	missing	-	auto-generated
+src/models/bpe/mod.rs::enum::Error	enum	ported	src/tokens/models/bpe/error.cr	BPE error types
+src/models/bpe/model.rs::func::build	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder.build
+src/models/bpe/model.rs::func::builder	func	ported	src/tokens/models/bpe/model.cr:33	BPE.builder
+src/models/bpe/model.rs::func::byte_fallback	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::cache_capacity	func	intentional_divergence	-	Crystal: BpeCache capacity managed internally
+src/models/bpe/model.rs::func::clear_cache	func	ported	src/tokens/models/bpe/model.cr:141	clear_cache
+src/models/bpe/model.rs::func::continuing_subword_prefix	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::dropout	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::end_of_word_suffix	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::files	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::from_file	func	ported	src/tokens/models/bpe/model.cr:47	from_file
+src/models/bpe/model.rs::func::fuse_unk	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::get_continuing_subword_prefix	func	ported	src/tokens/models/bpe/model.cr	Crystal property/getter
+src/models/bpe/model.rs::func::get_unk_token	func	ported	src/tokens/models/bpe/model.cr	Crystal property/getter
+src/models/bpe/model.rs::func::get_vocab	func	ported	src/tokens/models/bpe/model.cr	Crystal property/getter
+src/models/bpe/model.rs::func::ignore_merges	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::func::new	func	ported	src/tokens/models/bpe/model.cr:18	BPE.new
+src/models/bpe/model.rs::func::read_file	func	ported	src/tokens/models/bpe/model.cr:51	read_file
+src/models/bpe/model.rs::func::resize_cache	func	ported	src/tokens/models/bpe/model.cr:145	resize_cache
+src/models/bpe/model.rs::func::unk_token	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/model.rs::method::BPE.builder	method	ported	src/tokens/models/bpe/model.cr:33	BPE.builder
+src/models/bpe/model.rs::method::BpeBuilder.new	method	ported	src/tokens/models/bpe/builder.cr	BpeBuilder.new
+src/models/bpe/model.rs::struct::BPE	struct	ported	src/tokens/models/bpe/model.cr:4	BPE class
+src/models/bpe/model.rs::struct::BpeBuilder	struct	ported	src/tokens/models/bpe/builder.cr	BpeBuilder class
+src/models/bpe/model.rs::test::test_bpe_byte_fallback	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_byte_fallback_newline	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_from_file	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_from_file_bad_merges	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_from_file_merge_token_oov	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_with_continuing_subword_prefix	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_bpe_with_dropout_0	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_cache_is_per_bpe_instance	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_ignore_merges	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_ordered_vocab_iter	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_tokenize_with_and_without_dropout	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_unk_get_fused	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::test::test_unk_not_fused	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/model.rs::type::MergeMap	type	ported	src/tokens/models/bpe/types.cr:7	MergeMap alias
+src/models/bpe/model.rs::type::Merges	type	ported	src/tokens/models/bpe/types.cr:8	Merges alias
+src/models/bpe/model.rs::type::Vocab	type	ported	src/tokens/models/bpe/types.cr:5	Vocab alias
+src/models/bpe/serialization.rs::test::test_serialization	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/serialization.rs::test::test_serialization_ignore_merges	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/trainer.rs::func::build	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder.build
+src/models/bpe/trainer.rs::func::builder	func	ported	src/tokens/models/bpe/model.cr:33	BPE.builder
+src/models/bpe/trainer.rs::func::continuing_subword_prefix	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::do_train	func	ported	src/tokens/models/bpe/trainer.cr:61	do_train
+src/models/bpe/trainer.rs::func::end_of_word_suffix	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::get_word_count	func	ported	src/tokens/models/bpe/trainer.cr:43	get_word_count
+src/models/bpe/trainer.rs::func::initial_alphabet	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::limit_alphabet	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::max_token_length	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::min_frequency	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::new	func	ported	src/tokens/models/bpe/model.cr:18	BPE.new
+src/models/bpe/trainer.rs::func::progress_format	func	intentional_divergence	-	progress bar not ported (Crystal: no indicatif equivalent)
+src/models/bpe/trainer.rs::func::show_progress	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::special_tokens	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::func::vocab_size	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
+src/models/bpe/trainer.rs::method::BpeTrainer.new	method	ported	src/tokens/models/bpe/trainer.cr:25	BpeTrainer.new
+src/models/bpe/trainer.rs::method::BpeTrainerBuilder.new	method	ported	src/tokens/models/bpe/trainer.cr:235	BpeTrainerBuilder.new
+src/models/bpe/trainer.rs::struct::BpeTrainer	struct	ported	src/tokens/models/bpe/trainer.cr:13	BpeTrainer
+src/models/bpe/trainer.rs::struct::BpeTrainerBuilder	struct	ported	src/tokens/models/bpe/trainer.cr:234	BpeTrainerBuilder
+src/models/bpe/trainer.rs::test::bpe_test_max_token_length_16	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/trainer.rs::test::bpe_test_max_token_length_direct_assert	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/trainer.rs::test::test_train	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/word.rs::func::merge_with	func	ported	src/tokens/models/bpe/word.cr	Word#merge_all
+src/models/bpe/word.rs::method::Symbol.merge_with	method	ported	src/tokens/models/bpe/word.cr	Symbol merge logic
+src/models/bpe/word.rs::test::test_merge	test	ported	spec/models/bpe_spec.cr	ported
+src/models/bpe/word.rs::test::test_merge_max_length	test	ported	spec/models/bpe_spec.cr	ported
 src/models/mod.rs::enum::EnumType	enum	missing	-	auto-generated
 src/models/mod.rs::enum::ModelHelper	enum	missing	-	auto-generated
 src/models/mod.rs::enum::ModelUntagged	enum	missing	-	auto-generated

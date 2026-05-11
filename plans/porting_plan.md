@@ -210,7 +210,7 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 
 - [x] BPE model, trainer, and spec baseline exist in the repo
 - [x] BPE behavior is already exercised by the current passing spec suite
-- [ ] Reconcile the remaining `src/models/bpe/*` source rows in `rust_port_inventory.tsv` so the ledger matches the code that already exists
+- [x] Reconcile the remaining `src/models/bpe/*` source rows in `rust_port_inventory.tsv` so the ledger matches the code that already exists
 
 ### Tokenizer foundation already landed
 
