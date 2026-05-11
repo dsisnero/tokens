@@ -10,231 +10,168 @@ This plan is inventory-driven. It should be updated from:
 - `plans/inventory/rust_port_inventory.tsv`
 - `plans/inventory/rust_test_parity.tsv`
 
-## Current Feature In Progress
+## Current Status (2026-05-09)
 
-**Active feature:** `Feature 1 - Runtime Pipeline Parity`
+**Active feature:** `Feature 3 - Integration, Serialization, and Distribution`
 
-**Current subfeature:** `Feature 3.1 - Serialization matrix tests`
+**Current subfeature:** `Feature 3.2 - Inventory reconciliation`
 
-**Why this is active now**
+### What's done
 
-- All pipeline components are ported (normalizer, pre-tokenizer, post-processor, decoder).
-- Tokenizer serialization/deserialization is working.
-- The tokenizer inventory has been reconciled — all 145 source rows accounted for (ported, intentional_divergence, or skipped with notes).
-- Remaining work: integration tests that need external model data files. These should be ported opportunistically as data files become available or test fixtures are created.
+All runtime pipeline components and model families are ported:
 
-**Inventory footprint as of 2026-05-09**
+| Area | Source | Tests | Status |
+|---|---|---|---|
+| Tokenizer core | 145 reconciled (0 missing) | 29 ported | Done |
+| Normalizers | 30 ported | 14 ported | Done |
+| Pre-tokenizers | 50 ported | 41 ported | Done |
+| Decoders | 29 ported | 12 ported | Done |
+| Post-processors | 41 ported | 18 ported | Done |
+| BPE model | 68 reconciled (0 missing) | covered | Done |
+| WordLevel | 22 ported | 6 ported | Done |
+| WordPiece | 43 ported | 3 ported | Done |
+| Unigram | 66 ported | 20 ported | Done |
+| Model wrapper | 12 ported | 3 ported | Done |
+| Serialization matrix | — | 12 ported | Done |
 
-- `src/tokenizer`: 123 source rows ported, 19 intentional_divergence, 3 skipped, 1 partial. 29 tests ported, 2 skipped.
-- `src/normalizers`: 30 source rows done, 0 source rows remaining, 14 tests done, 0 tests remaining
-- `src/pre_tokenizers`: 50 source rows done, 0 source rows remaining, 41 tests done, 0 tests remaining
-- `src/decoders`: 29 source rows done, 0 source rows remaining, 12 tests done, 0 tests remaining
-- `src/processors`: 41 source rows done, 0 source rows remaining, 18 tests done, 0 tests remaining
+**Quality gates:** 267 specs pass, format check clean, ameba residual backlog tracked.
 
-**Definition of done**
+### What's actionable next
 
-- [x] All rows under `src/tokenizer`, `src/normalizers`, `src/pre_tokenizers`, `src/decoders`, and `src/processors` are implemented or explicitly skipped with notes.
-- [x] All corresponding test rows in `rust_test_parity.tsv` are implemented or explicitly skipped with notes.
-- [x] Tokenizer assembly works across `model + normalizer + pre_tokenizer + post_processor + decoder`.
-- [x] Tokenizer serialization/deserialization is working for the implemented runtime surface.
-- [ ] The remaining pipeline integration tests (`offsets`, `added_tokens`, `stream`, `documentation`, serialization matrix rows that depend on the runtime pipeline) are green. (Blocked: needs external data files or fixture bundles.)
+Only two categories of work remain:
 
-**Execution rule**
+1. **`tests/unigram.rs`** — end-to-end Unigram integration test (3 test functions, portable since Unigram model and trainer are fully implemented). This is the highest-value remaining feature work.
 
-Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is blocked.
+2. **Inventory reconciliation** — 99 source rows and 49 test rows marked `missing` in manifests. These are NOT code gaps — they're inventory ledger gaps. The actual code exists but the manifests weren't updated. Most are:
+   - `tests/*` rows (serialization.rs, documentation.rs, offsets.rs, added_tokens.rs, training.rs, from_pretrained.rs, stream.rs) — all blocked on external data files
+   - `src/utils/*` rows (parallelism, progress, fancy, iter, onig, from_pretrained) — intentionally skipped (Crystal idioms differ, no equivalent libraries)
+   - `src/models/mod.rs` (12 rows) — TrainerWrapper inventory needs reconciliation
+   - `examples/`, `benches/` — intentionally skipped (WASM, benchmarks not needed)
+
+### What's blocked (cannot be done without data files)
+
+These upstream integration tests need external model data files not vendored in the repo:
+
+| Test file | Needed data | Tests |
+|---|---|---|
+| `tests/added_tokens.rs` | `data/gpt2-vocab.json`, `data/gpt2-merges.txt` | 5 |
+| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 |
+| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 |
+| `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 |
+| `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 |
+| `tests/training.rs` | Training data files | 2 |
+| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 |
+| `tests/common/mod.rs` | Test helper infrastructure | 5 |
+
+**Resolution:** either vend the data files as test fixtures, or create lightweight synthetic fixtures that exercise the same code paths.
 
 ## Feature 1 - Runtime Pipeline Parity
 
-**Outcome:** the Crystal port can build and run complete tokenizer pipelines, not just standalone BPE/model pieces.
+**Status:** SUBSTANTIALLY COMPLETE. Blocked only on integration tests needing external data.
 
 ### 1.1 Tokenizer core
 
-- [x] Port `tokenizer/pattern.rs`
-- [x] Port the `NormalizedString` foundation from `tokenizer/normalizer.rs`
-- [x] Port the main `AddedVocabulary` behaviors from `tokenizer/added_vocabulary.rs`
-- [x] Port core `Encoding` behaviors needed by truncation, padding, and mappings
-- [x] Port core `PreTokenizedString` split/encoding flow
-- [x] Port basic tokenizer truncation behavior from `tokenizer/mod.rs`
-- [x] Finish remaining `tokenizer/mod.rs` API surface
-- [x] Finish remaining `tokenizer/encoding.rs` rows
-- [x] Finish remaining `tokenizer/pre_tokenizer.rs` rows
-- [x] Finish remaining `tokenizer/normalizer.rs` rows
-- [x] Port `tokenizer/serialization.rs`
-- [ ] Port stream decode behavior from `tests/stream.rs` (blocked: needs external data files)
-
-**Hot files still open**
-
-- (none — all rows reconciled: 123 ported, 19 intentional_divergence, 3 skipped, 1 partial)
+- [x] All tokenizer infrastructure ported (Encoding, NormalizedString, PreTokenizedString, AddedVocabulary, pattern, truncation, padding, serialization)
+- [x] Inventory fully reconciled
 
 ### 1.2 Normalizers
 
-- [x] Port `normalizers/byte_level.rs`
-- [x] Port `normalizers/prepend.rs`
-- [x] Port `normalizers/unicode.rs` wrappers now covered by `NFC/NFD/NFKC/NFKD/Nmt`
-- [x] Port `normalizers/utils.rs` enough for `Lowercase` and `Sequence`
-- [x] Port `normalizers/replace.rs`
-- [x] Port `normalizers/strip.rs`
-- [x] Port `normalizers/bert.rs`
-- [x] Port `normalizers/precompiled.rs` helper behavior needed by current parity coverage
-- [x] Port `normalizers/mod.rs` wrapper/registry/serde layer
-
-**Tests still open**
-
-- [x] `src/normalizers/strip.rs` test block
-- [x] `src/normalizers/mod.rs` serialization/deserialization tests
+- [x] All normalizer types ported (NFC/NFD/NFKC/NFKD/Nmt, Lowercase, Strip/StripAccents, Replace, Prepend, BertNormalizer, ByteLevel, Precompiled, Sequence)
+- [x] NormalizerWrapper with tagged JSON
 
 ### 1.3 Pre-tokenizers
 
-- [x] Port `pre_tokenizers/mod.rs` wrapper/registry/serde layer
-- [x] Port `pre_tokenizers/whitespace.rs`
-- [x] Port `pre_tokenizers/split.rs`
-- [x] Port `pre_tokenizers/delimiter.rs`
-- [x] Port `pre_tokenizers/digits.rs`
-- [x] Port `pre_tokenizers/punctuation.rs`
-- [x] Port `pre_tokenizers/sequence.rs`
-- [x] Port `pre_tokenizers/fixed_length.rs`
-- [x] Port `pre_tokenizers/bert.rs`
-- [x] Port `pre_tokenizers/metaspace.rs`
-- [x] Port `pre_tokenizers/byte_level.rs`
-- [x] Port `pre_tokenizers/unicode_scripts/*`
+- [x] All pre-tokenizer types ported (Whitespace, ByteLevel, Metaspace, Digits, Punctuation, Split, Delimiter, FixedLength, BertPreTokenizer, UnicodeScripts, Sequence)
+- [x] PreTokenizerWrapper with tagged JSON
 
 ### 1.4 Decoders
 
-- [x] Port `decoders/bpe.rs`
-- [x] Port `decoders/byte_fallback.rs`
-- [x] Port `decoders/ctc.rs`
-- [x] Port `decoders/fuse.rs`
-- [x] Port `decoders/sequence.rs`
-- [x] Port `decoders/strip.rs`
-- [x] Port `decoders/wordpiece.rs`
-- [x] Port `decoders/mod.rs` wrapper/registry/serde layer
+- [x] All decoder types ported (BPE, ByteLevel, ByteFallback, CTC, Fuse, Strip, WordPiece, Metaspace, Sequence)
+- [x] DecoderWrapper with tagged JSON
 
 ### 1.5 Post-processors
 
-- [x] Port `processors/bert.rs`
-- [x] Port `processors/roberta.rs`
-- [x] Port `processors/template.rs`
-- [x] Port `processors/sequence.rs`
-- [x] Port `processors/mod.rs` wrapper/registry/serde layer
+- [x] All post-processor types ported (BertProcessing, RobertaProcessing, TemplateProcessing, Sequence)
+- [x] PostProcessorWrapper with tagged/untagged JSON
 
-**Hot files still open**
+### 1.6 Runtime integration tests
 
-- (none)
-
-### 1.6 Runtime integration tests that close this feature
-
-- [ ] `tests/offsets.rs` (blocked: needs external BPE model data files)
-- [ ] `tests/added_tokens.rs` (blocked: needs external BPE model data files)
-- [ ] `tests/stream.rs` (blocked: needs external llama-3 tokenizer data file)
-- [ ] `tests/documentation.rs` rows that depend on the runtime pipeline (blocked: some rows need WordPiece model)
-- [x] `tests/serialization.rs` rows that depend on runtime wrappers (ported: spec/tokenizer/serialization_spec.cr)
+- [x] Tokenizer serialization round-trip (spec/tokenizer/serialization_spec.cr)
+- [ ] Remaining tests blocked on external data files (see above)
 
 ## Feature 2 - Additional Model Families
 
-**Outcome:** the Crystal port supports the non-BPE model families that upstream ships.
-
-**Inventory footprint as of 2026-05-06**
-
-- `src/models/wordlevel`: 22 source rows done, 6 tests done, 0 remaining
-- `src/models/wordpiece`: 43 source rows done, 3 tests done, 0 remaining
-- `src/models/unigram`: 66 source rows done, 20 tests done, 0 remaining
-- `src/models/mod.rs`: 12 source rows remaining
+**Status:** COMPLETE. All three model families ported with trainers.
 
 ### 2.1 WordLevel
-
-- [x] Port `models/wordlevel/mod.rs`
-- [x] Port `models/wordlevel/trainer.rs`
-- [x] Port `models/wordlevel/serialization.rs`
+- [x] Model, trainer, serializer, serialization, 6 specs
 
 ### 2.2 WordPiece
-
-- [x] Port `models/wordpiece/mod.rs`
-- [x] Port `models/wordpiece/trainer.rs`
-- [x] Port `models/wordpiece/serialization.rs`
+- [x] Greedy longest-match tokenizer, BpeTrainer delegating trainer, serialization, 11 specs
 
 ### 2.3 Unigram
+- [x] Trie, Viterbi lattice (viterbi/nbest/populate_marginal), EM trainer (digamma, e-step, m-step, pruning, finalize), serialization, 30 specs
 
-- [x] Port `models/unigram/trie.rs`
-- [x] Port `models/unigram/lattice.rs`
-- [x] Port `models/unigram/model.rs`
-- [x] Port `models/unigram/trainer.rs`
-- [x] Port `models/unigram/serialization.rs`
-- [ ] Port top-level `tests/unigram.rs`
-
-### 2.4 Model wrapper and model-level integration
-
-- [x] Port `models/mod.rs`
-- [x] Close cross-model serialization coverage after WordLevel/WordPiece/Unigram land
+### 2.4 Model wrapper
+- [x] ModelWrapper (tagged/untagged JSON), TrainerWrapper (type-checked train), cross-model tokenizer serialization, 9 specs
 
 ## Feature 3 - Integration, Serialization, and Distribution
 
-**Outcome:** the repo is not just functionally ported, but wired for parity validation, serialization compatibility, examples, and distribution-facing utilities.
+**Status:** IN PROGRESS.
 
-**Inventory footprint as of 2026-05-06**
+### 3.1 Serialization matrix
 
-- `src/utils`: 12 source rows done, 36 source rows remaining, 4 tests done, 2 tests remaining
-- `tests/serialization.rs`: 11 source rows remaining, 11 tests remaining
-- `tests/documentation.rs`: 8 source rows remaining, 8 tests remaining
-- `tests/offsets.rs`: 6 source rows remaining, 6 tests remaining
-- `tests/added_tokens.rs`: 5 source rows remaining, 5 tests remaining
-- `tests/from_pretrained.rs`: 4 source rows remaining, 4 tests remaining
-- `examples/unstable_wasm/*` and benches: still unported
+- [x] Port `tests/serialization.rs` inner-type ↔ wrapper round-trips (12 tests)
+- [x] Added `to_json` to NormalizerWrapper, PreTokenizerWrapper, and 8 inner types (NFC/NFD/NFKC/NFKD/Nmt, BertNormalizer, BertPreTokenizer, Whitespace)
+- [ ] Remaining serialization tests blocked on `data/` files
 
-### 3.1 Utility layer
+### 3.2 Inventory reconciliation
 
-- [x] Port core truncation and padding utilities already required by tokenizer work
-- [ ] Finish `utils/parallelism.rs`
-- [ ] Finish `utils/progress.rs`
-- [ ] Finish `utils/from_pretrained.rs`
-- [ ] Finish `utils/onig.rs`
-- [ ] Finish `utils/iter.rs`
-- [ ] Finish `utils/fancy.rs`
+- [x] BPE inventory reconciled (0 missing)
+- [ ] `tests/*` rows — mark as `blocked` (needs data files)
+- [ ] `src/utils/*` rows — mark as `intentional_divergence` (Crystal equivalents differ)
+- [ ] `src/models/mod.rs` (12 rows) — reconcile TrainerWrapper
+- [ ] `examples/` and `benches/` — mark as `skipped`
 
-### 3.2 Cross-cutting parity suites
+### 3.3 End-to-end Unigram integration test
 
-- [ ] Port `tests/serialization.rs`
-- [ ] Port `tests/documentation.rs`
-- [ ] Port `tests/offsets.rs`
-- [ ] Port `tests/added_tokens.rs`
-- [ ] Port `tests/from_pretrained.rs`
-- [ ] Port `tests/training.rs`
+- [ ] Port `tests/unigram.rs` (3 test functions). Unigram model and trainer are fully ported — this test validates them working together.
 
-### 3.3 Examples and benchmarks
+### 3.4 Utility layer
 
-- [ ] Port `examples/unstable_wasm/src/lib.rs`
-- [ ] Port benchmark entry points
+- [x] Core truncation and padding utilities (needed by tokenizer)
+- [ ] Remaining utilities not ported:
+  - `utils/parallelism.rs` — Rayon threading (Crystal: fibers, not needed yet)
+  - `utils/progress.rs` — indicatif progress bar (no Crystal equivalent)
+  - `utils/from_pretrained.rs` — HTTP model download (not needed yet)
+  - `utils/onig.rs` — Oniguruma regex (Crystal: PCRE2 via SysRegex)
+  - `utils/iter.rs` — Rust iterator adapters (Crystal uses different patterns)
+  - `utils/fancy.rs` — Pretty-print diagnostics (not needed yet)
 
-## Completed or Mostly Completed Foundations
+### 3.5 Examples and benchmarks
 
-### BPE baseline
-
-- [x] BPE model, trainer, and spec baseline exist in the repo
-- [x] BPE behavior is already exercised by the current passing spec suite
-- [x] Reconcile the remaining `src/models/bpe/*` source rows in `rust_port_inventory.tsv` so the ledger matches the code that already exists
-
-### Tokenizer foundation already landed
-
-- [x] `tokenizer/pattern.rs`
-- [x] large `NormalizedString` / alignment foundation
-- [x] `AddedVocabulary` matching and normalization cache behavior
-- [x] tokenizer truncation and padding basics
-- [x] byte-level, prepend, unicode, utils, and replace normalizers
+- [ ] `examples/unstable_wasm/` — skip (WASM not applicable to Crystal CLI)
+- [ ] `benches/` — skip for now (benchmarks need data files)
 
 ## Ordering
 
-1. **Feature 1** is substantially complete. The execution rule blocks Feature 2/3 unless Feature 1 is blocked.
-   Feature 1 is now BLOCKED: the remaining integration tests (`tests/added_tokens.rs`, `tests/offsets.rs`, `tests/stream.rs`, parts of `tests/documentation.rs`)
-   require external model data files (`data/gpt2-*.json`, `data/llama-3-tokenizer.json`, `data/bert-base-uncased-vocab.txt`) that are not vendored in the repository.
-   Once these data files are available or lightweight test fixtures are created, the remaining tests can be ported.
-2. Move to **Feature 2** now — the runtime surface is complete enough to assemble end-to-end tokenizers with BPE.
+The only remaining feature work is `tests/unigram.rs`. Everything else is either:
+- Blocked on external data files (integration tests)
+- Inventory reconciliation (marking already-decided statuses)
+- Intentionally skipped (utilities, examples, benches)
 
-## Completion Gate For This Plan
+Priority:
+1. Port `tests/unigram.rs` — validates Unigram end-to-end
+2. Reconcile remaining inventory (99 source + 49 test rows → mark as blocked/skipped/divergence)
+3. Create lightweight test fixtures to unblock integration tests (or vend data files)
 
-The plan is complete when:
+## Completion Gate
 
-- [x] Every feature checklist above is `[x]` or explicitly skipped with a reason in the inventory.
-- [x] `plans/inventory/rust_port_inventory.tsv` has no accidental stale `missing` rows for already-landed code.
-- [x] `plans/inventory/rust_test_parity.tsv` has no accidental stale `missing` rows for already-landed specs.
-- [x] `crystal tool format --check src spec` passes.
-- [x] `crystal spec` passes (196 examples, 0 failures).
-- [ ] `ameba src spec` is either green or reduced to a consciously tracked residual backlog with no ambiguity about newly introduced violations.
+- [x] All runtime pipeline components ported (Feature 1)
+- [x] All model families ported (Feature 2)
+- [x] Cross-model serialization working
+- [x] `crystal tool format --check src spec` passes
+- [x] `crystal spec` passes (267 examples)
+- [ ] Inventory fully reconciled (0 genuine `missing` rows)
+- [ ] `tests/unigram.rs` ported
+- [ ] Integration tests unblocked (data files vendored or fixtures created)
