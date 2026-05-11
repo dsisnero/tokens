@@ -217,12 +217,12 @@ tests/from_pretrained.rs::test::test_from_pretrained	skipped	-	blocked: needs ex
 tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	skipped	-	blocked: needs external data files
 tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	skipped	-	blocked: needs external data files
 tests/from_pretrained.rs::test::test_from_pretrained_revision	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::byte_level_basic	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::byte_level_double_sequence	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::byte_level_unicode	skipped	-	blocked: needs external data files
-tests/offsets.rs::test::split_on_added_tokens_bert	skipped	-	blocked: needs external data files
+tests/offsets.rs::test::byte_level_basic	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_double_sequence	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_unicode	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::split_on_added_tokens_bert	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/serialization.rs::test::bpe_serde	skipped	-	blocked: needs external data files
 tests/serialization.rs::test::bpe_with_dropout_serde	skipped	-	blocked: needs external data files
 tests/serialization.rs::test::decoders	skipped	-	blocked: needs external data files
@@ -234,8 +234,8 @@ tests/serialization.rs::test::test_deserialize_long_file	skipped	-	blocked: need
 tests/serialization.rs::test::tokenizer	skipped	-	blocked: needs external data files
 tests/serialization.rs::test::wordlevel_serde	skipped	-	blocked: needs external data files
 tests/serialization.rs::test::wordpiece_serde	skipped	-	blocked: needs external data files
-tests/stream.rs::test::test_decode_stream_step_no_panic	skipped	-	blocked: needs external data files
-tests/stream.rs::test::test_decoding_with_added_bpe	skipped	-	blocked: needs external data files
+tests/stream.rs::test::test_decode_stream_step_no_panic	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
+tests/stream.rs::test::test_decoding_with_added_bpe	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/training.rs::test::bpe_continuing_subword_prefix_error	skipped	-	blocked: needs external data files
 tests/training.rs::test::bpe_values_after_training	skipped	-	blocked: needs external data files
 tests/unigram.rs::test::test_sample	ported	spec/integration/unigram_spec.cr:ported	ported

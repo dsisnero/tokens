@@ -55,8 +55,8 @@ These upstream integration tests need external model data files. Some are now un
 | Test file | Needed data | Tests | Status |
 |---|---|---|---|
 | `tests/added_tokens.rs` | `data/gpt2-vocab.json`, `data/gpt2-merges.txt` | 5 | DONE |
-| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 | unblocked |
-| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 | unblocked |
+| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 | DONE (3 tests ported) |
+| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 | DONE (1 test ported) |
 | `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 | unblocked |
 | `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 | blocked (needs HTTP feature) |
 | `tests/training.rs` | Training data files | 2 | unblocked |

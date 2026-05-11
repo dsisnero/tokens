@@ -732,12 +732,12 @@ tests/from_pretrained.rs::test::test_from_pretrained	test	skipped	-	blocked: nee
 tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	test	skipped	-	blocked: needs HTTP feature and pretrained models
 tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	test	skipped	-	blocked: needs HTTP feature and pretrained models
 tests/from_pretrained.rs::test::test_from_pretrained_revision	test	skipped	-	blocked: needs HTTP feature and pretrained models
-tests/offsets.rs::test::byte_level_basic	test	skipped	-	blocked: needs external BPE model data files
-tests/offsets.rs::test::byte_level_double_sequence	test	skipped	-	blocked: needs external BPE model data files
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence	test	skipped	-	blocked: needs external BPE model data files
-tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	test	skipped	-	blocked: needs external BPE model data files
-tests/offsets.rs::test::byte_level_unicode	test	skipped	-	blocked: needs external BPE model data files
-tests/offsets.rs::test::split_on_added_tokens_bert	test	skipped	-	blocked: needs external BPE model data files
+tests/offsets.rs::test::byte_level_basic	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_double_sequence	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_pre_tokenized_sequence_with_trimming	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::byte_level_unicode	test	ported	spec/integration/offsets_spec.cr:ported	ported
+tests/offsets.rs::test::split_on_added_tokens_bert	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/serialization.rs::test::bpe_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
 tests/serialization.rs::test::bpe_with_dropout_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
 tests/serialization.rs::test::decoders	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
@@ -749,8 +749,8 @@ tests/serialization.rs::test::test_deserialize_long_file	test	skipped	-	blocked:
 tests/serialization.rs::test::tokenizer	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
 tests/serialization.rs::test::wordlevel_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
 tests/serialization.rs::test::wordpiece_serde	test	skipped	-	blocked: needs external data files (gpt2-*, albert-base)
-tests/stream.rs::test::test_decode_stream_step_no_panic	test	skipped	-	blocked: needs llama-3 tokenizer data file
-tests/stream.rs::test::test_decoding_with_added_bpe	test	skipped	-	blocked: needs llama-3 tokenizer data file
+tests/stream.rs::test::test_decode_stream_step_no_panic	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
+tests/stream.rs::test::test_decoding_with_added_bpe	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/training.rs::test::bpe_continuing_subword_prefix_error	test	skipped	-	blocked: needs training data files
 tests/training.rs::test::bpe_values_after_training	test	skipped	-	blocked: needs training data files
 tests/unigram.rs::test::test_sample	test	skipped	-	mixed (1 test ported, 2 blocked on data files)
