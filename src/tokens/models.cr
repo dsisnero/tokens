@@ -1,0 +1,5 @@
+require "./models/bpe"
+require "./models/wordlevel"
+require "./models/wordpiece"
+require "./models/unigram"
+require "./models/mod"

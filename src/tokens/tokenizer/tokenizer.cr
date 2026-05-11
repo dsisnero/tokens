@@ -419,7 +419,13 @@ module Tokens
         json.field "model" do
           case model = @model
           when Models::BPE::BPE
-            json.raw(model.to_json)
+            json.raw(ModelWrapper.new(model).to_json)
+          when Models::WordPiece
+            json.raw(ModelWrapper.new(model).to_json)
+          when Models::WordLevel
+            json.raw(ModelWrapper.new(model).to_json)
+          when Models::Unigram::Unigram
+            json.raw(ModelWrapper.new(model).to_json)
           else
             json.null
           end
@@ -438,9 +444,7 @@ module Tokens
       model_val = obj["model"]?
       raise Exception.new("Missing model") unless model_val
       model_json = model_val.to_json
-
-      # Use BPE model deserialization
-      model = Models::BPE::BPE.from_json(model_json)
+      model = ModelWrapper.from_json(model_json).model.as(Model)
       tokenizer = new(model)
 
       if tr = obj["truncation"]?

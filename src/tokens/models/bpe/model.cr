@@ -264,9 +264,9 @@ module Tokens
             @unk_token == other.unk_token &&
             @continuing_subword_prefix == other.continuing_subword_prefix &&
             @end_of_word_suffix == other.end_of_word_suffix &&
-            @fuse_unk == other.fuse_unk &&
-            @byte_fallback == other.byte_fallback &&
-            @ignore_merges == other.ignore_merges
+            @fuse_unk == other.fuse_unk? &&
+            @byte_fallback == other.byte_fallback? &&
+            @ignore_merges == other.ignore_merges?
         end
 
         def save(folder : String, name : String? = nil) : Array(String)

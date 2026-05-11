@@ -137,7 +137,7 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 
 - `src/models/wordlevel`: 22 source rows done, 6 tests done, 0 remaining
 - `src/models/wordpiece`: 43 source rows done, 3 tests done, 0 remaining
-- `src/models/unigram`: 66 source rows remaining, 20 tests remaining
+- `src/models/unigram`: 66 source rows done, 20 tests done, 0 remaining
 - `src/models/mod.rs`: 12 source rows remaining
 
 ### 2.1 WordLevel
@@ -154,11 +154,11 @@ Do not switch to Feature 2 or Feature 3 implementation work unless Feature 1 is 
 
 ### 2.3 Unigram
 
-- [ ] Port `models/unigram/trie.rs`
-- [ ] Port `models/unigram/lattice.rs`
-- [ ] Port `models/unigram/model.rs`
-- [ ] Port `models/unigram/trainer.rs`
-- [ ] Port `models/unigram/serialization.rs`
+- [x] Port `models/unigram/trie.rs`
+- [x] Port `models/unigram/lattice.rs`
+- [x] Port `models/unigram/model.rs`
+- [x] Port `models/unigram/trainer.rs`
+- [x] Port `models/unigram/serialization.rs`
 - [ ] Port top-level `tests/unigram.rs`
 
 ### 2.4 Model wrapper and model-level integration
