@@ -1,6 +1,34 @@
 module Tokens
   module Models
     module BPE
+      # Byte-Pair Encoding model.
+      #
+      # BPE starts with individual characters and iteratively merges the most
+      # frequent adjacent pairs to build a vocabulary of subword tokens.
+      # Used by GPT-2, RoBERTa, LLaMA, and many other models.
+      #
+      # ## Building
+      #
+      # ```
+      # # From files
+      # bpe = Tokens::Models::BPE.from_files("vocab.json", "merges.txt").build
+      #
+      # # From scratch
+      # bpe = Tokens::Models::BPE::BpeBuilder.new
+      #   .unk_token("[UNK]")
+      #   .dropout(0.1_f32)
+      #   .build
+      # ```
+      #
+      # ## Training
+      #
+      # ```
+      # trainer = Tokens::Models::BPE::BpeTrainerBuilder.new
+      #   .vocab_size(30000)
+      #   .min_frequency(2_u64)
+      #   .build
+      # trainer.do_train(word_counts, bpe)
+      # ```
       class BPE
         include Model
 

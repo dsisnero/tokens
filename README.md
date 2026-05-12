@@ -211,6 +211,8 @@ tokenizer.with_padding(Tokens::PaddingParams.new(
 ## Documentation
 
 - [Architecture](docs/architecture.md) — codebase structure, pipeline design, core types
+- [Quicktour](docs/quicktour.md) — walkthrough: building, training, encoding, decoding, pipeline components
+- [Reference](docs/reference.md) — all models, normalizers, pre-tokenizers, post-processors, decoders with examples
 - [Development](docs/development.md) — setup, quality gates, parity checks
 - [Testing](docs/testing.md) — test categories, test data, running tests
 - [Parity Tracking](docs/parity.md) — inventory manifests, status vocabulary, parity checks

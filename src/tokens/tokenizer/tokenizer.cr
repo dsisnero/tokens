@@ -9,6 +9,21 @@ module Tokens
     end
   end
 
+  # Normalizes raw text before tokenization.
+  #
+  # Implementations include Unicode normalization (NFC, NFD, NFKC, NFKD),
+  # lowercasing, stripping, character replacement, and byte-level encoding.
+  #
+  # ```
+  # # Apply a normalizer directly
+  # normalizer = Tokens::Normalizers::Sequence.new([
+  #   Tokens::Normalizers::Strip.new(true, true),
+  #   Tokens::Normalizers::NFC.new,
+  # ])
+  # normalized = Tokens::NormalizedString.new("  Hello  ")
+  # normalizer.normalize(normalized)
+  # normalized.get # => "Hello"
+  # ```
   module Normalizer
     abstract def normalize(normalized : NormalizedString) : Nil
 
@@ -16,6 +31,18 @@ module Tokens
     end
   end
 
+  # Splits normalized text into word-level chunks before the model tokenizes them.
+  #
+  # Common pre-tokenizers: Whitespace, ByteLevel (GPT-2), Metaspace, Digits,
+  # Punctuation, Split, and Sequence for chaining.
+  #
+  # ```
+  # pt = Tokens::PreTokenizers::Whitespace.new
+  # pretok = Tokens::PreTokenizedString.new("Hello world!")
+  # pt.pre_tokenize(pretok)
+  # splits = pretok.get_splits(Tokens::OffsetReferential::Original, Tokens::OffsetType::Byte)
+  # # => [("Hello", (0, 5)), ("world", (6, 11)), ("!", (11, 12))]
+  # ```
   module PreTokenizer
     abstract def pre_tokenize(pretokenized : PreTokenizedString) : Nil
 
@@ -23,6 +50,11 @@ module Tokens
     end
   end
 
+  # Adds special tokens and sets type/sequence IDs after tokenization.
+  #
+  # Implementations: BertProcessing ([CLS]...[SEP]), RobertaProcessing
+  # (<s>...</s> with offset trimming), TemplateProcessing (fully customizable),
+  # and SequenceProcessor for chaining.
   module PostProcessor
     abstract def added_tokens(is_pair : Bool) : Int32
 
@@ -36,6 +68,10 @@ module Tokens
     end
   end
 
+  # Converts token IDs back to human-readable text.
+  #
+  # Implementations: BPEDecoder, ByteLevel, ByteFallback, CTC, Fuse, Strip,
+  # WordPiece (strips ## prefixes), Metaspace, and Sequence for chaining.
   module Decoder
     abstract def decode_chain(tokens : Array(String)) : Array(String)
 
@@ -52,6 +88,49 @@ module Tokens
     abstract def train(model : ModelType) : Array(AddedToken)
   end
 
+  # A tokenizer that processes raw text through a configurable pipeline.
+  #
+  # The pipeline has five stages: Normalizer → PreTokenizer → Model →
+  # PostProcessor. The Decoder runs separately for `decode`.
+  #
+  # ## Building from scratch
+  #
+  # ```
+  # model = Tokens::Models::BPE::BpeBuilder.new.unk_token("[UNK]").build
+  # tokenizer = Tokens::TokenizerImpl.new(model)
+  #   .with_normalizer(Tokens::Normalizers::NFC.new)
+  #   .with_pre_tokenizer(Tokens::PreTokenizers::ByteLevel.default)
+  #   .with_post_processor(Tokens::PostProcessors::BertProcessing.default)
+  #   .with_decoder(Tokens::Decoders::BPEDecoder.default)
+  # ```
+  #
+  # ## Training
+  #
+  # ```
+  # trainer = Tokens::Models::BPE::BpeTrainerBuilder.new
+  #   .vocab_size(30000)
+  #   .special_tokens([Tokens::AddedToken.new("[UNK]", true)])
+  #   .build
+  # tokenizer.train_from_files(trainer, ["data/corpus.txt"])
+  # ```
+  #
+  # ## Encoding and Decoding
+  #
+  # ```
+  # encoding = tokenizer.encode("Hello world!", add_special_tokens: true)
+  # encoding.tokens                # => ["[CLS]", "Hello", "world", "!", "[SEP]"]
+  # tokenizer.decode(encoding.ids) # => "Hello world !"
+  # ```
+  #
+  # ## Loading pretrained
+  #
+  # ```
+  # # From file
+  # tokenizer = Tokens::TokenizerImpl.from_json(File.read("tokenizer.json"))
+  #
+  # # From HuggingFace Hub
+  # tokenizer = Tokens::TokenizerImpl.from_pretrained("bert-base-cased")
+  # ```
   class TokenizerImpl
     getter model : Model
     getter normalizer : Normalizer?

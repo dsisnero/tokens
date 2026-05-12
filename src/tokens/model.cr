@@ -4,6 +4,16 @@ module Tokens
   class TokenizerError < Exception
   end
 
+  # A tokenization model that converts text chunks into token IDs.
+  #
+  # Four model families are implemented:
+  # - **BPE** (GPT-2, RoBERTa) — Byte-Pair Encoding with merge table
+  # - **WordPiece** (BERT) — Greedy longest-match with `##` continuing prefix
+  # - **WordLevel** — Simple word-to-id mapping
+  # - **Unigram** (XLNet) — Viterbi lattice with n-best sampling
+  #
+  # Models can be trained using their respective trainers (BpeTrainer,
+  # WordPieceTrainer, WordLevelTrainer, UnigramTrainer).
   module Model
     abstract def tokenize(sequence : String) : Array(Token)
     abstract def token_to_id(token : String) : UInt32?
