@@ -15,16 +15,16 @@ src/
     tokenizer/                 # Core tokenizer infrastructure
       encoding.cr              # Encoding struct + Truncation/Padding types
       truncation.cr            # truncate_encodings helper
-      tokenizer.cr             # TokenizerImpl, DecodeStream, abstract modules
+      tokenizer.cr             # TokenizerImpl, Tokenizer, DecodeStream, abstract modules
       normalizer.cr            # NormalizedString (alignments, transforms)
-      pre_tokenizer.cr         # PreTokenizedString (split, tokenize)
-      added_vocabulary.cr      # AddedVocabulary (special tokens, matching)
-      pattern.cr               # SysRegex (PCRE2 wrapper)
+      pre_tokenizer.cr         # PreTokenizedString (split, tokenize, into_encoding)
+      added_vocabulary.cr      # AddedVocabulary (special tokens, matching, normalization)
+      pattern.cr               # SysRegex (PCRE2 wrapper), Invert, Pattern module
       input_sequence.cr        # InputSequence (raw vs pre-tokenized)
 
-    normalizers/               # Normalizer implementations
-      mod.cr                   # NormalizerWrapper (tagged JSON, enum-like)
-      unicode.cr               # NFC, NFD, NFKC, NFKD
+    normalizers/               # Normalizer implementations (10 types)
+      mod.cr                   # NormalizerWrapper (tagged/untagged JSON dispatch)
+      unicode.cr               # NFD, NFKD, NFC, NFKC, Nmt
       utils.cr                 # Lowercase, Sequence
       strip.cr                 # Strip, StripAccents
       replace.cr               # Replace (string/regex pattern)
@@ -33,62 +33,99 @@ src/
       byte_level.cr            # ByteLevel normalizer
       precompiled.cr           # Precompiled
 
-    pre_tokenizers/            # Pre-tokenizer implementations
-      mod.cr                   # PreTokenizerWrapper (tagged JSON, enum-like)
+    pre_tokenizers/            # Pre-tokenizer implementations (11 types)
+      mod.cr                   # PreTokenizerWrapper (tagged JSON dispatch)
       whitespace.cr            # Whitespace, WhitespaceSplit
-      byte_level.cr            # ByteLevel (GPT-2) + process_offsets helper
-      metaspace.cr             # Metaspace
+      byte_level.cr            # ByteLevel (GPT-2) + Decoder/PostProcessor + process_offsets
+      metaspace.cr             # Metaspace (+ PrependScheme)
       digits.cr                # Digits
       punctuation.cr           # Punctuation
-      split.cr                 # Split (pattern-based)
+      split.cr                 # Split (pattern-based: char, string, regex)
       delimiter.cr             # CharDelimiterSplit
       fixed_length.cr          # FixedLength
       bert.cr                  # BertPreTokenizer
       sequence.cr              # Sequence (chain)
-      unicode_scripts/         # UnicodeScripts pre-tokenizer
+      unicode_scripts/         # UnicodeScripts pre-tokenizer (+ Script enum)
 
-    processors/                # Post-processor implementations
+    processors/                # Post-processor implementations (4 types)
       mod.cr                   # PostProcessorWrapper (tagged/untagged JSON)
       bert.cr                  # BertProcessing ([CLS] ... [SEP])
-      roberta.cr               # RobertaProcessing (<s> ... </s>)
-      template.cr              # TemplateProcessing (Piece, SpecialToken, Template)
+      roberta.cr               # RobertaProcessing (<s> ... </s>) + offset trimming
+      template.cr              # TemplateProcessing (Piece, SpecialToken, Template, TokensMap)
       sequence.cr              # SequenceProcessor (chain)
 
-    decoders/                  # Decoder implementations
-      mod.cr                   # DecoderWrapper (tagged JSON, enum-like)
+    decoders/                  # Decoder implementations (8 types)
+      mod.cr                   # DecoderWrapper (tagged JSON dispatch)
       bpe.cr                   # BPEDecoder
       byte_fallback.cr         # ByteFallback
       ctc.cr                   # CTC
       fuse.cr                  # Fuse
       sequence.cr              # Sequence (chain)
       strip.cr                 # Strip
-      wordpiece.cr             # WordPiece
+      wordpiece.cr             # WordPiece (+ cleanup helper)
 
-    models/                    # Model implementations
+    models/                    # Model implementations (4 families)
+      mod.cr                   # ModelWrapper, TrainerWrapper (tagged union dispatch)
       bpe/                     # BPE model
-        model.cr               # BPE model, vocab, merges
-        trainer.cr             # BpeTrainer
-        builder.cr             # Builder pattern
-        cache.cr               # Cache
-        types.cr               # Pair, Merge types
-        word.cr                # Word representation
+        model.cr               # BPE model, BpeBuilder, vocab/merges, serialization
+        trainer.cr             # BpeTrainer, BpeTrainerBuilder (inherits Trainer(BPE))
+        builder.cr             # Builder pattern helpers
+        cache.cr               # BpeCache
+        types.cr               # Pair, MergeMap, Vocab, VocabR type aliases
+        word.cr                # Word, Merge, Symbol
         iterators.cr           # MergeIter, WordIter
         error.cr               # Error types
+      wordlevel/               # WordLevel model
+        model.cr               # WordLevel model, WordLevelBuilder, serialization
+        trainer.cr             # WordLevelTrainer
+      wordpiece/               # WordPiece model
+        model.cr               # WordPiece model (greedy longest-match), serialization
+        trainer.cr             # WordPieceTrainer (wraps BpeTrainer)
+      unigram/                 # Unigram model
+        model.cr               # Unigram model, iterator, serialization
+        trainer.cr             # UnigramTrainer (EM algorithm: digamma, e-step, m-step)
+        lattice.cr             # Lattice (viterbi, nbest, populate_marginal, sample)
+        trie.cr                # Trie, TrieBuilder
 
-spec/                          # Crystal specs (ported from upstream Rust tests)
-  tokenizer/                   # Core tokenizer specs
+    utils/                     # Utility layer (ported)
+      from_pretrained.cr       # HuggingFace Hub model download + caching
+      parallelism.cr           # get_parallelism, set_parallelism (sequential)
+      iter.cr                  # LinesWithEnding (line reading preserving \n/\r)
+      progress.cr              # ProgressBar, ProgressStyle, ProgressFormat
+
+spec/                          # Crystal specs — 299 examples, 0 failures
+  spec_helper.cr               # Test configuration
+  tokenizer/                   # Core tokenizer specs (encoding, truncation, padding, etc.)
   normalizers/                 # Normalizer specs
   pre_tokenizers/              # Pre-tokenizer specs
   processors/                  # Post-processor specs
   decoders/                    # Decoder specs
-  models/                      # Model specs (bpe_spec.cr)
+  models/                      # Model specs (BPE, WordLevel, WordPiece, Unigram)
+  utils/                       # Utility specs (parallelism)
+  integration/                 # Integration tests using external model data files
+    documentation_spec.cr      # 6 tests: load_tokenizer, streaming, training, quicktour, pipeline, pipeline_bert
+    training_spec.cr           # 2 tests: bpe_values_after_training, bpe_continuing_subword_prefix_error
+    from_pretrained_spec.cr    # 4 tests: from_pretrained (2 network-gated)
+    wiki_training_spec.cr      # 2 tests: quicktour_slow_train, train_pipeline_bert
+    serialization_extra_spec.cr # 12 cross-model serialization round-trips
+    added_tokens_spec.cr       # 5 tests
+    offsets_spec.cr            # 5 tests
+    offsets_bert_spec.cr       # 1 test
+    stream_spec.cr             # 2 tests (partial Korean)
+    unigram_spec.cr            # 3 tests (sample, from_file, train_from_file)
 
 plans/
   porting_plan.md              # Feature checklist and completion status
   inventory/                   # Parity tracking manifests (TSV)
-    rust_port_inventory.tsv    # Source API inventory
-    rust_source_parity.tsv     # Source API match status
-    rust_test_parity.tsv       # Test coverage status
+    rust_port_inventory.tsv    # Source API inventory (757 items)
+    rust_source_parity.tsv     # Source API match status (515 items)
+    rust_test_parity.tsv       # Test coverage status (242 tests, 0 missing)
+
+scripts/                       # Parity check scripts (synced from cross-language-crystal-parity)
+  check_port_inventory.sh      # Validate inventory statuses vs discovered source
+  check_source_parity.sh       # Validate source API coverage
+  check_test_parity.sh         # Validate test coverage
+  verify_parity_adversarial.sh # Full adversarial verification
 ```
 
 ## Pipeline Architecture

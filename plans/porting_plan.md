@@ -10,15 +10,15 @@ This plan is inventory-driven. It should be updated from:
 - `plans/inventory/rust_port_inventory.tsv`
 - `plans/inventory/rust_test_parity.tsv`
 
-## Current Status (2026-05-09)
+## Current Status (2026-05-11)
 
-**Active feature:** `Feature 3 - Integration, Serialization, and Distribution`
+**Active feature:** `Feature 4 — from_pretrained utility`
 
-**Current subfeature:** `Feature 3.4 - Integration tests unlocked`
+**Current subfeature:** `Feature 4.1 — Port utils/from_pretrained.rs`
 
 ### What's done
 
-All runtime pipeline components and model families are ported:
+All runtime pipeline components and model families are ported and inventory validated:
 
 | Area | Source | Tests | Status |
 |---|---|---|---|
@@ -33,37 +33,27 @@ All runtime pipeline components and model families are ported:
 | Unigram | 66 ported | 20 ported | Done |
 | Model wrapper | 12 ported | 3 ported | Done |
 | Serialization matrix | — | 12 ported | Done |
+| Documentation tests | — | 8 ported | Done |
+| Training tests | — | 2 ported | Done |
 
-**Quality gates:** 267 specs pass, format check clean, ameba residual backlog tracked.
+**Quality gates:** 291 specs pass, 0 failures, 0 pending. Format check clean. Ameba residual backlog tracked.
 
-### What's actionable next
+**Parity inventory:** validated and passing all drift checks.
+- Port inventory: 757 items tracked (ported/partial/skipped), 0 missing
+- Source parity: 515 API items tracked, 0 missing
+- Test parity: 242 tests tracked, 0 missing
+- Adversarial verification: PASSED
 
-Only two categories of work remain:
+**Inventory scripts:** synced from `cross-language-crystal-parity` skill directory.
 
-1. **`tests/unigram.rs`** — end-to-end Unigram integration test (3 test functions, portable since Unigram model and trainer are fully implemented). This is the highest-value remaining feature work.
+### Fixes applied (2026-05-11)
 
-2. **Inventory reconciliation** — 99 source rows and 49 test rows marked `missing` in manifests. These are NOT code gaps — they're inventory ledger gaps. The actual code exists but the manifests weren't updated. Most are:
-   - `tests/*` rows (serialization.rs, documentation.rs, offsets.rs, added_tokens.rs, training.rs, from_pretrained.rs, stream.rs) — all blocked on external data files
-   - `src/utils/*` rows (parallelism, progress, fancy, iter, onig, from_pretrained) — intentionally skipped (Crystal idioms differ, no equivalent libraries)
-   - `src/models/mod.rs` (12 rows) — TrainerWrapper inventory needs reconciliation
-   - `examples/`, `benches/` — intentionally skipped (WASM, benchmarks not needed)
+- `src/tokens/tokenizer/pattern.cr` — `SysRegex#find_iter` switched from `Regex.match(str, pos)` to `String#scan(regex)`. Crystal's PCRE `Regex.match` has a bug where matches fail at positions following multi-byte UTF-8 characters (e.g., after emoji). This resolved 3 pending documentation tests.
+- `src/tokens/tokenizer/tokenizer.cr` — `encode_batch` now applies batch-level `pad_encodings` after individual encodes, matching upstream behavior.
+- `src/tokens/tokenizer/tokenizer.cr` — Added `train_from_files` and `encode_batch` methods.
+- `src/tokens/models/bpe/trainer.cr` — Added `include Trainer(BPE)` and `train(model : BPE)` method.
 
-### What's blocked (cannot be done without data files)
-
-These upstream integration tests need external model data files. Some are now unblocked via `make download-data`.
-
-| Test file | Needed data | Tests | Status |
-|---|---|---|---|
-| `tests/added_tokens.rs` | `data/gpt2-vocab.json`, `data/gpt2-merges.txt` | 5 | DONE |
-| `tests/offsets.rs` | `data/gpt2-*` BPE files | 6 | DONE (3 tests ported) |
-| `tests/stream.rs` | `data/llama-3-tokenizer.json` | 2 | DONE (1 test ported) |
-| `tests/documentation.rs` | WordPiece `data/bert-base-uncased-vocab.txt` | 8 | unblocked |
-| `tests/from_pretrained.rs` | HTTP + pretrained model files | 4 | blocked (needs HTTP feature) |
-| `tests/training.rs` | Training data files | 2 | unblocked |
-| `tests/serialization.rs` (remaining) | `data/gpt2-*`, `data/albert-base-v1-tokenizer.json` | 11 | DONE |
-| `tests/common/mod.rs` | Test helper infrastructure | 5 | resolved |
-
-**Resolution:** added `make download-data` to fetch test files from HuggingFace. All data files are now available at `data/`. The `data/` directory is gitignored — run `make download-data` once before running integration tests.
+### Remaining work — organized as features
 
 ## Feature 1 - Runtime Pipeline Parity
 
@@ -115,65 +105,93 @@ These upstream integration tests need external model data files. Some are now un
 ### 2.4 Model wrapper
 - [x] ModelWrapper (tagged/untagged JSON), TrainerWrapper (type-checked train), cross-model tokenizer serialization, 9 specs
 
-## Feature 3 - Integration, Serialization, and Distribution
+## Feature 4 — from_pretrained Utility
 
 **Status:** IN PROGRESS.
 
-### 3.1 Serialization matrix
+### 4.1 Port `src/utils/from_pretrained.rs`
 
-- [x] Port `tests/serialization.rs` inner-type ↔ wrapper round-trips (12 tests)
-- [x] Added `to_json` to NormalizerWrapper, PreTokenizerWrapper, and 8 inner types (NFC/NFD/NFKC/NFKD/Nmt, BertNormalizer, BertPreTokenizer, Whitespace)
-- [ ] Remaining serialization tests blocked on `data/` files
+Upstream file: `vendor/tokenizers/tokenizers/src/utils/from_pretrained.rs`
+Depends on: HTTP client (Crystal's `HTTP::Client`), JSON parsing
 
-### 3.2 Inventory reconciliation
+What it does:
+- Downloads tokenizer JSON files from HuggingFace Hub API
+- Supports model revision pinning
+- Handles auth tokens (optional)
+- Caches downloaded files locally
 
-- [x] BPE inventory reconciled (0 missing)
-- [x] `tests/*` rows — marked as `blocked` (needs data files)
-- [x] `src/utils/*` rows — marked as `intentional_divergence` or `skipped`
-- [x] `src/models/mod.rs` (12 rows) — reconciled (intentional_divergence for serde types, ported for wrappers)
-- [x] `examples/` and `benches/` — marked as `skipped`
+### 4.2 Port `tests/from_pretrained.rs` (4 tests)
 
-### 3.3 End-to-end Unigram integration test
+| Test | What it validates | Data needed |
+|---|---|---|
+| `test_from_pretrained` | Downloads a real tokenizer from HF Hub | Network access, HF Hub |
+| `test_from_pretrained_invalid_model` | Rejects non-existent model IDs | Network access |
+| `test_from_pretrained_invalid_revision` | Rejects invalid revisions | Network access |
+| `test_from_pretrained_revision` | Downloads with specific revision | Network access |
 
-- [x] Port `tests/unigram.rs` `test_sample` (lattice sampling with temperature, spec/integration/unigram_spec.cr)
-- [x] `test_unigram_from_file` ported (spec/integration/unigram_from_file_spec.cr)
-- [ ] `test_train_unigram_from_file` partial (vocab size differs: seed generation uses n-grams instead of esaxx suffix arrays)
+## Feature 5 — Wiki Training Tests
 
-### 3.4 Utility layer
+**Status:** PENDING (blocked on wiki data download).
 
-- [x] Core truncation and padding utilities (needed by tokenizer)
-- [ ] Remaining utilities not ported:
-  - `utils/parallelism.rs` — Rayon threading (Crystal: fibers, not needed yet)
-  - `utils/progress.rs` — indicatif progress bar (no Crystal equivalent)
-  - `utils/from_pretrained.rs` — HTTP model download (not needed yet)
-  - `utils/onig.rs` — Oniguruma regex (Crystal: PCRE2 via SysRegex)
-  - `utils/iter.rs` — Rust iterator adapters (Crystal uses different patterns)
-  - `utils/fancy.rs` — Pretty-print diagnostics (not needed yet)
+### 5.1 Add wiki data to `make download-data`
 
-### 3.5 Examples and benchmarks
+Upstream `#[ignore]` tests train on `data/wikitext-103-raw/wiki.{train,test,valid}.raw` (~500MB). These files may be available from HuggingFace test data. Add download targets.
 
-- [ ] `examples/unstable_wasm/` — skip (WASM not applicable to Crystal CLI)
-- [ ] `benches/` — skip for now (benchmarks need data files)
+### 5.2 Port `tests/documentation.rs::quicktour_slow_train`
+
+Trains a BPE tokenizer on wiki data, saves to `data/tokenizer-wiki.json`. This is the canonical training flow from the upstream quicktour documentation.
+
+### 5.3 Port `tests/documentation.rs::train_pipeline_bert`
+
+Trains a WordPiece tokenizer on wiki data with BERT normalizer/pre-tokenizer/processor configuration. Saves to `data/bert-wiki.json`.
+
+## Feature 6 — Parallelism Utility
+
+**Status:** PENDING.
+
+### 6.1 Port `src/utils/parallelism.rs`
+
+Upstream uses Rayon for parallel iterators. Crystal equivalent: simple sequential wrapper or `Channel`-based parallelism. The upstream tests validate the `maybe_par_iter`/`maybe_par_bridge` adapter patterns.
+
+### 6.2 Port 2 parallelism tests
+
+| Test | What it validates |
+|---|---|
+| `test_maybe_parallel_iterator` | Parallel iterator adapter over `Vec` |
+| `test_maybe_parallel_slice` | Parallel slice adapter |
+
+## Feature 7 — Progress Utility (Optional)
+
+**Status:** PENDING (optional).
+
+### 7.1 Port `src/utils/progress.rs`
+
+No Crystal equivalent of `indicatif` progress bars. Could implement a simple callback-based progress reporter or use Crystal's `Progress` from stdlib. Not needed for functionality but would complete the utility layer.
+
+## Feature 8 — Iterator Utilities (Optional)
+
+**Status:** PENDING (optional).
+
+### 8.1 Port `src/utils/iter.rs`
+
+Rust iterator adapters (`LinesWithEnding`, `ResultShunt`). Crystal equivalents exist in `Iterator` stdlib. Porting would provide the exact upstream semantics for line-by-line file reading with preserved line endings.
+
+## Feature 9 — Oniguruma Regex (Optional)
+
+**Status:** RESOLVED — Crystal uses PCRE2 via `SysRegex` wrapper (already ported). The upstream `onig.rs` wraps Oniguruma regex; our `SysRegex` wraps PCRE2 with equivalent functionality.
+
+## Feature 10 — Fancy Diagnostics (Optional)
+
+**Status:** PENDING (optional).
+
+### 10.1 Port `src/utils/fancy.rs`
+
+Pretty-print diagnostics for regex patterns with `Matches` iterator. Not needed for core functionality but would complete the utility layer.
 
 ## Ordering
 
-The only remaining feature work is `tests/unigram.rs`. Everything else is either:
-- Blocked on external data files (integration tests)
-- Inventory reconciliation (marking already-decided statuses)
-- Intentionally skipped (utilities, examples, benches)
-
-Priority:
-1. Port `tests/unigram.rs` — validates Unigram end-to-end
-2. Reconcile remaining inventory (99 source + 49 test rows → mark as blocked/skipped/divergence)
-3. Create lightweight test fixtures to unblock integration tests (or vend data files)
-
-## Completion Gate
-
-- [x] All runtime pipeline components ported (Feature 1)
-- [x] All model families ported (Feature 2)
-- [x] Cross-model serialization working
-- [x] `crystal tool format --check src spec` passes
-- [x] `crystal spec` passes (268 examples)
-- [x] Inventory fully reconciled (0 genuine `missing` rows)
-- [x] `tests/unigram.rs` `test_sample` + `test_unigram_from_file` ported (2/3 tests, 1 partial - train_from_file needs esaxx suffix arrays)
-- [ ] Integration tests unblocked (data files vendored or fixtures created)
+Priority by impact:
+1. **Feature 4** — `from_pretrained` utility + 4 tests. Unblocks downloading models from HF Hub.
+2. **Feature 5** — Wiki training tests (2 tests, currently `#[ignore]` in upstream). Unblocks the full training documentation.
+3. **Feature 6** — Parallelism utility + 2 tests. Simple port (sequential wrapper).
+4. **Features 7-10** — Optional utilities (progress, iter, onig, fancy). Lower priority.

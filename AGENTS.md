@@ -20,6 +20,17 @@ Upstream behavior is the source of truth. All porting decisions must preserve up
    - `ameba src spec`
    - `crystal spec`
 
+## Parity Checks
+
+Source path for all parity check scripts is `vendor/tokenizers/tokenizers` (core crate, excludes bindings/benches/examples):
+
+```bash
+bash scripts/check_port_inventory.sh . plans/inventory/rust_port_inventory.tsv vendor/tokenizers/tokenizers rust
+bash scripts/check_source_parity.sh . plans/inventory/rust_source_parity.tsv vendor/tokenizers/tokenizers rust
+bash scripts/check_test_parity.sh . plans/inventory/rust_test_parity.tsv vendor/tokenizers/tokenizers rust
+bash scripts/verify_parity_adversarial.sh . vendor/tokenizers/tokenizers rust 'crystal spec' ''
+```
+
 ## Directory Layout
 
 ```
