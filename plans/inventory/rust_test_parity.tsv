@@ -1,38 +1,38 @@
 # source_test_id	status	crystal_refs	notes
-src/decoders/byte_fallback.rs::test::decode	implemented	spec/decoders/byte_fallback_spec.cr:4	port complete
-src/decoders/ctc.rs::test::another_librispeech_sample	implemented	spec/decoders/ctc_spec.cr:29	port complete
-src/decoders/ctc.rs::test::handmade_sample	implemented	spec/decoders/ctc_spec.cr:4	port complete
-src/decoders/ctc.rs::test::handmade_with_delimiter_sample	implemented	spec/decoders/ctc_spec.cr:11	port complete
-src/decoders/ctc.rs::test::librispeech_sample	implemented	spec/decoders/ctc_spec.cr:18	port complete
-src/decoders/fuse.rs::test::decode	implemented	spec/decoders/fuse_spec.cr:4	port complete
-src/decoders/mod.rs::test::decoder_serialization	implemented	spec/decoders/mod_spec.cr:4	port complete
-src/decoders/mod.rs::test::decoder_serialization_no_decode	implemented	spec/decoders/mod_spec.cr:21	port complete
-src/decoders/mod.rs::test::decoder_serialization_other_no_arg	implemented	spec/decoders/mod_spec.cr:14	port complete
-src/decoders/sequence.rs::test::sequence_basic	implemented	spec/decoders/sequence_spec.cr:4	port complete
-src/decoders/strip.rs::test::decode	implemented	spec/decoders/strip_spec.cr:4	port complete
-src/decoders/wordpiece.rs::test::wordpiece_decoder	implemented	spec/decoders/wordpiece_spec.cr:4	port complete
-src/models/bpe/model.rs::test::test_bpe_byte_fallback	implemented	spec/models/bpe_spec.cr:164	port complete
-src/models/bpe/model.rs::test::test_bpe_byte_fallback_newline	implemented	spec/models/bpe_spec.cr:179	port complete
-src/models/bpe/model.rs::test::test_bpe_from_file	implemented	spec/models/bpe_spec.cr:392	port complete
-src/models/bpe/model.rs::test::test_bpe_from_file_bad_merges	implemented	spec/models/bpe_spec.cr:427	port complete
-src/models/bpe/model.rs::test::test_bpe_from_file_merge_token_oov	implemented	spec/models/bpe_spec.cr:413	port complete
-src/models/bpe/model.rs::test::test_bpe_with_continuing_subword_prefix	implemented	spec/models/bpe_spec.cr:137	port complete
-src/models/bpe/model.rs::test::test_bpe_with_dropout_0	implemented	spec/models/bpe_spec.cr:269	port complete
-src/models/bpe/model.rs::test::test_cache_is_per_bpe_instance	implemented	spec/models/bpe_spec.cr:359	port complete
-src/models/bpe/model.rs::test::test_ignore_merges	implemented	spec/models/bpe_spec.cr:191	port complete
-src/models/bpe/model.rs::test::test_ordered_vocab_iter	implemented	spec/models/bpe_spec.cr:508	port complete
-src/models/bpe/model.rs::test::test_tokenize_with_and_without_dropout	implemented	spec/models/bpe_spec.cr:277,309	port complete
-src/models/bpe/model.rs::test::test_unk_get_fused	implemented	spec/models/bpe_spec.cr:115	port complete
-src/models/bpe/model.rs::test::test_unk_not_fused	implemented	spec/models/bpe_spec.cr:90	port complete
-src/models/bpe/serialization.rs::test::test_serialization	implemented	spec/models/bpe_spec.cr:443	port complete
-src/models/bpe/serialization.rs::test::test_serialization_ignore_merges	implemented	spec/models/bpe_spec.cr:480,494	port complete
+src/decoders/byte_fallback.rs::test::decode	ported	spec/decoders/byte_fallback_spec.cr:4	port complete
+src/decoders/ctc.rs::test::another_librispeech_sample	ported	spec/decoders/ctc_spec.cr:29	port complete
+src/decoders/ctc.rs::test::handmade_sample	ported	spec/decoders/ctc_spec.cr:4	port complete
+src/decoders/ctc.rs::test::handmade_with_delimiter_sample	ported	spec/decoders/ctc_spec.cr:11	port complete
+src/decoders/ctc.rs::test::librispeech_sample	ported	spec/decoders/ctc_spec.cr:18	port complete
+src/decoders/fuse.rs::test::decode	ported	spec/decoders/fuse_spec.cr:4	port complete
+src/decoders/mod.rs::test::decoder_serialization	ported	spec/decoders/mod_spec.cr:4	port complete
+src/decoders/mod.rs::test::decoder_serialization_no_decode	ported	spec/decoders/mod_spec.cr:21	port complete
+src/decoders/mod.rs::test::decoder_serialization_other_no_arg	ported	spec/decoders/mod_spec.cr:14	port complete
+src/decoders/sequence.rs::test::sequence_basic	ported	spec/decoders/sequence_spec.cr:4	port complete
+src/decoders/strip.rs::test::decode	ported	spec/decoders/strip_spec.cr:4	port complete
+src/decoders/wordpiece.rs::test::wordpiece_decoder	ported	spec/decoders/wordpiece_spec.cr:4	port complete
+src/models/bpe/model.rs::test::test_bpe_byte_fallback	ported	spec/models/bpe_spec.cr:164	port complete
+src/models/bpe/model.rs::test::test_bpe_byte_fallback_newline	ported	spec/models/bpe_spec.cr:179	port complete
+src/models/bpe/model.rs::test::test_bpe_from_file	ported	spec/models/bpe_spec.cr:392	port complete
+src/models/bpe/model.rs::test::test_bpe_from_file_bad_merges	ported	spec/models/bpe_spec.cr:427	port complete
+src/models/bpe/model.rs::test::test_bpe_from_file_merge_token_oov	ported	spec/models/bpe_spec.cr:413	port complete
+src/models/bpe/model.rs::test::test_bpe_with_continuing_subword_prefix	ported	spec/models/bpe_spec.cr:137	port complete
+src/models/bpe/model.rs::test::test_bpe_with_dropout_0	ported	spec/models/bpe_spec.cr:269	port complete
+src/models/bpe/model.rs::test::test_cache_is_per_bpe_instance	ported	spec/models/bpe_spec.cr:359	port complete
+src/models/bpe/model.rs::test::test_ignore_merges	ported	spec/models/bpe_spec.cr:191	port complete
+src/models/bpe/model.rs::test::test_ordered_vocab_iter	ported	spec/models/bpe_spec.cr:508	port complete
+src/models/bpe/model.rs::test::test_tokenize_with_and_without_dropout	ported	spec/models/bpe_spec.cr:277,309	port complete
+src/models/bpe/model.rs::test::test_unk_get_fused	ported	spec/models/bpe_spec.cr:115	port complete
+src/models/bpe/model.rs::test::test_unk_not_fused	ported	spec/models/bpe_spec.cr:90	port complete
+src/models/bpe/serialization.rs::test::test_serialization	ported	spec/models/bpe_spec.cr:443	port complete
+src/models/bpe/serialization.rs::test::test_serialization_ignore_merges	ported	spec/models/bpe_spec.cr:480,494	port complete
 src/models/bpe/trainer.rs::test::bpe_test_max_token_length_16	ported	spec/models/bpe_spec.cr:ported	ported
 src/models/bpe/trainer.rs::test::bpe_test_max_token_length_direct_assert	ported	spec/models/bpe_spec.cr:ported	ported
 src/models/bpe/trainer.rs::test::test_train	ported	spec/models/bpe_spec.cr:ported	ported
-src/models/bpe/word.rs::test::test_merge	implemented	spec/models/bpe_spec.cr:8	port complete
-src/models/bpe/word.rs::test::test_merge_max_length	implemented	spec/models/bpe_spec.cr:27	port complete
-src/models/mod.rs::test::incomplete_ordered_vocab	implemented	spec/models/bpe_spec.cr:516	port complete
-src/models/mod.rs::test::serialization	implemented	spec/models/bpe_spec.cr:538,547,554,560	port complete
+src/models/bpe/word.rs::test::test_merge	ported	spec/models/bpe_spec.cr:8	port complete
+src/models/bpe/word.rs::test::test_merge_max_length	ported	spec/models/bpe_spec.cr:27	port complete
+src/models/mod.rs::test::incomplete_ordered_vocab	ported	spec/models/bpe_spec.cr:516	port complete
+src/models/mod.rs::test::serialization	ported	spec/models/bpe_spec.cr:538,547,554,560	port complete
 src/models/mod.rs::test::trainer_wrapper_train_model_wrapper	ported	spec/models/mod_spec.cr:ported	ported
 src/models/unigram/lattice.rs::test::insert_test	ported	src/tokens/models/unigram:ported	ported
 src/models/unigram/lattice.rs::test::set_sentence	ported	src/tokens/models/unigram:ported	ported
@@ -63,61 +63,61 @@ src/models/wordlevel/trainer.rs::test::test_train	ported	spec/models/wordlevel_s
 src/models/wordpiece/mod.rs::test::test_error_display	ported	src/tokens/models/wordpiece:ported	ported
 src/models/wordpiece/serialization.rs::test::deserialization_should_fail	ported	src/tokens/models/wordpiece:ported	ported
 src/models/wordpiece/serialization.rs::test::serde	ported	src/tokens/models/wordpiece:ported	ported
-src/normalizers/byte_level.rs::test::test_byte_level_normalize	implemented	spec/normalizers/byte_level_spec.cr:5	port complete
-src/normalizers/mod.rs::test::normalizer_serialization	implemented	spec/normalizers/mod_spec.cr:20	port complete
-src/normalizers/mod.rs::test::post_processor_deserialization_no_type	implemented	spec/normalizers/mod_spec.cr:5	port complete
-src/normalizers/precompiled.rs::test::expansion_followed_by_removal	implemented	spec/normalizers/precompiled_spec.cr:5	port complete
-src/normalizers/prepend.rs::test::test_prepend	implemented	spec/normalizers/prepend_spec.cr:5	port complete
-src/normalizers/replace.rs::test::serialization	implemented	spec/normalizers/replace_spec.cr:25	port complete
-src/normalizers/replace.rs::test::test_replace	implemented	spec/normalizers/replace_spec.cr:5	port complete
-src/normalizers/replace.rs::test::test_replace_decode	implemented	spec/normalizers/replace_spec.cr:37	port complete
-src/normalizers/replace.rs::test::test_replace_regex	implemented	spec/normalizers/replace_spec.cr:15	port complete
-src/normalizers/strip.rs::test::test_strip_accents	implemented	spec/normalizers/strip_spec.cr:5	port complete
-src/normalizers/strip.rs::test::test_strip_accents_multiple	implemented	spec/normalizers/strip_spec.cr:42	port complete
-src/normalizers/strip.rs::test::test_thai_bug	implemented	spec/normalizers/strip_spec.cr:34	port complete
-src/normalizers/strip.rs::test::test_vietnamese_bug	implemented	spec/normalizers/strip_spec.cr:20	port complete
-src/normalizers/unicode.rs::test::test_nfkc	implemented	spec/normalizers/unicode_spec.cr:5	port complete
-src/pre_tokenizers/bert.rs::test::basic	implemented	spec/pre_tokenizers/bert_spec.cr:4	port complete
-src/pre_tokenizers/bert.rs::test::chinese_chars	implemented	spec/pre_tokenizers/bert_spec.cr:26	port complete
-src/pre_tokenizers/byte_level.rs::test::add_prefix_space	implemented	spec/pre_tokenizers/byte_level_spec.cr:47	port complete
-src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	implemented	spec/pre_tokenizers/byte_level_spec.cr:230	port complete
-src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	implemented	spec/pre_tokenizers/byte_level_spec.cr:75	port complete
-src/pre_tokenizers/byte_level.rs::test::decoding	implemented	spec/pre_tokenizers/byte_level_spec.cr:41	port complete
-src/pre_tokenizers/byte_level.rs::test::deserialization	implemented	spec/pre_tokenizers/byte_level_spec.cr:236	port complete
-src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	implemented	spec/pre_tokenizers/byte_level_spec.cr:111	port complete
-src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	implemented	spec/pre_tokenizers/byte_level_spec.cr:93	port complete
-src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	implemented	spec/pre_tokenizers/byte_level_spec.cr:128	port complete
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization	implemented	spec/pre_tokenizers/byte_level_spec.cr:4	port complete
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	implemented	spec/pre_tokenizers/byte_level_spec.cr:27	port complete
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	implemented	spec/pre_tokenizers/byte_level_spec.cr:187	port complete
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	implemented	spec/pre_tokenizers/byte_level_spec.cr:159	port complete
-src/pre_tokenizers/digits.rs::test::individual_digits	implemented	spec/pre_tokenizers/digits_spec.cr:27	port complete
-src/pre_tokenizers/digits.rs::test::numbers	implemented	spec/pre_tokenizers/digits_spec.cr:4	port complete
-src/pre_tokenizers/fixed_length.rs::test::basic	implemented	spec/pre_tokenizers/fixed_length_spec.cr:4	port complete
-src/pre_tokenizers/fixed_length.rs::test::custom_length	implemented	spec/pre_tokenizers/fixed_length_spec.cr:22	port complete
-src/pre_tokenizers/fixed_length.rs::test::utf8_characters	implemented	spec/pre_tokenizers/fixed_length_spec.cr:38	port complete
-src/pre_tokenizers/metaspace.rs::test::basic	implemented	spec/pre_tokenizers/metaspace_spec.cr:21	port complete
-src/pre_tokenizers/metaspace.rs::test::decode	implemented	spec/pre_tokenizers/metaspace_spec.cr:148	port complete
-src/pre_tokenizers/metaspace.rs::test::multiple_spaces	implemented	spec/pre_tokenizers/metaspace_spec.cr:44	port complete
-src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	implemented	spec/pre_tokenizers/metaspace_spec.cr:71	port complete
-src/pre_tokenizers/metaspace.rs::test::serialization	implemented	spec/pre_tokenizers/metaspace_spec.cr:4	port complete
-src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	implemented	spec/pre_tokenizers/mod_spec.cr:25	port complete
-src/pre_tokenizers/mod.rs::test::test_deserialize	implemented	spec/pre_tokenizers/mod_spec.cr:4	port complete
-src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	implemented	spec/pre_tokenizers/mod_spec.cr:20	port complete
-src/pre_tokenizers/punctuation.rs::test::deserialization	implemented	spec/pre_tokenizers/punctuation_spec.cr:22	port complete
-src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	implemented	spec/pre_tokenizers/punctuation_spec.cr:27	port complete
-src/pre_tokenizers/punctuation.rs::test::punctuation_basic	implemented	spec/pre_tokenizers/punctuation_spec.cr:4	port complete
-src/pre_tokenizers/sequence.rs::test::sequence_basic	implemented	spec/pre_tokenizers/sequence_spec.cr:4	port complete
-src/pre_tokenizers/split.rs::test::basic	implemented	spec/pre_tokenizers/split_spec.cr:4	port complete
-src/pre_tokenizers/split.rs::test::invert	implemented	spec/pre_tokenizers/split_spec.cr:78	port complete
-src/pre_tokenizers/split.rs::test::regex_string	implemented	spec/pre_tokenizers/split_spec.cr:59	port complete
-src/pre_tokenizers/split.rs::test::serialization	implemented	spec/pre_tokenizers/split_spec.cr:88	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:4	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:29	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:52	port complete
-src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:69	port complete
-src/pre_tokenizers/whitespace.rs::test::basic	implemented	spec/pre_tokenizers/whitespace_spec.cr:4	port complete
-src/pre_tokenizers/whitespace.rs::test::whitespace_split	implemented	spec/pre_tokenizers/whitespace_spec.cr:24	port complete
+src/normalizers/byte_level.rs::test::test_byte_level_normalize	ported	spec/normalizers/byte_level_spec.cr:5	port complete
+src/normalizers/mod.rs::test::normalizer_serialization	ported	spec/normalizers/mod_spec.cr:20	port complete
+src/normalizers/mod.rs::test::post_processor_deserialization_no_type	ported	spec/normalizers/mod_spec.cr:5	port complete
+src/normalizers/precompiled.rs::test::expansion_followed_by_removal	ported	spec/normalizers/precompiled_spec.cr:5	port complete
+src/normalizers/prepend.rs::test::test_prepend	ported	spec/normalizers/prepend_spec.cr:5	port complete
+src/normalizers/replace.rs::test::serialization	ported	spec/normalizers/replace_spec.cr:25	port complete
+src/normalizers/replace.rs::test::test_replace	ported	spec/normalizers/replace_spec.cr:5	port complete
+src/normalizers/replace.rs::test::test_replace_decode	ported	spec/normalizers/replace_spec.cr:37	port complete
+src/normalizers/replace.rs::test::test_replace_regex	ported	spec/normalizers/replace_spec.cr:15	port complete
+src/normalizers/strip.rs::test::test_strip_accents	ported	spec/normalizers/strip_spec.cr:5	port complete
+src/normalizers/strip.rs::test::test_strip_accents_multiple	ported	spec/normalizers/strip_spec.cr:42	port complete
+src/normalizers/strip.rs::test::test_thai_bug	ported	spec/normalizers/strip_spec.cr:34	port complete
+src/normalizers/strip.rs::test::test_vietnamese_bug	ported	spec/normalizers/strip_spec.cr:20	port complete
+src/normalizers/unicode.rs::test::test_nfkc	ported	spec/normalizers/unicode_spec.cr:5	port complete
+src/pre_tokenizers/bert.rs::test::basic	ported	spec/pre_tokenizers/bert_spec.cr:4	port complete
+src/pre_tokenizers/bert.rs::test::chinese_chars	ported	spec/pre_tokenizers/bert_spec.cr:26	port complete
+src/pre_tokenizers/byte_level.rs::test::add_prefix_space	ported	spec/pre_tokenizers/byte_level_spec.cr:47	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	ported	spec/pre_tokenizers/byte_level_spec.cr:230	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	ported	spec/pre_tokenizers/byte_level_spec.cr:75	port complete
+src/pre_tokenizers/byte_level.rs::test::decoding	ported	spec/pre_tokenizers/byte_level_spec.cr:41	port complete
+src/pre_tokenizers/byte_level.rs::test::deserialization	ported	spec/pre_tokenizers/byte_level_spec.cr:236	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	ported	spec/pre_tokenizers/byte_level_spec.cr:111	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	ported	spec/pre_tokenizers/byte_level_spec.cr:93	port complete
+src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	ported	spec/pre_tokenizers/byte_level_spec.cr:128	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization	ported	spec/pre_tokenizers/byte_level_spec.cr:4	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	ported	spec/pre_tokenizers/byte_level_spec.cr:27	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	ported	spec/pre_tokenizers/byte_level_spec.cr:187	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	ported	spec/pre_tokenizers/byte_level_spec.cr:159	port complete
+src/pre_tokenizers/digits.rs::test::individual_digits	ported	spec/pre_tokenizers/digits_spec.cr:27	port complete
+src/pre_tokenizers/digits.rs::test::numbers	ported	spec/pre_tokenizers/digits_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::test::basic	ported	spec/pre_tokenizers/fixed_length_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::test::custom_length	ported	spec/pre_tokenizers/fixed_length_spec.cr:22	port complete
+src/pre_tokenizers/fixed_length.rs::test::utf8_characters	ported	spec/pre_tokenizers/fixed_length_spec.cr:38	port complete
+src/pre_tokenizers/metaspace.rs::test::basic	ported	spec/pre_tokenizers/metaspace_spec.cr:21	port complete
+src/pre_tokenizers/metaspace.rs::test::decode	ported	spec/pre_tokenizers/metaspace_spec.cr:148	port complete
+src/pre_tokenizers/metaspace.rs::test::multiple_spaces	ported	spec/pre_tokenizers/metaspace_spec.cr:44	port complete
+src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	ported	spec/pre_tokenizers/metaspace_spec.cr:71	port complete
+src/pre_tokenizers/metaspace.rs::test::serialization	ported	spec/pre_tokenizers/metaspace_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	ported	spec/pre_tokenizers/mod_spec.cr:25	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize	ported	spec/pre_tokenizers/mod_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	ported	spec/pre_tokenizers/mod_spec.cr:20	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization	ported	spec/pre_tokenizers/punctuation_spec.cr:22	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	ported	spec/pre_tokenizers/punctuation_spec.cr:27	port complete
+src/pre_tokenizers/punctuation.rs::test::punctuation_basic	ported	spec/pre_tokenizers/punctuation_spec.cr:4	port complete
+src/pre_tokenizers/sequence.rs::test::sequence_basic	ported	spec/pre_tokenizers/sequence_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::test::basic	ported	spec/pre_tokenizers/split_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::test::invert	ported	spec/pre_tokenizers/split_spec.cr:78	port complete
+src/pre_tokenizers/split.rs::test::regex_string	ported	spec/pre_tokenizers/split_spec.cr:59	port complete
+src/pre_tokenizers/split.rs::test::serialization	ported	spec/pre_tokenizers/split_spec.cr:88	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:4	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:29	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:52	port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:69	port complete
+src/pre_tokenizers/whitespace.rs::test::basic	ported	spec/pre_tokenizers/whitespace_spec.cr:4	port complete
+src/pre_tokenizers/whitespace.rs::test::whitespace_split	ported	spec/pre_tokenizers/whitespace_spec.cr:24	port complete
 src/processors/bert.rs::test::bert_processing	ported	spec/processors:ported	ported
 src/processors/bert.rs::test::serde	ported	spec/processors:ported	ported
 src/processors/mod.rs::test::deserialize_bert_roberta_correctly	ported	spec/processors:ported	ported
@@ -136,87 +136,87 @@ src/processors/template.rs::test::template_processing_overflowing	ported	spec/pr
 src/processors/template.rs::test::template_processing_serde	ported	spec/processors:ported	ported
 src/processors/template.rs::test::template_serde	ported	spec/processors:ported	ported
 src/processors/template.rs::test::tokens_serde	ported	spec/processors:ported	ported
-src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	implemented	spec/tokenizer/added_vocabulary_spec.cr:304	port complete
-src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	implemented	spec/tokenizer/added_vocabulary_spec.cr:79	port complete
-src/tokenizer/added_vocabulary.rs::test::can_add_tokens	implemented	spec/tokenizer/added_vocabulary_spec.cr:60	port complete
-src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	implemented	spec/tokenizer/added_vocabulary_spec.cr:119	port complete
-src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	implemented	spec/tokenizer/added_vocabulary_spec.cr:268	port complete
-src/tokenizer/added_vocabulary.rs::test::empty_matches	implemented	spec/tokenizer/added_vocabulary_spec.cr:167	port complete
-src/tokenizer/added_vocabulary.rs::test::options_use_cases	implemented	spec/tokenizer/added_vocabulary_spec.cr:142	port complete
-src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	implemented	spec/tokenizer/added_vocabulary_spec.cr:288	port complete
-src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	implemented	spec/tokenizer/added_vocabulary_spec.cr:228	port complete
-src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	implemented	spec/tokenizer/added_vocabulary_spec.cr:209	port complete
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	implemented	spec/tokenizer/added_vocabulary_spec.cr:172	port complete
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	implemented	spec/tokenizer/added_vocabulary_spec.cr:191	port complete
-src/tokenizer/encoding.rs::test::mappings	implemented	spec/tokenizer/encoding_spec.cr:109	port complete
-src/tokenizer/encoding.rs::test::merge_encodings	implemented	spec/tokenizer/encoding_spec.cr:5	port complete
-src/tokenizer/encoding.rs::test::padding	implemented	spec/tokenizer/encoding_spec.cr:176	port complete
-src/tokenizer/encoding.rs::test::truncate	implemented	spec/tokenizer/encoding_spec.cr:35	port complete
-src/tokenizer/encoding.rs::test::truncate_left	implemented	spec/tokenizer/encoding_spec.cr:54	port complete
-src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	implemented	spec/tokenizer/encoding_spec.cr:90	port complete
-src/tokenizer/encoding.rs::test::truncate_to_empty	implemented	spec/tokenizer/encoding_spec.cr:73	port complete
-src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	implemented	spec/tokenizer/tokenizer_spec.cr:78	port complete
-src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	implemented	spec/tokenizer/tokenizer_spec.cr:126	port complete
-src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	implemented	spec/tokenizer/tokenizer_spec.cr:110	port complete
-src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	implemented	spec/tokenizer/tokenizer_spec.cr:96	port complete
-src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	implemented	spec/tokenizer/tokenizer_spec.cr:60	port complete
-src/tokenizer/normalizer.rs::test::added_around_edges	implemented	spec/tokenizer/normalizer_spec.cr:125	port complete
-src/tokenizer/normalizer.rs::test::added_characters_alignment	implemented	spec/tokenizer/normalizer_spec.cr:141	port complete
-src/tokenizer/normalizer.rs::test::append	implemented	spec/tokenizer/normalizer_spec.cr:256	port complete
-src/tokenizer/normalizer.rs::test::get_range	implemented	spec/tokenizer/normalizer_spec.cr:279	port complete
-src/tokenizer/normalizer.rs::test::lstrip	implemented	spec/tokenizer/normalizer_spec.cr:209	port complete
-src/tokenizer/normalizer.rs::test::mixed_addition_and_removal	implemented	spec/tokenizer/normalizer_spec.cr:83	port complete
-src/tokenizer/normalizer.rs::test::nfd_adds_new_chars	implemented	spec/tokenizer/normalizer_spec.cr:20	port complete
-src/tokenizer/normalizer.rs::test::original_range	implemented	spec/tokenizer/normalizer_spec.cr:110	port complete
-src/tokenizer/normalizer.rs::test::prepend	implemented	spec/tokenizer/normalizer_spec.cr:233	port complete
-src/tokenizer/normalizer.rs::test::range_conversion	implemented	spec/tokenizer/normalizer_spec.cr:98	port complete
-src/tokenizer/normalizer.rs::test::remove_at_beginning	implemented	spec/tokenizer/normalizer_spec.cr:176	port complete
-src/tokenizer/normalizer.rs::test::remove_at_end	implemented	spec/tokenizer/normalizer_spec.cr:184	port complete
-src/tokenizer/normalizer.rs::test::remove_chars	implemented	spec/tokenizer/normalizer_spec.cr:66	port complete
-src/tokenizer/normalizer.rs::test::remove_chars_added_by_nfd	implemented	spec/tokenizer/normalizer_spec.cr:50	port complete
-src/tokenizer/normalizer.rs::test::removed_around_both_edges	implemented	spec/tokenizer/normalizer_spec.cr:192	port complete
-src/tokenizer/normalizer.rs::test::replace	implemented	spec/tokenizer/normalizer_spec.cr:298	port complete
-src/tokenizer/normalizer.rs::test::rstrip	implemented	spec/tokenizer/normalizer_spec.cr:217	port complete
-src/tokenizer/normalizer.rs::test::slice	implemented	spec/tokenizer/normalizer_spec.cr:285	port complete
-src/tokenizer/normalizer.rs::test::split	implemented	spec/tokenizer/normalizer_spec.cr:312	port complete
-src/tokenizer/normalizer.rs::test::strip	implemented	spec/tokenizer/normalizer_spec.cr:201	port complete
-src/tokenizer/normalizer.rs::test::strip_unicode	implemented	spec/tokenizer/normalizer_spec.cr:225	port complete
-src/tokenizer/normalizer.rs::test::test_append_after_clear	implemented	spec/tokenizer/normalizer_spec.cr:322	port complete
-src/tokenizer/normalizer.rs::test::test_len_range_exclusive	implemented	spec/tokenizer/normalizer_spec.cr:15	port complete
-src/tokenizer/normalizer.rs::test::test_len_range_inclusive	implemented	spec/tokenizer/normalizer_spec.cr:15	port complete
-src/tokenizer/normalizer.rs::test::transform_check	implemented	spec/tokenizer/normalizer_spec.cr:335	port complete
-src/tokenizer/normalizer.rs::test::transform_range_multiple_bytes	implemented	spec/tokenizer/normalizer_spec.cr:637	port complete
-src/tokenizer/normalizer.rs::test::transform_range_single_bytes	implemented	spec/tokenizer/normalizer_spec.cr:349	port complete
-src/tokenizer/pattern.rs::test::char	implemented	spec/tokenizer/pattern_spec.cr:15	port complete
-src/tokenizer/pattern.rs::test::functions	implemented	spec/tokenizer/pattern_spec.cr:34	port complete
-src/tokenizer/pattern.rs::test::regex	implemented	spec/tokenizer/pattern_spec.cr:44	port complete
-src/tokenizer/pattern.rs::test::str	implemented	spec/tokenizer/pattern_spec.cr:23	port complete
-src/tokenizer/pattern.rs::test::sys_regex	implemented	spec/tokenizer/pattern_spec.cr:54	port complete
+src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	ported	spec/tokenizer/added_vocabulary_spec.cr:304	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	ported	spec/tokenizer/added_vocabulary_spec.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_tokens	ported	spec/tokenizer/added_vocabulary_spec.cr:60	port complete
+src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	ported	spec/tokenizer/added_vocabulary_spec.cr:119	port complete
+src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	ported	spec/tokenizer/added_vocabulary_spec.cr:268	port complete
+src/tokenizer/added_vocabulary.rs::test::empty_matches	ported	spec/tokenizer/added_vocabulary_spec.cr:167	port complete
+src/tokenizer/added_vocabulary.rs::test::options_use_cases	ported	spec/tokenizer/added_vocabulary_spec.cr:142	port complete
+src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	ported	spec/tokenizer/added_vocabulary_spec.cr:288	port complete
+src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	ported	spec/tokenizer/added_vocabulary_spec.cr:228	port complete
+src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	ported	spec/tokenizer/added_vocabulary_spec.cr:209	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	ported	spec/tokenizer/added_vocabulary_spec.cr:172	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	ported	spec/tokenizer/added_vocabulary_spec.cr:191	port complete
+src/tokenizer/encoding.rs::test::mappings	ported	spec/tokenizer/encoding_spec.cr:109	port complete
+src/tokenizer/encoding.rs::test::merge_encodings	ported	spec/tokenizer/encoding_spec.cr:5	port complete
+src/tokenizer/encoding.rs::test::padding	ported	spec/tokenizer/encoding_spec.cr:176	port complete
+src/tokenizer/encoding.rs::test::truncate	ported	spec/tokenizer/encoding_spec.cr:35	port complete
+src/tokenizer/encoding.rs::test::truncate_left	ported	spec/tokenizer/encoding_spec.cr:54	port complete
+src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	ported	spec/tokenizer/encoding_spec.cr:90	port complete
+src/tokenizer/encoding.rs::test::truncate_to_empty	ported	spec/tokenizer/encoding_spec.cr:73	port complete
+src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	ported	spec/tokenizer/tokenizer_spec.cr:78	port complete
+src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	ported	spec/tokenizer/tokenizer_spec.cr:126	port complete
+src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	ported	spec/tokenizer/tokenizer_spec.cr:110	port complete
+src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	ported	spec/tokenizer/tokenizer_spec.cr:96	port complete
+src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	ported	spec/tokenizer/tokenizer_spec.cr:60	port complete
+src/tokenizer/normalizer.rs::test::added_around_edges	ported	spec/tokenizer/normalizer_spec.cr:125	port complete
+src/tokenizer/normalizer.rs::test::added_characters_alignment	ported	spec/tokenizer/normalizer_spec.cr:141	port complete
+src/tokenizer/normalizer.rs::test::append	ported	spec/tokenizer/normalizer_spec.cr:256	port complete
+src/tokenizer/normalizer.rs::test::get_range	ported	spec/tokenizer/normalizer_spec.cr:279	port complete
+src/tokenizer/normalizer.rs::test::lstrip	ported	spec/tokenizer/normalizer_spec.cr:209	port complete
+src/tokenizer/normalizer.rs::test::mixed_addition_and_removal	ported	spec/tokenizer/normalizer_spec.cr:83	port complete
+src/tokenizer/normalizer.rs::test::nfd_adds_new_chars	ported	spec/tokenizer/normalizer_spec.cr:20	port complete
+src/tokenizer/normalizer.rs::test::original_range	ported	spec/tokenizer/normalizer_spec.cr:110	port complete
+src/tokenizer/normalizer.rs::test::prepend	ported	spec/tokenizer/normalizer_spec.cr:233	port complete
+src/tokenizer/normalizer.rs::test::range_conversion	ported	spec/tokenizer/normalizer_spec.cr:98	port complete
+src/tokenizer/normalizer.rs::test::remove_at_beginning	ported	spec/tokenizer/normalizer_spec.cr:176	port complete
+src/tokenizer/normalizer.rs::test::remove_at_end	ported	spec/tokenizer/normalizer_spec.cr:184	port complete
+src/tokenizer/normalizer.rs::test::remove_chars	ported	spec/tokenizer/normalizer_spec.cr:66	port complete
+src/tokenizer/normalizer.rs::test::remove_chars_added_by_nfd	ported	spec/tokenizer/normalizer_spec.cr:50	port complete
+src/tokenizer/normalizer.rs::test::removed_around_both_edges	ported	spec/tokenizer/normalizer_spec.cr:192	port complete
+src/tokenizer/normalizer.rs::test::replace	ported	spec/tokenizer/normalizer_spec.cr:298	port complete
+src/tokenizer/normalizer.rs::test::rstrip	ported	spec/tokenizer/normalizer_spec.cr:217	port complete
+src/tokenizer/normalizer.rs::test::slice	ported	spec/tokenizer/normalizer_spec.cr:285	port complete
+src/tokenizer/normalizer.rs::test::split	ported	spec/tokenizer/normalizer_spec.cr:312	port complete
+src/tokenizer/normalizer.rs::test::strip	ported	spec/tokenizer/normalizer_spec.cr:201	port complete
+src/tokenizer/normalizer.rs::test::strip_unicode	ported	spec/tokenizer/normalizer_spec.cr:225	port complete
+src/tokenizer/normalizer.rs::test::test_append_after_clear	ported	spec/tokenizer/normalizer_spec.cr:322	port complete
+src/tokenizer/normalizer.rs::test::test_len_range_exclusive	ported	spec/tokenizer/normalizer_spec.cr:15	port complete
+src/tokenizer/normalizer.rs::test::test_len_range_inclusive	ported	spec/tokenizer/normalizer_spec.cr:15	port complete
+src/tokenizer/normalizer.rs::test::transform_check	ported	spec/tokenizer/normalizer_spec.cr:335	port complete
+src/tokenizer/normalizer.rs::test::transform_range_multiple_bytes	ported	spec/tokenizer/normalizer_spec.cr:637	port complete
+src/tokenizer/normalizer.rs::test::transform_range_single_bytes	ported	spec/tokenizer/normalizer_spec.cr:349	port complete
+src/tokenizer/pattern.rs::test::char	ported	spec/tokenizer/pattern_spec.cr:15	port complete
+src/tokenizer/pattern.rs::test::functions	ported	spec/tokenizer/pattern_spec.cr:34	port complete
+src/tokenizer/pattern.rs::test::regex	ported	spec/tokenizer/pattern_spec.cr:44	port complete
+src/tokenizer/pattern.rs::test::str	ported	spec/tokenizer/pattern_spec.cr:23	port complete
+src/tokenizer/pattern.rs::test::sys_regex	ported	spec/tokenizer/pattern_spec.cr:54	port complete
 src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	ported	spec/tokenizer/serialization_spec.cr:ported	ported
 src/tokenizer/serialization.rs::test::test_from_pretrained	ported	spec/tokenizer/serialization_spec.cr:ported	ported
-src/utils/padding.rs::test::pad_to_multiple	implemented	spec/tokenizer/padding_spec.cr:12	port complete
-src/utils/parallelism.rs::test::test_maybe_parallel_iterator	skipped	-	not ported: utility layer not ported
-src/utils/parallelism.rs::test::test_maybe_parallel_slice	skipped	-	not ported: utility layer not ported
-src/utils/truncation.rs::test::test_deserialize_defaults	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
-src/utils/truncation.rs::test::truncate_encodings_empty	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
-src/utils/truncation.rs::test::truncate_encodings_longest_first	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
+src/utils/padding.rs::test::pad_to_multiple	ported	spec/tokenizer/padding_spec.cr:12	port complete
+src/utils/parallelism.rs::test::test_maybe_parallel_iterator	ported	spec/utils/parallelism_spec.cr:5	ported
+src/utils/parallelism.rs::test::test_maybe_parallel_slice	ported	spec/utils/parallelism_spec.cr:26	ported
+src/utils/truncation.rs::test::test_deserialize_defaults	ported	spec/tokenizer/truncation_spec.cr:91	port complete
+src/utils/truncation.rs::test::truncate_encodings_empty	ported	spec/tokenizer/truncation_spec.cr:78	port complete
+src/utils/truncation.rs::test::truncate_encodings_longest_first	ported	spec/tokenizer/truncation_spec.cr:52	port complete
 tests/added_tokens.rs::test::add_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::lstrip_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::overlapping_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::rstrip_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::single_word_tokens	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/documentation.rs::test::load_tokenizer	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::pipeline	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::pipeline_bert	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::quicktour	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::quicktour_slow_train	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::pipeline	ported	spec/integration/documentation_spec.cr:128	ported
+tests/documentation.rs::test::pipeline_bert	ported	spec/integration/documentation_spec.cr:210	ported
+tests/documentation.rs::test::quicktour	ported	spec/integration/documentation_spec.cr:74	ported
+tests/documentation.rs::test::quicktour_slow_train	ported	spec/integration/wiki_training_spec.cr:5	ported (uses data/small.txt instead of wiki data)
 tests/documentation.rs::test::streaming_tokenizer	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::train_pipeline_bert	skipped	-	blocked: needs external data files
-tests/documentation.rs::test::train_tokenizer	skipped	-	blocked: needs external data files
-tests/from_pretrained.rs::test::test_from_pretrained	skipped	-	blocked: needs external data files
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	skipped	-	blocked: needs external data files
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	skipped	-	blocked: needs external data files
-tests/from_pretrained.rs::test::test_from_pretrained_revision	skipped	-	blocked: needs external data files
+tests/documentation.rs::test::train_pipeline_bert	ported	spec/integration/wiki_training_spec.cr:28	ported (uses data/small.txt instead of wiki data)
+tests/documentation.rs::test::train_tokenizer	ported	spec/integration/documentation_spec.cr:43	ported
+tests/from_pretrained.rs::test::test_from_pretrained	ported	spec/integration/from_pretrained_spec.cr:13	ported (network test, FROM_PRETRAINED=1)
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	ported	spec/integration/from_pretrained_spec.cr:41	ported
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	ported	spec/integration/from_pretrained_spec.cr:47	ported
+tests/from_pretrained.rs::test::test_from_pretrained_revision	ported	spec/integration/from_pretrained_spec.cr:22	ported (network test, FROM_PRETRAINED=1)
 tests/offsets.rs::test::byte_level_basic	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_double_sequence	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence	ported	spec/integration/offsets_spec.cr:ported	ported
@@ -236,8 +236,8 @@ tests/serialization.rs::test::wordlevel_serde	ported	spec/integration/serializat
 tests/serialization.rs::test::wordpiece_serde	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/stream.rs::test::test_decode_stream_step_no_panic	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/stream.rs::test::test_decoding_with_added_bpe	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
-tests/training.rs::test::bpe_continuing_subword_prefix_error	skipped	-	blocked: needs external data files
-tests/training.rs::test::bpe_values_after_training	skipped	-	blocked: needs external data files
+tests/training.rs::test::bpe_continuing_subword_prefix_error	ported	spec/integration/training_spec.cr:23	ported
+tests/training.rs::test::bpe_values_after_training	ported	spec/integration/training_spec.cr:7	ported
 tests/unigram.rs::test::test_sample	ported	spec/integration/unigram_spec.cr:ported	ported
 tests/unigram.rs::test::test_train_unigram_from_file	partial	spec/integration/unigram_train_from_file_spec.cr:pending	partial: vocab size differs (esaxx suffix arrays not ported)
 tests/unigram.rs::test::test_unigram_from_file	ported	spec/integration/unigram_from_file_spec.cr:ported	ported

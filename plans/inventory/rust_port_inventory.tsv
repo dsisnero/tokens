@@ -4,52 +4,52 @@ benches/layout_benchmark.rs::func::bench_layout	func	skipped	-	skipped: benchmar
 benches/llama3_benchmark.rs::func::llama3	func	skipped	-	skipped: benchmarks need data files
 examples/unstable_wasm/src/lib.rs::func::tokenize	func	skipped	-	skipped: WASM not applicable to Crystal CLI
 examples/unstable_wasm/src/utils.rs::func::set_panic_hook	func	skipped	-	skipped: WASM not applicable to Crystal CLI
-src/decoders/bpe.rs::func::new	func	implemented	src/tokens/decoders/bpe.cr:10	constructor provided by #initialize
-src/decoders/bpe.rs::method::BPEDecoder.new	method	implemented	src/tokens/decoders/bpe.cr:10	port complete
-src/decoders/bpe.rs::struct::BPEDecoder	struct	implemented	src/tokens/decoders/bpe.cr:5	port complete
-src/decoders/byte_fallback.rs::func::new	func	implemented	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
-src/decoders/byte_fallback.rs::method::ByteFallback.new	method	implemented	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
-src/decoders/byte_fallback.rs::struct::ByteFallback	struct	implemented	src/tokens/decoders/byte_fallback.cr:5	port complete
-src/decoders/byte_fallback.rs::test::decode	test	implemented	spec/decoders/byte_fallback_spec.cr:4	port complete
-src/decoders/ctc.rs::func::new	func	implemented	src/tokens/decoders/ctc.cr:12	constructor provided by #initialize
-src/decoders/ctc.rs::method::CTC.new	method	implemented	src/tokens/decoders/ctc.cr:12	port complete
-src/decoders/ctc.rs::struct::CTC	struct	implemented	src/tokens/decoders/ctc.cr:5	port complete
-src/decoders/ctc.rs::test::another_librispeech_sample	test	implemented	spec/decoders/ctc_spec.cr:29	port complete
-src/decoders/ctc.rs::test::handmade_sample	test	implemented	spec/decoders/ctc_spec.cr:4	port complete
-src/decoders/ctc.rs::test::handmade_with_delimiter_sample	test	implemented	spec/decoders/ctc_spec.cr:11	port complete
-src/decoders/ctc.rs::test::librispeech_sample	test	implemented	spec/decoders/ctc_spec.cr:18	port complete
-src/decoders/fuse.rs::func::new	func	implemented	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
-src/decoders/fuse.rs::method::Fuse.new	method	implemented	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
-src/decoders/fuse.rs::struct::Fuse	struct	implemented	src/tokens/decoders/fuse.cr:5	port complete
-src/decoders/fuse.rs::test::decode	test	implemented	spec/decoders/fuse_spec.cr:4	port complete
-src/decoders/mod.rs::enum::DecoderHelper	enum	implemented	src/tokens/decoders/mod.cr:45	tagged decoder dispatch is handled by DecoderWrapper.from_json
-src/decoders/mod.rs::enum::DecoderUntagged	enum	implemented	src/tokens/decoders/mod.cr:45	untagged enum matching is represented by the Crystal wrapper dispatcher
-src/decoders/mod.rs::enum::DecoderWrapper	enum	implemented	src/tokens/decoders/mod.cr:4	wrapper ported as Crystal class over tagged union
-src/decoders/mod.rs::enum::EnumType	enum	implemented	src/tokens/decoders/mod.cr:55	decoder type dispatch is handled by DecoderWrapper.from_json
-src/decoders/mod.rs::struct::Tagged	struct	implemented	src/tokens/decoders/mod.cr:55	tagged JSON object handling is embedded in DecoderWrapper.from_json
-src/decoders/mod.rs::test::decoder_serialization	test	implemented	spec/decoders/mod_spec.cr:4	port complete
-src/decoders/mod.rs::test::decoder_serialization_no_decode	test	implemented	spec/decoders/mod_spec.cr:21	port complete
-src/decoders/mod.rs::test::decoder_serialization_other_no_arg	test	implemented	spec/decoders/mod_spec.cr:14	port complete
-src/decoders/sequence.rs::func::get_decoders	func	implemented	src/tokens/decoders/sequence.cr:22	upstream-style accessor retained for parity
-src/decoders/sequence.rs::func::get_decoders_mut	func	implemented	src/tokens/decoders/sequence.cr:27	upstream-style accessor retained for parity
-src/decoders/sequence.rs::func::new	func	implemented	src/tokens/decoders/sequence.cr:10	constructor provided by #initialize
-src/decoders/sequence.rs::method::Sequence.new	method	implemented	src/tokens/decoders/sequence.cr:10	port complete
-src/decoders/sequence.rs::struct::Sequence	struct	implemented	src/tokens/decoders/sequence.cr:5	port complete
-src/decoders/sequence.rs::test::sequence_basic	test	implemented	spec/decoders/sequence_spec.cr:4	port complete
-src/decoders/strip.rs::func::new	func	implemented	src/tokens/decoders/strip.cr:12	constructor provided by #initialize
-src/decoders/strip.rs::method::Strip.new	method	implemented	src/tokens/decoders/strip.cr:12	port complete
-src/decoders/strip.rs::struct::Strip	struct	implemented	src/tokens/decoders/strip.cr:5	port complete
-src/decoders/strip.rs::test::decode	test	implemented	spec/decoders/strip_spec.cr:4	port complete
-src/decoders/wordpiece.rs::func::cleanup	func	implemented	src/tokens/decoders/wordpiece.cr:18	port complete
-src/decoders/wordpiece.rs::func::new	func	implemented	src/tokens/decoders/wordpiece.cr:11	constructor provided by #initialize
-src/decoders/wordpiece.rs::method::WordPiece.new	method	implemented	src/tokens/decoders/wordpiece.cr:11	port complete
-src/decoders/wordpiece.rs::struct::WordPiece	struct	implemented	src/tokens/decoders/wordpiece.cr:5	port complete
-src/decoders/wordpiece.rs::test::wordpiece_decoder	test	implemented	spec/decoders/wordpiece_spec.cr:4	port complete
+src/decoders/bpe.rs::func::new	func	ported	src/tokens/decoders/bpe.cr:10	constructor provided by #initialize
+src/decoders/bpe.rs::method::BPEDecoder.new	method	ported	src/tokens/decoders/bpe.cr:10	port complete
+src/decoders/bpe.rs::struct::BPEDecoder	struct	ported	src/tokens/decoders/bpe.cr:5	port complete
+src/decoders/byte_fallback.rs::func::new	func	ported	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/byte_fallback.rs::method::ByteFallback.new	method	ported	src/tokens/decoders/byte_fallback.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/byte_fallback.rs::struct::ByteFallback	struct	ported	src/tokens/decoders/byte_fallback.cr:5	port complete
+src/decoders/byte_fallback.rs::test::decode	test	ported	spec/decoders/byte_fallback_spec.cr:4	port complete
+src/decoders/ctc.rs::func::new	func	ported	src/tokens/decoders/ctc.cr:12	constructor provided by #initialize
+src/decoders/ctc.rs::method::CTC.new	method	ported	src/tokens/decoders/ctc.cr:12	port complete
+src/decoders/ctc.rs::struct::CTC	struct	ported	src/tokens/decoders/ctc.cr:5	port complete
+src/decoders/ctc.rs::test::another_librispeech_sample	test	ported	spec/decoders/ctc_spec.cr:29	port complete
+src/decoders/ctc.rs::test::handmade_sample	test	ported	spec/decoders/ctc_spec.cr:4	port complete
+src/decoders/ctc.rs::test::handmade_with_delimiter_sample	test	ported	spec/decoders/ctc_spec.cr:11	port complete
+src/decoders/ctc.rs::test::librispeech_sample	test	ported	spec/decoders/ctc_spec.cr:18	port complete
+src/decoders/fuse.rs::func::new	func	ported	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/fuse.rs::method::Fuse.new	method	ported	src/tokens/decoders/fuse.cr:5	zero-field struct uses the default Crystal constructor
+src/decoders/fuse.rs::struct::Fuse	struct	ported	src/tokens/decoders/fuse.cr:5	port complete
+src/decoders/fuse.rs::test::decode	test	ported	spec/decoders/fuse_spec.cr:4	port complete
+src/decoders/mod.rs::enum::DecoderHelper	enum	ported	src/tokens/decoders/mod.cr:45	tagged decoder dispatch is handled by DecoderWrapper.from_json
+src/decoders/mod.rs::enum::DecoderUntagged	enum	ported	src/tokens/decoders/mod.cr:45	untagged enum matching is represented by the Crystal wrapper dispatcher
+src/decoders/mod.rs::enum::DecoderWrapper	enum	ported	src/tokens/decoders/mod.cr:4	wrapper ported as Crystal class over tagged union
+src/decoders/mod.rs::enum::EnumType	enum	ported	src/tokens/decoders/mod.cr:55	decoder type dispatch is handled by DecoderWrapper.from_json
+src/decoders/mod.rs::struct::Tagged	struct	ported	src/tokens/decoders/mod.cr:55	tagged JSON object handling is embedded in DecoderWrapper.from_json
+src/decoders/mod.rs::test::decoder_serialization	test	ported	spec/decoders/mod_spec.cr:4	port complete
+src/decoders/mod.rs::test::decoder_serialization_no_decode	test	ported	spec/decoders/mod_spec.cr:21	port complete
+src/decoders/mod.rs::test::decoder_serialization_other_no_arg	test	ported	spec/decoders/mod_spec.cr:14	port complete
+src/decoders/sequence.rs::func::get_decoders	func	ported	src/tokens/decoders/sequence.cr:22	upstream-style accessor retained for parity
+src/decoders/sequence.rs::func::get_decoders_mut	func	ported	src/tokens/decoders/sequence.cr:27	upstream-style accessor retained for parity
+src/decoders/sequence.rs::func::new	func	ported	src/tokens/decoders/sequence.cr:10	constructor provided by #initialize
+src/decoders/sequence.rs::method::Sequence.new	method	ported	src/tokens/decoders/sequence.cr:10	port complete
+src/decoders/sequence.rs::struct::Sequence	struct	ported	src/tokens/decoders/sequence.cr:5	port complete
+src/decoders/sequence.rs::test::sequence_basic	test	ported	spec/decoders/sequence_spec.cr:4	port complete
+src/decoders/strip.rs::func::new	func	ported	src/tokens/decoders/strip.cr:12	constructor provided by #initialize
+src/decoders/strip.rs::method::Strip.new	method	ported	src/tokens/decoders/strip.cr:12	port complete
+src/decoders/strip.rs::struct::Strip	struct	ported	src/tokens/decoders/strip.cr:5	port complete
+src/decoders/strip.rs::test::decode	test	ported	spec/decoders/strip_spec.cr:4	port complete
+src/decoders/wordpiece.rs::func::cleanup	func	ported	src/tokens/decoders/wordpiece.cr:18	port complete
+src/decoders/wordpiece.rs::func::new	func	ported	src/tokens/decoders/wordpiece.cr:11	constructor provided by #initialize
+src/decoders/wordpiece.rs::method::WordPiece.new	method	ported	src/tokens/decoders/wordpiece.cr:11	port complete
+src/decoders/wordpiece.rs::struct::WordPiece	struct	ported	src/tokens/decoders/wordpiece.cr:5	port complete
+src/decoders/wordpiece.rs::test::wordpiece_decoder	test	ported	spec/decoders/wordpiece_spec.cr:4	port complete
 src/models/bpe/mod.rs::enum::Error	enum	ported	src/tokens/models/bpe/error.cr	BPE error types
 src/models/bpe/model.rs::func::build	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder.build
 src/models/bpe/model.rs::func::builder	func	ported	src/tokens/models/bpe/model.cr:33	BPE.builder
 src/models/bpe/model.rs::func::byte_fallback	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
-src/models/bpe/model.rs::func::cache_capacity	func	intentional_divergence	-	Crystal: BpeCache capacity managed internally
+src/models/bpe/model.rs::func::cache_capacity	func	skipped	-	Crystal: BpeCache capacity managed internally
 src/models/bpe/model.rs::func::clear_cache	func	ported	src/tokens/models/bpe/model.cr:141	clear_cache
 src/models/bpe/model.rs::func::continuing_subword_prefix	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
 src/models/bpe/model.rs::func::dropout	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
@@ -98,7 +98,7 @@ src/models/bpe/trainer.rs::func::limit_alphabet	func	ported	src/tokens/models/bp
 src/models/bpe/trainer.rs::func::max_token_length	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
 src/models/bpe/trainer.rs::func::min_frequency	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
 src/models/bpe/trainer.rs::func::new	func	ported	src/tokens/models/bpe/model.cr:18	BPE.new
-src/models/bpe/trainer.rs::func::progress_format	func	intentional_divergence	-	progress bar not ported (Crystal: no indicatif equivalent)
+src/models/bpe/trainer.rs::func::progress_format	func	skipped	-	progress bar not ported (Crystal: no indicatif equivalent)
 src/models/bpe/trainer.rs::func::show_progress	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
 src/models/bpe/trainer.rs::func::special_tokens	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
 src/models/bpe/trainer.rs::func::vocab_size	func	ported	src/tokens/models/bpe/builder.cr	BpeBuilder method
@@ -113,15 +113,15 @@ src/models/bpe/word.rs::func::merge_with	func	ported	src/tokens/models/bpe/word.
 src/models/bpe/word.rs::method::Symbol.merge_with	method	ported	src/tokens/models/bpe/word.cr	Symbol merge logic
 src/models/bpe/word.rs::test::test_merge	test	ported	spec/models/bpe_spec.cr	ported
 src/models/bpe/word.rs::test::test_merge_max_length	test	ported	spec/models/bpe_spec.cr	ported
-src/models/mod.rs::enum::EnumType	enum	intentional_divergence	-	Crystal: explicit type-tag matching in ModelWrapper.from_json, no serde EnumType
-src/models/mod.rs::enum::ModelHelper	enum	intentional_divergence	-	Crystal: handled via from_untagged/from_tagged, no serde ModelHelper
-src/models/mod.rs::enum::ModelUntagged	enum	intentional_divergence	-	Crystal: sequentially tried in from_untagged, no serde ModelUntagged
+src/models/mod.rs::enum::EnumType	enum	skipped	-	Crystal: explicit type-tag matching in ModelWrapper.from_json, no serde EnumType
+src/models/mod.rs::enum::ModelHelper	enum	skipped	-	Crystal: handled via from_untagged/from_tagged, no serde ModelHelper
+src/models/mod.rs::enum::ModelUntagged	enum	skipped	-	Crystal: sequentially tried in from_untagged, no serde ModelUntagged
 src/models/mod.rs::enum::ModelWrapper	enum	ported	src/tokens/models/mod.cr:4	ModelWrapper class (not enum in Crystal)
 src/models/mod.rs::enum::TrainerWrapper	enum	ported	src/tokens/models/mod.cr:117	TrainerWrapper class (not enum in Crystal)
 src/models/mod.rs::func::clear_cache	func	ported	src/tokens/models/mod.cr	ModelWrapper.clear_cache not needed in Crystal
 src/models/mod.rs::func::resize_cache	func	ported	src/tokens/models/mod.cr	ModelWrapper.resize_cache not needed in Crystal
-src/models/mod.rs::method::ModelWrapper.clear_cache	method	intentional_divergence	-	Crystal: cache managed at model level, not wrapper
-src/models/mod.rs::struct::Tagged	struct	intentional_divergence	-	Crystal: handled via explicit JSON parsing, no serde Tagged
+src/models/mod.rs::method::ModelWrapper.clear_cache	method	skipped	-	Crystal: cache managed at model level, not wrapper
+src/models/mod.rs::struct::Tagged	struct	skipped	-	Crystal: handled via explicit JSON parsing, no serde Tagged
 src/models/mod.rs::test::incomplete_ordered_vocab	test	ported	spec/models/mod_spec.cr	tested via model serialization spec
 src/models/mod.rs::test::serialization	test	ported	spec/models/mod_spec.cr	tested via model serialization spec
 src/models/mod.rs::test::trainer_wrapper_train_model_wrapper	test	ported	spec/models/mod_spec.cr	tested via trainer type-check spec
@@ -256,141 +256,141 @@ src/models/wordpiece/trainer.rs::method::WordPieceTrainer.min_frequency	method	p
 src/models/wordpiece/trainer.rs::method::WordPieceTrainerBuilder.new	method	ported	src/tokens/models/wordpiece:ported	ported
 src/models/wordpiece/trainer.rs::struct::WordPieceTrainer	struct	ported	src/tokens/models/wordpiece:ported	ported
 src/models/wordpiece/trainer.rs::struct::WordPieceTrainerBuilder	struct	ported	src/tokens/models/wordpiece:ported	ported
-src/normalizers/bert.rs::func::new	func	implemented	src/tokens/normalizers/bert.cr:11	constructor provided by #initialize
-src/normalizers/bert.rs::method::BertNormalizer.new	method	implemented	src/tokens/normalizers/bert.cr:11	port complete
-src/normalizers/bert.rs::struct::BertNormalizer	struct	implemented	src/tokens/normalizers/bert.cr:3	port complete
-src/normalizers/byte_level.rs::func::alphabet	func	implemented	src/tokens/normalizers/byte_level.cr:13	port complete
-src/normalizers/byte_level.rs::func::new	func	implemented	src/tokens/normalizers/byte_level.cr:10	constructor provided by #initialize
-src/normalizers/byte_level.rs::method::ByteLevel.new	method	implemented	src/tokens/normalizers/byte_level.cr:10	port complete
-src/normalizers/byte_level.rs::struct::ByteLevel	struct	implemented	src/tokens/normalizers/byte_level.cr:5	port complete
-src/normalizers/byte_level.rs::test::test_byte_level_normalize	test	implemented	spec/normalizers/byte_level_spec.cr:5	port complete
-src/normalizers/mod.rs::enum::EnumType	enum	implemented	src/tokens/normalizers/mod.cr:65	ported as string-tag dispatch in wrapper parser
-src/normalizers/mod.rs::enum::NormalizerHelper	enum	implemented	src/tokens/normalizers/mod.cr:43	ported as tagged-vs-legacy JSON dispatch
-src/normalizers/mod.rs::enum::NormalizerUntagged	enum	implemented	src/tokens/normalizers/mod.cr:43	ported as manual untagged wrapper dispatch
-src/normalizers/mod.rs::enum::NormalizerWrapper	enum	implemented	src/tokens/normalizers/mod.cr:4	ported as wrapper class over tagged union
-src/normalizers/mod.rs::struct::Tagged	struct	implemented	src/tokens/normalizers/mod.cr:65	ported as parsed tagged JSON object handling
-src/normalizers/mod.rs::test::normalizer_serialization	test	implemented	spec/normalizers/mod_spec.cr:20	port complete
-src/normalizers/mod.rs::test::post_processor_deserialization_no_type	test	implemented	spec/normalizers/mod_spec.cr:5	port complete
-src/normalizers/precompiled.rs::test::expansion_followed_by_removal	test	implemented	spec/normalizers/precompiled_spec.cr:5	port complete
-src/normalizers/prepend.rs::func::new	func	implemented	src/tokens/normalizers/prepend.cr:8	constructor provided by #initialize
-src/normalizers/prepend.rs::method::Prepend.new	method	implemented	src/tokens/normalizers/prepend.cr:8	port complete
-src/normalizers/prepend.rs::struct::Prepend	struct	implemented	src/tokens/normalizers/prepend.cr:3	port complete
-src/normalizers/prepend.rs::test::test_prepend	test	implemented	spec/normalizers/prepend_spec.cr:5	port complete
-src/normalizers/replace.rs::enum::ReplacePattern	enum	implemented	src/tokens/normalizers/replace.cr:5	ported as tagged union struct
-src/normalizers/replace.rs::struct::Replace	struct	implemented	src/tokens/normalizers/replace.cr:70	port complete
-src/normalizers/replace.rs::test::serialization	test	implemented	spec/normalizers/replace_spec.cr:25	port complete
-src/normalizers/replace.rs::test::test_replace	test	implemented	spec/normalizers/replace_spec.cr:5	port complete
-src/normalizers/replace.rs::test::test_replace_decode	test	implemented	spec/normalizers/replace_spec.cr:37	port complete
-src/normalizers/replace.rs::test::test_replace_regex	test	implemented	spec/normalizers/replace_spec.cr:15	port complete
-src/normalizers/strip.rs::func::new	func	implemented	src/tokens/normalizers/strip.cr:9	constructor provided by #initialize
-src/normalizers/strip.rs::method::Strip.new	method	implemented	src/tokens/normalizers/strip.cr:9	port complete
-src/normalizers/strip.rs::struct::Strip	struct	implemented	src/tokens/normalizers/strip.cr:3	port complete
-src/normalizers/strip.rs::struct::StripAccents	struct	implemented	src/tokens/normalizers/strip.cr:22	port complete
-src/normalizers/strip.rs::test::test_strip_accents	test	implemented	spec/normalizers/strip_spec.cr:5	port complete
-src/normalizers/strip.rs::test::test_strip_accents_multiple	test	implemented	spec/normalizers/strip_spec.cr:42	port complete
-src/normalizers/strip.rs::test::test_thai_bug	test	implemented	spec/normalizers/strip_spec.cr:34	port complete
-src/normalizers/strip.rs::test::test_vietnamese_bug	test	implemented	spec/normalizers/strip_spec.cr:20	port complete
-src/normalizers/unicode.rs::struct::NFC	struct	implemented	src/tokens/normalizers/unicode.cr:19	port complete
-src/normalizers/unicode.rs::struct::NFD	struct	implemented	src/tokens/normalizers/unicode.cr:3	port complete
-src/normalizers/unicode.rs::struct::NFKC	struct	implemented	src/tokens/normalizers/unicode.cr:27	port complete
-src/normalizers/unicode.rs::struct::NFKD	struct	implemented	src/tokens/normalizers/unicode.cr:11	port complete
-src/normalizers/unicode.rs::struct::Nmt	struct	implemented	src/tokens/normalizers/unicode.cr:35	port complete
-src/normalizers/unicode.rs::test::test_nfkc	test	implemented	spec/normalizers/unicode_spec.cr:5	port complete
-src/normalizers/utils.rs::func::new	func	implemented	src/tokens/normalizers/utils.cr:8	constructor provided by #initialize
-src/normalizers/utils.rs::method::Sequence.new	method	implemented	src/tokens/normalizers/utils.cr:8	ported as Array(Tokens::Normalizer) sequence
-src/normalizers/utils.rs::struct::Lowercase	struct	implemented	src/tokens/normalizers/utils.cr:16	port complete
-src/normalizers/utils.rs::struct::Sequence	struct	implemented	src/tokens/normalizers/utils.cr:3	ported as Array(Tokens::Normalizer) sequence
-src/pre_tokenizers/bert.rs::struct::BertPreTokenizer	struct	implemented	src/tokens/pre_tokenizers/bert.cr:5	port complete
-src/pre_tokenizers/bert.rs::test::basic	test	implemented	spec/pre_tokenizers/bert_spec.cr:4	port complete
-src/pre_tokenizers/bert.rs::test::chinese_chars	test	implemented	spec/pre_tokenizers/bert_spec.cr:26	port complete
-src/pre_tokenizers/byte_level.rs::func::add_prefix_space	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:32	port complete
-src/pre_tokenizers/byte_level.rs::func::alphabet	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:26	port complete
-src/pre_tokenizers/byte_level.rs::func::new	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:19	constructor provided by #initialize
-src/pre_tokenizers/byte_level.rs::func::process_offsets	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:149	port complete
-src/pre_tokenizers/byte_level.rs::func::trim_offsets	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:36	port complete
-src/pre_tokenizers/byte_level.rs::func::use_regex	func	implemented	src/tokens/pre_tokenizers/byte_level.cr:40	port complete
-src/pre_tokenizers/byte_level.rs::method::ByteLevel.new	method	implemented	src/tokens/pre_tokenizers/byte_level.cr:19	port complete
-src/pre_tokenizers/byte_level.rs::struct::ByteLevel	struct	implemented	src/tokens/pre_tokenizers/byte_level.cr:6	port complete
-src/pre_tokenizers/byte_level.rs::test::add_prefix_space	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:47	port complete
-src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:230	port complete
-src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:75	port complete
-src/pre_tokenizers/byte_level.rs::test::decoding	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:41	port complete
-src/pre_tokenizers/byte_level.rs::test::deserialization	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:236	port complete
-src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:111	port complete
-src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:93	port complete
-src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:128	port complete
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:4	port complete
-src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:27	port complete
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:187	port complete
-src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	test	implemented	spec/pre_tokenizers/byte_level_spec.cr:159	port complete
-src/pre_tokenizers/delimiter.rs::func::new	func	implemented	src/tokens/pre_tokenizers/delimiter.cr:10	constructor provided by #initialize
-src/pre_tokenizers/delimiter.rs::method::CharDelimiterSplit.new	method	implemented	src/tokens/pre_tokenizers/delimiter.cr:10	port complete
-src/pre_tokenizers/delimiter.rs::struct::CharDelimiterSplit	struct	implemented	src/tokens/pre_tokenizers/delimiter.cr:5	port complete
-src/pre_tokenizers/digits.rs::func::new	func	implemented	src/tokens/pre_tokenizers/digits.cr:10	constructor provided by #initialize
-src/pre_tokenizers/digits.rs::method::Digits.new	method	implemented	src/tokens/pre_tokenizers/digits.cr:10	port complete
-src/pre_tokenizers/digits.rs::struct::Digits	struct	implemented	src/tokens/pre_tokenizers/digits.cr:5	port complete
-src/pre_tokenizers/digits.rs::test::individual_digits	test	implemented	spec/pre_tokenizers/digits_spec.cr:27	port complete
-src/pre_tokenizers/digits.rs::test::numbers	test	implemented	spec/pre_tokenizers/digits_spec.cr:4	port complete
-src/pre_tokenizers/fixed_length.rs::func::new	func	implemented	src/tokens/pre_tokenizers/fixed_length.cr:10	constructor provided by #initialize
-src/pre_tokenizers/fixed_length.rs::method::FixedLength.new	method	implemented	src/tokens/pre_tokenizers/fixed_length.cr:10	port complete
-src/pre_tokenizers/fixed_length.rs::struct::FixedLength	struct	implemented	src/tokens/pre_tokenizers/fixed_length.cr:5	port complete
-src/pre_tokenizers/fixed_length.rs::test::basic	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:4	port complete
-src/pre_tokenizers/fixed_length.rs::test::custom_length	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:22	port complete
-src/pre_tokenizers/fixed_length.rs::test::utf8_characters	test	implemented	spec/pre_tokenizers/fixed_length_spec.cr:38	port complete
-src/pre_tokenizers/metaspace.rs::enum::PrependScheme	enum	implemented	src/tokens/pre_tokenizers/metaspace.cr:5	port complete
-src/pre_tokenizers/metaspace.rs::func::get_prepend_scheme	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:47	port complete
-src/pre_tokenizers/metaspace.rs::func::get_replacement	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:27	port complete
-src/pre_tokenizers/metaspace.rs::func::get_split	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:37	port complete
-src/pre_tokenizers/metaspace.rs::func::new	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:19	constructor provided by #initialize
-src/pre_tokenizers/metaspace.rs::func::set_prepend_scheme	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:52	port complete
-src/pre_tokenizers/metaspace.rs::func::set_replacement	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:32	port complete
-src/pre_tokenizers/metaspace.rs::func::set_split	func	implemented	src/tokens/pre_tokenizers/metaspace.cr:42	port complete
-src/pre_tokenizers/metaspace.rs::method::Metaspace.new	method	implemented	src/tokens/pre_tokenizers/metaspace.cr:19	port complete
-src/pre_tokenizers/metaspace.rs::struct::Metaspace	struct	implemented	src/tokens/pre_tokenizers/metaspace.cr:11	port complete
-src/pre_tokenizers/metaspace.rs::struct::MetaspaceHelper	struct	implemented	src/tokens/pre_tokenizers/metaspace.cr:113	manual JSON helper behavior embedded in Metaspace.from_json
-src/pre_tokenizers/metaspace.rs::test::basic	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:21	port complete
-src/pre_tokenizers/metaspace.rs::test::decode	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:148	port complete
-src/pre_tokenizers/metaspace.rs::test::multiple_spaces	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:44	port complete
-src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:71	port complete
-src/pre_tokenizers/metaspace.rs::test::serialization	test	implemented	spec/pre_tokenizers/metaspace_spec.cr:4	port complete
-src/pre_tokenizers/mod.rs::enum::EnumType	enum	implemented	src/tokens/pre_tokenizers/mod.cr:54	wrapper registry is ported across all upstream pre-tokenizer variants currently tracked in the ledger
-src/pre_tokenizers/mod.rs::enum::PreTokenizerHelper	enum	implemented	src/tokens/pre_tokenizers/mod.cr:43	tagged JSON dispatch is handled by PreTokenizerWrapper.from_json
-src/pre_tokenizers/mod.rs::enum::PreTokenizerUntagged	enum	implemented	src/tokens/pre_tokenizers/mod.cr:43	untagged enum matching is represented by the Crystal wrapper dispatcher
-src/pre_tokenizers/mod.rs::enum::PreTokenizerWrapper	enum	implemented	src/tokens/pre_tokenizers/mod.cr:4	wrapper ported as Crystal class over tagged union
-src/pre_tokenizers/mod.rs::struct::Tagged	struct	implemented	src/tokens/pre_tokenizers/mod.cr:54	tagged JSON object handling is embedded in PreTokenizerWrapper.from_json
-src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	test	implemented	spec/pre_tokenizers/mod_spec.cr:25	port complete
-src/pre_tokenizers/mod.rs::test::test_deserialize	test	implemented	spec/pre_tokenizers/mod_spec.cr:4	port complete
-src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	test	implemented	spec/pre_tokenizers/mod_spec.cr:20	port complete
-src/pre_tokenizers/punctuation.rs::func::new	func	implemented	src/tokens/pre_tokenizers/punctuation.cr:12	constructor provided by #initialize
-src/pre_tokenizers/punctuation.rs::method::Punctuation.new	method	implemented	src/tokens/pre_tokenizers/punctuation.cr:12	port complete
-src/pre_tokenizers/punctuation.rs::struct::Punctuation	struct	implemented	src/tokens/pre_tokenizers/punctuation.cr:5	port complete
-src/pre_tokenizers/punctuation.rs::test::deserialization	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:22	port complete
-src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:27	port complete
-src/pre_tokenizers/punctuation.rs::test::punctuation_basic	test	implemented	spec/pre_tokenizers/punctuation_spec.cr:4	port complete
-src/pre_tokenizers/sequence.rs::func::new	func	implemented	src/tokens/pre_tokenizers/sequence.cr:8	constructor provided by #initialize
-src/pre_tokenizers/sequence.rs::method::Sequence.new	method	implemented	src/tokens/pre_tokenizers/sequence.cr:8	port complete
-src/pre_tokenizers/sequence.rs::struct::Sequence	struct	implemented	src/tokens/pre_tokenizers/sequence.cr:3	port complete
-src/pre_tokenizers/sequence.rs::test::sequence_basic	test	implemented	spec/pre_tokenizers/sequence_spec.cr:4	port complete
-src/pre_tokenizers/split.rs::enum::SplitPattern	enum	implemented	src/tokens/pre_tokenizers/split.cr:5	port complete
-src/pre_tokenizers/split.rs::struct::Split	struct	implemented	src/tokens/pre_tokenizers/split.cr:52	port complete
-src/pre_tokenizers/split.rs::struct::SplitHelper	struct	implemented	src/tokens/pre_tokenizers/split.cr:98	manual JSON helper parsing embedded in Split.from_json
-src/pre_tokenizers/split.rs::test::basic	test	implemented	spec/pre_tokenizers/split_spec.cr:4	port complete
-src/pre_tokenizers/split.rs::test::invert	test	implemented	spec/pre_tokenizers/split_spec.cr:78	port complete
-src/pre_tokenizers/split.rs::test::regex_string	test	implemented	spec/pre_tokenizers/split_spec.cr:59	port complete
-src/pre_tokenizers/split.rs::test::serialization	test	implemented	spec/pre_tokenizers/split_spec.cr:88	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::func::new	func	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::method::UnicodeScripts.new	method	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::struct::UnicodeScripts	struct	implemented	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:4	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:29	port complete
-src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:52	port complete
-src/pre_tokenizers/unicode_scripts/scripts.rs::enum::Script	enum	implemented	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:9	generated script table port complete
-src/pre_tokenizers/unicode_scripts/scripts.rs::func::get_script	func	implemented	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:151	generated script lookup port complete
-src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	test	implemented	spec/pre_tokenizers/unicode_scripts_spec.cr:69	port complete
-src/pre_tokenizers/whitespace.rs::struct::Whitespace	struct	implemented	src/tokens/pre_tokenizers/whitespace.cr:3	port complete
-src/pre_tokenizers/whitespace.rs::struct::WhitespaceSplit	struct	implemented	src/tokens/pre_tokenizers/whitespace.cr:16	port complete
-src/pre_tokenizers/whitespace.rs::test::basic	test	implemented	spec/pre_tokenizers/whitespace_spec.cr:4	port complete
-src/pre_tokenizers/whitespace.rs::test::whitespace_split	test	implemented	spec/pre_tokenizers/whitespace_spec.cr:24	port complete
+src/normalizers/bert.rs::func::new	func	ported	src/tokens/normalizers/bert.cr:11	constructor provided by #initialize
+src/normalizers/bert.rs::method::BertNormalizer.new	method	ported	src/tokens/normalizers/bert.cr:11	port complete
+src/normalizers/bert.rs::struct::BertNormalizer	struct	ported	src/tokens/normalizers/bert.cr:3	port complete
+src/normalizers/byte_level.rs::func::alphabet	func	ported	src/tokens/normalizers/byte_level.cr:13	port complete
+src/normalizers/byte_level.rs::func::new	func	ported	src/tokens/normalizers/byte_level.cr:10	constructor provided by #initialize
+src/normalizers/byte_level.rs::method::ByteLevel.new	method	ported	src/tokens/normalizers/byte_level.cr:10	port complete
+src/normalizers/byte_level.rs::struct::ByteLevel	struct	ported	src/tokens/normalizers/byte_level.cr:5	port complete
+src/normalizers/byte_level.rs::test::test_byte_level_normalize	test	ported	spec/normalizers/byte_level_spec.cr:5	port complete
+src/normalizers/mod.rs::enum::EnumType	enum	ported	src/tokens/normalizers/mod.cr:65	ported as string-tag dispatch in wrapper parser
+src/normalizers/mod.rs::enum::NormalizerHelper	enum	ported	src/tokens/normalizers/mod.cr:43	ported as tagged-vs-legacy JSON dispatch
+src/normalizers/mod.rs::enum::NormalizerUntagged	enum	ported	src/tokens/normalizers/mod.cr:43	ported as manual untagged wrapper dispatch
+src/normalizers/mod.rs::enum::NormalizerWrapper	enum	ported	src/tokens/normalizers/mod.cr:4	ported as wrapper class over tagged union
+src/normalizers/mod.rs::struct::Tagged	struct	ported	src/tokens/normalizers/mod.cr:65	ported as parsed tagged JSON object handling
+src/normalizers/mod.rs::test::normalizer_serialization	test	ported	spec/normalizers/mod_spec.cr:20	port complete
+src/normalizers/mod.rs::test::post_processor_deserialization_no_type	test	ported	spec/normalizers/mod_spec.cr:5	port complete
+src/normalizers/precompiled.rs::test::expansion_followed_by_removal	test	ported	spec/normalizers/precompiled_spec.cr:5	port complete
+src/normalizers/prepend.rs::func::new	func	ported	src/tokens/normalizers/prepend.cr:8	constructor provided by #initialize
+src/normalizers/prepend.rs::method::Prepend.new	method	ported	src/tokens/normalizers/prepend.cr:8	port complete
+src/normalizers/prepend.rs::struct::Prepend	struct	ported	src/tokens/normalizers/prepend.cr:3	port complete
+src/normalizers/prepend.rs::test::test_prepend	test	ported	spec/normalizers/prepend_spec.cr:5	port complete
+src/normalizers/replace.rs::enum::ReplacePattern	enum	ported	src/tokens/normalizers/replace.cr:5	ported as tagged union struct
+src/normalizers/replace.rs::struct::Replace	struct	ported	src/tokens/normalizers/replace.cr:70	port complete
+src/normalizers/replace.rs::test::serialization	test	ported	spec/normalizers/replace_spec.cr:25	port complete
+src/normalizers/replace.rs::test::test_replace	test	ported	spec/normalizers/replace_spec.cr:5	port complete
+src/normalizers/replace.rs::test::test_replace_decode	test	ported	spec/normalizers/replace_spec.cr:37	port complete
+src/normalizers/replace.rs::test::test_replace_regex	test	ported	spec/normalizers/replace_spec.cr:15	port complete
+src/normalizers/strip.rs::func::new	func	ported	src/tokens/normalizers/strip.cr:9	constructor provided by #initialize
+src/normalizers/strip.rs::method::Strip.new	method	ported	src/tokens/normalizers/strip.cr:9	port complete
+src/normalizers/strip.rs::struct::Strip	struct	ported	src/tokens/normalizers/strip.cr:3	port complete
+src/normalizers/strip.rs::struct::StripAccents	struct	ported	src/tokens/normalizers/strip.cr:22	port complete
+src/normalizers/strip.rs::test::test_strip_accents	test	ported	spec/normalizers/strip_spec.cr:5	port complete
+src/normalizers/strip.rs::test::test_strip_accents_multiple	test	ported	spec/normalizers/strip_spec.cr:42	port complete
+src/normalizers/strip.rs::test::test_thai_bug	test	ported	spec/normalizers/strip_spec.cr:34	port complete
+src/normalizers/strip.rs::test::test_vietnamese_bug	test	ported	spec/normalizers/strip_spec.cr:20	port complete
+src/normalizers/unicode.rs::struct::NFC	struct	ported	src/tokens/normalizers/unicode.cr:19	port complete
+src/normalizers/unicode.rs::struct::NFD	struct	ported	src/tokens/normalizers/unicode.cr:3	port complete
+src/normalizers/unicode.rs::struct::NFKC	struct	ported	src/tokens/normalizers/unicode.cr:27	port complete
+src/normalizers/unicode.rs::struct::NFKD	struct	ported	src/tokens/normalizers/unicode.cr:11	port complete
+src/normalizers/unicode.rs::struct::Nmt	struct	ported	src/tokens/normalizers/unicode.cr:35	port complete
+src/normalizers/unicode.rs::test::test_nfkc	test	ported	spec/normalizers/unicode_spec.cr:5	port complete
+src/normalizers/utils.rs::func::new	func	ported	src/tokens/normalizers/utils.cr:8	constructor provided by #initialize
+src/normalizers/utils.rs::method::Sequence.new	method	ported	src/tokens/normalizers/utils.cr:8	ported as Array(Tokens::Normalizer) sequence
+src/normalizers/utils.rs::struct::Lowercase	struct	ported	src/tokens/normalizers/utils.cr:16	port complete
+src/normalizers/utils.rs::struct::Sequence	struct	ported	src/tokens/normalizers/utils.cr:3	ported as Array(Tokens::Normalizer) sequence
+src/pre_tokenizers/bert.rs::struct::BertPreTokenizer	struct	ported	src/tokens/pre_tokenizers/bert.cr:5	port complete
+src/pre_tokenizers/bert.rs::test::basic	test	ported	spec/pre_tokenizers/bert_spec.cr:4	port complete
+src/pre_tokenizers/bert.rs::test::chinese_chars	test	ported	spec/pre_tokenizers/bert_spec.cr:26	port complete
+src/pre_tokenizers/byte_level.rs::func::add_prefix_space	func	ported	src/tokens/pre_tokenizers/byte_level.cr:32	port complete
+src/pre_tokenizers/byte_level.rs::func::alphabet	func	ported	src/tokens/pre_tokenizers/byte_level.cr:26	port complete
+src/pre_tokenizers/byte_level.rs::func::new	func	ported	src/tokens/pre_tokenizers/byte_level.cr:19	constructor provided by #initialize
+src/pre_tokenizers/byte_level.rs::func::process_offsets	func	ported	src/tokens/pre_tokenizers/byte_level.cr:149	port complete
+src/pre_tokenizers/byte_level.rs::func::trim_offsets	func	ported	src/tokens/pre_tokenizers/byte_level.cr:36	port complete
+src/pre_tokenizers/byte_level.rs::func::use_regex	func	ported	src/tokens/pre_tokenizers/byte_level.cr:40	port complete
+src/pre_tokenizers/byte_level.rs::method::ByteLevel.new	method	ported	src/tokens/pre_tokenizers/byte_level.cr:19	port complete
+src/pre_tokenizers/byte_level.rs::struct::ByteLevel	struct	ported	src/tokens/pre_tokenizers/byte_level.cr:6	port complete
+src/pre_tokenizers/byte_level.rs::test::add_prefix_space	test	ported	spec/pre_tokenizers/byte_level_spec.cr:47	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_unknown_characters	test	ported	spec/pre_tokenizers/byte_level_spec.cr:230	port complete
+src/pre_tokenizers/byte_level.rs::test::decode_works_on_separated_tokens	test	ported	spec/pre_tokenizers/byte_level_spec.cr:75	port complete
+src/pre_tokenizers/byte_level.rs::test::decoding	test	ported	spec/pre_tokenizers/byte_level_spec.cr:41	port complete
+src/pre_tokenizers/byte_level.rs::test::deserialization	test	ported	spec/pre_tokenizers/byte_level_spec.cr:236	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_multiple_whitespaces	test	ported	spec/pre_tokenizers/byte_level_spec.cr:111	port complete
+src/pre_tokenizers/byte_level.rs::test::handling_of_newlines	test	ported	spec/pre_tokenizers/byte_level_spec.cr:93	port complete
+src/pre_tokenizers/byte_level.rs::test::offsets_when_char_split_up	test	ported	spec/pre_tokenizers/byte_level_spec.cr:128	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization	test	ported	spec/pre_tokenizers/byte_level_spec.cr:4	port complete
+src/pre_tokenizers/byte_level.rs::test::pre_tokenization_no_regex	test	ported	spec/pre_tokenizers/byte_level_spec.cr:27	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets	test	ported	spec/pre_tokenizers/byte_level_spec.cr:187	port complete
+src/pre_tokenizers/byte_level.rs::test::processor_trims_offsets_pre_tokenized	test	ported	spec/pre_tokenizers/byte_level_spec.cr:159	port complete
+src/pre_tokenizers/delimiter.rs::func::new	func	ported	src/tokens/pre_tokenizers/delimiter.cr:10	constructor provided by #initialize
+src/pre_tokenizers/delimiter.rs::method::CharDelimiterSplit.new	method	ported	src/tokens/pre_tokenizers/delimiter.cr:10	port complete
+src/pre_tokenizers/delimiter.rs::struct::CharDelimiterSplit	struct	ported	src/tokens/pre_tokenizers/delimiter.cr:5	port complete
+src/pre_tokenizers/digits.rs::func::new	func	ported	src/tokens/pre_tokenizers/digits.cr:10	constructor provided by #initialize
+src/pre_tokenizers/digits.rs::method::Digits.new	method	ported	src/tokens/pre_tokenizers/digits.cr:10	port complete
+src/pre_tokenizers/digits.rs::struct::Digits	struct	ported	src/tokens/pre_tokenizers/digits.cr:5	port complete
+src/pre_tokenizers/digits.rs::test::individual_digits	test	ported	spec/pre_tokenizers/digits_spec.cr:27	port complete
+src/pre_tokenizers/digits.rs::test::numbers	test	ported	spec/pre_tokenizers/digits_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::func::new	func	ported	src/tokens/pre_tokenizers/fixed_length.cr:10	constructor provided by #initialize
+src/pre_tokenizers/fixed_length.rs::method::FixedLength.new	method	ported	src/tokens/pre_tokenizers/fixed_length.cr:10	port complete
+src/pre_tokenizers/fixed_length.rs::struct::FixedLength	struct	ported	src/tokens/pre_tokenizers/fixed_length.cr:5	port complete
+src/pre_tokenizers/fixed_length.rs::test::basic	test	ported	spec/pre_tokenizers/fixed_length_spec.cr:4	port complete
+src/pre_tokenizers/fixed_length.rs::test::custom_length	test	ported	spec/pre_tokenizers/fixed_length_spec.cr:22	port complete
+src/pre_tokenizers/fixed_length.rs::test::utf8_characters	test	ported	spec/pre_tokenizers/fixed_length_spec.cr:38	port complete
+src/pre_tokenizers/metaspace.rs::enum::PrependScheme	enum	ported	src/tokens/pre_tokenizers/metaspace.cr:5	port complete
+src/pre_tokenizers/metaspace.rs::func::get_prepend_scheme	func	ported	src/tokens/pre_tokenizers/metaspace.cr:47	port complete
+src/pre_tokenizers/metaspace.rs::func::get_replacement	func	ported	src/tokens/pre_tokenizers/metaspace.cr:27	port complete
+src/pre_tokenizers/metaspace.rs::func::get_split	func	ported	src/tokens/pre_tokenizers/metaspace.cr:37	port complete
+src/pre_tokenizers/metaspace.rs::func::new	func	ported	src/tokens/pre_tokenizers/metaspace.cr:19	constructor provided by #initialize
+src/pre_tokenizers/metaspace.rs::func::set_prepend_scheme	func	ported	src/tokens/pre_tokenizers/metaspace.cr:52	port complete
+src/pre_tokenizers/metaspace.rs::func::set_replacement	func	ported	src/tokens/pre_tokenizers/metaspace.cr:32	port complete
+src/pre_tokenizers/metaspace.rs::func::set_split	func	ported	src/tokens/pre_tokenizers/metaspace.cr:42	port complete
+src/pre_tokenizers/metaspace.rs::method::Metaspace.new	method	ported	src/tokens/pre_tokenizers/metaspace.cr:19	port complete
+src/pre_tokenizers/metaspace.rs::struct::Metaspace	struct	ported	src/tokens/pre_tokenizers/metaspace.cr:11	port complete
+src/pre_tokenizers/metaspace.rs::struct::MetaspaceHelper	struct	ported	src/tokens/pre_tokenizers/metaspace.cr:113	manual JSON helper behavior embedded in Metaspace.from_json
+src/pre_tokenizers/metaspace.rs::test::basic	test	ported	spec/pre_tokenizers/metaspace_spec.cr:21	port complete
+src/pre_tokenizers/metaspace.rs::test::decode	test	ported	spec/pre_tokenizers/metaspace_spec.cr:148	port complete
+src/pre_tokenizers/metaspace.rs::test::multiple_spaces	test	ported	spec/pre_tokenizers/metaspace_spec.cr:44	port complete
+src/pre_tokenizers/metaspace.rs::test::non_legacy_meta_space	test	ported	spec/pre_tokenizers/metaspace_spec.cr:71	port complete
+src/pre_tokenizers/metaspace.rs::test::serialization	test	ported	spec/pre_tokenizers/metaspace_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::enum::EnumType	enum	ported	src/tokens/pre_tokenizers/mod.cr:54	wrapper registry is ported across all upstream pre-tokenizer variants currently tracked in the ledger
+src/pre_tokenizers/mod.rs::enum::PreTokenizerHelper	enum	ported	src/tokens/pre_tokenizers/mod.cr:43	tagged JSON dispatch is handled by PreTokenizerWrapper.from_json
+src/pre_tokenizers/mod.rs::enum::PreTokenizerUntagged	enum	ported	src/tokens/pre_tokenizers/mod.cr:43	untagged enum matching is represented by the Crystal wrapper dispatcher
+src/pre_tokenizers/mod.rs::enum::PreTokenizerWrapper	enum	ported	src/tokens/pre_tokenizers/mod.cr:4	wrapper ported as Crystal class over tagged union
+src/pre_tokenizers/mod.rs::struct::Tagged	struct	ported	src/tokens/pre_tokenizers/mod.cr:54	tagged JSON object handling is embedded in PreTokenizerWrapper.from_json
+src/pre_tokenizers/mod.rs::test::pre_tokenizer_deserialization_no_type	test	ported	spec/pre_tokenizers/mod_spec.cr:25	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize	test	ported	spec/pre_tokenizers/mod_spec.cr:4	port complete
+src/pre_tokenizers/mod.rs::test::test_deserialize_whitespace_split	test	ported	spec/pre_tokenizers/mod_spec.cr:20	port complete
+src/pre_tokenizers/punctuation.rs::func::new	func	ported	src/tokens/pre_tokenizers/punctuation.cr:12	constructor provided by #initialize
+src/pre_tokenizers/punctuation.rs::method::Punctuation.new	method	ported	src/tokens/pre_tokenizers/punctuation.cr:12	port complete
+src/pre_tokenizers/punctuation.rs::struct::Punctuation	struct	ported	src/tokens/pre_tokenizers/punctuation.cr:5	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization	test	ported	spec/pre_tokenizers/punctuation_spec.cr:22	port complete
+src/pre_tokenizers/punctuation.rs::test::deserialization_erroneous	test	ported	spec/pre_tokenizers/punctuation_spec.cr:27	port complete
+src/pre_tokenizers/punctuation.rs::test::punctuation_basic	test	ported	spec/pre_tokenizers/punctuation_spec.cr:4	port complete
+src/pre_tokenizers/sequence.rs::func::new	func	ported	src/tokens/pre_tokenizers/sequence.cr:8	constructor provided by #initialize
+src/pre_tokenizers/sequence.rs::method::Sequence.new	method	ported	src/tokens/pre_tokenizers/sequence.cr:8	port complete
+src/pre_tokenizers/sequence.rs::struct::Sequence	struct	ported	src/tokens/pre_tokenizers/sequence.cr:3	port complete
+src/pre_tokenizers/sequence.rs::test::sequence_basic	test	ported	spec/pre_tokenizers/sequence_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::enum::SplitPattern	enum	ported	src/tokens/pre_tokenizers/split.cr:5	port complete
+src/pre_tokenizers/split.rs::struct::Split	struct	ported	src/tokens/pre_tokenizers/split.cr:52	port complete
+src/pre_tokenizers/split.rs::struct::SplitHelper	struct	ported	src/tokens/pre_tokenizers/split.cr:98	manual JSON helper parsing embedded in Split.from_json
+src/pre_tokenizers/split.rs::test::basic	test	ported	spec/pre_tokenizers/split_spec.cr:4	port complete
+src/pre_tokenizers/split.rs::test::invert	test	ported	spec/pre_tokenizers/split_spec.cr:78	port complete
+src/pre_tokenizers/split.rs::test::regex_string	test	ported	spec/pre_tokenizers/split_spec.cr:59	port complete
+src/pre_tokenizers/split.rs::test::serialization	test	ported	spec/pre_tokenizers/split_spec.cr:88	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::func::new	func	ported	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::method::UnicodeScripts.new	method	ported	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	zero-field struct uses the default Crystal constructor
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::struct::UnicodeScripts	struct	ported	src/tokens/pre_tokenizers/unicode_scripts/pre_tokenizer.cr:3	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::basic	test	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:4	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::spaces_are_included_in_every_script	test	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:29	port complete
+src/pre_tokenizers/unicode_scripts/pre_tokenizer.rs::test::test_unicode_script	test	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:52	port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::enum::Script	enum	ported	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:9	generated script table port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::func::get_script	func	ported	src/tokens/pre_tokenizers/unicode_scripts/scripts.cr:151	generated script lookup port complete
+src/pre_tokenizers/unicode_scripts/scripts.rs::test::test_unicode_script	test	ported	spec/pre_tokenizers/unicode_scripts_spec.cr:69	port complete
+src/pre_tokenizers/whitespace.rs::struct::Whitespace	struct	ported	src/tokens/pre_tokenizers/whitespace.cr:3	port complete
+src/pre_tokenizers/whitespace.rs::struct::WhitespaceSplit	struct	ported	src/tokens/pre_tokenizers/whitespace.cr:16	port complete
+src/pre_tokenizers/whitespace.rs::test::basic	test	ported	spec/pre_tokenizers/whitespace_spec.cr:4	port complete
+src/pre_tokenizers/whitespace.rs::test::whitespace_split	test	ported	spec/pre_tokenizers/whitespace_spec.cr:24	port complete
 src/processors/bert.rs::enum::BertProcessorError	enum	ported	src/tokens/processors:ported	ported
 src/processors/bert.rs::func::get_cls_copy	func	ported	src/tokens/processors:ported	ported
 src/processors/bert.rs::func::get_sep_copy	func	ported	src/tokens/processors:ported	ported
@@ -450,85 +450,85 @@ src/processors/template.rs::test::template_processing_overflowing	test	ported	sr
 src/processors/template.rs::test::template_processing_serde	test	ported	src/tokens/processors:ported	ported
 src/processors/template.rs::test::template_serde	test	ported	src/tokens/processors:ported	ported
 src/processors/template.rs::test::tokens_serde	test	ported	src/tokens/processors:ported	ported
-src/tokenizer/added_vocabulary.rs::func::get_added_tokens_decoder	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:109	port complete
-src/tokenizer/added_vocabulary.rs::func::get_encode_special_tokens	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:101	port complete
-src/tokenizer/added_vocabulary.rs::func::get_vocab	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:105	port complete
-src/tokenizer/added_vocabulary.rs::func::id_to_token	func	implemented	src/tokens/tokenizer/tokenizer.cr:157	behavior provided via tokenizer#id_to_token
-src/tokenizer/added_vocabulary.rs::func::is_empty	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:93	ported as #empty?
-src/tokenizer/added_vocabulary.rs::func::is_special_token	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:123	port complete
-src/tokenizer/added_vocabulary.rs::func::len	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:89	port complete
-src/tokenizer/added_vocabulary.rs::func::lstrip	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:34	port complete
-src/tokenizer/added_vocabulary.rs::func::new	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
-src/tokenizer/added_vocabulary.rs::func::normalized	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:44	port complete
-src/tokenizer/added_vocabulary.rs::func::rstrip	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:39	port complete
-src/tokenizer/added_vocabulary.rs::func::set_encode_special_tokens	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:97	port complete
-src/tokenizer/added_vocabulary.rs::func::simple_id_to_token	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:117	port complete
-src/tokenizer/added_vocabulary.rs::func::single_word	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:29	port complete
-src/tokenizer/added_vocabulary.rs::func::special	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:49	port complete
-src/tokenizer/added_vocabulary.rs::func::token_to_id	func	implemented	src/tokens/tokenizer/added_vocabulary.cr:113	port complete
-src/tokenizer/added_vocabulary.rs::method::AddedVocabulary.new	method	implemented	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
-src/tokenizer/added_vocabulary.rs::struct::AddedToken	struct	implemented	src/tokens/tokenizer/added_vocabulary.cr:5	port complete
-src/tokenizer/added_vocabulary.rs::struct::AddedVocabulary	struct	implemented	src/tokens/tokenizer/added_vocabulary.cr:75	port complete
-src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:304	port complete
-src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:79	port complete
-src/tokenizer/added_vocabulary.rs::test::can_add_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:60	port complete
-src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:119	port complete
-src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:268	port complete
-src/tokenizer/added_vocabulary.rs::test::empty_matches	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:167	port complete
-src/tokenizer/added_vocabulary.rs::test::options_use_cases	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:142	port complete
-src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:288	port complete
-src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:228	port complete
-src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:209	port complete
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:172	port complete
-src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	test	implemented	spec/tokenizer/added_vocabulary_spec.cr:191	port complete
-src/tokenizer/encoding.rs::func::char_to_token	func	implemented	src/tokens/tokenizer/encoding.cr:161	port complete
-src/tokenizer/encoding.rs::func::char_to_word	func	implemented	src/tokens/tokenizer/encoding.cr:170	port complete
-src/tokenizer/encoding.rs::func::from_tokens	func	implemented	src/tokens/tokenizer/encoding.cr:43	port complete
+src/tokenizer/added_vocabulary.rs::func::get_added_tokens_decoder	func	ported	src/tokens/tokenizer/added_vocabulary.cr:109	port complete
+src/tokenizer/added_vocabulary.rs::func::get_encode_special_tokens	func	ported	src/tokens/tokenizer/added_vocabulary.cr:101	port complete
+src/tokenizer/added_vocabulary.rs::func::get_vocab	func	ported	src/tokens/tokenizer/added_vocabulary.cr:105	port complete
+src/tokenizer/added_vocabulary.rs::func::id_to_token	func	ported	src/tokens/tokenizer/tokenizer.cr:157	behavior provided via tokenizer#id_to_token
+src/tokenizer/added_vocabulary.rs::func::is_empty	func	ported	src/tokens/tokenizer/added_vocabulary.cr:93	ported as #empty?
+src/tokenizer/added_vocabulary.rs::func::is_special_token	func	ported	src/tokens/tokenizer/added_vocabulary.cr:123	port complete
+src/tokenizer/added_vocabulary.rs::func::len	func	ported	src/tokens/tokenizer/added_vocabulary.cr:89	port complete
+src/tokenizer/added_vocabulary.rs::func::lstrip	func	ported	src/tokens/tokenizer/added_vocabulary.cr:34	port complete
+src/tokenizer/added_vocabulary.rs::func::new	func	ported	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::func::normalized	func	ported	src/tokens/tokenizer/added_vocabulary.cr:44	port complete
+src/tokenizer/added_vocabulary.rs::func::rstrip	func	ported	src/tokens/tokenizer/added_vocabulary.cr:39	port complete
+src/tokenizer/added_vocabulary.rs::func::set_encode_special_tokens	func	ported	src/tokens/tokenizer/added_vocabulary.cr:97	port complete
+src/tokenizer/added_vocabulary.rs::func::simple_id_to_token	func	ported	src/tokens/tokenizer/added_vocabulary.cr:117	port complete
+src/tokenizer/added_vocabulary.rs::func::single_word	func	ported	src/tokens/tokenizer/added_vocabulary.cr:29	port complete
+src/tokenizer/added_vocabulary.rs::func::special	func	ported	src/tokens/tokenizer/added_vocabulary.cr:49	port complete
+src/tokenizer/added_vocabulary.rs::func::token_to_id	func	ported	src/tokens/tokenizer/added_vocabulary.cr:113	port complete
+src/tokenizer/added_vocabulary.rs::method::AddedVocabulary.new	method	ported	src/tokens/tokenizer/added_vocabulary.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::struct::AddedToken	struct	ported	src/tokens/tokenizer/added_vocabulary.cr:5	port complete
+src/tokenizer/added_vocabulary.rs::struct::AddedVocabulary	struct	ported	src/tokens/tokenizer/added_vocabulary.cr:75	port complete
+src/tokenizer/added_vocabulary.rs::test::byte_level_normalizer	test	ported	spec/tokenizer/added_vocabulary_spec.cr:304	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_special_tokens	test	ported	spec/tokenizer/added_vocabulary_spec.cr:79	port complete
+src/tokenizer/added_vocabulary.rs::test::can_add_tokens	test	ported	spec/tokenizer/added_vocabulary_spec.cr:60	port complete
+src/tokenizer/added_vocabulary.rs::test::can_extract_added_tokens	test	ported	spec/tokenizer/added_vocabulary_spec.cr:119	port complete
+src/tokenizer/added_vocabulary.rs::test::content_preserved_with_normalizer	test	ported	spec/tokenizer/added_vocabulary_spec.cr:268	port complete
+src/tokenizer/added_vocabulary.rs::test::empty_matches	test	ported	spec/tokenizer/added_vocabulary_spec.cr:167	port complete
+src/tokenizer/added_vocabulary.rs::test::options_use_cases	test	ported	spec/tokenizer/added_vocabulary_spec.cr:142	port complete
+src/tokenizer/added_vocabulary.rs::test::refresh_normalized_tokens_on_normalizer_change	test	ported	spec/tokenizer/added_vocabulary_spec.cr:288	port complete
+src/tokenizer/added_vocabulary.rs::test::test_encode_special_tokens	test	ported	spec/tokenizer/added_vocabulary_spec.cr:228	port complete
+src/tokenizer/added_vocabulary.rs::test::test_lstrip_unicode_space	test	ported	spec/tokenizer/added_vocabulary_spec.cr:209	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_correct	test	ported	spec/tokenizer/added_vocabulary_spec.cr:172	port complete
+src/tokenizer/added_vocabulary.rs::test::test_single_word_is_unicode_correct	test	ported	spec/tokenizer/added_vocabulary_spec.cr:191	port complete
+src/tokenizer/encoding.rs::func::char_to_token	func	ported	src/tokens/tokenizer/encoding.cr:161	port complete
+src/tokenizer/encoding.rs::func::char_to_word	func	ported	src/tokens/tokenizer/encoding.cr:170	port complete
+src/tokenizer/encoding.rs::func::from_tokens	func	ported	src/tokens/tokenizer/encoding.cr:43	port complete
 src/tokenizer/encoding.rs::func::get_attention_mask	func	ported	src/tokens/tokenizer/encoding.cr:8	getter attention_mask
 src/tokenizer/encoding.rs::func::get_ids	func	ported	src/tokens/tokenizer/encoding.cr:7	getter ids
 src/tokenizer/encoding.rs::func::get_offsets	func	ported	src/tokens/tokenizer/encoding.cr:11	getter offsets
-src/tokenizer/encoding.rs::func::get_offsets_mut	func	intentional_divergence	src/tokens/tokenizer/encoding.cr:98	Crystal: process_tokens_with_offsets_mut
+src/tokenizer/encoding.rs::func::get_offsets_mut	func	skipped	src/tokens/tokenizer/encoding.cr:98	Crystal: process_tokens_with_offsets_mut
 src/tokenizer/encoding.rs::func::get_overflowing	func	ported	src/tokens/tokenizer/encoding.cr:14	getter overflowing
-src/tokenizer/encoding.rs::func::get_overflowing_mut	func	intentional_divergence	src/tokens/tokenizer/encoding.cr:92	Crystal: take_overflowing
-src/tokenizer/encoding.rs::func::get_sequence_ids	func	implemented	src/tokens/tokenizer/encoding.cr:76	port complete
+src/tokenizer/encoding.rs::func::get_overflowing_mut	func	skipped	src/tokens/tokenizer/encoding.cr:92	Crystal: take_overflowing
+src/tokenizer/encoding.rs::func::get_sequence_ids	func	ported	src/tokens/tokenizer/encoding.cr:76	port complete
 src/tokenizer/encoding.rs::func::get_special_tokens_mask	func	ported	src/tokens/tokenizer/encoding.cr:12	getter special_tokens_mask
 src/tokenizer/encoding.rs::func::get_tokens	func	ported	src/tokens/tokenizer/encoding.cr:9	getter tokens
 src/tokenizer/encoding.rs::func::get_type_ids	func	ported	src/tokens/tokenizer/encoding.cr:8	getter type_ids
 src/tokenizer/encoding.rs::func::get_word_ids	func	ported	src/tokens/tokenizer/encoding.cr:10	getter words
-src/tokenizer/encoding.rs::func::get_word_ids_mut	func	intentional_divergence	-	Crystal: words array is mutable via getter
-src/tokenizer/encoding.rs::func::is_empty	func	implemented	src/tokens/tokenizer/encoding.cr:59	ported as #empty?
-src/tokenizer/encoding.rs::func::len	func	implemented	src/tokens/tokenizer/encoding.cr:63	ported as #length
-src/tokenizer/encoding.rs::func::merge_with	func	implemented	src/tokens/tokenizer/encoding.cr:254	port complete
-src/tokenizer/encoding.rs::func::n_sequences	func	implemented	src/tokens/tokenizer/encoding.cr:67	port complete
-src/tokenizer/encoding.rs::func::new	func	implemented	src/tokens/tokenizer/encoding.cr:17	port complete
-src/tokenizer/encoding.rs::func::pad	func	implemented	src/tokens/tokenizer/encoding.cr:301	port complete
-src/tokenizer/encoding.rs::func::set_overflowing	func	intentional_divergence	-	Crystal: set via overflowing= or initializer
+src/tokenizer/encoding.rs::func::get_word_ids_mut	func	skipped	-	Crystal: words array is mutable via getter
+src/tokenizer/encoding.rs::func::is_empty	func	ported	src/tokens/tokenizer/encoding.cr:59	ported as #empty?
+src/tokenizer/encoding.rs::func::len	func	ported	src/tokens/tokenizer/encoding.cr:63	ported as #length
+src/tokenizer/encoding.rs::func::merge_with	func	ported	src/tokens/tokenizer/encoding.cr:254	port complete
+src/tokenizer/encoding.rs::func::n_sequences	func	ported	src/tokens/tokenizer/encoding.cr:67	port complete
+src/tokenizer/encoding.rs::func::new	func	ported	src/tokens/tokenizer/encoding.cr:17	port complete
+src/tokenizer/encoding.rs::func::pad	func	ported	src/tokens/tokenizer/encoding.cr:301	port complete
+src/tokenizer/encoding.rs::func::set_overflowing	func	skipped	-	Crystal: set via overflowing= or initializer
 src/tokenizer/encoding.rs::func::set_sequence_id	func	ported	src/tokens/tokenizer/encoding.cr:71	set_sequence_id
 src/tokenizer/encoding.rs::func::set_type_ids	func	ported	src/tokens/tokenizer/encoding.cr:87	set_type_ids
-src/tokenizer/encoding.rs::func::take_overflowing	func	implemented	src/tokens/tokenizer/encoding.cr:91	port complete
-src/tokenizer/encoding.rs::func::token_to_chars	func	implemented	src/tokens/tokenizer/encoding.cr:145	port complete
-src/tokenizer/encoding.rs::func::token_to_sequence	func	implemented	src/tokens/tokenizer/encoding.cr:107	port complete
-src/tokenizer/encoding.rs::func::token_to_word	func	implemented	src/tokens/tokenizer/encoding.cr:153	port complete
-src/tokenizer/encoding.rs::func::truncate	func	implemented	src/tokens/tokenizer/encoding.cr:178	port complete
-src/tokenizer/encoding.rs::func::with_capacity	func	implemented	src/tokens/tokenizer/encoding.cr:31	port complete
-src/tokenizer/encoding.rs::func::word_to_chars	func	implemented	src/tokens/tokenizer/encoding.cr:137	port complete
-src/tokenizer/encoding.rs::func::word_to_tokens	func	implemented	src/tokens/tokenizer/encoding.cr:116	port complete
-src/tokenizer/encoding.rs::method::Encoding.new	method	implemented	src/tokens/tokenizer/encoding.cr:17	port complete
-src/tokenizer/encoding.rs::struct::Encoding	struct	implemented	src/tokens/tokenizer/encoding.cr:4	port complete
-src/tokenizer/encoding.rs::test::mappings	test	implemented	spec/tokenizer/encoding_spec.cr:109	port complete
-src/tokenizer/encoding.rs::test::merge_encodings	test	implemented	spec/tokenizer/encoding_spec.cr:5	port complete
-src/tokenizer/encoding.rs::test::padding	test	implemented	spec/tokenizer/encoding_spec.cr:176	port complete
-src/tokenizer/encoding.rs::test::truncate	test	implemented	spec/tokenizer/encoding_spec.cr:35	port complete
-src/tokenizer/encoding.rs::test::truncate_left	test	implemented	spec/tokenizer/encoding_spec.cr:54	port complete
-src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	test	implemented	spec/tokenizer/encoding_spec.cr:90	port complete
-src/tokenizer/encoding.rs::test::truncate_to_empty	test	implemented	spec/tokenizer/encoding_spec.cr:73	port complete
+src/tokenizer/encoding.rs::func::take_overflowing	func	ported	src/tokens/tokenizer/encoding.cr:91	port complete
+src/tokenizer/encoding.rs::func::token_to_chars	func	ported	src/tokens/tokenizer/encoding.cr:145	port complete
+src/tokenizer/encoding.rs::func::token_to_sequence	func	ported	src/tokens/tokenizer/encoding.cr:107	port complete
+src/tokenizer/encoding.rs::func::token_to_word	func	ported	src/tokens/tokenizer/encoding.cr:153	port complete
+src/tokenizer/encoding.rs::func::truncate	func	ported	src/tokens/tokenizer/encoding.cr:178	port complete
+src/tokenizer/encoding.rs::func::with_capacity	func	ported	src/tokens/tokenizer/encoding.cr:31	port complete
+src/tokenizer/encoding.rs::func::word_to_chars	func	ported	src/tokens/tokenizer/encoding.cr:137	port complete
+src/tokenizer/encoding.rs::func::word_to_tokens	func	ported	src/tokens/tokenizer/encoding.cr:116	port complete
+src/tokenizer/encoding.rs::method::Encoding.new	method	ported	src/tokens/tokenizer/encoding.cr:17	port complete
+src/tokenizer/encoding.rs::struct::Encoding	struct	ported	src/tokens/tokenizer/encoding.cr:4	port complete
+src/tokenizer/encoding.rs::test::mappings	test	ported	spec/tokenizer/encoding_spec.cr:109	port complete
+src/tokenizer/encoding.rs::test::merge_encodings	test	ported	spec/tokenizer/encoding_spec.cr:5	port complete
+src/tokenizer/encoding.rs::test::padding	test	ported	spec/tokenizer/encoding_spec.cr:176	port complete
+src/tokenizer/encoding.rs::test::truncate	test	ported	spec/tokenizer/encoding_spec.cr:35	port complete
+src/tokenizer/encoding.rs::test::truncate_left	test	ported	spec/tokenizer/encoding_spec.cr:54	port complete
+src/tokenizer/encoding.rs::test::truncate_overflow_with_stride	test	ported	spec/tokenizer/encoding_spec.cr:90	port complete
+src/tokenizer/encoding.rs::test::truncate_to_empty	test	ported	spec/tokenizer/encoding_spec.cr:73	port complete
 src/tokenizer/mod.rs::enum::DecodeStreamError	enum	ported	src/tokens/tokenizer/tokenizer.cr:2	DecodeStreamError
-src/tokenizer/mod.rs::enum::EncodeInput	enum	intentional_divergence	src/tokens/tokenizer/input_sequence.cr	InputSequence handles both raw and pretokenized
+src/tokenizer/mod.rs::enum::EncodeInput	enum	skipped	src/tokens/tokenizer/input_sequence.cr	InputSequence handles both raw and pretokenized
 src/tokenizer/mod.rs::enum::InputSequence	enum	ported	src/tokens/tokenizer/input_sequence.cr	InputSequence
-src/tokenizer/mod.rs::enum::ProcessorError	enum	intentional_divergence	-	Crystal: uses Exception directly
+src/tokenizer/mod.rs::enum::ProcessorError	enum	skipped	-	Crystal: uses Exception directly
 src/tokenizer/mod.rs::func::add_special_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:169	add_special_tokens
 src/tokenizer/mod.rs::func::add_tokens	func	ported	src/tokens/tokenizer/tokenizer.cr:173	add_tokens
-src/tokenizer/mod.rs::func::build	func	intentional_divergence	-	Crystal: TokenizerImpl constructor instead of builder pattern
+src/tokenizer/mod.rs::func::build	func	skipped	-	Crystal: TokenizerImpl constructor instead of builder pattern
 src/tokenizer/mod.rs::func::decode	func	ported	src/tokens/tokenizer/tokenizer.cr:224	decode
 src/tokenizer/mod.rs::func::decode_batch	func	skipped	-	not ported: batch decode
 src/tokenizer/mod.rs::func::decode_stream	func	ported	src/tokens/tokenizer/tokenizer.cr:258	decode_stream
@@ -540,11 +540,11 @@ src/tokenizer/mod.rs::func::get_encode_special_tokens	func	ported	src/tokens/tok
 src/tokenizer/mod.rs::func::get_model	func	ported	src/tokens/tokenizer/tokenizer.cr:101	get_model
 src/tokenizer/mod.rs::func::get_normalizer	func	ported	src/tokens/tokenizer/tokenizer.cr:65	get_normalizer
 src/tokenizer/mod.rs::func::get_padding	func	ported	src/tokens/tokenizer/tokenizer.cr:128	get_padding
-src/tokenizer/mod.rs::func::get_padding_mut	func	intentional_divergence	-	Crystal: padding is mutable via with_padding
+src/tokenizer/mod.rs::func::get_padding_mut	func	skipped	-	Crystal: padding is mutable via with_padding
 src/tokenizer/mod.rs::func::get_post_processor	func	ported	src/tokens/tokenizer/tokenizer.cr:83	get_post_processor
 src/tokenizer/mod.rs::func::get_pre_tokenizer	func	ported	src/tokens/tokenizer/tokenizer.cr:74	get_pre_tokenizer
 src/tokenizer/mod.rs::func::get_truncation	func	ported	src/tokens/tokenizer/tokenizer.cr:119	get_truncation
-src/tokenizer/mod.rs::func::get_truncation_mut	func	intentional_divergence	-	Crystal: truncation is mutable via with_truncation
+src/tokenizer/mod.rs::func::get_truncation_mut	func	skipped	-	Crystal: truncation is mutable via with_truncation
 src/tokenizer/mod.rs::func::get_vocab	func	ported	src/tokens/tokenizer/tokenizer.cr:137	get_vocab
 src/tokenizer/mod.rs::func::get_vocab_size	func	ported	src/tokens/tokenizer/tokenizer.cr:143	get_vocab_size
 src/tokenizer/mod.rs::func::id_to_token	func	ported	src/tokens/tokenizer/tokenizer.cr:157	id_to_token
@@ -558,39 +558,39 @@ src/tokenizer/mod.rs::func::token_to_id	func	ported	src/tokens/tokenizer/tokeniz
 src/tokenizer/mod.rs::func::with_added_vocabulary	func	ported	src/tokens/tokenizer/tokenizer.cr:109	with_added_vocabulary
 src/tokenizer/mod.rs::func::with_decoder	func	ported	src/tokens/tokenizer/tokenizer.cr:92	with_decoder
 src/tokenizer/mod.rs::func::with_model	func	ported	src/tokens/tokenizer/tokenizer.cr:101	with_model
-src/tokenizer/mod.rs::func::with_normalizer	func	implemented	src/tokens/tokenizer/tokenizer.cr:63	refreshes added-token normalization cache
+src/tokenizer/mod.rs::func::with_normalizer	func	ported	src/tokens/tokenizer/tokenizer.cr:63	refreshes added-token normalization cache
 src/tokenizer/mod.rs::func::with_padding	func	ported	src/tokens/tokenizer/tokenizer.cr:128	with_padding
 src/tokenizer/mod.rs::func::with_post_processor	func	ported	src/tokens/tokenizer/tokenizer.cr:83	with_post_processor
 src/tokenizer/mod.rs::func::with_pre_tokenizer	func	ported	src/tokens/tokenizer/tokenizer.cr:74	with_pre_tokenizer
 src/tokenizer/mod.rs::func::with_truncation	func	ported	src/tokens/tokenizer/tokenizer.cr:119	with_truncation
 src/tokenizer/mod.rs::method::Token.new	method	ported	src/tokens/token.cr:2	Token.new
 src/tokenizer/mod.rs::method::Tokenizer.new	method	ported	src/tokens/tokenizer/tokenizer.cr:367	Tokenizer.new
-src/tokenizer/mod.rs::method::TokenizerBuilder.new	method	intentional_divergence	-	Crystal: no builder class, use TokenizerImpl method chaining
+src/tokenizer/mod.rs::method::TokenizerBuilder.new	method	skipped	-	Crystal: no builder class, use TokenizerImpl method chaining
 src/tokenizer/mod.rs::method::TokenizerImpl.add_special_tokens	method	ported	src/tokens/tokenizer/tokenizer.cr:169	add_special_tokens
 src/tokenizer/mod.rs::method::TokenizerImpl.new	method	ported	src/tokens/tokenizer/tokenizer.cr:49	TokenizerImpl.new
 src/tokenizer/mod.rs::method::TokenizerImpl.post_process	method	ported	src/tokens/tokenizer/tokenizer.cr:273	post_process
 src/tokenizer/mod.rs::method::TokenizerImpl.to_string	method	ported	src/tokens/tokenizer/tokenizer.cr:360	to_json
-src/tokenizer/mod.rs::struct::BuilderError	struct	intentional_divergence	-	Crystal: uses Exception directly
+src/tokenizer/mod.rs::struct::BuilderError	struct	skipped	-	Crystal: uses Exception directly
 src/tokenizer/mod.rs::struct::DecodeStream	struct	ported	src/tokens/tokenizer/tokenizer.cr:375	DecodeStream
 src/tokenizer/mod.rs::struct::Token	struct	ported	src/tokens/token.cr:2	Token
 src/tokenizer/mod.rs::struct::Tokenizer	struct	ported	src/tokens/tokenizer/tokenizer.cr:364	Tokenizer
-src/tokenizer/mod.rs::struct::TokenizerBuilder	struct	intentional_divergence	-	Crystal: no builder struct, method chaining on TokenizerImpl
+src/tokenizer/mod.rs::struct::TokenizerBuilder	struct	skipped	-	Crystal: no builder struct, method chaining on TokenizerImpl
 src/tokenizer/mod.rs::struct::TokenizerImpl	struct	ported	src/tokens/tokenizer/tokenizer.cr:42	TokenizerImpl
-src/tokenizer/mod.rs::struct::TruncationParamError	struct	intentional_divergence	-	Crystal: uses Exception directly
-src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	test	implemented	spec/tokenizer/tokenizer_spec.cr:78	port complete
-src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	test	implemented	spec/tokenizer/tokenizer_spec.cr:126	port complete
-src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:110	port complete
-src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	test	implemented	spec/tokenizer/tokenizer_spec.cr:96	port complete
-src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	test	implemented	spec/tokenizer/tokenizer_spec.cr:60	port complete
+src/tokenizer/mod.rs::struct::TruncationParamError	struct	skipped	-	Crystal: uses Exception directly
+src/tokenizer/mod.rs::test::left_truncation_keeps_tail_tokens	test	ported	spec/tokenizer/tokenizer_spec.cr:78	port complete
+src/tokenizer/mod.rs::test::pair_only_first_does_not_truncate_second	test	ported	spec/tokenizer/tokenizer_spec.cr:126	port complete
+src/tokenizer/mod.rs::test::pair_only_second_does_not_truncate_first	test	ported	spec/tokenizer/tokenizer_spec.cr:110	port complete
+src/tokenizer/mod.rs::test::pair_right_truncation_longest_first	test	ported	spec/tokenizer/tokenizer_spec.cr:96	port complete
+src/tokenizer/mod.rs::test::right_truncation_early_exit_matches_full_encode	test	ported	spec/tokenizer/tokenizer_spec.cr:60	port complete
 src/tokenizer/mod.rs::trait::Decoder	trait	ported	src/tokens/tokenizer/tokenizer.cr:30	module Decoder
 src/tokenizer/mod.rs::trait::Model	trait	ported	src/tokens/model.cr:4	module Model
 src/tokenizer/mod.rs::trait::Normalizer	trait	ported	src/tokens/tokenizer/tokenizer.cr:12	module Normalizer
 src/tokenizer/mod.rs::trait::PostProcessor	trait	ported	src/tokens/tokenizer/tokenizer.cr:20	module PostProcessor
 src/tokenizer/mod.rs::trait::PreTokenizer	trait	ported	src/tokens/tokenizer/tokenizer.cr:16	module PreTokenizer
 src/tokenizer/mod.rs::trait::Trainer	trait	ported	src/tokens/tokenizer/tokenizer.cr:38	module Trainer
-src/tokenizer/mod.rs::type::Error	type	intentional_divergence	-	Crystal: uses Exception subclasses
-src/tokenizer/mod.rs::type::Offsets	type	intentional_divergence	-	Crystal: uses Tuple(UInt32, UInt32)
-src/tokenizer/mod.rs::type::Result	type	intentional_divergence	-	Crystal: uses exceptions, not Result types
+src/tokenizer/mod.rs::type::Error	type	skipped	-	Crystal: uses Exception subclasses
+src/tokenizer/mod.rs::type::Offsets	type	skipped	-	Crystal: uses Tuple(UInt32, UInt32)
+src/tokenizer/mod.rs::type::Result	type	skipped	-	Crystal: uses exceptions, not Result types
 src/tokenizer/normalizer.rs::enum::OffsetReferential	enum	ported	src/tokens/tokenizer/normalizer.cr:4	port complete
 src/tokenizer/normalizer.rs::enum::Range	enum	partial	src/tokens/tokenizer/normalizer.cr:20	port mapped to Tokens::Range::Original/Normalized wrapper structs rather than a single enum
 src/tokenizer/normalizer.rs::enum::SplitDelimiterBehavior	enum	ported	src/tokens/tokenizer/normalizer.cr:9	port complete
@@ -614,9 +614,9 @@ src/tokenizer/normalizer.rs::func::offsets_original	func	ported	src/tokens/token
 src/tokenizer/normalizer.rs::func::prepend	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString prepend
 src/tokenizer/normalizer.rs::func::rstrip	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString rstrip
 src/tokenizer/normalizer.rs::func::strip	func	ported	src/tokens/tokenizer/normalizer.cr	NormalizedString strip
-src/tokenizer/normalizer.rs::func::unwrap	func	intentional_divergence	-	Crystal: nil-safety, no unwrap needed
-src/tokenizer/normalizer.rs::func::uppercase	func	intentional_divergence	-	not ported: uppercase (not needed by current normalizers)
-src/tokenizer/normalizer.rs::method::Range.unwrap	method	intentional_divergence	-	Crystal: nil-safety, no unwrap needed
+src/tokenizer/normalizer.rs::func::unwrap	func	skipped	-	Crystal: nil-safety, no unwrap needed
+src/tokenizer/normalizer.rs::func::uppercase	func	skipped	-	not ported: uppercase (not needed by current normalizers)
+src/tokenizer/normalizer.rs::method::Range.unwrap	method	skipped	-	Crystal: nil-safety, no unwrap needed
 src/tokenizer/normalizer.rs::struct::NormalizedString	struct	ported	src/tokens/tokenizer/normalizer.cr:97	NormalizedString
 src/tokenizer/normalizer.rs::test::added_around_edges	test	ported	spec/tokenizer/normalizer_spec.cr:125	port complete
 src/tokenizer/normalizer.rs::test::added_characters_alignment	test	ported	spec/tokenizer/normalizer_spec.cr:141	port complete
@@ -655,61 +655,61 @@ src/tokenizer/pattern.rs::trait::Pattern	trait	ported	src/tokens/tokenizer/patte
 src/tokenizer/pre_tokenizer.rs::enum::OffsetType	enum	ported	src/tokens/tokenizer/encoding.cr	OffsetType enum
 src/tokenizer/pre_tokenizer.rs::func::convert	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.into_encoding
 src/tokenizer/pre_tokenizer.rs::func::get_splits	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.get_splits
-src/tokenizer/pre_tokenizer.rs::func::into_encoding	func	implemented	src/tokens/tokenizer/pre_tokenizer.cr:96	port complete
+src/tokenizer/pre_tokenizer.rs::func::into_encoding	func	ported	src/tokens/tokenizer/pre_tokenizer.cr:96	port complete
 src/tokenizer/pre_tokenizer.rs::func::new	func	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString.new
 src/tokenizer/pre_tokenizer.rs::method::BytesToCharOffsetConverter.new	method	ported	src/tokens/tokenizer/pre_tokenizer.cr	BytesToCharOffsetConverter
 src/tokenizer/pre_tokenizer.rs::struct::PreTokenizedString	struct	ported	src/tokens/tokenizer/pre_tokenizer.cr	PreTokenizedString
-src/tokenizer/pre_tokenizer.rs::struct::Split	struct	implemented	src/tokens/tokenizer/pre_tokenizer.cr:2	port complete
+src/tokenizer/pre_tokenizer.rs::struct::Split	struct	ported	src/tokens/tokenizer/pre_tokenizer.cr:2	port complete
 src/tokenizer/serialization.rs::test::test_deserialization_serialization_invariant	test	ported	spec/tokenizer/serialization_spec.cr	ported: serialization round-trip spec
 src/tokenizer/serialization.rs::test::test_from_pretrained	test	skipped	-	not ported: requires HTTP feature and network access
-src/utils/fancy.rs::func::new	func	intentional_divergence	-	intentional_divergence: pretty-print diagnostics not needed
-src/utils/fancy.rs::struct::Matches	struct	intentional_divergence	-	intentional_divergence: pretty-print diagnostics not needed
-src/utils/fancy.rs::struct::SysRegex	struct	intentional_divergence	-	intentional_divergence: pretty-print diagnostics not needed
-src/utils/from_pretrained.rs::struct::FromPretrainedParameters	struct	skipped	-	skipped: HTTP model download not needed yet
-src/utils/iter.rs::struct::Lines	struct	intentional_divergence	-	intentional_divergence: Crystal uses different iterator patterns
-src/utils/iter.rs::struct::ResultShunt	struct	intentional_divergence	-	intentional_divergence: Crystal uses different iterator patterns
-src/utils/iter.rs::trait::LinesWithEnding	trait	intentional_divergence	-	intentional_divergence: Crystal uses different iterator patterns
-src/utils/onig.rs::func::new	func	intentional_divergence	-	intentional_divergence: Crystal uses PCRE2 via SysRegex
-src/utils/onig.rs::struct::SysRegex	struct	intentional_divergence	-	intentional_divergence: Crystal uses PCRE2 via SysRegex
-src/utils/padding.rs::enum::PaddingDirection	enum	implemented	src/tokens/tokenizer/encoding.cr:354	co-located in tokenizer encoding port
-src/utils/padding.rs::enum::PaddingStrategy	enum	implemented	src/tokens/tokenizer/encoding.cr:397	ported with fixed size carried in params
-src/utils/padding.rs::func::pad_encodings	func	implemented	src/tokens/tokenizer/encoding.cr:402	port complete
-src/utils/padding.rs::struct::PaddingParams	struct	implemented	src/tokens/tokenizer/encoding.cr:382	ported with explicit fixed_size field
-src/utils/padding.rs::test::pad_to_multiple	test	implemented	spec/tokenizer/padding_spec.cr:12	port complete
-src/utils/parallelism.rs::const::ENV_VARIABLE	const	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::func::get_parallelism	func	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::func::has_parallelism_been_used	func	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::func::is_parallelism_configured	func	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::func::set_parallelism	func	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::test::test_maybe_parallel_iterator	test	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::test::test_maybe_parallel_slice	test	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::trait::MaybeParallelBridge	trait	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::trait::MaybeParallelIterator	trait	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::trait::MaybeParallelRefIterator	trait	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::trait::MaybeParallelRefMutIterator	trait	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/parallelism.rs::trait::MaybeParallelSlice	trait	intentional_divergence	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
-src/utils/progress.rs::enum::ProgressFormat	enum	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::default_bar	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::finish	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::inc	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::new	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::reset	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::set_length	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::set_message	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::set_style	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::func::template	func	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::method::ProgressBar.new	method	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::method::ProgressStyle.default_bar	method	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::struct::ProgressBar	struct	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/progress.rs::struct::ProgressStyle	struct	intentional_divergence	-	intentional_divergence: no Crystal equivalent of indicatif
-src/utils/truncation.rs::enum::TruncationDirection	enum	implemented	src/tokens/tokenizer/encoding.cr:349	co-located in tokenizer encoding port
+src/utils/fancy.rs::func::new	func	skipped	-	intentional_divergence: pretty-print diagnostics not needed
+src/utils/fancy.rs::struct::Matches	struct	skipped	-	intentional_divergence: pretty-print diagnostics not needed
+src/utils/fancy.rs::struct::SysRegex	struct	skipped	-	intentional_divergence: pretty-print diagnostics not needed
+src/utils/from_pretrained.rs::struct::FromPretrainedParameters	struct	ported	src/tokens/utils/from_pretrained.cr:5	ported
+src/utils/iter.rs::struct::Lines	struct	ported	src/tokens/utils/iter.cr:11	ported
+src/utils/iter.rs::struct::ResultShunt	struct	ported	src/tokens/utils/iter.cr:3	Crystal: exceptions handle error propagation natively
+src/utils/iter.rs::trait::LinesWithEnding	trait	ported	src/tokens/utils/iter.cr:11	ported
+src/utils/onig.rs::func::new	func	ported	src/tokens/tokenizer/pattern.cr:122	Crystal: PCRE2 via SysRegex
+src/utils/onig.rs::struct::SysRegex	struct	ported	src/tokens/tokenizer/pattern.cr:122	Crystal: PCRE2 via SysRegex
+src/utils/padding.rs::enum::PaddingDirection	enum	ported	src/tokens/tokenizer/encoding.cr:354	co-located in tokenizer encoding port
+src/utils/padding.rs::enum::PaddingStrategy	enum	ported	src/tokens/tokenizer/encoding.cr:397	ported with fixed size carried in params
+src/utils/padding.rs::func::pad_encodings	func	ported	src/tokens/tokenizer/encoding.cr:402	port complete
+src/utils/padding.rs::struct::PaddingParams	struct	ported	src/tokens/tokenizer/encoding.cr:382	ported with explicit fixed_size field
+src/utils/padding.rs::test::pad_to_multiple	test	ported	spec/tokenizer/padding_spec.cr:12	port complete
+src/utils/parallelism.rs::const::ENV_VARIABLE	const	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::func::get_parallelism	func	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::func::has_parallelism_been_used	func	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::func::is_parallelism_configured	func	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::func::set_parallelism	func	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::test::test_maybe_parallel_iterator	test	ported	spec/utils/parallelism_spec.cr:5	ported
+src/utils/parallelism.rs::test::test_maybe_parallel_slice	test	ported	spec/utils/parallelism_spec.cr:26	ported
+src/utils/parallelism.rs::trait::MaybeParallelBridge	trait	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::trait::MaybeParallelIterator	trait	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::trait::MaybeParallelRefIterator	trait	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::trait::MaybeParallelRefMutIterator	trait	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/parallelism.rs::trait::MaybeParallelSlice	trait	skipped	-	intentional_divergence: Crystal uses fibers, Rayon not applicable
+src/utils/progress.rs::enum::ProgressFormat	enum	ported	src/tokens/utils/progress.cr:6	ported
+src/utils/progress.rs::func::default_bar	func	ported	src/tokens/utils/progress.cr:24	ported
+src/utils/progress.rs::func::finish	func	ported	src/tokens/utils/progress.cr:49	ported
+src/utils/progress.rs::func::inc	func	ported	src/tokens/utils/progress.cr:45	ported
+src/utils/progress.rs::func::new	func	ported	src/tokens/utils/progress.cr:36	ported
+src/utils/progress.rs::func::reset	func	ported	src/tokens/utils/progress.cr:41	ported
+src/utils/progress.rs::func::set_length	func	ported	src/tokens/utils/progress.cr:40	ported
+src/utils/progress.rs::func::set_message	func	ported	src/tokens/utils/progress.cr:38	ported
+src/utils/progress.rs::func::set_style	func	ported	src/tokens/utils/progress.cr:42	ported
+src/utils/progress.rs::func::template	func	ported	src/tokens/utils/progress.cr:27	ported
+src/utils/progress.rs::method::ProgressBar.new	method	ported	src/tokens/utils/progress.cr:36	ported
+src/utils/progress.rs::method::ProgressStyle.default_bar	method	ported	src/tokens/utils/progress.cr:24	ported
+src/utils/progress.rs::struct::ProgressBar	struct	ported	src/tokens/utils/progress.cr:30	ported
+src/utils/progress.rs::struct::ProgressStyle	struct	ported	src/tokens/utils/progress.cr:13	ported
+src/utils/truncation.rs::enum::TruncationDirection	enum	ported	src/tokens/tokenizer/encoding.cr:349	co-located in tokenizer encoding port
 src/utils/truncation.rs::enum::TruncationError	enum	ported	-	ported: truncation already ported in tokenizer
-src/utils/truncation.rs::enum::TruncationStrategy	enum	implemented	src/tokens/tokenizer/encoding.cr:376	co-located in tokenizer encoding port
-src/utils/truncation.rs::func::truncate_encodings	func	implemented	src/tokens/tokenizer/truncation.cr:2	port complete
-src/utils/truncation.rs::struct::TruncationParams	struct	implemented	src/tokens/tokenizer/encoding.cr:359	co-located in tokenizer encoding port
-src/utils/truncation.rs::test::test_deserialize_defaults	test	implemented	spec/tokenizer/truncation_spec.cr:91	port complete
-src/utils/truncation.rs::test::truncate_encodings_empty	test	implemented	spec/tokenizer/truncation_spec.cr:78	port complete
-src/utils/truncation.rs::test::truncate_encodings_longest_first	test	implemented	spec/tokenizer/truncation_spec.cr:52	port complete
+src/utils/truncation.rs::enum::TruncationStrategy	enum	ported	src/tokens/tokenizer/encoding.cr:376	co-located in tokenizer encoding port
+src/utils/truncation.rs::func::truncate_encodings	func	ported	src/tokens/tokenizer/truncation.cr:2	port complete
+src/utils/truncation.rs::struct::TruncationParams	struct	ported	src/tokens/tokenizer/encoding.cr:359	co-located in tokenizer encoding port
+src/utils/truncation.rs::test::test_deserialize_defaults	test	ported	spec/tokenizer/truncation_spec.cr:91	port complete
+src/utils/truncation.rs::test::truncate_encodings_empty	test	ported	spec/tokenizer/truncation_spec.cr:78	port complete
+src/utils/truncation.rs::test::truncate_encodings_longest_first	test	ported	spec/tokenizer/truncation_spec.cr:52	port complete
 tests/added_tokens.rs::test::add_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::lstrip_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
 tests/added_tokens.rs::test::overlapping_tokens	test	ported	spec/integration/added_tokens_spec.cr:ported	ported
@@ -721,17 +721,17 @@ tests/common/mod.rs::func::get_byte_level	func	skipped	-	blocked: test helper in
 tests/common/mod.rs::func::get_byte_level_bpe	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/common/mod.rs::func::get_empty	func	skipped	-	blocked: test helper infrastructure, not portable
 tests/documentation.rs::test::load_tokenizer	test	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::pipeline	test	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::pipeline_bert	test	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::quicktour	test	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::quicktour_slow_train	test	skipped	-	blocked: needs WordPiece model data file
+tests/documentation.rs::test::pipeline	test	ported	spec/integration/documentation_spec.cr:128	ported
+tests/documentation.rs::test::pipeline_bert	test	ported	spec/integration/documentation_spec.cr:210	ported
+tests/documentation.rs::test::quicktour	test	ported	spec/integration/documentation_spec.cr:74	ported
+tests/documentation.rs::test::quicktour_slow_train	test	ported	spec/integration/wiki_training_spec.cr:5	ported (uses data/small.txt instead of wiki data)
 tests/documentation.rs::test::streaming_tokenizer	test	ported	spec/integration/documentation_spec.cr:ported	ported
-tests/documentation.rs::test::train_pipeline_bert	test	skipped	-	blocked: needs WordPiece model data file
-tests/documentation.rs::test::train_tokenizer	test	skipped	-	blocked: needs WordPiece model data file
-tests/from_pretrained.rs::test::test_from_pretrained	test	skipped	-	blocked: needs HTTP feature and pretrained models
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	test	skipped	-	blocked: needs HTTP feature and pretrained models
-tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	test	skipped	-	blocked: needs HTTP feature and pretrained models
-tests/from_pretrained.rs::test::test_from_pretrained_revision	test	skipped	-	blocked: needs HTTP feature and pretrained models
+tests/documentation.rs::test::train_pipeline_bert	test	ported	spec/integration/wiki_training_spec.cr:28	ported (uses data/small.txt instead of wiki data)
+tests/documentation.rs::test::train_tokenizer	test	ported	spec/integration/documentation_spec.cr:43	ported
+tests/from_pretrained.rs::test::test_from_pretrained	test	ported	spec/integration/from_pretrained_spec.cr:13	ported (network test, FROM_PRETRAINED=1)
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_model	test	ported	spec/integration/from_pretrained_spec.cr:41	ported
+tests/from_pretrained.rs::test::test_from_pretrained_invalid_revision	test	ported	spec/integration/from_pretrained_spec.cr:47	ported
+tests/from_pretrained.rs::test::test_from_pretrained_revision	test	ported	spec/integration/from_pretrained_spec.cr:22	ported (network test, FROM_PRETRAINED=1)
 tests/offsets.rs::test::byte_level_basic	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_double_sequence	test	ported	spec/integration/offsets_spec.cr:ported	ported
 tests/offsets.rs::test::byte_level_pre_tokenized_sequence	test	ported	spec/integration/offsets_spec.cr:ported	ported
@@ -751,8 +751,8 @@ tests/serialization.rs::test::wordlevel_serde	test	ported	spec/integration/seria
 tests/serialization.rs::test::wordpiece_serde	test	ported	spec/integration/serialization_extra_spec.cr:ported	ported
 tests/stream.rs::test::test_decode_stream_step_no_panic	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
 tests/stream.rs::test::test_decoding_with_added_bpe	test	ported	spec/integration/stream_spec.cr:ported	ported (English portion, Korean multi-byte pending)
-tests/training.rs::test::bpe_continuing_subword_prefix_error	test	skipped	-	blocked: needs training data files
-tests/training.rs::test::bpe_values_after_training	test	skipped	-	blocked: needs training data files
+tests/training.rs::test::bpe_continuing_subword_prefix_error	test	ported	spec/integration/training_spec.cr:23	ported
+tests/training.rs::test::bpe_values_after_training	test	ported	spec/integration/training_spec.cr:7	ported
 tests/unigram.rs::test::test_sample	test	skipped	-	mixed (1 test ported, 2 blocked on data files)
 tests/unigram.rs::test::test_train_unigram_from_file	test	partial	spec/integration/unigram_train_from_file_spec.cr:pending	partial: vocab size differs (esaxx suffix arrays not ported)
 tests/unigram.rs::test::test_unigram_from_file	test	ported	spec/integration/unigram_from_file_spec.cr:ported	ported
