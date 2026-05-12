@@ -53,5 +53,11 @@ $(DATA_DIR)/llama-3-tokenizer.json: | $(DATA_DIR)
 $(DATA_DIR)/roberta.json: | $(DATA_DIR)
 	curl -sL $(HF_DATA)/roberta.json -o $@
 
+$(DATA_DIR)/tokenizer-wiki.json: | $(DATA_DIR)
+	curl -sL $(HF_DATA)/tokenizer-wiki.json -o $@
+
+$(DATA_DIR)/bert-wiki.json: | $(DATA_DIR)
+	curl -sL $(HF_DATA)/bert-wiki.json -o $@
+
 # Minimal set needed for integration tests
-download-data: $(DATA_DIR)/gpt2-vocab.json $(DATA_DIR)/gpt2-merges.txt $(DATA_DIR)/small.txt $(DATA_DIR)/unigram.json $(DATA_DIR)/albert-base-v1-tokenizer.json $(DATA_DIR)/bert-base-uncased-vocab.txt $(DATA_DIR)/llama-3-tokenizer.json $(DATA_DIR)/roberta.json
+download-data: $(DATA_DIR)/gpt2-vocab.json $(DATA_DIR)/gpt2-merges.txt $(DATA_DIR)/small.txt $(DATA_DIR)/unigram.json $(DATA_DIR)/albert-base-v1-tokenizer.json $(DATA_DIR)/bert-base-uncased-vocab.txt $(DATA_DIR)/llama-3-tokenizer.json $(DATA_DIR)/roberta.json $(DATA_DIR)/tokenizer-wiki.json $(DATA_DIR)/bert-wiki.json
