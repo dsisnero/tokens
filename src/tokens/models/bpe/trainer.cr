@@ -11,6 +11,8 @@ module Tokens
       end
 
       class BpeTrainer
+        include ::Tokens::Trainer(BPE)
+
         getter min_frequency : UInt64
         getter vocab_size : Int32
         getter show_progress : Bool
@@ -228,6 +230,10 @@ module Tokens
           else
             queue << item
           end
+        end
+
+        def train(model : BPE) : Array(AddedToken)
+          do_train(@words, model)
         end
       end
 

@@ -186,6 +186,52 @@ module Tokens
       @added_vocabulary.add_tokens(tokens, @model, @normalizer)
     end
 
+    def train_from_files(trainer : Models::BPE::BpeTrainer, files : Array(String)) : self
+      lines = [] of String
+      files.each do |file|
+        IterUtils.read_lines_with_ending(file).each { |line| lines << line }
+      end
+
+      trainer.feed(lines) do |sequence|
+        normalized = @added_vocabulary.extract_and_normalize(@normalizer, sequence)
+        pretok = do_pre_tokenize(normalized)
+        splits = pretok.get_splits(OffsetReferential::Original, OffsetType::Byte)
+        splits.map { |(s, _, _)| s }
+      end
+
+      case model = @model
+      when Models::BPE::BPE
+        special_tokens = trainer.train(model)
+        add_special_tokens(special_tokens)
+      else
+        raise "train_from_files: unsupported model type #{model.class}"
+      end
+      self
+    end
+
+    def train_from_files(trainer : Models::WordPieceTrainer, files : Array(String)) : self
+      lines = [] of String
+      files.each do |file|
+        IterUtils.read_lines_with_ending(file).each { |line| lines << line }
+      end
+
+      trainer.feed(lines) do |sequence|
+        normalized = @added_vocabulary.extract_and_normalize(@normalizer, sequence)
+        pretok = do_pre_tokenize(normalized)
+        splits = pretok.get_splits(OffsetReferential::Original, OffsetType::Byte)
+        splits.map { |(s, _, _)| s }
+      end
+
+      case model = @model
+      when Models::WordPiece
+        special_tokens = trainer.train(model)
+        add_special_tokens(special_tokens)
+      else
+        raise "train_from_files: unsupported model type #{model.class}"
+      end
+      self
+    end
+
     def encode_single_sequence(sequence : InputSequence, type_id : UInt32, offsets_type : OffsetType) : Encoding
       if raw = sequence.raw?
         pre_tokenized = @added_vocabulary.extract_and_normalize(@normalizer, raw)
@@ -243,6 +289,22 @@ module Tokens
       encoding = encode_single_sequence(seq1, 0_u32, OffsetType::Char)
       pair_encoding = encode_single_sequence(seq2, 1_u32, OffsetType::Char)
       post_process(encoding, pair_encoding, add_special_tokens)
+    end
+
+    def encode_batch(inputs : Array(String), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = inputs.map { |input| encode(input, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
+    end
+
+    def encode_batch(inputs : Array(Tuple(String, String)), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = inputs.map { |(a, b)| encode({a, b}, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
     end
 
     def decode(ids : Array(UInt32), skip_special_tokens : Bool = false) : String
@@ -433,6 +495,12 @@ module Tokens
       end
     end
 
+    def self.from_pretrained(identifier : String, params : FromPretrainedParameters? = nil) : self
+      path = Tokens.from_pretrained(identifier, params)
+      json_str = File.read(path)
+      from_json(json_str)
+    end
+
     def self.from_json(json_str : String) : self
       data = JSON.parse(json_str)
       raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
@@ -520,7 +588,7 @@ module Tokens
                        set_encode_special_tokens get_encode_special_tokens
                        add_special_tokens add_tokens encode encode_fast
                        encode_char_offsets decode decode_stream get_n_added_tokens
-                       to_json from_json] %}
+                       encode_batch train_from_files to_json from_json] %}
       def {{name.id}}(*args, **kwargs)
         @inner.{{name.id}}(*args, **kwargs)
       end
@@ -528,6 +596,14 @@ module Tokens
     end
 
     forward_to_inner
+
+    def self.from_pretrained(identifier : String, params : FromPretrainedParameters? = nil) : self
+      inner = TokenizerImpl.from_pretrained(identifier, params)
+      tk = allocate
+      tk.initialize(inner.model)
+      tk.instance_variable_set("@inner", inner)
+      tk
+    end
   end
 
   class DecodeStream

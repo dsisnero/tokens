@@ -135,13 +135,16 @@ module Tokens
       offsets = [] of Tuple(UInt32, UInt32)
       previous = 0
 
-      while match = @regex.match(inside, previous)
+      inside.scan(@regex) do |match|
         start = match.byte_begin(0)
         stop = match.byte_end(0)
-        offsets << {start.to_u32, stop.to_u32}
 
-        previous = stop
-        previous = Pattern.advance_after_zero_width_match(inside, previous) if start == stop
+        # Only include matches at or after the current position
+        if start >= previous
+          offsets << {start.to_u32, stop.to_u32}
+          previous = stop
+          previous = Pattern.advance_after_zero_width_match(inside, previous) if start == stop
+        end
       end
 
       offsets
