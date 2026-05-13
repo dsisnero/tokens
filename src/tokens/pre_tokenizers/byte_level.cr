@@ -54,11 +54,11 @@ module Tokens
         end
 
         pretokenized.normalize do |normalized|
-          transformations = [] of Tuple(Char, Int32)
-          normalized.get.each_char do |char|
-            char.to_s.to_slice.each_with_index do |byte, index|
-              transformations << {Tokens::Normalizers::ByteLevel.bytes_char[byte], index == 0 ? 0 : 1}
-            end
+          raw = normalized.get
+          transformations = Array({Char, Int32}).new(raw.bytesize)
+          raw.each_byte do |byte|
+            change = (byte & 0xC0) == 0x80 ? 1 : 0
+            transformations << {Tokens::Normalizers::ByteLevel.bytes_char[byte], change}
           end
           normalized.transform(transformations, 0)
         end
@@ -124,7 +124,11 @@ module Tokens
       end
 
       def self.from_json(json : String) : self
-        object = JSON.parse(json).as_h
+        from_json(JSON.parse(json))
+      end
+
+      def self.from_json(data : JSON::Any) : self
+        object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
         type = object["type"]?.try(&.as_s?)
         raise JSON::ParseException.new("Invalid pre-tokenizer type", 0, 0) if type && type != "ByteLevel"
 
@@ -150,8 +154,8 @@ module Tokens
       byte_space = Tokens::Normalizers::ByteLevel.bytes_char[' '.ord.to_u8]
 
       encoding.process_tokens_with_offsets_mut do |index, token, offsets|
-        leading_spaces = token.each_char.take_while { |char| char == byte_space || char.whitespace? }.size
-        trailing_spaces = token.each_char.to_a.reverse.take_while { |char| char == byte_space || char.whitespace? }.size
+        leading_spaces = count_leading_spaces(token, byte_space)
+        trailing_spaces = count_trailing_spaces(token, byte_space)
 
         updated = offsets
         if leading_spaces > 0 || trailing_spaces > 0
@@ -168,6 +172,31 @@ module Tokens
 
         updated
       end
+    end
+
+    private def self.count_leading_spaces(token : String, byte_space : Char) : Int32
+      count = 0
+      reader = Char::Reader.new(token)
+      while reader.has_next?
+        char = reader.current_char
+        break unless char == byte_space || char.whitespace?
+        count += 1
+        reader.next_char?
+      end
+      count
+    end
+
+    private def self.count_trailing_spaces(token : String, byte_space : Char) : Int32
+      count = 0
+      reader = Char::Reader.new(at_end: token)
+      while reader.current_char != '\0'
+        char = reader.current_char
+        break unless char == byte_space || char.whitespace?
+        count += 1
+        break unless reader.has_previous?
+        reader.previous_char?
+      end
+      count
     end
   end
 end

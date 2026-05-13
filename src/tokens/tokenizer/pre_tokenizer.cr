@@ -41,7 +41,7 @@ module Tokens
     end
 
     def split(split_fn : Int32, NormalizedString -> Array(Split))
-      new_splits = [] of Split
+      new_splits = Array(Split).new(@splits.size)
       @splits.each_with_index do |split, i|
         if split.tokens
           new_splits << split

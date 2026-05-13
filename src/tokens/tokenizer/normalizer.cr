@@ -329,7 +329,7 @@ module Tokens
       replaced_index = 0
       offset = initial_offset + normalized_range.begin
 
-      replacement_alignments = [] of Tuple(UInt32, UInt32)
+      replacement_alignments = Array(Tuple(UInt32, UInt32)).new(dest.size)
       replacement_text = String.build do |io|
         dest.each do |item|
           char = item[0].as(Char)
@@ -373,7 +373,7 @@ module Tokens
       suffix = byte_slice(@normalized, normalized_range.end...length) || ""
       @normalized = prefix + replacement_text + suffix
 
-      new_alignments = [] of Tuple(UInt32, UInt32)
+      new_alignments = Array(Tuple(UInt32, UInt32)).new(normalized_range.begin + replacement_alignments.size + @alignments.size - normalized_range.end)
       new_alignments.concat(@alignments[0...normalized_range.begin])
       new_alignments.concat(replacement_alignments)
       new_alignments.concat(@alignments[normalized_range.end...@alignments.size])
@@ -688,7 +688,7 @@ module Tokens
       return false if index < 0 || index > s.bytesize
       return true if index == 0 || index == s.bytesize
 
-      NormalizedString.byte_char_entries(s).any? { |byte_offset, _| byte_offset == index }
+      (s.to_slice[index] & 0b1100_0000) != 0b1000_0000
     end
 
     private def byte_slice(s : String, range : ::Range(Int32, Int32)) : String?

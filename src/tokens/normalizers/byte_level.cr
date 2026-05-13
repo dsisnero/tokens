@@ -19,11 +19,11 @@ module Tokens
       def normalize(normalized : Tokens::NormalizedString) : Nil
         return if normalized.empty?
 
-        transformations = [] of Tuple(Char, Int32)
-        normalized.get.each_char do |char|
-          char.to_s.to_slice.each_with_index do |byte, index|
-            transformations << {self.class.bytes_char[byte], index == 0 ? 0 : 1}
-          end
+        raw = normalized.get
+        transformations = Array({Char, Int32}).new(raw.bytesize)
+        raw.each_byte do |byte|
+          change = (byte & 0xC0) == 0x80 ? 1 : 0
+          transformations << {self.class.bytes_char[byte], change}
         end
         normalized.transform(transformations, 0)
       end

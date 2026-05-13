@@ -62,6 +62,19 @@ module Tokens
         new(value, kind)
       end
 
+      def self.from_json(data : JSON::Any) : self
+        object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
+
+        if string = object["String"]?.try(&.as_s?)
+          return string(string)
+        end
+        if regex = object["Regex"]?.try(&.as_s?)
+          return regex(regex)
+        end
+
+        raise JSON::ParseException.new("Missing ReplacePattern kind", 0, 0)
+      end
+
       def self.new(pull : JSON::PullParser) : self
         from_json(pull)
       end
@@ -155,6 +168,17 @@ module Tokens
         raise JSON::ParseException.new("Missing Replace content", 0, 0) unless content
 
         new(pattern, content)
+      end
+
+      def self.from_json(data : JSON::Any) : self
+        object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
+        type = object["type"]?.try(&.as_s?)
+        raise JSON::ParseException.new("Invalid normalizer type", 0, 0) if type && type != "Replace"
+
+        pattern_json = object["pattern"]? || raise(JSON::ParseException.new("Missing Replace pattern", 0, 0))
+        content = object["content"]?.try(&.as_s?) || raise(JSON::ParseException.new("Missing Replace content", 0, 0))
+
+        new(ReplacePattern.from_json(pattern_json), content)
       end
 
       def self.new(pull : JSON::PullParser) : self
