@@ -2,7 +2,31 @@
 
 ## Unreleased
 
+### Performance
+
+- **Parallel batch encode/decode** — `encode_batch_fast`, `encode_batch_char_offsets`, and `decode_batch` APIs with chunked `spawn`/`Channel` worker parallelism, gated by `-Dpreview_mt` compile-time flag and `TOKENIZERS_PARALLELISM` env var
+- **Byte-level preallocation** — ByteLevel pre-tokenizer and normalizer switch from per-char `to_s` allocations to direct `each_byte` + UTF-8 continuation detection; preallocate transformation and alignment arrays with known capacities
+- **BPE merge_word optimization** — replace `w.chars.to_a` array allocation with `Char::Reader` iteration; precompute `BYTE_CODE_STRINGS[256]` for byte-fallback path
+- **BPE cache thread safety** — `Sync::RWLock`-protected per-instance `Hash` with cache-id generation tracking (Go-style `sync.RWMutex` pattern); concurrent reads don't block
+- **Hash capacity hints** — `initial_capacity` on BpeTrainer hashes (words, word_to_id, alphabet, pair_counts) to reduce rehashing and GC pressure
+- **Structured JSON deserialization** — direct `JSON::Any` and `JSON::PullParser` dispatch across all wrapper types, removing `to_json` + reparse round-trips
+- **`PreTokenizedString#split` preallocation** — `new_splits` allocated with `@splits.size` capacity, eliminating reallocations on word split expansion
+- **`ByteLevel.process_offsets`** — replaced iterator materialization (`take_while`, `to_a.reverse.take_while`) with forward/backward `Char::Reader` scans
+
+### Benchmarks
+
+- **Targeted harnesses** — ported `layout_benchmark.rs`, `bert_benchmark.rs`, and `llama3_benchmark.rs` from upstream into `bench/layout_benchmark.cr`, `bench/bert_benchmark.cr`, `bench/llama3_benchmark.cr`
+- **Profiling** — `sample` traces identify remaining GC/allocator pressure as primary bottleneck across all benchmark windows
+- **Upstream parity verified** — Crystal output matches Rust byte-for-byte on encode (token IDs, tokens, attention masks), deserialize, and batch paths
+
 ### Added
+
+- **`encode_batch_fast`** — batch encode without offset tracking, matching upstream `encode_batch_fast` API
+- **`encode_batch_char_offsets`** — batch encode with char-level offsets, matching upstream `encode_batch_char_offsets` API
+- **`decode_batch`** — batch decode, matching upstream `decode_batch` API
+- **`feed_pre_processed`** on `BpeTrainer` — pre-processed word batch feeding for future parallel training pipeline
+- **`Parallelism` module** — reads `TOKENIZERS_PARALLELISM` env var, `-Dpreview_mt` compile-time gating, `reset!` for test isolation
+- **`plan/performance.md`** — full experiment log (19 experiments), profiling findings, benchmark results, vendor reference, parity checklist
 
 - **`train_from_files`** — train BPE and WordPiece models directly from text files on `TokenizerImpl`
 - **`encode_batch`** — batch encode with `BatchLongest` padding on `TokenizerImpl`
