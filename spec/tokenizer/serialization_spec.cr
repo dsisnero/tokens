@@ -16,6 +16,43 @@ describe Tokens::TokenizerImpl do
     restored.get_added_vocabulary.len.should eq(3)
   end
 
+  it "round-trips non-null truncation and padding settings" do
+    model = Tokens::Models::WordLevel.build({"hello" => 0_u32, "[UNK]" => 1_u32}, "[UNK]")
+    tokenizer = Tokens::TokenizerImpl.new(model)
+      .with_truncation(Tokens::TruncationParams.new(
+        max_length: 32_u64,
+        strategy: Tokens::TruncationStrategy::OnlySecond,
+        stride: 4_u64,
+        direction: Tokens::TruncationDirection::Left,
+      ))
+      .with_padding(Tokens::PaddingParams.new(
+        strategy: Tokens::PaddingStrategy::Fixed,
+        direction: Tokens::PaddingDirection::Left,
+        pad_to_multiple_of: 8_u64,
+        pad_id: 9_u32,
+        pad_type_id: 2_u32,
+        pad_token: "<pad>",
+        fixed_size: 64_u64,
+      ))
+
+    restored = Tokens::TokenizerImpl.from_json(tokenizer.to_json)
+
+    truncation = restored.get_truncation.not_nil!
+    truncation.max_length.should eq(32_u64)
+    truncation.strategy.should eq(Tokens::TruncationStrategy::OnlySecond)
+    truncation.stride.should eq(4_u64)
+    truncation.direction.should eq(Tokens::TruncationDirection::Left)
+
+    padding = restored.get_padding.not_nil!
+    padding.strategy.should eq(Tokens::PaddingStrategy::Fixed)
+    padding.direction.should eq(Tokens::PaddingDirection::Left)
+    padding.pad_to_multiple_of.should eq(8_u64)
+    padding.pad_id.should eq(9_u32)
+    padding.pad_type_id.should eq(2_u32)
+    padding.pad_token.should eq("<pad>")
+    padding.fixed_size.should eq(64_u64)
+  end
+
   it "rejects unknown versions" do
     invalid = %({"version":"0.0","model":{"type":"BPE","vocab":{},"merges":[]},"added_tokens":[]})
 
