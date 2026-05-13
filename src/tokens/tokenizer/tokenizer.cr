@@ -132,6 +132,8 @@ module Tokens
   # tokenizer = Tokens::TokenizerImpl.from_pretrained("bert-base-cased")
   # ```
   class TokenizerImpl
+    PARALLEL_MAP_MIN_ITEMS_PER_CPU = 64
+
     getter model : Model
     getter normalizer : Normalizer?
     getter pre_tokenizer : PreTokenizer?
@@ -690,7 +692,7 @@ module Tokens
     end
 
     private def maybe_par_map(inputs : Array(T), &block : T -> U) : Array(U) forall T, U
-      if Parallelism.get_parallelism && inputs.size > System.cpu_count * 10
+      if Parallelism.get_parallelism && inputs.size > System.cpu_count * PARALLEL_MAP_MIN_ITEMS_PER_CPU
         Parallelism.mark_used!
         n_workers = System.cpu_count
         n_workers = inputs.size if inputs.size < n_workers

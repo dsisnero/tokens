@@ -21,7 +21,7 @@ Make `crystal run --release bench/benchmarks.cr --` correct and useful, then imp
   - Truncation and padding params now decode directly from structured JSON / pull parser paths.
 - [x] Parallel batch encode/decode
   - Rust uses Rayon-backed `maybe_par_iter`.
-  - Crystal port now implements chunked `spawn`/`Channel` workers with `cpu_count*10` batch threshold, gated by `TOKENIZERS_PARALLELISM` env var and `-Dpreview_mt` compile-time flag.
+  - Crystal port now implements chunked `spawn`/`Channel` workers with `cpu_count*64` batch threshold, gated by `TOKENIZERS_PARALLELISM` env var and `-Dpreview_mt` compile-time flag.
 - [x] Thread-local / shard-local BPE cache strategy
   - Rust uses per-thread local caches keyed by BPE cache generation.
   - Crystal port now uses `Sync::RWLock`-protected per-instance `Hash` with cache-id generation tracking; this is the Go `sync.RWMutex` pattern, which is more natural for Crystal's M:N fiber runtime than Rust's `thread_local!`.
@@ -44,8 +44,8 @@ CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/l
 
 | Case | Real Time | Notes |
 | --- | --- | --- |
-| `TemplateProcessing single 1000x` | `0.0018s` | Single sequence [CLS]…[SEP] wrapping |
-| `TemplateProcessing pair 1000x` | `0.0052s` | Pair sequence [CLS]…[SEP]…[SEP] wrapping |
+| `TemplateProcessing single 1000x` | `0.0015s` | Single sequence [CLS]…[SEP] wrapping |
+| `TemplateProcessing pair 1000x` | `0.0045s` | Pair sequence [CLS]…[SEP]…[SEP] wrapping |
 
 ### BERT/WordPiece — `bench/bert_benchmark.cr`
 
@@ -57,9 +57,9 @@ CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/b
 
 | Case | Real Time | Notes |
 | --- | --- | --- |
-| `WordPiece BERT encode 5x` | `0.0447s` | Full corpus × 5 |
-| `WordPiece BERT encode_batch 5x` | `0.0510s` | Batch=1000, full corpus × 5 |
-| `WordPiece train small 3x` | `0.0164s` | Train from small.txt × 3 |
+| `WordPiece BERT encode 5x` | `0.0593s` | Full corpus × 5 |
+| `WordPiece BERT encode_batch 5x` | `0.0681s` | Batch=1000, full corpus × 5 |
+| `WordPiece train small 3x` | `0.0807s` | Train from small.txt × 3 |
 
 ### Llama3 — `bench/llama3_benchmark.cr`
 
@@ -71,14 +71,14 @@ CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/l
 
 | Case | Real Time | Notes |
 | --- | --- | --- |
-| `llama3-encode 5x` | `0.4767s` | Full corpus × 5 |
-| `llama3-encode_batch 5x` | `0.2795s` | Batch=1000, full corpus × 5 |
-| `llama3-encode_batch_char_offsets 5x` | `0.2808s` | Char-offset batch, full corpus × 5 |
-| `llama3-concurrent-1t` | `0.0983s` | 1 thread encoding ~1000 lines |
-| `llama3-concurrent-2t` | `0.0706s` | 2 threads (1.39× speedup) |
-| `llama3-concurrent-4t` | `0.0666s` | 4 threads (1.47× speedup) |
-| `llama3-concurrent-8t` | `0.0517s` | 8 threads (1.90× speedup) |
-| `BPE train big 3x` | `0.0293s` | Train Llama3 from small.txt × 3 |
+| `llama3-encode 5x` | `2.5407s` | Full synthetic corpus × 5 |
+| `llama3-encode_batch 5x` | `1.4470s` | Batch=1000, full synthetic corpus × 5 |
+| `llama3-encode_batch_char_offsets 5x` | `1.8861s` | Char-offset batch, full synthetic corpus × 5 |
+| `llama3-concurrent-1t` | `0.0609s` | 1 worker encoding 1000 lines |
+| `llama3-concurrent-2t` | `0.0867s` | 2 workers encoding 1000 lines each |
+| `llama3-concurrent-4t` | `0.1882s` | 4 workers encoding 1000 lines each |
+| `llama3-concurrent-8t` | `0.3785s` | 8 workers encoding 1000 lines each |
+| `BPE train big 3x` | `0.0358s` | Train Llama3 from small.txt × 3 |
 
 
 ```bash
@@ -150,6 +150,8 @@ CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/b
 | 16 | Mirror byte-wise transform path in ByteLevel normalizer | `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec spec/normalizers/byte_level_spec.cr spec/integration/documentation_spec.cr spec/tokenizer/serialization_spec.cr`; targeted `crystal eval -Dpreview_mt --release` probe; `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/benchmarks.cr --` | Targeted probe over 2000x corpus transform loop: `old 963.1ms -> new 486.7ms`; full benchmark remained within recent preview-MT run band (`encode BPE 100x` `0.762263s`, `post_process 100x` `0.588742s`) | Keep | The plan already optimized the ByteLevel pre-tokenizer path; this finishes the same allocation removal in the ByteLevel normalizer by switching from `each_char + char.to_s` to `each_byte` with preallocated `transformations` |
 | 17 | Remove ByteLevel offset-trimming iterator allocations | `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec spec/processors/template_spec.cr spec/processors/bert_spec.cr spec/processors/roberta_spec.cr spec/integration/documentation_spec.cr spec/pre_tokenizers/byte_level_spec.cr`; `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec`; `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/benchmarks.cr --` | `post_process 100x` improved from the recent `~0.589s` preview-MT band to `0.554105s`; `encode BPE 100x` `0.594207s`; full suite still green | Keep | Replaced `take_while` and `to_a.reverse.take_while` in `ByteLevel.process_offsets` with forward/backward `Char::Reader` scans that preserve the original character-count semantics without materializing arrays |
 | 18 | Preallocate `new_splits` in `PreTokenizedString#split` + add Hash capacity hints in BpeTrainer + add `feed_pre_processed` API | Profiled with `sample` on `llama3_bench`; `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec`; `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal run -Dpreview_mt --release bench/benchmarks.cr --` | `PreTokenizedString#split` profile samples dropped 22%; `encode BPE 100x` 0.568s avg (4% better); `train BPE 5x` 0.050s avg (2% better); `post_process 100x` 0.522s avg (neutral) | Keep | `new_splits = Array(Split).new(@splits.size)`; `initial_capacity` hints on BpeTrainer hashes (words→512, word_to_id→vocab_size, alphabet→256, pair_counts→vocab*2); added `feed_pre_processed` for future parallel train pipeline |
+| 19 | Correct local benchmark harnesses against actual tokenizer assets and upstream workload shape | `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec spec/utils/parallelism_spec.cr spec/processors/template_spec.cr spec/processors/bert_spec.cr spec/tokenizer/serialization_spec.cr`; isolated `bench/benchmarks.cr`, `bench/layout_benchmark.cr`, `bench/bert_benchmark.cr`, `bench/llama3_benchmark.cr` reruns | Fixed invalid RoBERTa `[CLS]/[SEP]` post-process benchmark, dynamic ALBERT special-token IDs, real WordPiece+BERT bench construction from `bert-base-uncased-vocab.txt`, and Llama3 `1000 lines per worker` concurrent workload | Keep | Benchmark correctness fix only; earlier local targeted numbers were not trustworthy enough for perf decisions |
+| 20 | Retune `maybe_par_map` threshold from `cpu_count*10` to `cpu_count*64` | `CRYSTAL_CACHE_DIR=$PWD/.crystal-cache crystal spec spec/utils/parallelism_spec.cr spec/tokenizer/serialization_spec.cr`; isolated `bench/benchmarks.cr` and `bench/llama3_benchmark.cr` with and without `TOKENIZERS_PARALLELISM=0` | Canonical medium batches improved from the corrected-threshold baseline: `encode_batch 5x500ln` `0.078882s -> 0.058401s`, `encode_batch_fast 5x500ln` `0.079503s -> 0.056159s`, `decode_batch 5x500ln` `0.015476s -> 0.011022s`; corrected Llama3 `1000`-line batches still beat serial (`1.447s vs 2.403s`) | Keep | Avoids parallelizing medium-size batches too early while preserving wins on larger batches |
 
 ## Next Rust-Derived Experiments
 
@@ -176,19 +178,19 @@ Latest run:
 
 | Case | Real Time |
 | --- | --- |
-| `encode BPE 100x` | `0.568s` (avg 3 runs) |
-| `encode WordPiece 100x` | `0.628s` |
-| `encode_batch 20x50ln` | `0.019s` |
-| `encode_batch_fast 20x50ln` | `0.019s` |
+| `encode BPE 100x` | `0.551s` |
+| `encode WordPiece 100x` | `0.603s` |
+| `encode_batch 20x50ln` | `0.020s` |
+| `encode_batch_fast 20x50ln` | `0.021s` |
 | `encode_batch_char_offsets 20x50ln` | `0.020s` |
-| `decode_batch 20x50ln` | `0.003s` |
-| `encode_batch 5x500ln` | `0.081s` |
-| `encode_batch_fast 5x500ln` | `0.086s` |
-| `decode_batch 5x500ln` | `0.017s` |
-| `decode 100x` | `0.107s` |
-| `deserialize 50x` | `1.062s` |
-| `train BPE 5x` | `0.050s` (avg 3 runs) |
-| `post_process 100x` | `0.522s` (avg 3 runs) |
+| `decode_batch 20x50ln` | `0.004s` |
+| `encode_batch 5x500ln` | `0.058s` |
+| `encode_batch_fast 5x500ln` | `0.056s` |
+| `decode_batch 5x500ln` | `0.011s` |
+| `decode 100x` | `0.116s` |
+| `deserialize 50x` | `0.993s` |
+| `train BPE 5x` | `0.050s` |
+| `post_process 100x` | `0.490s` |
 
 ## Vendor Reference
 
@@ -203,8 +205,8 @@ Latest run:
 ## Focused Harnesses
 
 - `bench/layout_benchmark.cr` ports `vendor/tokenizers/tokenizers/benches/layout_benchmark.rs`. Uses `data/albert-base-v1-tokenizer.json`. Measures `TemplateProcessing` single/pair overhead in isolation.
-- `bench/bert_benchmark.cr` ports `vendor/tokenizers/tokenizers/benches/bert_benchmark.rs`. Uses `data/bert-wiki.json`. Measures WordPiece encode, batch encode, and train throughput.
-- `bench/llama3_benchmark.cr` ports `vendor/tokenizers/tokenizers/benches/llama3_benchmark.rs`. Uses `data/llama-3-tokenizer.json`. Measures BPE encode, batch, char-offsets batch, concurrent long-context encode scaling (1→8 threads), and train.
+- `bench/bert_benchmark.cr` ports `vendor/tokenizers/tokenizers/benches/bert_benchmark.rs`. Uses `data/bert-base-uncased-vocab.txt` and a local BERT normalizer/pre-tokenizer/post-processor pipeline. Measures WordPiece encode, batch encode, and train throughput.
+- `bench/llama3_benchmark.cr` ports `vendor/tokenizers/tokenizers/benches/llama3_benchmark.rs`. Uses `data/llama-3-tokenizer.json` and a replicated local corpus large enough to preserve the upstream `1000 lines per worker` concurrent long-context shape. Measures BPE encode, batch, char-offsets batch, concurrent scaling (1→8 workers), and train.
 
 Run any with:
 

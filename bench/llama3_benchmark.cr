@@ -2,7 +2,7 @@ require "../src/tokens"
 require "benchmark"
 
 module TokensBenchmarks
-  CORPUS     = File.read("data/small.txt") * 30
+  CORPUS     = File.read("data/small.txt") * 150
   LINES      = CORPUS.lines.reject(&.strip.empty?)
   BATCH_SIZE = 1000
   LLAMA_JSON = File.read("data/llama-3-tokenizer.json")
@@ -19,6 +19,7 @@ module TokensBenchmarks
 
     lines_per_thread = 1000
     all_lines = LINES
+    raise "Not enough lines for concurrent long-context benchmark" if all_lines.size < lines_per_thread * 8
 
     GC.collect
     sleep 0.1.seconds
@@ -43,10 +44,9 @@ module TokensBenchmarks
       end
 
       {1, 2, 4, 8}.each do |num_threads|
-        thread_lines = all_lines.size // num_threads
         inputs = (0...num_threads).map do |i|
-          start = i * thread_lines
-          finish = (start + thread_lines).clamp(..all_lines.size)
+          start = i * lines_per_thread
+          finish = start + lines_per_thread
           all_lines[start...finish].join("\n")
         end
 

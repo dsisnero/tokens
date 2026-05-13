@@ -6,12 +6,15 @@ module TokensBenchmarks
   LINES       = CORPUS.lines.reject(&.strip.empty?)
   ALBERT_JSON = File.read("data/albert-base-v1-tokenizer.json")
 
-  def self.create_processor : Tokens::PostProcessors::TemplateProcessing
+  def self.create_processor(tokenizer : Tokens::TokenizerImpl) : Tokens::PostProcessors::TemplateProcessing
+    cls_id = tokenizer.token_to_id("[CLS]") || raise "ALBERT tokenizer missing [CLS]"
+    sep_id = tokenizer.token_to_id("[SEP]") || raise "ALBERT tokenizer missing [SEP]"
+
     Tokens::PostProcessors::TemplateProcessing.build(
       Tokens::PostProcessors::ProcTemplate.parse("[CLS]:0 $A:0 [SEP]:0"),
       Tokens::PostProcessors::ProcTemplate.parse("[CLS]:0 $A:0 [SEP]:0 $B:1 [SEP]:1"),
       Tokens::PostProcessors::TokensMap.from_tuples([
-        {"[CLS]", 0_u32}, {"[SEP]", 1_u32},
+        {"[CLS]", cls_id}, {"[SEP]", sep_id},
       ]),
     )
   end
@@ -23,7 +26,7 @@ module TokensBenchmarks
     puts "=" * 70
 
     tokenizer = Tokens::TokenizerImpl.from_json(ALBERT_JSON)
-    processor = create_processor
+    processor = create_processor(tokenizer)
 
     encodings = LINES.map { |line| tokenizer.encode(line, false) }
 
