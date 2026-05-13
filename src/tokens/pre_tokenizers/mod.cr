@@ -44,23 +44,29 @@ module Tokens
       raise Exception.new("data did not match any variant of untagged enum PreTokenizerUntagged")
     end
 
+    def self.from_json(value : JSON::Any) : self
+      from_any(value)
+    rescue JSON::ParseException
+      raise Exception.new("data did not match any variant of untagged enum PreTokenizerUntagged")
+    end
+
     private def self.from_any(value : JSON::Any) : self
       object = value.as_h?
       raise Exception.new("data did not match any variant of untagged enum PreTokenizerUntagged") unless object
 
       if type = object["type"]?.try(&.as_s?)
-        return from_tagged(type, object)
+        return from_tagged(type, value, object)
       end
 
       raise Exception.new("data did not match any variant of untagged enum PreTokenizerUntagged")
     end
 
-    private def self.from_tagged(type : String, object : Hash(String, JSON::Any)) : self
+    private def self.from_tagged(type : String, value : JSON::Any, object : Hash(String, JSON::Any)) : self
       if pretokenizer = build_unit_pretokenizer(type)
         return new(pretokenizer)
       end
 
-      new(build_complex_pretokenizer(type, object))
+      new(build_complex_pretokenizer(type, value, object))
     end
 
     private def self.build_unit_pretokenizer(type : String) : Wrapped?
@@ -78,12 +84,12 @@ module Tokens
       end
     end
 
-    private def self.build_complex_pretokenizer(type : String, object : Hash(String, JSON::Any)) : Wrapped
+    private def self.build_complex_pretokenizer(type : String, value : JSON::Any, object : Hash(String, JSON::Any)) : Wrapped
       case type
       when "Delimiter"
         build_delimiter(object)
       when "ByteLevel"
-        Tokens::PreTokenizers::ByteLevel.from_json(object.to_json)
+        Tokens::PreTokenizers::ByteLevel.from_json(value)
       when "Digits"
         Tokens::PreTokenizers::Digits.new(object["individual_digits"]?.try(&.as_bool) || false)
       when "FixedLength"
@@ -91,11 +97,11 @@ module Tokens
       when "Metaspace"
         build_metaspace(object)
       when "Punctuation"
-        Tokens::PreTokenizers::Punctuation.from_json(object.to_json)
+        Tokens::PreTokenizers::Punctuation.from_json(value)
       when "Sequence"
         build_sequence(object)
       when "Split"
-        Tokens::PreTokenizers::Split.from_json(object.to_json)
+        Tokens::PreTokenizers::Split.from_json(value)
       else
         raise Exception.new("data did not match any variant of untagged enum PreTokenizerUntagged")
       end

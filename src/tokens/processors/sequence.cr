@@ -57,13 +57,16 @@ module Tokens
       end
 
       def self.from_json(json_str : String) : self
-        data = JSON.parse(json_str)
+        from_json(JSON.parse(json_str))
+      end
+
+      def self.from_json(data : JSON::Any) : self
         raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
         obj = data.as_h
 
         procs_arr = obj["processors"]?.try(&.as_a?) || raise(JSON::ParseException.new("Missing processors", 0, 0))
         processors = procs_arr.map do |item|
-          PostProcessorWrapper.from_json(item.to_json)
+          PostProcessorWrapper.from_json(item)
         end
 
         new(processors)

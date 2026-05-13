@@ -111,7 +111,11 @@ module Tokens
       end
 
       def self.from_json(json : String) : self
-        object = JSON.parse(json).as_h
+        from_json(JSON.parse(json))
+      end
+
+      def self.from_json(data : JSON::Any) : self
+        object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
         raise JSON::ParseException.new("Invalid pre-tokenizer type", 0, 0) if object["type"]?.try(&.as_s?) && object["type"].as_s != "Metaspace"
 
         replacement = object["replacement"]?.try(&.as_s?)

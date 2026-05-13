@@ -397,6 +397,137 @@ module Tokens
 
     def initialize(@max_length = 512_u64, @strategy = TruncationStrategy::LongestFirst, @stride = 0_u64, @direction = TruncationDirection::Right)
     end
+
+    def self.from_json(json : String) : self
+      from_json(JSON::PullParser.new(json))
+    end
+
+    def self.from_json(pull : JSON::PullParser) : self
+      max_length = 512_u64
+      strategy = TruncationStrategy::LongestFirst
+      stride = 0_u64
+      direction = TruncationDirection::Right
+
+      pull.read_begin_object
+      until pull.kind.end_object?
+        key = pull.read_object_key
+        case key
+        when "max_length"
+          max_length = pull.read_int.to_u64
+        when "strategy"
+          strategy = read_truncation_strategy(pull)
+        when "stride"
+          stride = pull.read_int.to_u64
+        when "direction"
+          direction = read_truncation_direction(pull)
+        else
+          pull.skip
+        end
+      end
+      pull.read_end_object
+
+      new(
+        max_length: max_length,
+        strategy: strategy,
+        stride: stride,
+        direction: direction,
+      )
+    end
+
+    def self.from_json(data : JSON::Any) : self
+      object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
+
+      new(
+        max_length: object["max_length"]?.try(&.as_i64?).try(&.to_u64) || 512_u64,
+        strategy: parse_truncation_strategy(object["strategy"]?),
+        stride: object["stride"]?.try(&.as_i64?).try(&.to_u64) || 0_u64,
+        direction: parse_truncation_direction(object["direction"]?),
+      )
+    end
+
+    def self.new(pull : JSON::PullParser) : self
+      from_json(pull)
+    end
+
+    private def self.parse_truncation_strategy(value : JSON::Any?) : TruncationStrategy
+      return TruncationStrategy::LongestFirst unless value
+
+      case raw = value.raw
+      when String
+        case raw
+        when "LongestFirst", "longest_first"
+          TruncationStrategy::LongestFirst
+        when "OnlyFirst", "only_first"
+          TruncationStrategy::OnlyFirst
+        when "OnlySecond", "only_second"
+          TruncationStrategy::OnlySecond
+        else
+          raise JSON::ParseException.new("Invalid truncation strategy", 0, 0)
+        end
+      when Int64
+        TruncationStrategy.from_value(raw.to_i)
+      else
+        raise JSON::ParseException.new("Invalid truncation strategy", 0, 0)
+      end
+    end
+
+    private def self.read_truncation_strategy(pull : JSON::PullParser) : TruncationStrategy
+      case pull.kind
+      when .string?
+        case pull.read_string
+        when "LongestFirst", "longest_first"
+          TruncationStrategy::LongestFirst
+        when "OnlyFirst", "only_first"
+          TruncationStrategy::OnlyFirst
+        when "OnlySecond", "only_second"
+          TruncationStrategy::OnlySecond
+        else
+          raise JSON::ParseException.new("Invalid truncation strategy", 0, 0)
+        end
+      when .int?
+        TruncationStrategy.from_value(pull.read_int.to_i)
+      else
+        raise JSON::ParseException.new("Invalid truncation strategy", 0, 0)
+      end
+    end
+
+    private def self.parse_truncation_direction(value : JSON::Any?) : TruncationDirection
+      return TruncationDirection::Right unless value
+
+      case raw = value.raw
+      when String
+        case raw
+        when "Left", "left"
+          TruncationDirection::Left
+        when "Right", "right"
+          TruncationDirection::Right
+        else
+          raise JSON::ParseException.new("Invalid truncation direction", 0, 0)
+        end
+      when Int64
+        TruncationDirection.from_value(raw.to_i)
+      else
+        raise JSON::ParseException.new("Invalid truncation direction", 0, 0)
+      end
+    end
+
+    private def self.read_truncation_direction(pull : JSON::PullParser) : TruncationDirection
+      case pull.kind
+      when .string?
+        case pull.read_string
+        when "Left", "left"
+          TruncationDirection::Left
+        when "Right", "right"
+          TruncationDirection::Right
+        else
+          raise JSON::ParseException.new("Invalid truncation direction", 0, 0)
+        end
+      when .int?
+        TruncationDirection.from_value(pull.read_int.to_i)
+      else
+        raise JSON::ParseException.new("Invalid truncation direction", 0, 0)
+      end
+    end
   end
 
   enum TruncationStrategy
@@ -417,6 +548,165 @@ module Tokens
     getter fixed_size : UInt64?
 
     def initialize(@strategy = PaddingStrategy::BatchLongest, @direction = PaddingDirection::Right, @pad_to_multiple_of = nil, @pad_id = 0_u32, @pad_type_id = 0_u32, @pad_token = "[PAD]", @fixed_size = nil)
+    end
+
+    def self.from_json(json : String) : self
+      from_json(JSON::PullParser.new(json))
+    end
+
+    def self.from_json(pull : JSON::PullParser) : self
+      strategy : PaddingStrategy? = nil
+      direction = PaddingDirection::Right
+      pad_to_multiple_of = nil.as(UInt64?)
+      pad_id = 0_u32
+      pad_type_id = 0_u32
+      pad_token = "[PAD]"
+      fixed_size = nil.as(UInt64?)
+
+      pull.read_begin_object
+      until pull.kind.end_object?
+        key = pull.read_object_key
+        case key
+        when "strategy"
+          strategy = read_padding_strategy(pull)
+        when "direction"
+          direction = read_padding_direction(pull)
+        when "pad_to_multiple_of"
+          pad_to_multiple_of = read_optional_u64(pull)
+        when "pad_id"
+          pad_id = pull.read_int.to_u32
+        when "pad_type_id"
+          pad_type_id = pull.read_int.to_u32
+        when "pad_token"
+          pad_token = pull.read_string
+        when "fixed_size"
+          fixed_size = read_optional_u64(pull)
+        else
+          pull.skip
+        end
+      end
+      pull.read_end_object
+
+      strategy ||= fixed_size ? PaddingStrategy::Fixed : PaddingStrategy::BatchLongest
+
+      new(
+        strategy: strategy,
+        direction: direction,
+        pad_to_multiple_of: pad_to_multiple_of,
+        pad_id: pad_id,
+        pad_type_id: pad_type_id,
+        pad_token: pad_token,
+        fixed_size: fixed_size,
+      )
+    end
+
+    def self.from_json(data : JSON::Any) : self
+      object = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
+      fixed_size = object["fixed_size"]?
+      strategy = parse_padding_strategy(object["strategy"]?, fixed_size)
+
+      new(
+        strategy: strategy,
+        direction: parse_padding_direction(object["direction"]?),
+        pad_to_multiple_of: uint64_or_nil(object["pad_to_multiple_of"]?),
+        pad_id: object["pad_id"]?.try(&.as_i64?).try(&.to_u32) || 0_u32,
+        pad_type_id: object["pad_type_id"]?.try(&.as_i64?).try(&.to_u32) || 0_u32,
+        pad_token: object["pad_token"]?.try(&.as_s?) || "[PAD]",
+        fixed_size: uint64_or_nil(fixed_size),
+      )
+    end
+
+    def self.new(pull : JSON::PullParser) : self
+      from_json(pull)
+    end
+
+    private def self.parse_padding_strategy(value : JSON::Any?, fixed_size : JSON::Any?) : PaddingStrategy
+      return fixed_size && !fixed_size.raw.nil? ? PaddingStrategy::Fixed : PaddingStrategy::BatchLongest unless value
+
+      case raw = value.raw
+      when String
+        case raw
+        when "BatchLongest", "batch_longest"
+          PaddingStrategy::BatchLongest
+        when "Fixed", "fixed"
+          PaddingStrategy::Fixed
+        else
+          raise JSON::ParseException.new("Invalid padding strategy", 0, 0)
+        end
+      when Int64
+        PaddingStrategy.from_value(raw.to_i)
+      else
+        raise JSON::ParseException.new("Invalid padding strategy", 0, 0)
+      end
+    end
+
+    private def self.read_padding_strategy(pull : JSON::PullParser) : PaddingStrategy
+      case pull.kind
+      when .string?
+        case pull.read_string
+        when "BatchLongest", "batch_longest"
+          PaddingStrategy::BatchLongest
+        when "Fixed", "fixed"
+          PaddingStrategy::Fixed
+        else
+          raise JSON::ParseException.new("Invalid padding strategy", 0, 0)
+        end
+      when .int?
+        PaddingStrategy.from_value(pull.read_int.to_i)
+      else
+        raise JSON::ParseException.new("Invalid padding strategy", 0, 0)
+      end
+    end
+
+    private def self.parse_padding_direction(value : JSON::Any?) : PaddingDirection
+      return PaddingDirection::Right unless value
+
+      case raw = value.raw
+      when String
+        case raw
+        when "Left", "left"
+          PaddingDirection::Left
+        when "Right", "right"
+          PaddingDirection::Right
+        else
+          raise JSON::ParseException.new("Invalid padding direction", 0, 0)
+        end
+      when Int64
+        PaddingDirection.from_value(raw.to_i)
+      else
+        raise JSON::ParseException.new("Invalid padding direction", 0, 0)
+      end
+    end
+
+    private def self.read_padding_direction(pull : JSON::PullParser) : PaddingDirection
+      case pull.kind
+      when .string?
+        case pull.read_string
+        when "Left", "left"
+          PaddingDirection::Left
+        when "Right", "right"
+          PaddingDirection::Right
+        else
+          raise JSON::ParseException.new("Invalid padding direction", 0, 0)
+        end
+      when .int?
+        PaddingDirection.from_value(pull.read_int.to_i)
+      else
+        raise JSON::ParseException.new("Invalid padding direction", 0, 0)
+      end
+    end
+
+    private def self.uint64_or_nil(value : JSON::Any?) : UInt64?
+      return nil unless value
+      return nil if value.raw.nil?
+
+      value.as_i64.to_u64
+    end
+
+    private def self.read_optional_u64(pull : JSON::PullParser) : UInt64?
+      return nil if pull.kind.null? && pull.read_null.nil?
+
+      pull.read_int.to_u64
     end
   end
 

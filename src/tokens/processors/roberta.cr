@@ -244,7 +244,10 @@ module Tokens
       end
 
       def self.from_json(json : String, check_type : Bool = true) : self
-        data = JSON.parse(json)
+        from_json(JSON.parse(json), check_type: check_type)
+      end
+
+      def self.from_json(data : JSON::Any, check_type : Bool = true) : self
         raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
 
         obj = data.as_h

@@ -36,32 +36,33 @@ module Tokens
     end
 
     def self.from_json(json_str : String) : self
-      data = JSON.parse(json_str)
+      from_json(JSON.parse(json_str))
+    end
+
+    def self.from_json(data : JSON::Any) : self
       raise Exception.new("data did not match any variant of untagged enum PostProcessorWrapper") unless data.as_h?
       obj = data.as_h
 
-      # Try tagged first
       if type = obj["type"]?.try(&.as_s?)
-        return from_tagged(type, obj, json_str)
+        return from_tagged(type, data)
       end
 
-      # Untagged - try each variant
-      from_untagged(obj, json_str)
+      from_untagged(data)
     end
 
-    private def self.from_tagged(type : String, obj : Hash(String, JSON::Any), json_str : String) : self
+    private def self.from_tagged(type : String, data : JSON::Any) : self
       begin
         case type
         when "RobertaProcessing"
-          return new(Tokens::PostProcessors::RobertaProcessing.from_json(json_str))
+          return new(Tokens::PostProcessors::RobertaProcessing.from_json(data))
         when "BertProcessing"
-          return new(Tokens::PostProcessors::BertProcessing.from_json(json_str))
+          return new(Tokens::PostProcessors::BertProcessing.from_json(data))
         when "ByteLevel"
-          return new(Tokens::PreTokenizers::ByteLevel.from_json(json_str))
+          return new(Tokens::PreTokenizers::ByteLevel.from_json(data))
         when "TemplateProcessing"
-          return new(Tokens::PostProcessors::TemplateProcessing.from_json(json_str))
+          return new(Tokens::PostProcessors::TemplateProcessing.from_json(data))
         when "Sequence"
-          return new(Tokens::PostProcessors::SequenceProcessor.from_json(json_str))
+          return new(Tokens::PostProcessors::SequenceProcessor.from_json(data))
         end
       rescue
       end
@@ -69,19 +70,19 @@ module Tokens
       raise Exception.new("data did not match any variant of untagged enum PostProcessorWrapper")
     end
 
-    private def self.from_untagged(obj : Hash(String, JSON::Any), json_str : String) : self
+    private def self.from_untagged(data : JSON::Any) : self
       # Only Roberta and Bert can match without a type tag (fields-only matching)
       # Roberta must come before Bert, but Roberta requires trim_offsets + add_prefix_space fields
 
       # Try Roberta (fields-only, no type check)
       begin
-        return new(Tokens::PostProcessors::RobertaProcessing.from_json(json_str, check_type: false))
+        return new(Tokens::PostProcessors::RobertaProcessing.from_json(data, check_type: false))
       rescue
       end
 
       # Try Bert (fields-only, no type check)
       begin
-        return new(Tokens::PostProcessors::BertProcessing.from_json(json_str, check_type: false))
+        return new(Tokens::PostProcessors::BertProcessing.from_json(data, check_type: false))
       rescue
       end
 

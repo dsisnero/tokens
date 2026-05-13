@@ -78,6 +78,17 @@ module Tokens
       from_untagged(json_str)
     end
 
+    def self.from_json(data : JSON::Any) : self
+      raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
+      obj = data.as_h
+
+      if type = obj["type"]?.try(&.as_s?)
+        return from_tagged(type, obj)
+      end
+
+      from_untagged(data)
+    end
+
     private def self.from_tagged(type : String, json_str : String) : self
       begin
         case type
@@ -89,6 +100,26 @@ module Tokens
           return new(Models::WordLevel.from_json(json_str))
         when "Unigram"
           return new(Models::Unigram::Unigram.from_json(json_str))
+        end
+      rescue ex : JSON::ParseException
+        raise ex
+      rescue ex
+        raise JSON::ParseException.new(ex.message || "Invalid model JSON", 0, 0)
+      end
+      raise JSON::ParseException.new("Unknown model type: #{type}", 0, 0)
+    end
+
+    private def self.from_tagged(type : String, obj : Hash(String, JSON::Any)) : self
+      begin
+        case type
+        when "BPE"
+          return new(Models::BPE::BPE.from_json(obj))
+        when "WordPiece"
+          return new(Models::WordPiece.from_json(JSON::Any.new(obj)))
+        when "WordLevel"
+          return new(Models::WordLevel.from_json(JSON::Any.new(obj)))
+        when "Unigram"
+          return new(Models::Unigram::Unigram.from_json(JSON::Any.new(obj)))
         end
       rescue ex : JSON::ParseException
         raise ex
@@ -117,6 +148,30 @@ module Tokens
 
       begin
         return new(Models::Unigram::Unigram.from_json(json_str))
+      rescue
+      end
+
+      raise JSON::ParseException.new("data did not match any Model variant", 0, 0)
+    end
+
+    private def self.from_untagged(data : JSON::Any) : self
+      begin
+        return new(Models::BPE::BPE.from_json(data))
+      rescue
+      end
+
+      begin
+        return new(Models::WordPiece.from_json(data))
+      rescue
+      end
+
+      begin
+        return new(Models::WordLevel.from_json(data))
+      rescue
+      end
+
+      begin
+        return new(Models::Unigram::Unigram.from_json(data))
       rescue
       end
 

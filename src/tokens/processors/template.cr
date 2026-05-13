@@ -58,7 +58,10 @@ module Tokens
       end
 
       def self.from_json(json_str : String) : self
-        data = JSON.parse(json_str)
+        from_json(JSON.parse(json_str))
+      end
+
+      def self.from_json(data : JSON::Any) : self
         raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
         obj = data.as_h
 
@@ -153,6 +156,14 @@ module Tokens
       def self.from_tuple(tuple : Tuple(String, UInt32)) : self
         new(tuple[0], [tuple[1]], [tuple[0]])
       end
+
+      def self.from_json(data : JSON::Any) : self
+        obj = data.as_h? || raise(JSON::ParseException.new("Expected object", 0, 0))
+        id = obj["id"]?.try(&.as_s?) || raise(JSON::ParseException.new("Missing id", 0, 0))
+        ids = obj["ids"]?.try(&.as_a?).try(&.map { |entry| entry.as_i.to_u32 }) || raise(JSON::ParseException.new("Missing ids", 0, 0))
+        tokens = obj["tokens"]?.try(&.as_a?).try(&.map(&.as_s)) || raise(JSON::ParseException.new("Missing tokens", 0, 0))
+        new(id, ids, tokens)
+      end
     end
 
     struct ProcTemplate
@@ -180,11 +191,12 @@ module Tokens
       end
 
       def self.from_json(json_str : String) : self
-        data = JSON.parse(json_str)
+        from_json(JSON.parse(json_str))
+      end
+
+      def self.from_json(data : JSON::Any) : self
         raise JSON::ParseException.new("Expected array", 0, 0) unless data.as_a?
-        pieces = data.as_a.map do |item|
-          Piece.from_json(item.to_json)
-        end
+        pieces = data.as_a.map { |item| Piece.from_json(item) }
         new(pieces)
       end
     end
@@ -231,11 +243,14 @@ module Tokens
       end
 
       def self.from_json(json_str : String) : self
-        data = JSON.parse(json_str)
+        from_json(JSON.parse(json_str))
+      end
+
+      def self.from_json(data : JSON::Any) : self
         raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
         map = {} of String => TemplateSpecialToken
         data.as_h.each do |key, value|
-          map[key] = TemplateSpecialToken.from_json(value.to_json)
+          map[key] = TemplateSpecialToken.from_json(value)
         end
         new(map)
       end
@@ -414,7 +429,10 @@ module Tokens
       end
 
       def self.from_json(json_str : String) : self
-        data = JSON.parse(json_str)
+        from_json(JSON.parse(json_str))
+      end
+
+      def self.from_json(data : JSON::Any) : self
         raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
 
         obj = data.as_h
@@ -423,16 +441,12 @@ module Tokens
         pair_arr = obj["pair"]?.try(&.as_a?) || raise(JSON::ParseException.new("Missing pair", 0, 0))
         tokens_obj = obj["special_tokens"]?.try(&.as_h?) || raise(JSON::ParseException.new("Missing special_tokens", 0, 0))
 
-        single_pieces = single_arr.map do |item|
-          Piece.from_json(item.to_json)
-        end
-        pair_pieces = pair_arr.map do |item|
-          Piece.from_json(item.to_json)
-        end
+        single_pieces = single_arr.map { |item| Piece.from_json(item) }
+        pair_pieces = pair_arr.map { |item| Piece.from_json(item) }
 
         tokens_map = {} of String => TemplateSpecialToken
         tokens_obj.each do |key, value|
-          tokens_map[key] = TemplateSpecialToken.from_json(value.to_json)
+          tokens_map[key] = TemplateSpecialToken.from_json(value)
         end
 
         single = ProcTemplate.new(single_pieces)

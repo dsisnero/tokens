@@ -48,14 +48,18 @@ module Tokens
       end
 
       def self.from_json(json : String) : self
-        object = JSON.parse(json).as_h
+        from_json(JSON.parse(json))
+      end
+
+      def self.from_json(data : JSON::Any) : self
+        object = data.as_h? || raise(Exception.new("Expected object"))
         type = object["type"]?.try(&.as_s?)
         raise Exception.new("Invalid decoder type") if type && type != "Sequence"
 
         decoders = object["decoders"]?
         raise Exception.new("missing field `decoders`") unless decoders
 
-        new(decoders.as_a.map { |entry| Tokens::DecoderWrapper.from_json(entry.to_json) })
+        new(decoders.as_a.map { |entry| Tokens::DecoderWrapper.from_json(entry) })
       end
     end
   end

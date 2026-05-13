@@ -44,12 +44,16 @@ module Tokens
       from_any(JSON.parse(json))
     end
 
+    def self.from_json(value : JSON::Any) : self
+      from_any(value)
+    end
+
     private def self.from_any(value : JSON::Any) : self
       object = value.as_h?
       raise Exception.new("data did not match any variant of untagged enum NormalizerUntagged") unless object
 
       if type = object["type"]?.try(&.as_s?)
-        return from_tagged(type, object)
+        return from_tagged(type, value, object)
       end
 
       if legacy_strip?(object)
@@ -66,7 +70,7 @@ module Tokens
       raise Exception.new("data did not match any variant of untagged enum NormalizerUntagged")
     end
 
-    private def self.from_tagged(type : String, object : Hash(String, JSON::Any)) : self
+    private def self.from_tagged(type : String, value : JSON::Any, object : Hash(String, JSON::Any)) : self
       case type
       when "BertNormalizer"
         new(build_bert_normalizer(object))
@@ -77,7 +81,7 @@ module Tokens
       when "NFC", "NFD", "NFKC", "NFKD", "Lowercase", "Nmt", "Precompiled", "ByteLevel"
         build_unit_wrapper(type)
       when "Replace"
-        new(Tokens::Normalizers::Replace.from_json(object.to_json))
+        new(Tokens::Normalizers::Replace.from_json(value))
       when "Prepend"
         new(Tokens::Normalizers::Prepend.new(object["prepend"]?.try(&.as_s) || ""))
       when "Sequence"
