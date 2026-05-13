@@ -247,6 +247,15 @@ module Tokens
           @symbols.map(&.c)
         end
 
+        def each_symbol_with_offset(& : UInt32, UInt32, UInt32 ->) : Nil
+          offset = 0_u32
+          @symbols.each do |symbol|
+            next_offset = offset + symbol.len
+            yield symbol.c, offset, next_offset
+            offset = next_offset
+          end
+        end
+
         def chars_iter : Iterator(UInt32)
           @symbols.map(&.c).to_a.each
         end

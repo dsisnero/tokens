@@ -32,6 +32,10 @@ module Tokens
       class BPE
         include Model
 
+        BYTE_CODE_STRINGS = Array(String).new(256) do |i|
+          String.build { |io| io << "<0x" << i.to_s(16).rjust(2, '0').upcase << ">" }
+        end
+
         property vocab : Vocab
         property vocab_r : VocabR
         property merges : MergeMap
@@ -100,70 +104,133 @@ module Tokens
         end
 
         def self.from_json(json_string : String) : BPE
-          parsed = JSON.parse(json_string).as_h
+          parsed = JSON.parse(json_string)
+          raise JSON::ParseException.new("Expected object", 0, 0) unless parsed.as_h?
+          from_json(parsed)
+        end
+
+        def self.from_json(parsed : JSON::Any) : BPE
+          raise JSON::ParseException.new("Expected object", 0, 0) unless parsed.as_h?
+          obj = parsed.as_h
+          from_json(obj)
+        end
+
+        def self.from_json(parsed : Hash(String, JSON::Any)) : BPE
           vocab = Vocab.new
           parsed["vocab"].as_h.each do |token, id|
             vocab[token] = id.as_i.to_u32
           end
-          merges = parse_merges_from_json(parsed["merges"])
-          builder = BpeBuilder.new
-          builder.vocab_and_merges(vocab, merges)
-
-          if v = parsed["dropout"]?
-            if val = v.as_f?
-              builder.dropout(val.to_f32)
-            end
-          end
-          if v = parsed["unk_token"]?
-            if val = v.as_s?
-              builder.unk_token(val)
-            end
-          end
-          if v = parsed["continuing_subword_prefix"]?
-            if val = v.as_s?
-              builder.continuing_subword_prefix(val)
-            end
-          end
-          if v = parsed["end_of_word_suffix"]?
-            if val = v.as_s?
-              builder.end_of_word_suffix(val)
-            end
-          end
-          if v = parsed["fuse_unk"]?
-            builder.fuse_unk(v.as_bool)
-          end
-          if v = parsed["byte_fallback"]?
-            builder.byte_fallback(v.as_bool)
-          end
-          if v = parsed["ignore_merges"]?
-            builder.ignore_merges(v.as_bool)
+          dropout = parsed["dropout"]?.try(&.as_f?).try(&.to_f32)
+          if value = dropout
+            raise InvalidDropout.new if value < 0.0_f32 || value > 1.0_f32
           end
 
-          builder.build
+          unk_token = parsed["unk_token"]?.try(&.as_s?)
+          continuing_subword_prefix = parsed["continuing_subword_prefix"]?.try(&.as_s?)
+          end_of_word_suffix = parsed["end_of_word_suffix"]?.try(&.as_s?)
+          fuse_unk = parsed["fuse_unk"]?.try(&.as_bool) || false
+          byte_fallback = parsed["byte_fallback"]?.try(&.as_bool) || false
+          ignore_merges = parsed["ignore_merges"]?.try(&.as_bool) || false
+          prefix_len = continuing_subword_prefix.try(&.bytesize) || 0
+
+          BPE.new(
+            vocab,
+            build_reverse_vocab(vocab),
+            build_merge_map_from_json(vocab, parsed["merges"], prefix_len),
+            BpeCache.new(DEFAULT_CACHE_CAPACITY),
+            dropout,
+            unk_token,
+            continuing_subword_prefix,
+            end_of_word_suffix,
+            fuse_unk,
+            byte_fallback,
+            ignore_merges,
+          )
         end
 
-        private def self.parse_merges_from_json(merges_json : JSON::Any) : Array(Tuple(String, String))
-          merges = [] of Tuple(String, String)
-          merges_json.as_a.each do |entry|
-            case entry
-            when JSON::Any
-              if entry.raw.is_a?(Array)
-                arr = entry.as_a
-                if arr.size != 2
-                  raise BadMerges.new(0)
-                end
-                merges << {arr[0].as_s, arr[1].as_s}
-              elsif entry.raw.is_a?(String)
-                merge_str = entry.as_s
-                parts = merge_str.split(' ')
-                if parts.size != 2
-                  raise BadMerges.new(0)
-                end
-                merges << {parts[0], parts[1]}
-              end
-            end
+        def self.build_reverse_vocab(vocab : Vocab) : VocabR
+          vocab_r = VocabR.new
+          vocab.each do |key, val|
+            vocab_r[val] = key
           end
-          merges
+          vocab_r
+        end
+
+        def self.build_merge_map(vocab : Vocab, merges : Enumerable(Tuple(String, String)), prefix_len : Int32) : MergeMap
+          scratch = Bytes.new(max_vocab_token_bytes(vocab))
+          merge_map = MergeMap.new
+
+          merges.each_with_index do |(a, b), index|
+            a_id = vocab[a]?
+            raise MergeTokenOutOfVocabulary.new(a) unless a_id
+            b_id = vocab[b]?
+            raise MergeTokenOutOfVocabulary.new(b) unless b_id
+
+            merged = build_merged_token(a, b, prefix_len, scratch)
+            new_id = vocab[merged]?
+            raise MergeTokenOutOfVocabulary.new(merged) unless new_id
+
+            merge_map[{a_id, b_id}] = {index.to_u32, new_id}
+          end
+
+          merge_map
+        end
+
+        private def self.build_merge_map_from_json(vocab : Vocab, merges_json : JSON::Any, prefix_len : Int32) : MergeMap
+          merges = merges_json.as_a
+          scratch = Bytes.new(max_vocab_token_bytes(vocab))
+          merge_map = MergeMap.new
+
+          merges.each_with_index do |entry, index|
+            a, b = parse_merge_entry(entry)
+            a_id = vocab[a]?
+            raise MergeTokenOutOfVocabulary.new(a) unless a_id
+            b_id = vocab[b]?
+            raise MergeTokenOutOfVocabulary.new(b) unless b_id
+
+            merged = build_merged_token(a, b, prefix_len, scratch)
+            new_id = vocab[merged]?
+            raise MergeTokenOutOfVocabulary.new(merged) unless new_id
+
+            merge_map[{a_id, b_id}] = {index.to_u32, new_id}
+          end
+
+          merge_map
+        end
+
+        private def self.parse_merge_entry(entry : JSON::Any) : Tuple(String, String)
+          if entry.raw.is_a?(Array)
+            arr = entry.as_a
+            raise BadMerges.new(0) if arr.size != 2
+            {arr[0].as_s, arr[1].as_s}
+          elsif entry.raw.is_a?(String)
+            parts = entry.as_s.split(' ')
+            raise BadMerges.new(0) if parts.size != 2
+            {parts[0], parts[1]}
+          else
+            raise BadMerges.new(0)
+          end
+        end
+
+        private def self.max_vocab_token_bytes(vocab : Vocab) : Int32
+          max = 0
+          vocab.each_key do |token|
+            size = token.bytesize
+            max = size if size > max
+          end
+          max
+        end
+
+        private def self.build_merged_token(a : String, b : String, prefix_len : Int32, scratch : Bytes) : String
+          a_bytes = a.to_slice
+          b_bytes = b.to_slice
+          tail_len = b.bytesize - prefix_len
+          merge_len = a.bytesize + tail_len
+
+          scratch[0, a_bytes.size].copy_from(a_bytes)
+          scratch[a_bytes.size, tail_len].copy_from(b_bytes[prefix_len, tail_len])
+
+          String.new(scratch.to_unsafe, merge_len, merge_len)
         end
 
         def clear_cache
@@ -321,16 +388,20 @@ module Tokens
 
         # ameba:disable Metrics/CyclomaticComplexity
         private def merge_word(w : String) : Word
-          chars = w.chars.to_a
           word = Word.with_capacity(w.bytesize.to_i32)
           unk = nil
 
-          chars.each_with_index do |char, index|
-            is_first = index == 0
-            is_last = index == chars.size - 1
+          reader = Char::Reader.new(w)
+          is_first = true
+
+          while reader.has_next?
+            char = reader.current_char
+            byte_len = char.bytesize.to_u32
+
+            reader.next_char
+            is_last = !reader.has_next?
 
             s = char.to_s
-            byte_len = char.bytesize.to_u32
 
             if !is_first
               if prefix = @continuing_subword_prefix
@@ -355,7 +426,7 @@ module Tokens
                 found = true
                 byte_tokens = [] of UInt32
                 s.each_byte do |b|
-                  code = String.build { |io| io << "<0x" << b.to_s(16).rjust(2, '0').upcase << ">" }
+                  code = BYTE_CODE_STRINGS[b]
                   if tid = @vocab[code]?
                     byte_tokens << tid
                   else
@@ -365,6 +436,7 @@ module Tokens
                 end
                 if found
                   byte_tokens.each { |tid| word.add(tid, 1_u32) }
+                  is_first = false
                   next
                 end
               end
@@ -388,6 +460,8 @@ module Tokens
                       end
               end
             end
+
+            is_first = false
           end
 
           if unk_val = unk
@@ -399,11 +473,11 @@ module Tokens
         end
 
         private def word_to_tokens(word : Word) : Array(Token)
-          chars = word.chars_iter.to_a
-          offsets = word.offsets_iter.to_a
-          chars.zip(offsets).map do |id, offset|
-            Token.new(id, @vocab_r[id] || "?", offset)
+          tokens = Array(Token).new(word.size)
+          word.each_symbol_with_offset do |id, start_offset, end_offset|
+            tokens << Token.new(id, @vocab_r[id] || "?", {start_offset, end_offset})
           end
+          tokens
         end
 
         private def tokenize_with_cache(sequence : String) : Array(Token)

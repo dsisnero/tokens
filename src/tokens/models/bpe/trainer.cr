@@ -51,7 +51,7 @@ module Tokens
         end
 
         def feed(iterator : Array(String), &process : String -> Array(String))
-          words = Hash(String, UInt64).new(0_u64)
+          words = Hash(String, UInt64).new(initial_capacity: 512, default_value: 0_u64)
           iterator.each do |sequence|
             process.call(sequence).each do |word|
               words[word] += 1_u64
@@ -60,8 +60,18 @@ module Tokens
           @words = words
         end
 
+        def feed_pre_processed(word_batches : Array(Array(String)))
+          words = Hash(String, UInt64).new(initial_capacity: 512, default_value: 0_u64)
+          word_batches.each do |batch|
+            batch.each do |word|
+              words[word] += 1_u64
+            end
+          end
+          @words = words
+        end
+
         def do_train(word_counts : Hash(String, UInt64), model : BPE) : Array(AddedToken)
-          word_to_id = Hash(String, UInt32).new
+          word_to_id = Hash(String, UInt32).new(initial_capacity: @vocab_size + @special_tokens.size)
           id_to_word = [] of String
           max_token_length = @max_token_length || Int32::MAX
 
@@ -75,7 +85,7 @@ module Tokens
           end
 
           # 2. Compute the initial alphabet
-          alphabet = Hash(Char, UInt64).new(0_u64)
+          alphabet = Hash(Char, UInt64).new(initial_capacity: 256, default_value: 0_u64)
           word_counts.each do |word, count|
             word.each_char do |c|
               alphabet[c] += count
@@ -120,8 +130,8 @@ module Tokens
           end
 
           # 4. Count pairs in words
-          pair_counts = Hash(Pair, Int32).new(0)
-          where_to_update = Hash(Pair, Set(Int32)).new { |h, k| h[k] = Set(Int32).new }
+          pair_counts = Hash(Pair, Int32).new(initial_capacity: @vocab_size * 2, default_value: 0)
+          where_to_update = Hash(Pair, Set(Int32)).new(initial_capacity: @vocab_size * 2) { |h, k| h[k] = Set(Int32).new }
           words.each_with_index do |word, i|
             chars = word.get_chars
             chars.each_cons(2) do |(a, b)|

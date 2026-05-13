@@ -80,10 +80,7 @@ module Tokens
           end
 
           vocab = @vocab
-          vocab_r = VocabR.new
-          vocab.each do |key, val|
-            vocab_r[val] = key
-          end
+          vocab_r = BPE.build_reverse_vocab(vocab)
 
           cache = @cache_capacity > 0 ? BpeCache.new(@cache_capacity) : nil
 
@@ -93,19 +90,7 @@ module Tokens
                          0
                        end
 
-          merge_map = MergeMap.new
-          @merges.each_with_index do |(a, b), i|
-            a_id = vocab[a]?
-            raise MergeTokenOutOfVocabulary.new(a) unless a_id
-            b_id = vocab[b]?
-            raise MergeTokenOutOfVocabulary.new(b) unless b_id
-
-            merged = a + b[prefix_len..]
-            new_id = vocab[merged]?
-            raise MergeTokenOutOfVocabulary.new(merged) unless new_id
-
-            merge_map[{a_id, b_id}] = {i.to_u32, new_id}
-          end
+          merge_map = BPE.build_merge_map(vocab, @merges, prefix_len)
 
           BPE.new(
             vocab, vocab_r, merge_map,
