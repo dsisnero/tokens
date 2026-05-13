@@ -2,6 +2,7 @@ require "../spec_helper"
 
 describe "Parallelism" do
   it "test_maybe_parallel_iterator" do
+    Tokens::Parallelism.reset!
     v = [1_u32, 2, 3, 4, 5, 6]
 
     v.sum(0_u32).should eq(21)
@@ -9,10 +10,14 @@ describe "Parallelism" do
     v.map! { |x| x * 2 }
     v.sum(0_u32).should eq(42)
 
-    # Verify parallelism API
     Tokens::Parallelism.has_parallelism_been_used.should be_false
     Tokens::Parallelism.is_parallelism_configured.should be_false
-    Tokens::Parallelism.get_parallelism.should eq(true)
+
+    {% if flag?(:preview_mt) %}
+      Tokens::Parallelism.get_parallelism.should eq(true)
+    {% else %}
+      Tokens::Parallelism.get_parallelism.should eq(false)
+    {% end %}
 
     Tokens::Parallelism.set_parallelism(true)
     Tokens::Parallelism.is_parallelism_configured.should be_true

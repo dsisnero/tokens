@@ -371,7 +371,7 @@ module Tokens
     end
 
     def encode_batch(inputs : Array(String), add_special_tokens : Bool = false) : Array(Encoding)
-      encodings = inputs.map { |input| encode(input, add_special_tokens) }
+      encodings = maybe_par_map(inputs) { |input| encode(input, add_special_tokens) }
       if params = @padding
         Tokens.pad_encodings(encodings, params)
       end
@@ -379,7 +379,39 @@ module Tokens
     end
 
     def encode_batch(inputs : Array(Tuple(String, String)), add_special_tokens : Bool = false) : Array(Encoding)
-      encodings = inputs.map { |(a, b)| encode({a, b}, add_special_tokens) }
+      encodings = maybe_par_map(inputs) { |(a, b)| encode({a, b}, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
+    end
+
+    def encode_batch_fast(inputs : Array(String), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = maybe_par_map(inputs) { |input| encode_fast(input, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
+    end
+
+    def encode_batch_fast(inputs : Array(Tuple(String, String)), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = maybe_par_map(inputs) { |(a, b)| encode_fast({a, b}, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
+    end
+
+    def encode_batch_char_offsets(inputs : Array(String), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = maybe_par_map(inputs) { |input| encode_char_offsets(input, add_special_tokens) }
+      if params = @padding
+        Tokens.pad_encodings(encodings, params)
+      end
+      encodings
+    end
+
+    def encode_batch_char_offsets(inputs : Array(Tuple(String, String)), add_special_tokens : Bool = false) : Array(Encoding)
+      encodings = maybe_par_map(inputs) { |(a, b)| encode_char_offsets({a, b}, add_special_tokens) }
       if params = @padding
         Tokens.pad_encodings(encodings, params)
       end
@@ -405,6 +437,10 @@ module Tokens
 
     def decode_stream(skip_special_tokens : Bool = false) : DecodeStream
       DecodeStream.new(self, skip_special_tokens)
+    end
+
+    def decode_batch(ids_batch : Array(Array(UInt32)), skip_special_tokens : Bool = false) : Array(String)
+      maybe_par_map(ids_batch) { |ids| decode(ids, skip_special_tokens) }
     end
 
     protected def do_normalize(normalized : NormalizedString) : NormalizedString
@@ -582,6 +618,10 @@ module Tokens
 
     def self.from_json(json_str : String) : self
       data = JSON.parse(json_str)
+      from_json(data)
+    end
+
+    def self.from_json(data : JSON::Any) : self
       raise JSON::ParseException.new("Expected object", 0, 0) unless data.as_h?
       obj = data.as_h
 
@@ -590,52 +630,51 @@ module Tokens
 
       model_val = obj["model"]?
       raise Exception.new("Missing model") unless model_val
-      model_json = model_val.to_json
-      model = ModelWrapper.from_json(model_json).model.as(Model)
+      model = ModelWrapper.from_json(model_val).model.as(Model)
       tokenizer = new(model)
 
       if tr = obj["truncation"]?
         unless tr.raw.nil?
-          params = TruncationParams.from_json(tr.to_json)
+          params = TruncationParams.from_json(tr)
           tokenizer.with_truncation(params)
         end
       end
 
       if pad = obj["padding"]?
         unless pad.raw.nil?
-          params = PaddingParams.from_json(pad.to_json)
+          params = PaddingParams.from_json(pad)
           tokenizer.with_padding(params)
         end
       end
 
       if norm = obj["normalizer"]?
         unless norm.raw.nil?
-          tokenizer.with_normalizer(NormalizerWrapper.from_json(norm.to_json).as(Normalizer))
+          tokenizer.with_normalizer(NormalizerWrapper.from_json(norm).as(Normalizer))
         end
       end
 
       if pt = obj["pre_tokenizer"]?
         unless pt.raw.nil?
-          tokenizer.with_pre_tokenizer(PreTokenizerWrapper.from_json(pt.to_json).as(PreTokenizer))
+          tokenizer.with_pre_tokenizer(PreTokenizerWrapper.from_json(pt).as(PreTokenizer))
         end
       end
 
       if pp = obj["post_processor"]?
         unless pp.raw.nil?
-          tokenizer.with_post_processor(PostProcessorWrapper.from_json(pp.to_json).as(PostProcessor))
+          tokenizer.with_post_processor(PostProcessorWrapper.from_json(pp).as(PostProcessor))
         end
       end
 
       if dec = obj["decoder"]?
         unless dec.raw.nil?
-          tokenizer.with_decoder(DecoderWrapper.from_json(dec.to_json).as(Decoder))
+          tokenizer.with_decoder(DecoderWrapper.from_json(dec).as(Decoder))
         end
       end
 
       added_tokens_arr = obj["added_tokens"]?.try(&.as_a?)
       if added_tokens_arr
         tokens = added_tokens_arr.map do |entry|
-          AddedTokenWithId.from_json(entry.to_json)
+          AddedTokenWithId.from_json(entry)
         end
         tok_tokens = tokens.map do |atwi|
           t = atwi.token
@@ -648,6 +687,33 @@ module Tokens
       end
 
       tokenizer
+    end
+
+    private def maybe_par_map(inputs : Array(T), &block : T -> U) : Array(U) forall T, U
+      if Parallelism.get_parallelism && inputs.size > System.cpu_count * 10
+        Parallelism.mark_used!
+        n_workers = System.cpu_count
+        n_workers = inputs.size if inputs.size < n_workers
+        chunk_size = (inputs.size / n_workers).ceil.to_i
+        chunks = inputs.each_slice(chunk_size).to_a
+
+        channel = Channel({Int32, Array(U)}).new(chunks.size)
+        chunks.each_with_index do |chunk, idx|
+          spawn do
+            channel.send({idx, chunk.map { |item| block.call(item) }})
+          end
+        end
+
+        results = Array(Array(U)?).new(chunks.size, nil)
+        chunks.size.times do
+          idx, chunk_result = channel.receive
+          results[idx] = chunk_result
+        end
+
+        results.compact_map { |r| r }.flatten
+      else
+        inputs.map { |input| block.call(input) }
+      end
     end
   end
 
@@ -666,8 +732,10 @@ module Tokens
                        get_vocab get_vocab_size token_to_id id_to_token
                        set_encode_special_tokens get_encode_special_tokens
                        add_special_tokens add_tokens encode encode_fast
-                       encode_char_offsets decode decode_stream get_n_added_tokens
-                       encode_batch train_from_files to_json from_json] %}
+                       encode_char_offsets encode_batch encode_batch_fast
+                       encode_batch_char_offsets decode decode_batch
+                       decode_stream get_n_added_tokens
+                       train_from_files to_json from_json] %}
       def {{name.id}}(*args, **kwargs)
         @inner.{{name.id}}(*args, **kwargs)
       end
